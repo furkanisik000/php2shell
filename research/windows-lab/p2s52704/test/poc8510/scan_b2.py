@@ -6,7 +6,7 @@ import sys, time, urllib.parse
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8510"))
 import importlib.util
 spec = importlib.util.spec_from_file_location("p2s",
-    r"C:\Users\<USER>\p2s52704\test\poc8510\php2shell.py")
+    r"research/windows-lab/p2s52704\test\poc8510\php2shell.py")
 p2s = importlib.util.module_from_spec(spec); spec.loader.exec_module(p2s)
 
 HOST, PORT, TLS = "127.0.0.1", 18116, False

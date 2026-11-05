@@ -17,14 +17,14 @@ export default function TopBar({ health, lastLog }) {
       </div>
       <div className="status">
         <span className={'dot' + (online ? ' on' : '')} />
-        <span>{online ? `online · v${health.version}` : 'baglaniyor… / sunucu kapali (server.py)'}</span>
+        <span>{online ? `online · v${health.version}` : 'baglaniyor… / server offline (server.py)'}</span>
       </div>
       <div className="spacer" />
       <div className="live-tail">
         {lastLog ? <><b>{lastLog.level}</b> {lastLog.message}</> : '—'}
       </div>
       <div className="pill">
-        {health ? `${health.vulns} CVE · ${health.with_poc} PoC · ${health.profiles} profil` : '—'}
+        {health ? `${health.vulns} CVE · ${health.with_poc} PoC · ${health.profilees} profile` : '—'}
       </div>
     </div>
   )

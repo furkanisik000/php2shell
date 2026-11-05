@@ -5,7 +5,7 @@ export default function RiskGauge({ risk }) {
   const factors = (risk && risk.factors) || []
   return (
     <div className="panel">
-      <h3>Risk Degerlendirmesi <span className="tag">{risk && risk.n_cve != null ? risk.n_cve + ' CVE' : ''}</span></h3>
+      <h3>Risk Assessment <span className="tag">{risk && risk.n_cve != null ? risk.n_cve + ' CVE' : ''}</span></h3>
       <div className="gauge-wrap">
         <div className="gauge">
           <svg width="150" height="150" viewBox="0 0 150 150">
@@ -23,7 +23,7 @@ export default function RiskGauge({ risk }) {
           </div>
         </div>
         <div className="factors">
-          {factors.length === 0 && <div className="factor"><span className="fl">Faktor yok</span></div>}
+          {factors.length === 0 && <div className="factor"><span className="fl">No factors</span></div>}
           {factors.map((f, i) => {
             const v = f.delta
             const cls = v > 0 ? 'pos' : v < 0 ? 'neg' : 'zero'

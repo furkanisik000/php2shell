@@ -76,22 +76,22 @@ Her surum **ayri port'ta**, LAN'dan erisilebilir (`-p host:80`). Container adi =
 
 | Surum | Container adi | Host port | LAN URL |
 |---|---|---|---|
-| 5.4.45 | `p2s5445` | **18101** | http://LAB_IP:18101/index.php |
-| 5.5.38 | `p2s5538` | **18102** | http://LAB_IP:18102/index.php |
-| 5.6.40 | `p2s5640` | **18103** | http://LAB_IP:18103/index.php |
-| 7.0.33 | `p2s7033` | **18104** | http://LAB_IP:18104/index.php |
-| 7.1.33 | `p2s7133` | **18105** | http://LAB_IP:18105/index.php |
-| 7.2.34 | `p2s7234` | **18106** | http://LAB_IP:18106/index.php |
-| 7.3.33 | `p2s7333` | **18107** | http://LAB_IP:18107/index.php |
-| 7.4.33 | `p2s7433` | **18108** | http://LAB_IP:18108/index.php |
-| 8.0.30 | `p2s8030` | **18109** | http://LAB_IP:18109/index.php |
-| 8.1.32 | `p2s8132` | **18110** | http://LAB_IP:18110/index.php |
-| 8.2.34 | `p2s8234` | **18111** | http://LAB_IP:18111/index.php |
-| 8.3.35 | `p2s8335` | **18112** | http://LAB_IP:18112/index.php |
-| **8.4.26 (baseline)** | `p2s8426` | **18113** | http://LAB_IP:18113/index.php |
-| 8.5.11 | `p2s8511` | **18114** | http://LAB_IP:18114/index.php |
+| 5.4.45 | `p2s5445` | **18101** | http://127.0.0.1:18101/index.php |
+| 5.5.38 | `p2s5538` | **18102** | http://127.0.0.1:18102/index.php |
+| 5.6.40 | `p2s5640` | **18103** | http://127.0.0.1:18103/index.php |
+| 7.0.33 | `p2s7033` | **18104** | http://127.0.0.1:18104/index.php |
+| 7.1.33 | `p2s7133` | **18105** | http://127.0.0.1:18105/index.php |
+| 7.2.34 | `p2s7234` | **18106** | http://127.0.0.1:18106/index.php |
+| 7.3.33 | `p2s7333` | **18107** | http://127.0.0.1:18107/index.php |
+| 7.4.33 | `p2s7433` | **18108** | http://127.0.0.1:18108/index.php |
+| 8.0.30 | `p2s8030` | **18109** | http://127.0.0.1:18109/index.php |
+| 8.1.32 | `p2s8132` | **18110** | http://127.0.0.1:18110/index.php |
+| 8.2.34 | `p2s8234` | **18111** | http://127.0.0.1:18111/index.php |
+| 8.3.35 | `p2s8335` | **18112** | http://127.0.0.1:18112/index.php |
+| **8.4.26 (baseline)** | `p2s8426` | **18113** | http://127.0.0.1:18113/index.php |
+| 8.5.11 | `p2s8511` | **18114** | http://127.0.0.1:18114/index.php |
 
-> Not: IP `LAB_IP` kullanicinin LAN IP'si — senin kutunda farkliysa
+> Not: IP `127.0.0.1` kullanicinin LAN IP'si — senin kutunda farkliysa
 > `ipconfig` ile al, tablodaki URL'leri ona gore degistir.
 
 ### Tek komutla hepsini baslat
@@ -154,7 +154,7 @@ foreach ($u in $urls) {
 }
 ```
 
-> LAN'dan (farkli makine): `curl http://LAB_IP:18113/index.php` → `OK`
+> LAN'dan (farkli makine): `curl http://127.0.0.1:18113/index.php` → `OK`
 > **Windows Firewall:** 18101–18114 araligini LAN profiline ac:
 > `New-NetFirewallRule -DisplayName "p2s-php" -Direction Inbound -Port 18101-18114 -Protocol TCP -Action Allow`
 
@@ -162,7 +162,7 @@ foreach ($u in $urls) {
 
 ## 6) MCP araclari — Docker'a programatik erisim
 
-Docker MCP Gateway (http://LAB_IP:8811/mcp) ile MCP istemcisi uzerinden
+Docker MCP Gateway (http://127.0.0.1:8811/mcp) ile MCP istemcisi uzerinden
 Docker'i yonetmek. **Profil `paths` config'i ister** (desktop-commander + filesystem):
 
 ### 6a) Profil duzeltmesi (validation hatasi: "paths missing")
@@ -241,5 +241,5 @@ docker images --format "{{.Repository}}:{{.Tag}}" | Select-String "php:.*-apache
 - [ ] 14 image `docker images`'da (5.4.45–8.5.11)
 - [ ] 14 container `docker ps`'da (p2s5445–p2s8511)
 - [ ] 18101–18114 portlari dinliyor
-- [ ] `curl http://LAB_IP:18113/index.php` → `OK` (LAN'dan)
+- [ ] `curl http://127.0.0.1:18113/index.php` → `OK` (LAN'dan)
 - [ ] Windows Firewall 18101–18114 LAN'a acik

@@ -1,4 +1,4 @@
-// Saf PHP surum parse + risk skorlama. chrome.* yok, db yok.
+// Saf PHP version parse + risk skorlama. chrome.* none, db none.
 
 const VER_RE = /php\/?\s*v?(\d{1,2}\.\d{1,2}(?:\.\d{1,3})?)/i;
 
@@ -37,7 +37,7 @@ const STATUS_META = {
   INCOMPLETE_VERSION: { tone: 'neutral', label: 'Incomplete' },
 };
 
-/** status -> {tone,label}. Bilinmeyen status icin neutral. */
+/** status -> {tone,label}. Bilinmeyen status for neutral. */
 export function statusMeta(status) {
   return STATUS_META[status] || { tone: 'neutral', label: status || '—' };
 }
@@ -56,7 +56,7 @@ export function scoreVersion(version, rules) {
   const parsed = parseVersion(version);
   if (!parsed) {
     const m = statusMeta('INCOMPLETE_VERSION');
-    return { status: 'INCOMPLETE_VERSION', tone: m.tone, label: m.label, reason: 'Surum parse edilemedi — x.y(.z) gir.' };
+    return { status: 'INCOMPLETE_VERSION', tone: m.tone, label: m.label, reason: 'Version parse edilemedi — x.y(.z) gir.' };
   }
   const branch = [parsed.major, parsed.minor];
   const eol = rules?.eolBefore || [8, 2];

@@ -4,7 +4,7 @@
 import sys, time, importlib.util, urllib.request, urllib.error, subprocess
 
 spec = importlib.util.spec_from_file_location("p2s",
-    r"C:\Users\<USER>\p2s52704\test\poc8335\php2shell.py")
+    r"research/windows-lab/p2s52704\test\poc8335\php2shell.py")
 p2s = importlib.util.module_from_spec(spec); spec.loader.exec_module(p2s)
 
 VERSIONS = {

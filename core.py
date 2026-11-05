@@ -482,7 +482,7 @@ def scan_ports(host: str, extra_ports=None, skip_port=None) -> list:
 # TLS fingerprint
 # ---------------------------------------------------------------------------
 def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
-    """TLS parmak izi: protokol, cipher suite ve sertifika meta verileri.
+    """TLS parmak izi: protokol, cipher suite and sertifika meta verileri.
 
     Sertifika dogrulamasi BILINCLI olarak kapalidir (CERT_NONE) — taranacak
     targets may also carry self-signed lab certificates; the goal is to gather
@@ -917,7 +917,7 @@ def build_command(cve_id: str, params: dict) -> str:
     v2 native motor (poc/ paketi) komut satiri URETMEZ — exploit'i scanner'in
     kendisi socket/HTTP seviyesinde dogrudan calistirir (`run_exploit`). Bu fonksiyon
     backward-compatible path only for legacy CVE panels carrying `command_template`.
-    uyumluluk amaciyla korunmustur ve sablonu `db/exploits.json` uzerinden cozer.
+    uyumluluk amaciyla korunmustur and sablonu `db/exploits.json` uzerinden cozer.
 
     Fix (2026-11-05): the previous revision read `command_template` from a dict
     that never contained it, raising KeyError on every call; it now reads the
@@ -955,13 +955,13 @@ def build_command(cve_id: str, params: dict) -> str:
 def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
     """Sinirli (allow-list'li) yerel komut yurutucu — legacy `/run` ucu.
 
-    Guvenlik modeli: ilk gercek token (ENV=val atamalari atlanir) ALLOWED_BIN
+    Guvenlik modeli: ilk real token (ENV=val atamalari atlanir) ALLOWED_BIN
     beyaz listesinde olmalidir; calisma suresi `timeout` ile sinirlidir; cikti
-    20 KB ile sinirlandirilir. Bu genel bir shell DEGILDIR — salt operatorun
-    yetkili oldugu PoC/kesif araclarina kapali bir koprudur.
+    20 KB ile sinirlandirilir. Bu genel a shell DEGILDIR — salt operatorun
+    yetkili oldugu PoC/kesif araclarina closed a koprudur.
 
     Not: v2 native motor bu yolu kullanmaz (`run_exploit` → poc/ paketi); burasi
-    yalnizca `command_template` tabanli legacy PoC'lar ve MCP `build_poc_command`
+    yalnizca `command_template` tabanli legacy PoC'lar and MCP `build_poc_command`
     flow.
 
     Args:
@@ -979,7 +979,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
         toks = shlex.split(cmd)
     except ValueError as e:
         return {"ok": False, "error": f"parse: {e}"}
-    # ENV=value bicimindeki onek atamalarini atlayarak ilk gercek binary'i bul
+    # ENV=value bicimindeki onek atamalarini atlayarak ilk real binary'i bul
     first = None
     for t in toks:
         if re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", t):  # leading ENV=val

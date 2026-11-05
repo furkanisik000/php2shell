@@ -47,21 +47,30 @@
 │
 ├── web/                      # React (Vite) frontend source — rebuild locally, dist/ is ignored
 │
-├── targets/                  # intentionally-vulnerable Docker lab targets (PHP, Tomcat, Flask, Node, .NET)
+├── targets/                  # intentionally-vulnerable Docker lab targets — see targets/README.md
 │
-├── scripts/                  # helper scripts
-│   ├── p2s_probe.php         # tiny PHP probe used inside lab containers
-│   ├── p2s_other_setup.bat   # Windows/Docker Desktop lab bootstrap
-│   └── lab-deploy/           # batch scripts that configure the lab PHP instances
-│
-├── research/                 # notes & raw research artifacts (read-only archive material)
-│   ├── notes/                # project compass, lab setup guides, target matrix
-│   └── windows-lab/          # deep-dive research tree recovered from the lab machine
+├── research/                 # read-only archive of the authorized php2shell study
+│   ├── RESEARCH_REPORT.md    # consolidated report: what was built/tried/failed
+│   ├── notes/                # lab setup guides, target matrix, project compass
+│   ├── github-survey/        # public-repo ecosystem survey scripts
+│   └── windows-lab/          # full lab tree incl. deploy batch scripts (host = Windows; same chain)
 │
 ├── local-checker-ext/        # unpacked Chrome extension (offline PHP version checker)
 │
 └── upstream-reference/       # third-party reference PoC for CVE-2026-109618/19 (own license, see dir)
 ```
+
+## Documentation map
+
+| Document | Read when… |
+|----------|------------|
+| `README.md` (this file) | First contact: what P2S is, how to run it. |
+| `SECURITY.md` | Usage policy, disclosure, hardening guidance. |
+| `CONTRIBUTING.md` | You want to change code or the CVE database. |
+| `research/README.md` | Navigating the php2shell research archive. |
+| `research/RESEARCH_REPORT.md` | Full study: chain mechanics, per-version verdicts, experiments, errors & dead ends. |
+| `targets/README.md` | Building the vulnerable Docker lab targets. |
+| `local-checker-ext/README.md` | Using the offline Chrome checker extension. |
 
 ## Quick start (lab environment)
 

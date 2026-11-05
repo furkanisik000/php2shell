@@ -2,29 +2,29 @@ import { useState } from 'react'
 import { api } from '../api.js'
 
 const MCP_TOOLS = [
-  ['scan_target', 'url, name?, save?', 'Fingerprint + WAF + port + TLS + CVE + risk; profil SQLite\'a kaydeder'],
+  ['scan_target', 'url, name?, save?', 'Fingerprint + WAF + port + TLS + CVE + risk; profile SQLite\'a kaydeder'],
   ['list_cves', 'software?, version?', 'Kritik CVE listesi (filtreli)'],
   ['get_cve', 'id', 'Tek CVE (PoC paneliyle)'],
   ['poc_list', '—', 'Native PoC katalogu'],
   ['poc_describe', 'cve_id', 'Native PoC mantigi + parametreler'],
-  ['run_poc', 'cve_id, params', 'Native engine ile PoC calistir (socket/HTTP scanner\'dan)'],
-  ['list_profiles', '—', 'Kayitli hedef profilleri (SQLite)'],
-  ['get_profile', 'id', 'Tek profil (tam + tarihce)'],
-  ['delete_profile', 'id', 'Profili sil'],
+  ['run_poc', 'cve_id, params', 'Run a PoC with the native engine (socket/HTTP scanner\'dan)'],
+  ['list_profilees', '—', 'Saved Target profilees (SQLite)'],
+  ['get_profilee', 'id', 'Tek profile (tam + tarihce)'],
+  ['delete_profilee', 'id', 'profilei sil'],
   ['export_report', 'id, fmt', 'Risk raporu (md/json) + yol'],
   ['risk_score', 'id | url', 'Risk puani + faktor kirilimi'],
   ['tls_fingerprint', 'host, port?', 'TLS/sertifika parmak izi'],
   ['port_scan', 'host, extra_ports?', 'TCP port + servis banner'],
-  ['list_logs', 'level?, category?, limit?', 'Operasyon loglari (SQLite + dosya)'],
+  ['list_logs', 'level?, category?, limit?', 'Operation logs (SQLite + file)'],
 ]
 
 const INSTALL = `# stdio MCP (Qwen Code)
 qwen mcp add p2s -- /opt/homebrew/bin/python3.12 \\
-  <REPO_PATH>/mcp_server.py
-# sonra: tam Qwen restart (qwen mcp add hot-load yapmaz)
+  mcp_server.py
+# then: tam Qwen restart (qwen mcp add hot-load yapmaz)
 
 # HTTP API
-curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://LAB_IP:18111/index.php"}'
+curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://127.0.0.1:18111/index.php"}'
 curl -sX POST http://127.0.0.1:8123/poc/CVE-2026-109618 -H 'Content-Type: application/json' -d '{"params":{"url":"…","cmd":"id>/out/p1"}}'`
 
 export default function McpView() {
@@ -55,11 +55,11 @@ export default function McpView() {
       <div className="panel">
         <h3>MCP Server — Qwen Code entegrasyonu</h3>
         <p style={{ color: 'var(--text2)', fontSize: 13, marginBottom: 12 }}>
-          Scanner, Model Context Protocol sunucusu olarak Qwen Code'a (ve her MCP client'a) baglanir. {MCP_TOOLS.length} native tool.
+          Scanner, Model Context Protocol server to Qwen Code (and any MCP client). {MCP_TOOLS.length} native tool.
         </p>
         <div className="cmd-box">{INSTALL}</div>
         <p style={{ color: 'var(--text3)', fontSize: 11.5, marginTop: 8 }}>
-          Not: <code>qwen mcp add</code> sonrasi tam Qwen restart gerekir (hot-load yok). Server stdio, bagimliliksiz.
+          Not: <code>qwen mcp add</code> sonrasi a full Qwen restart is required (no hot-load). Server stdio, bagimliliksiz.
         </p>
       </div>
       <div className="panel">
@@ -89,7 +89,7 @@ export default function McpView() {
           </div>
         </div>
         {err && <div style={{ color: 'var(--red)', fontSize: 12, marginTop: 8 }}>{err}</div>}
-        <button className="btn primary" style={{ marginTop: 12 }} onClick={run}>▶ Calistir</button>
+        <button className="btn primary" style={{ marginTop: 12 }} onClick={run}>▶ Run</button>
         {show && <pre className="outbox show" style={{ display: 'block' }}>{out}</pre>}
       </div>
     </>

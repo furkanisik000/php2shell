@@ -28,18 +28,18 @@ export const api = {
     return req('/cves' + (q ? '?' + q : ''))
   },
   pocs: () => req('/pocs'),
-  profiles: () => req('/profiles'),
-  profile: (id) => req('/profiles/' + encodeURIComponent(id)),
-  rescan: (id, body) => post(`/profiles/${encodeURIComponent(id)}/rescan`, body),
-  deleteProfile: (id) => del('/profiles/' + encodeURIComponent(id)),
-  renameProfile: (id, name) => post(`/profiles/${encodeURIComponent(id)}/rename`, { name }),
+  profilees: () => req('/profilees'),
+  profilee: (id) => req('/profilees/' + encodeURIComponent(id)),
+  rescan: (id, body) => post(`/profilees/${encodeURIComponent(id)}/rescan`, body),
+  deleteprofilee: (id) => del('/profilees/' + encodeURIComponent(id)),
+  renameprofilee: (id, name) => post(`/profilees/${encodeURIComponent(id)}/rename`, { name }),
   scan: (body) => post('/scan', body),
   probe: (body) => post('/probe', body),
   runPoc: (cve, params) => post('/poc/' + encodeURIComponent(cve), { params }),
-  runPocProfile: (pid, cve, params) => post(`/profiles/${encodeURIComponent(pid)}/poc/${encodeURIComponent(cve)}`, { params }),
-  pocRuns: (pid) => req(`/profiles/${encodeURIComponent(pid)}/poc-runs`),
-  scans: (pid) => req(`/profiles/${encodeURIComponent(pid)}/scans`),
-  reportUrl: (id, fmt) => `/profiles/${encodeURIComponent(id)}/report?fmt=${fmt}`,
+  runPocprofilee: (pid, cve, params) => post(`/profilees/${encodeURIComponent(pid)}/poc/${encodeURIComponent(cve)}`, { params }),
+  pocRuns: (pid) => req(`/profilees/${encodeURIComponent(pid)}/poc-runs`),
+  scans: (pid) => req(`/profilees/${encodeURIComponent(pid)}/scans`),
+  reportUrl: (id, fmt) => `/profilees/${encodeURIComponent(id)}/report?fmt=${fmt}`,
   logs: ({ level, category, q, limit } = {}) => {
     const p = new URLSearchParams()
     if (level) p.set('level', level)

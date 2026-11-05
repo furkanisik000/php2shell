@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { api } from '../api.js'
 
-export default function CveCard({ cve, pocs, hitMajor, profileId, onRun }) {
+export default function CveCard({ cve, pocs, hitMajor, profileeId, onRun }) {
   const spec = pocs[cve.id]
   const isHit = hitMajor && (cve.affected || []).includes(hitMajor)
   const scoreCls = cve.score >= 9.5 ? 'crit' : 'high'
@@ -29,12 +29,12 @@ export default function CveCard({ cve, pocs, hitMajor, profileId, onRun }) {
         <span>📅 {cve.published || ''}</span>
         <span><a href={nvd} target="_blank" rel="noopener">NVD</a>{(cve.edb || []).length > 0 && <> <a href={cve.edb[0]} target="_blank" rel="noopener">EDB</a></>}</span>
       </div>
-      {spec && <PocPanel cve={cve} spec={spec} profileId={profileId} onRun={onRun} />}
+      {spec && <PocPanel cve={cve} spec={spec} profileeId={profileeId} onRun={onRun} />}
     </div>
   )
 }
 
-function PocPanel({ cve, spec, profileId, onRun }) {
+function PocPanel({ cve, spec, profileeId, onRun }) {
   const [params, setParams] = useState({})
   const [running, setRunning] = useState(false)
   const [out, setOut] = useState('')
@@ -47,8 +47,8 @@ function PocPanel({ cve, spec, profileId, onRun }) {
     setRunning(true); setShow(true); setResult(null)
     setOut('native engine calisiyor… (socket/HTTP scanner\'dan atiliyor)')
     try {
-      const r = profileId
-        ? await api.runPocProfile(profileId, cve.id, vals)
+      const r = profileeId
+        ? await api.runPocprofilee(profileeId, cve.id, vals)
         : await api.runPoc(cve.id, vals)
       renderResult(r.result || r)
       onRun && onRun()
@@ -62,23 +62,23 @@ function PocPanel({ cve, spec, profileId, onRun }) {
     let h = ''
     if (res.error) h += `<span class="err">✗ ${esc(res.error)}</span>\n`
     if (res.status != null) h += `<span class="dim">HTTP ${res.status}</span>\n`
-    if (res.evidence) h += `<span class="dim">KANIT:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`
+    if (res.evidence) h += `<span class="dim">EVIDENCE:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`
     const det = res.detail || {}
-    if (det.host) h += `<span class="dim">hedef: ${esc(det.host)}</span>\n`
+    if (det.host) h += `<span class="dim">target: ${esc(det.host)}</span>\n`
     if (det.stage) h += `<span class="dim">asama: ${esc(det.stage)}</span>\n`
     if (det.chunk_base) h += `<span class="dim">chunk=${esc(det.chunk_base)} libphp=${esc(det.libphp_base || '')} zif=${esc(det.zif_abs || '')} htdata=${esc(det.htdata_abs || '')}</span>\n`
     if (res.log && res.log.length) h += `<span class="dim">── log ──</span>\n${res.log.map(l => '<span class="dim">' + esc(l) + '</span>').join('\n')}`
-    if (!h) h = '<span class="dim">cikti yok</span>'
+    if (!h) h = '<span class="dim">no output</span>'
     setOut(h)
     setResult(res)
   }
 
   const badge = result ? (
     result.success
-      ? <span className="result-badge win">✓ BASARILI — kanit alindi</span>
+      ? <span className="result-badge win">✓ SUCCESS — evidence captured</span>
       : (result.error
         ? <span className="result-badge lose">✗ basarisiz</span>
-        : <span className="result-badge mid">○ calisti — hedef savunmali / trigger tetiklenmedi</span>)
+        : <span className="result-badge mid">○ ran — target defended / trigger not fired</span>)
   ) : null
 
   return (
@@ -107,7 +107,7 @@ function PocPanel({ cve, spec, profileId, onRun }) {
         </div>
       )}
       <button className="btn danger" disabled={running} onClick={run}>
-        {running ? <span className="spin" /> : '▶'} Calistir (native engine)
+        {running ? <span className="spin" /> : '▶'} Run (native engine)
       </button>
       {show && <div className="outbox show" dangerouslySetInnerHTML={{ __html: out }} />}
       {badge}

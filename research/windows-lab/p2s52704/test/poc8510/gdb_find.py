@@ -22,7 +22,7 @@ import os
 procs = []
 for i, pid in enumerate(pids):
     script = "/tmp/gdb_w%d.txt" % i
-    with open(r"C:\Users\<USER>\p2s52704\test\poc8510\gdb_w%d.txt" % i, "w") as f:
+    with open(r"research/windows-lab/p2s52704\test\poc8510\gdb_w%d.txt" % i, "w") as f:
         f.write("attach %d\nset pagination off\nset confirm off\n"
                 "break *0x%x\ncommands 1\nsilent\n"
                 "printf 'HIT worker %d\\n' % 0x%x\nx/160gx 0x%x\n"
