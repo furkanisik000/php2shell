@@ -1,5 +1,5 @@
 // Akis: aktif sekmeyi otomatik al -> hedefi CANLI sor -> PHP surumu cik
-//      -> surumu surum-tabanli db.json'da sorgula -> risk notu.
+//      -> surumu version-tabanli db.json'da sorgula -> risk notu.
 import { statusMeta } from './lib/version.js';
 import { checkTarget } from './lib/check.js';
 import { lookupVersion, listVersions, getMeta } from './lib/lookup.js';
@@ -78,7 +78,7 @@ function renderResult(res, vinfo) {
 
   card.innerHTML = `
     <div class="result-head t-${tone}">
-      <span class="pill">${esc(info ? info.label : v ? '—' : 'Surum gizli')}</span>
+      <span class="pill">${esc(info ? info.label : v ? '—' : 'Version gizli')}</span>
       <span class="host">${esc(res.host)}</span>
     </div>
     <dl class="kv">
@@ -104,7 +104,7 @@ async function doCheck(inputOverride) {
       if (u) input = u;
     }
     if (!input) {
-      renderResult({ ok: false, message: 'Hedef yok — URL yaz ya da hedef sekmesindeyken ac.' });
+      renderResult({ ok: false, message: 'Hedef none — URL yaz ya da target sekmesindeyken ac.' });
       return;
     }
     $('#target').value = input;

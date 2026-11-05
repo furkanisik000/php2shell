@@ -42,7 +42,7 @@ export default function LogView() {
         </select>
         <select value={cat} onChange={e => setCat(e.target.value)}>
           <option value="">Tum kategoriler</option>
-          <option>scan</option><option>poc</option><option>profile</option><option>store</option><option>system</option>
+          <option>scan</option><option>poc</option><option>profilee</option><option>store</option><option>system</option>
         </select>
         <input placeholder="log metni ara…" value={q}
           onChange={e => { setQ(e.target.value); const t = e.target.value; clearTimeout(load._d); load._d = setTimeout(() => setQLive(t), 300) }} />
@@ -53,7 +53,7 @@ export default function LogView() {
         <button className="btn sm danger" onClick={clear}>🗑 Temizle</button>
       </div>
       <div className="log-console">
-        {logs.length === 0 ? <div className="log-line"><span className="msg" style={{ color: 'var(--text3)' }}>log yok</span></div> :
+        {logs.length === 0 ? <div className="log-line"><span className="msg" style={{ color: 'var(--text3)' }}>no logs</span></div> :
           logs.map(l => (
             <div className="log-line" key={l.id}>
               <span className="ts">{(l.ts || '').replace('T', ' ').replace('Z', '')}</span>
@@ -65,7 +65,7 @@ export default function LogView() {
           ))}
       </div>
       <p style={{ color: 'var(--text3)', fontSize: 11, marginTop: 8 }}>
-        Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Her tarama, PoC calismasi ve hata kaydedilir.
+        Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Every scan, PoC run and error is recorded.
       </p>
     </div>
   )

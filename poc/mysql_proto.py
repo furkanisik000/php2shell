@@ -121,7 +121,7 @@ def _read_auth_result(sock):
 def run_auth_bypass(params):
     target = (params.get("host") or params.get("url") or "").strip()
     if not target:
-        return {"ok": False, "success": False, "error": "host gerekli"}
+        return {"ok": False, "success": False, "error": "host required"}
     host, _, port = target.partition(":")
     port = int(port or 3306)
     user = (params.get("user") or "").strip()
@@ -154,7 +154,7 @@ def run_auth_bypass(params):
 def run_stack_overflow(params):
     target = (params.get("host") or params.get("url") or "").strip()
     if not target:
-        return {"ok": False, "success": False, "error": "host gerekli"}
+        return {"ok": False, "success": False, "error": "host required"}
     host, _, port = target.partition(":")
     port = int(port or 3306)
     try:
@@ -198,28 +198,28 @@ EXPLOITS = {
         "name": "MySQL stack overflow RCE", "type": "RCE", "preauth": False,
         "affected": ["5.5", "5.6", "5.7", "8.0"],
         "note": "Native MySQL protocol: oversized auth packet -> crash/RST sinyali.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "127.0.0.1:3306"),
                    _in("Boyut (KB)", "size_kb", False, "512")],
         "run": run_stack_overflow},
     "CVE-2015-4824": {
         "name": "MySQL auth bypass (NULL user)", "type": "AuthBypass", "preauth": True,
         "affected": ["5.5", "5.6", "5.7", "8.0"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "127.0.0.1:3306"),
                    _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
     "CVE-2023-24714": {
         "name": "MySQL auth bypass (empty user)", "type": "AuthBypass", "preauth": True,
         "affected": ["8.0", "8.1", "8.2"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "127.0.0.1:3306"),
                    _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
     "CVE-2019-14367": {
         "name": "MySQL auth bypass + RCE", "type": "RCE", "preauth": True,
         "affected": ["8.0", "8.1", "8.2"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "127.0.0.1:3306"),
                    _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
 }

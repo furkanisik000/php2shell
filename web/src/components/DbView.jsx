@@ -37,7 +37,7 @@ export default function DbView({ db, pocs }) {
             value={q} onChange={e => setQ(e.target.value.toLowerCase())} />
         </div>
       </div>
-      {out.length === 0 ? <div className="sec-empty">Sonuc yok</div> : (
+      {out.length === 0 ? <div className="sec-empty">No result</div> : (
         <>
           {out.slice(0, 300).map(c => <CveCard key={c.id} cve={c} pocs={pocs} hitMajor={ver || null} />)}
           {out.length > 300 && <div className="empty">+ {out.length - 300} daha (filtre daralt)</div>}

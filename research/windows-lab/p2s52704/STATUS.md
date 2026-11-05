@@ -2,7 +2,7 @@
 
 Lab: one `php:<ver>-apache` Docker container per version, single-worker prefork,
 `memory_limit=128M max_input_vars=1000 display_errors=1 post_max_size=512M`, host port `181xx`.
-Working dir: `C:\Users\<USER>\p2s52704\`. Exploit: `exploit.py` (bookworm profile, 256MB OOM field).
+Working dir: `research/windows-lab/p2s52704\`. Exploit: `exploit.py` (bookworm profile, 256MB OOM field).
 
 **RCE chain:** stage-1 Set-Cookie heap leak → stage-2 Set-Cookie libphp leak →
 stage-3 upload_progress fake-ref (pDestructor=zif_system) → RCE on session teardown.

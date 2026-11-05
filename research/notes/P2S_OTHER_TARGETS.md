@@ -2,7 +2,7 @@
 
 > **Amac:** php2shell (18120, kullanicida) DISINDAKI native PoC'ler icin
 > **gercek kanit** alinacak Docker hedeflerini tek dokumanda toplama.
-> Hedef ortam: **Windows kutusu LAB_IP** (Docker Desktop, WSL2, **native amd64**).
+> Hedef ortam: **Windows kutusu 127.0.0.1** (Docker Desktop, WSL2, **native amd64**).
 > Port araligi: **18201–18220** (18101–18114 PHP + 18120 OOM ile cakismaz).
 > Sunucudaki agent bu dokumani takip edip her container'i ayaga kaldirip LAN'a acacak.
 
@@ -55,7 +55,7 @@ curl -s --max-time 5 http://127.0.0.1:18201/ | Select-String "Tomcat"      # HTT
 # AJP portu acik mi:
 Test-NetConnection 127.0.0.1 -Port 18202 -InformationLevel Quiet            # True
 ```
-**Kanit (scanner):** `CVE-2020-1938` → host `LAB_IP:18202`, file `/WEB-INF/web.xml`
+**Kanit (scanner):** `CVE-2020-1938` → host `127.0.0.1:18202`, file `/WEB-INF/web.xml`
 ve `../../../../../etc/passwd` → gercek byte'lar.
 
 ---
@@ -87,7 +87,7 @@ docker exec p2s-h2c nginx -s reload
 ```powershell
 curl -s --http2-prior-knowledge -o /dev/null -w "h2c -> HTTP %{http_code} (http_version=%{http_version})\n" http://127.0.0.1:18203/
 ```
-**Kanit (scanner):** `CVE-2024-7347` → host `LAB_IP:18203`, streams 500 → RST/GOAWAY.
+**Kanit (scanner):** `CVE-2024-7347` → host `127.0.0.1:18203`, streams 500 → RST/GOAWAY.
 
 ---
 
@@ -108,7 +108,7 @@ docker exec p2s-apacheh2 sh -c "echo 'Protocols h2 http/1.1' >> /etc/apache2/con
 docker restart p2s-apacheh2
 ```
 **Dogrula:** `curl -s --http2-prior-knowledge -o /dev/null -w "%{http_version}\n" http://127.0.0.1:18205/`
-**Kanit (scanner):** `CVE-2021-44790` / `CVE-2017-5638` / `CVE-2024-38477` → host `LAB_IP:18205`.
+**Kanit (scanner):** `CVE-2021-44790` / `CVE-2017-5638` / `CVE-2024-38477` → host `127.0.0.1:18205`.
 
 ---
 
@@ -138,9 +138,9 @@ Test-NetConnection 127.0.0.1 -Port 18210 -InformationLevel Quiet   # 5.7
 Test-NetConnection 127.0.0.1 -Port 18211 -InformationLevel Quiet   # 8.0
 ```
 **Kanit (scanner):**
-- `CVE-2015-4824` → host `LAB_IP:18210`, user `` (bos) → OK paket.
-- `CVE-2023-24714` → host `LAB_IP:18211`, user `` (bos) → OK paket.
-- `CVE-2019-14853` → host `LAB_IP:18210`, size_kb 512 → crash/RST sinyali.
+- `CVE-2015-4824` → host `127.0.0.1:18210`, user `` (bos) → OK paket.
+- `CVE-2023-24714` → host `127.0.0.1:18211`, user `` (bos) → OK paket.
+- `CVE-2019-14853` → host `127.0.0.1:18210`, size_kb 512 → crash/RST sinyali.
 
 ---
 
@@ -202,9 +202,9 @@ docker exec p2s-phpcgi nginx -s reload
 curl -s --max-time 5 http://127.0.0.1:18215/index.php          # "P2S-PHP-OK"
 ```
 **Kanit (scanner):**
-- `CVE-2017-13300` → host `LAB_IP:18215`, base `/index.php`, cmd `id` → `uid=`.
-- `CVE-2014-8142` → host `LAB_IP:18215`, base `/index.php`, cmd `id` → `uid=`.
-- `CVE-2019-8648` → host `LAB_IP:18215`, base `/cgi-bin/php`, cmd `id` → `uid=`.
+- `CVE-2017-13300` → host `127.0.0.1:18215`, base `/index.php`, cmd `id` → `uid=`.
+- `CVE-2014-8142` → host `127.0.0.1:18215`, base `/index.php`, cmd `id` → `uid=`.
+- `CVE-2019-8648` → host `127.0.0.1:18215`, base `/cgi-bin/php`, cmd `id` → `uid=`.
 
 ---
 
@@ -227,11 +227,11 @@ Asagi `p2s_other_setup.bat` dosyasi olarak kaydedip Windows'ta calistir:
 ## Dogrulama Checklist (kurulumdan sonra)
 
 - [ ] `docker ps --filter "name=p2s"` → 7 container (ghostcat, h2c, apacheh2, mysql57, mysql80, phpfpm, phpcgi)
-- [ ] `Test-NetConnection LAB_IP -Port 18202` (AJP) → True
-- [ ] `curl http://LAB_IP:18201/` → Tomcat 200
-- [ ] `curl --http2-prior-knowledge http://LAB_IP:18203/` → http_version=2
-- [ ] `Test-NetConnection LAB_IP -Port 18210/18211` (MySQL) → True
-- [ ] `curl http://LAB_IP:18215/index.php` → "P2S-PHP-OK"
+- [ ] `Test-NetConnection 127.0.0.1 -Port 18202` (AJP) → True
+- [ ] `curl http://127.0.0.1:18201/` → Tomcat 200
+- [ ] `curl --http2-prior-knowledge http://127.0.0.1:18203/` → http_version=2
+- [ ] `Test-NetConnection 127.0.0.1 -Port 18210/18211` (MySQL) → True
+- [ ] `curl http://127.0.0.1:18215/index.php` → "P2S-PHP-OK"
 - [ ] Windows Firewall 18201–18220 LAN'a acik:
       `New-NetFirewallRule -DisplayName "p2s-other" -Direction Inbound -Port 18201-18220 -Protocol TCP -Action Allow`
 

@@ -1,6 +1,6 @@
 const TABS = [
-  { id: 'scan', label: 'Tarama' },
-  { id: 'profiles', label: 'Profiller', countKey: 'profiles' },
+  { id: 'scan', label: 'Scanma' },
+  { id: 'profilees', label: 'profileler', countKey: 'profilees' },
   { id: 'db', label: 'CVE DB', countKey: 'cves' },
   { id: 'log', label: 'Log', countKey: 'logs' },
   { id: 'mcp', label: 'MCP / API' },

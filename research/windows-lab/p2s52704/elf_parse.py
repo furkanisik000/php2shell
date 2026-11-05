@@ -97,7 +97,7 @@ def find_rce_functions(symbols):
     return found
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\<USER>\p2s52704\archive\libphp7_7433.so"
+    path = sys.argv[1] if len(sys.argv) > 1 else r"research/windows-lab/p2s52704\archive\libphp7_7433.so"
     print(f"Parsing {path} ...", flush=True)
     symbols = parse_elf_symbols(path)
     print(f"Found {len(symbols)} function symbols", flush=True)

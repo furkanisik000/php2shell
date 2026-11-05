@@ -1,14 +1,14 @@
 {
   "cve": "CVE-2026-109618/19 (php2shell)",
   "updated": "2026-10-24",
-  "note": "SURUM-TABANLI risk DB'si. Anahtar = branch (major.minor). Surum tespiti live fetch ile gelir; bu dosya sadece RISK DATASI. Yeni branch ekle: \"8.6\": { \"status\": \"CONFIRMED_FIXED\", \"note\": \"...\" }",
+  "note": "SURUM-TABANLI risk DB'si. Anahtar = branch (major.minor). Version tespiti live fetch ile gelir; bu file sadece RISK DATASI. Yeni branch ekle: \"8.6\": { \"status\": \"CONFIRMED_FIXED\", \"note\": \"...\" }",
   "rules": {
     "eolBefore": [8, 2],
     "fixedBranch": null,
-    "note": "versions map'inde olmayan branch'ler icin fallback. eolBefore: altinda EOL. fixedBranch: null=dogrulanmadi (at-risk)."
+    "note": "versions map'inde olmayan branch'ler for fallback. eolBefore: altinda EOL. fixedBranch: null=dogrulanmadi (at-risk)."
   },
   "versions": {
-    "5.4":  { "status": "EOL_NO_PATCH",   "note": "EOL — vendor patch yok" },
+    "5.4":  { "status": "EOL_NO_PATCH",   "note": "EOL — vendor patch none" },
     "5.5":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
     "5.6":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
     "7.0":  { "status": "EOL_NO_PATCH",   "note": "EOL" },

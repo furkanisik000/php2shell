@@ -149,11 +149,11 @@ input.mono{font-family:var(--mono);font-size:12.5px}
 .tbl .cell-txt{font-family:inherit}
 
 /* ===== PROFILES ===== */
-.profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.profile-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.profile-card .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.profile-card .pname{font-size:15px;font-weight:700;font-family:var(--mono);overflow-wrap:anywhere;word-break:break-word;min-width:0}
-.profile-card .purl{font-size:11.5px;color:var(--text2);overflow-wrap:anywhere;word-break:break-word;margin-top:2px;min-width:0}
+.profilees-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.profilee-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.profilee-card .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.profilee-card .pname{font-size:15px;font-weight:700;font-family:var(--mono);overflow-wrap:anywhere;word-break:break-word;min-width:0}
+.profilee-card .purl{font-size:11.5px;color:var(--text2);overflow-wrap:anywhere;word-break:break-word;margin-top:2px;min-width:0}
 .mini-gauge{width:64px;height:64px;flex:none;position:relative}
 .mini-gauge .mn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;font-family:var(--mono)}
 .pfacts{display:flex;flex-wrap:wrap;gap:6px}
@@ -223,8 +223,8 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
 </div>
 
 <div class="tabs">
-  <div class="tab active" data-view="scan" onclick="switchView('scan')">Tarama</div>
-  <div class="tab" data-view="profiles" onclick="switchView('profiles')">Profiller <span class="n" id="n-profiles">0</span></div>
+  <div class="tab active" data-view="scan" onclick="switchView('scan')">Scanma</div>
+  <div class="tab" data-view="profilees" onclick="switchView('profilees')">profileler <span class="n" id="n-profilees">0</span></div>
   <div class="tab" data-view="db" onclick="switchView('db')">CVE DB <span class="n" id="n-cves">0</span></div>
   <div class="tab" data-view="log" onclick="switchView('log')">Log <span class="n" id="n-logs">0</span></div>
   <div class="tab" data-view="mcp" onclick="switchView('mcp')">MCP / API</div>
@@ -234,13 +234,13 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
   <!-- ============ SIDE (scan controls + fingerprint) ============ -->
   <div class="col-side">
     <div class="panel">
-      <h3>Hedef <span class="tag" id="scan-state">hazir</span></h3>
+      <h3>Hedef <span class="tag" id="scan-state">ready</span></h3>
       <label class="f">Hedef URL</label>
-      <input id="target-url" class="mono" placeholder="http://LAB_IP:18111/index.php" spellcheck="false">
-      <label class="f" style="margin-top:12px">Profil adi (opsiyonel)</label>
+      <input id="target-url" class="mono" placeholder="http://127.0.0.1:18111/index.php" spellcheck="false">
+      <label class="f" style="margin-top:12px">profile adi (opsiyonel)</label>
       <input id="target-name" placeholder="orn: php-target-18111" spellcheck="false">
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-        <button class="btn primary block" id="btn-scan" onclick="doScan(true)">🎯 Tara + Kaydet</button>
+        <button class="btn primary block" id="btn-scan" onclick="doScan(true)">🎯 Scan + Kaydet</button>
       </div>
       <button class="btn sm block" style="margin-top:8px" onclick="doScan(false)">Tek tara (kaydetme)</button>
     </div>
@@ -254,7 +254,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
       <div id="waf-body"></div>
     </div>
     <div class="panel" id="ports-panel" style="display:none">
-      <h3>Acik Portlar <span class="tag" id="ports-n"></span></h3>
+      <h3>Open Ports <span class="tag" id="ports-n"></span></h3>
       <div id="ports-body"></div>
     </div>
     <div class="panel" id="tls-panel" style="display:none">
@@ -278,12 +278,12 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
     <div class="view active" id="view-scan">
       <div id="scan-empty" class="empty">
         <div class="big">🎯</div>
-        Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br>
-        eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, her adimi <b>loglar</b> ve native PoC'leri kendisi atar.
+        Enter a target URL on the left → <b>Scan</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br>
+        eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, logs every step <b>loglar</b> and sends native PoCs itself.
       </div>
       <div id="scan-result" style="display:none">
         <div class="panel">
-          <h3>Risk Degerlendirmesi <span class="tag" id="risk-target"></span></h3>
+          <h3>Risk Assessment <span class="tag" id="risk-target"></span></h3>
           <div class="gauge-wrap">
             <div class="gauge">
               <svg width="150" height="150" viewBox="0 0 150 150">
@@ -305,21 +305,21 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
         <div id="cve-list"></div>
       </div>
 
-      <!-- HISTORY (when viewing a saved profile) -->
+      <!-- HISTORY (when viewing a saved profilee) -->
       <div id="history-block" style="display:none">
-        <div class="sec-head">Tarama Tarihcesi <span class="n" id="hist-scan-n"></span>
-          <button class="btn sm" style="margin-left:auto" onclick="rescanCurrent()">↻ Yeniden Tara (tarihe ekle)</button>
+        <div class="sec-head">Scanma Tarihcesi <span class="n" id="hist-scan-n"></span>
+          <button class="btn sm" style="margin-left:auto" onclick="rescanCurrent()">↻ Yeniden Scan (tarihe ekle)</button>
         </div>
         <div class="history-block" id="hist-scans"></div>
-        <div class="sec-head">PoC Calistirma Kayitlari <span class="n" id="hist-poc-n"></span></div>
+        <div class="sec-head">PoC Runma Kayitlari <span class="n" id="hist-poc-n"></span></div>
         <div class="history-block" id="hist-pocs"></div>
       </div>
     </div>
 
     <!-- PROFILES VIEW -->
-    <div class="view" id="view-profiles">
-      <div class="sec-head" style="margin-top:0">Kayitli Hedef Profilleri <span class="n" id="prof-count"></span></div>
-      <div id="profiles-body"><div class="empty"><div class="big">📁</div>Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.</div></div>
+    <div class="view" id="view-profilees">
+      <div class="sec-head" style="margin-top:0">Saved Target profilees <span class="n" id="prof-count"></span></div>
+      <div id="profilees-body"><div class="empty"><div class="big">📁</div>No profilees yet. "Scanma" sekmesinden target tara → profile SQLite'a kaydedilir.</div></div>
     </div>
 
     <!-- DB VIEW -->
@@ -346,7 +346,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
           </select>
           <select id="log-cat" onchange="loadLogs()">
             <option value="">Tum kategoriler</option>
-            <option>scan</option><option>poc</option><option>profile</option><option>store</option><option>system</option>
+            <option>scan</option><option>poc</option><option>profilee</option><option>store</option><option>system</option>
           </select>
           <input id="log-q" placeholder="log metni ara…" oninput="debounceLogs()">
           <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
@@ -356,7 +356,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
           <button class="btn sm danger" onclick="clearLogs()">🗑 Temizle</button>
         </div>
         <div class="log-console" id="log-console"><span class="dim">yukleniyor…</span></div>
-        <p style="color:var(--text3);font-size:11px;margin-top:8px">Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Her tarama, PoC calismasi ve hata kaydedilir.</p>
+        <p style="color:var(--text3);font-size:11px;margin-top:8px">Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Every scan, PoC run and error is recorded.</p>
       </div>
     </div>
 
@@ -364,9 +364,9 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
     <div class="view" id="view-mcp">
       <div class="panel">
         <h3>MCP Server — Qwen Code entegrasyonu</h3>
-        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Scanner, Model Context Protocol sunucusu olarak Qwen Code'a (ve her MCP client'a) baglanir. 14 native tool.</p>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Scanner, Model Context Protocol server to Qwen Code (and any MCP client). 14 native tool.</p>
         <div class="cmd-box" id="mcp-install"></div>
-        <p style="color:var(--text3);font-size:11.5px;margin-top:8px">Not: <code>qwen mcp add</code> sonrasi tam Qwen restart gerekir (hot-load yok). Server stdio, bagimliliksiz.</p>
+        <p style="color:var(--text3);font-size:11.5px;margin-top:8px">Not: <code>qwen mcp add</code> sonrasi a full Qwen restart is required (no hot-load). Server stdio, bagimliliksiz.</p>
       </div>
       <div class="panel">
         <h3>Tool'lar <span class="tag" id="mcp-tool-n">14</span></h3>
@@ -389,7 +389,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
             <input id="test-arg" class="mono" placeholder='{"software":"PHP"}'>
           </div>
         </div>
-        <button class="btn primary" style="margin-top:12px" onclick="runTest()">▶ Calistir</button>
+        <button class="btn primary" style="margin-top:12px" onclick="runTest()">▶ Run</button>
         <div class="outbox" id="test-out"></div>
       </div>
     </div>
@@ -402,7 +402,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
 let DB = [];
 let POCS = {};
 let PROFILES = [];
-let currentProfileId = null;
+let currentprofileeId = null;
 
 const $ = id => document.getElementById(id);
 function esc(s){const d=document.createElement('div');d.textContent=(s==null)?'':String(s);return d.innerHTML;}
@@ -417,14 +417,14 @@ async function init(){
     const h = await j('/health');
     $('status-dot').classList.add('on');
     $('status-txt').textContent = 'online · v'+h.version;
-    $('pill-counts').textContent = h.vulns+' CVE · '+h.with_poc+' PoC · '+h.profiles+' profil';
+    $('pill-counts').textContent = h.vulns+' CVE · '+h.with_poc+' PoC · '+h.profilees+' profile';
     $('n-cves').textContent = h.vulns;
   }catch(e){
-    $('status-txt').textContent = 'sunucu kapali (server.py)';
+    $('status-txt').textContent = 'server offline (server.py)';
   }
   try{ const c = await j('/cves'); DB = c.cves||[]; $('n-cves').textContent = DB.length; }catch(e){}
   try{ const p = await j('/pocs'); POCS = p.pocs||{}; }catch(e){}
-  await loadProfiles();
+  await loadprofilees();
   buildDBfilters(); renderDB(); renderMCP();
   loadLogs();
 }
@@ -434,25 +434,25 @@ function switchView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   const el = $('view-'+v); if(el) el.classList.add('active');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  if(v==='profiles') loadProfiles();
+  if(v==='profilees') loadprofilees();
   if(v==='log') loadLogs();
 }
 
 /* ---------- scan ---------- */
 async function doScan(save){
   const url = $('target-url').value.trim();
-  if(!url){alert('Hedef URL gir');return;}
+  if(!url){alert('Enter a target URL');return;}
   const btn = $('btn-scan'); btn.disabled=true; $('scan-state').textContent='taraniyor…';
   try{
     const body = {url, save:!!save};
     if($('target-name').value.trim()) body.name=$('target-name').value.trim();
     const prof = await j('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(prof.id) currentProfileId = prof.id; else currentProfileId=null;
+    if(prof.id) currentprofileeId = prof.id; else currentprofileeId=null;
     renderScan(prof.scan || prof, prof);
-    if(save){ loadProfiles(); loadLogs(); }
+    if(save){ loadprofilees(); loadLogs(); }
     $('scan-state').textContent = save ? 'kaydedildi ✓' : 'tara';
   }catch(e){
-    $('scan-state').textContent='hata'; alert('Tarama hatasi: '+e.message);
+    $('scan-state').textContent='hata'; alert('Scanma hatasi: '+e.message);
   }
   btn.disabled=false;
 }
@@ -492,9 +492,9 @@ function renderScan(s, prof){
   // ports
   const ports = s.ports||[];
   $('ports-n').textContent = ports.length;
-  $('ports-body').innerHTML = ports.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>Port</th><th>Servis</th><th>Surum</th></tr>`
+  $('ports-body').innerHTML = ports.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>Port</th><th>Service</th><th>Version</th></tr>`
     + ports.map(p=>`<tr><td class="ok">:${esc(p.port)}</td><td>${esc(p.service||'open')}</td><td>${esc(p.version||'—')}</td></tr>`).join('')+'</table></div>'
-    : `<div class="sec-empty">Acik port bulunamadi</div>`;
+    : `<div class="sec-empty">No open ports found</div>`;
   $('ports-panel').style.display='block';
 
   // TLS
@@ -546,14 +546,14 @@ function renderRisk(risk){
   $('risk-factors').innerHTML = fs.map(f=>{
     const v=f.delta; const cls = v>0?'pos':(v<0?'neg':'zero');
     return `<div class="factor"><span class="fl">${esc(f.label)} ${f.note?`<span style="color:var(--text3)">· ${esc(f.note)}</span>`:''}</span><span class="fv ${cls}">${v>0?'+':''}${v}</span></div>`;
-  }).join('') || '<div class="factor"><span class="fl">Faktor yok</span></div>';
+  }).join('') || '<div class="factor"><span class="fl">No factors</span></div>';
 }
 
 /* ---------- CVE list + native PoC ---------- */
 function renderCVEs(cves, hitMajor){
   $('cve-count').textContent = `${cves.length} · ${cves.filter(c=>POCS[c.id]).length} native PoC`;
   if(!cves.length){
-    $('cve-list').innerHTML = '<div class="sec-empty" style="margin-top:8px">Tespit edilen surumler icin eslesen kritik CVE bulunamadi ✓</div>';
+    $('cve-list').innerHTML = '<div class="sec-empty" style="margin-top:8px">No critical CVE matches for the detected versions ✓</div>';
     return;
   }
   $('cve-list').innerHTML = cves.map(c=>renderCVE(c, hitMajor)).join('');
@@ -595,7 +595,7 @@ function renderPoC(cveId){
       ${p.preauth?'<span class="badge b-pre">PRE-AUTH</span>':''}</div>
     ${p.note?`<div class="poc-note">⚠ ${esc(p.note)}</div>`:''}
     ${inputs?`<div class="poc-grid">${inputs}</div>`:''}
-    <button class="btn danger" onclick="runPoC('${esc(cveId)}')">▶ Calistir (native engine)</button>
+    <button class="btn danger" onclick="runPoC('${esc(cveId)}')">▶ Run (native engine)</button>
     <div class="outbox" id="pocout-${esc(cveId)}"></div>
     <div id="pocres-${esc(cveId)}"></div>
   </div>`;
@@ -614,12 +614,12 @@ async function runPoC(cveId){
   res.innerHTML='';
   const params = pocParams(cveId);
   try{
-    // profile-linked when viewing a saved profile (recorded to poc_runs), else ad-hoc
-    const url = currentProfileId ? `/profiles/${encodeURIComponent(currentProfileId)}/poc/${encodeURIComponent(cveId)}` : `/poc/${encodeURIComponent(cveId)}`;
+    // profilee-linked when viewing a saved profilee (recorded to poc_runs), else ad-hoc
+    const url = currentprofileeId ? `/profilees/${encodeURIComponent(currentprofileeId)}/poc/${encodeURIComponent(cveId)}` : `/poc/${encodeURIComponent(cveId)}`;
     const r = await j(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({params})});
     renderPoCResult(out,res,r.result||r);
     loadLogs();
-    if(currentProfileId) loadProfiles();
+    if(currentprofileeId) loadprofilees();
   }catch(e){
     out.innerHTML=`<span class="err">✗ ${esc(e.message)}</span>`;
   }
@@ -629,57 +629,57 @@ function renderPoCResult(out,res){
   let h='';
   if(res.error) h+=`<span class="err">✗ ${esc(res.error)}</span>\n`;
   if(res.status!=null) h+=`<span class="dim">HTTP ${res.status}</span>\n`;
-  if(res.evidence){ h+=`<span class="dim">KANIT:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`; }
+  if(res.evidence){ h+=`<span class="dim">EVIDENCE:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`; }
   const det=res.detail||{};
-  if(det.host) h+=`<span class="dim">hedef: ${esc(det.host)}</span>\n`;
+  if(det.host) h+=`<span class="dim">target: ${esc(det.host)}</span>\n`;
   if(det.stage) h+=`<span class="dim">asama: ${esc(det.stage)}</span>\n`;
   if(det.chunk_base) h+=`<span class="dim">chunk=${esc(det.chunk_base)} libphp=${esc(det.libphp_base||'')} zif=${esc(det.zif_abs||'')} htdata=${esc(det.htdata_abs||'')}</span>\n`;
   if(det.split) h+=`<span class="dim">split: ${det.split.map(esc).join(' ')}</span>\n`;
   if(res.log && res.log.length) h+=`<span class="dim">── log ──\n</span>${res.log.map(l=>'<span class="dim">'+esc(l)+'</span>').join('\n')}`;
-  if(!h) h='<span class="dim">cikti yok</span>';
+  if(!h) h='<span class="dim">no output</span>';
   out.innerHTML=h;
   const badge = document.getElementById('pocres-'+out.id.replace('pocout-',''));
   if(badge){
-    if(res.success) badge.innerHTML='<span class="result-badge win">✓ BASARILI — kanit alindi</span>';
+    if(res.success) badge.innerHTML='<span class="result-badge win">✓ SUCCESS — evidence captured</span>';
     else if(res.error) badge.innerHTML='<span class="result-badge lose">✗ basarisiz</span>';
-    else badge.innerHTML='<span class="result-badge mid">○ calisti — hedef savunmali / trigger tetiklenmedi</span>';
+    else badge.innerHTML='<span class="result-badge mid">○ ran — target defended / trigger not fired</span>';
   }
 }
 
 /* ---------- history (scans + poc runs) ---------- */
 async function loadHistory(pid){
   try{
-    const [sc,pc] = await Promise.all([j(`/profiles/${encodeURIComponent(pid)}/scans`), j(`/profiles/${encodeURIComponent(pid)}/poc-runs`)]);
+    const [sc,pc] = await Promise.all([j(`/profilees/${encodeURIComponent(pid)}/scans`), j(`/profilees/${encodeURIComponent(pid)}/poc-runs`)]);
     $('hist-scan-n').textContent = sc.count;
     $('hist-poc-n').textContent = pc.count;
-    $('hist-scans').innerHTML = sc.scans.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr>`
+    $('hist-scans').innerHTML = sc.scans.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Time (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr>`
       + sc.scans.map(s=>`<tr><td>${s.id}</td><td>${esc(s.ts)}</td><td>${esc(s.url||'')}</td><td class="${(s.risk&&s.risk.score>=65)?'warn':'ok'}">${s.risk?s.risk.score:'—'}</td><td>${s.cve_count}</td></tr>`).join('')+'</table></div>'
-      : '<div class="sec-empty">tarama kaydi yok</div>';
-    $('hist-pocs').innerHTML = pc.runs.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuc</th><th>Kanit (kisa)</th></tr>`
+      : '<div class="sec-empty">no scan records</div>';
+    $('hist-pocs').innerHTML = pc.runs.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Time</th><th>CVE</th><th>Result</th><th>Evidence (short)</th></tr>`
       + pc.runs.map(r=>`<tr><td>${r.id}</td><td>${esc(r.ts)}</td><td>${esc(r.cve_id)}</td><td class="${r.success?'ok':'no'}">${r.success?'✓ BASARILI':'✗'}</td><td class="cell-txt">${esc((r.result&&r.result.evidence||'').slice(0,90))}</td></tr>`).join('')+'</table></div>'
-      : '<div class="sec-empty">PoC calistirma kaydi yok</div>';
+      : '<div class="sec-empty">no PoC run records</div>';
     $('history-block').style.display='block';
   }catch(e){ $('history-block').style.display='none'; }
 }
 
-/* ---------- profiles ---------- */
-async function loadProfiles(){
+/* ---------- profilees ---------- */
+async function loadprofilees(){
   try{
-    const r = await j('/profiles'); PROFILES = r.profiles||[];
-    $('n-profiles').textContent = PROFILES.length;
-    renderProfiles();
+    const r = await j('/profilees'); PROFILES = r.profilees||[];
+    $('n-profilees').textContent = PROFILES.length;
+    renderprofilees();
   }catch(e){}
 }
-function renderProfiles(){
+function renderprofilees(){
   $('prof-count').textContent = PROFILES.length;
   if(!PROFILES.length){
-    $('profiles-body').innerHTML='<div class="empty"><div class="big">📁</div>Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite\'a kaydedilir.</div>';
+    $('profilees-body').innerHTML='<div class="empty"><div class="big">📁</div>No profilees yet. "Scanma" sekmesinden target tara → profile SQLite\'a kaydedilir.</div>';
     return;
   }
-  $('profiles-body').innerHTML = `<div class="profiles-grid">`+PROFILES.map(p=>{
+  $('profilees-body').innerHTML = `<div class="profilees-grid">`+PROFILES.map(p=>{
     const r=p.risk||{}; const score=r.score||0; const C=2*Math.PI*26;
     const col = gradeColor(score);
-    return `<div class="profile-card">
+    return `<div class="profilee-card">
       <div class="ph">
         <div style="min-width:0"><div class="pname">${esc(p.name)}</div><div class="purl">${esc(p.url)}</div></div>
         <div class="mini-gauge">
@@ -695,47 +695,47 @@ function renderProfiles(){
         <span class="pfact">${r.letter||'—'} ${esc(r.grade||'')}</span>
         <span class="pfact">${p.n_cve||0} CVE</span>
         <span class="pfact">${(p.open_ports||[]).length} port</span>
-        <span class="pfact">${p.scans||0} tarama</span>
+        <span class="pfact">${p.scans||0} scan</span>
         <span class="pfact">${p.poc_runs||0} PoC</span>
       </div>
       <div class="pactions">
-        <button class="btn sm primary" onclick="openProfile('${esc(p.id)}')">Ac</button>
-        <button class="btn sm" onclick="rescanProfile('${esc(p.id)}')">↻ Tara</button>
+        <button class="btn sm primary" onclick="openprofilee('${esc(p.id)}')">Ac</button>
+        <button class="btn sm" onclick="rescanprofilee('${esc(p.id)}')">↻ Scan</button>
         <button class="btn sm" onclick="report('${esc(p.id)}')">⬇ Rapor</button>
-        <button class="btn sm danger" onclick="delProfile('${esc(p.id)}')">Sil</button>
+        <button class="btn sm danger" onclick="delprofilee('${esc(p.id)}')">Sil</button>
       </div>
     </div>`;
   }).join('')+'</div>';
 }
-async function openProfile(id){
-  const p = await j('/profiles/'+encodeURIComponent(id));
-  currentProfileId = p.id;
+async function openprofilee(id){
+  const p = await j('/profilees/'+encodeURIComponent(id));
+  currentprofileeId = p.id;
   $('target-url').value = p.url||''; $('target-name').value = p.name||'';
   switchView('scan');
   renderScan(p.scan||{}, p);
 }
-async function rescanProfile(id){
+async function rescanprofilee(id){
   $('target-url').value = (PROFILES.find(x=>x.id===id)||{}).url||'';
   switchView('scan');
-  const prof = await j(`/profiles/${encodeURIComponent(id)}/rescan`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
-  currentProfileId = prof.id;
+  const prof = await j(`/profilees/${encodeURIComponent(id)}/rescan`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+  currentprofileeId = prof.id;
   renderScan(prof.scan||prof, prof);
-  loadProfiles(); loadLogs();
+  loadprofilees(); loadLogs();
   $('scan-state').textContent='yeniden tarandi ✓';
 }
-function rescanCurrent(){ if(currentProfileId) rescanProfile(currentProfileId); }
+function rescanCurrent(){ if(currentprofileeId) rescanprofilee(currentprofileeId); }
 async function report(id){
-  const r = await jraw('/profiles/'+encodeURIComponent(id)+'/report?fmt=md');
+  const r = await jraw('/profilees/'+encodeURIComponent(id)+'/report?fmt=md');
   const text = await r.text();
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([text],{type:'text/markdown'}));
   a.download='risk_raporu_'+id+'.md'; a.click();
 }
-async function delProfile(id){
-  if(!confirm('Bu profili ve tum tarama/PoC kayitlarini sil?'))return;
-  await fetch('/profiles/'+encodeURIComponent(id),{method:'DELETE'});
-  if(currentProfileId===id){currentProfileId=null;}
-  loadProfiles(); loadLogs();
+async function delprofilee(id){
+  if(!confirm('Delete this profilee and all its scan/PoC records?'))return;
+  await fetch('/profilees/'+encodeURIComponent(id),{method:'DELETE'});
+  if(currentprofileeId===id){currentprofileeId=null;}
+  loadprofilees(); loadLogs();
 }
 
 /* ---------- DB view ---------- */
@@ -762,7 +762,7 @@ function renderDB(){
   }).sort((a,b)=>b.score-a.score);
   $('db-count').textContent=out.length+' CVE';
   $('db-body').innerHTML = out.slice(0,300).map(c=>renderCVE(c,ver||null)).join('')
-    || '<div class="sec-empty">Sonuc yok</div>';
+    || '<div class="sec-empty">No result</div>';
   if(out.length>300) $('db-body').innerHTML+=`<div class="empty">+ ${out.length-300} daha (filtre daralt)</div>`;
 }
 
@@ -779,7 +779,7 @@ async function loadLogs(clear){
     $('log-console').innerHTML = r.logs.length ? r.logs.map(l=>{
       const d = l.data?`\n<span class="data">${esc(JSON.stringify(l.data))}</span>`:'';
       return `<div class="log-line"><span class="ts">${esc((l.ts||'').replace('T',' ').replace('Z',''))}</span><span class="lvl ${l.level}">${esc(l.level)}</span><span class="cat">${esc(l.category||'-')}</span><span class="msg">${esc(l.message||'')}</span>${d}</div>`;
-    }).join('') : '<div class="log-line"><span class="msg" style="color:var(--text3)">log yok</span></div>';
+    }).join('') : '<div class="log-line"><span class="msg" style="color:var(--text3)">no logs</span></div>';
   }catch(e){ $('log-console').innerHTML='<span class="dim">log yuklenemedi: '+esc(e.message)+'</span>'; }
 }
 function updateLiveTail(logs){
@@ -799,30 +799,30 @@ function toggleLogLive(){
 
 /* ---------- MCP view ---------- */
 const MCP_TOOLS=[
-  ['scan_target','url, name?, save?','Fingerprint + WAF + port + TLS + CVE + risk; profil SQLite\'a kaydeder'],
+  ['scan_target','url, name?, save?','Fingerprint + WAF + port + TLS + CVE + risk; profile SQLite\'a kaydeder'],
   ['list_cves','software?, version?','Kritik CVE listesi (filtreli)'],
   ['get_cve','id','Tek CVE (PoC paneliyle)'],
   ['poc_list','—','Native PoC katalogu'],
   ['poc_describe','cve_id','Native PoC mantigi + parametreler'],
-  ['run_poc','cve_id, params','Native engine ile PoC calistir (socket/HTTP scanner\'dan)'],
-  ['list_profiles','—','Kayitli hedef profilleri (SQLite)'],
-  ['get_profile','id','Tek profil (tam + tarihce)'],
-  ['delete_profile','id','Profili sil'],
+  ['run_poc','cve_id, params','Run a PoC with the native engine (socket/HTTP scanner\'dan)'],
+  ['list_profilees','—','Saved Target profilees (SQLite)'],
+  ['get_profilee','id','Tek profile (tam + tarihce)'],
+  ['delete_profilee','id','profilei sil'],
   ['export_report','id, fmt','Risk raporu (md/json) + yol'],
   ['risk_score','id | url','Risk puani + faktor kirilimi'],
   ['tls_fingerprint','host, port?','TLS/sertifika parmak izi'],
   ['port_scan','host, extra_ports?','TCP port + servis banner'],
-  ['list_logs','level?, category?, limit?','Operasyon loglari (SQLite + dosya)'],
+  ['list_logs','level?, category?, limit?','Operation logs (SQLite + file)'],
 ];
 function renderMCP(){
   $('mcp-install').textContent =
 `# stdio MCP (Qwen Code)
 qwen mcp add p2s -- /opt/homebrew/bin/python3.12 \\
-  <REPO_PATH>/mcp_server.py
-# sonra: tam Qwen restart (qwen mcp add hot-load yapmaz)
+  mcp_server.py
+# then: tam Qwen restart (qwen mcp add hot-load yapmaz)
 
 # HTTP API
-curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://LAB_IP:18111/index.php"}'
+curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://127.0.0.1:18111/index.php"}'
 curl -sX POST http://127.0.0.1:8123/poc/CVE-2026-109618 -H 'Content-Type: application/json' -d '{"params":{"url":"…","cmd":"id>/out/p1"}}'`;
   $('mcp-tool-n').textContent = MCP_TOOLS.length;
   $('mcp-tools').innerHTML='<tr><th>Tool</th><th>Args</th><th>Aciklama</th></tr>'+MCP_TOOLS.map(t=>`<tr><td>${t[0]}</td><td>${esc(t[1])}</td><td class="cell-txt">${esc(t[2])}</td></tr>`).join('');

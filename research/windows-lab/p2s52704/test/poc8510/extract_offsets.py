@@ -84,5 +84,5 @@ print("\n=== OFFSET TABLE ===")
 for ver in sorted(results, key=lambda v: [int(x) for x in v.split(".")], reverse=True):
     o = results[ver]
     print("  %-8s zif=0x%-8x dtor=0x%-8x" % (ver, o.get("zif_system",0), o.get("zval_ptr_dtor",0)))
-json.dump(results, open(r"C:\Users\<USER>\p2s52704\test\poc8510\offsets.json","w"), indent=2)
+json.dump(results, open(r"research/windows-lab/p2s52704\test\poc8510\offsets.json","w"), indent=2)
 print("\nsaved -> offsets.json")

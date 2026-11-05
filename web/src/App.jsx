@@ -3,7 +3,7 @@ import { api } from './api.js'
 import TopBar from './components/TopBar.jsx'
 import Tabs from './components/Tabs.jsx'
 import ScanView from './components/ScanView.jsx'
-import ProfilesView from './components/ProfilesView.jsx'
+import profileesView from './components/profileesView.jsx'
 import DbView from './components/DbView.jsx'
 import LogView from './components/LogView.jsx'
 import McpView from './components/McpView.jsx'
@@ -13,13 +13,13 @@ export default function App() {
   const [health, setHealth] = useState(null)
   const [db, setDb] = useState([])
   const [pocs, setPocs] = useState({})
-  const [profiles, setProfiles] = useState([])
+  const [profilees, setprofilees] = useState([])
   const [logCount, setLogCount] = useState(0)
   const [lastLog, setLastLog] = useState(null)
-  const [activeProfileId, setActiveProfileId] = useState(null)
+  const [activeprofileeId, setActiveprofileeId] = useState(null)
 
-  const refreshProfiles = useCallback(() =>
-    api.profiles().then(p => setProfiles(p.profiles || [])).catch(() => {}), [])
+  const refreshprofilees = useCallback(() =>
+    api.profilees().then(p => setprofilees(p.profilees || [])).catch(() => {}), [])
   const refreshLogs = useCallback(() =>
     api.logs({ limit: 1 }).then(l => { setLogCount(l.count); setLastLog(l.logs[0] || null) }).catch(() => {}), [])
 
@@ -27,28 +27,28 @@ export default function App() {
     api.health().then(setHealth).catch(() => {})
     api.cves().then(c => setDb(c.cves || [])).catch(() => {})
     api.pocs().then(p => setPocs(p.pocs || {})).catch(() => {})
-    refreshProfiles()
+    refreshprofilees()
     refreshLogs()
-  }, [refreshProfiles, refreshLogs])
+  }, [refreshprofilees, refreshLogs])
 
-  const openProfile = (id) => { setActiveProfileId(id); setView('scan') }
+  const openprofilee = (id) => { setActiveprofileeId(id); setView('scan') }
 
   return (
     <>
       <TopBar health={health} lastLog={lastLog} />
-      <Tabs view={view} setView={setView} counts={{ profiles: profiles.length, cves: db.length, logs: logCount }} />
+      <Tabs view={view} setView={setView} counts={{ profilees: profilees.length, cves: db.length, logs: logCount }} />
       <div className={view === 'scan' ? 'wrap' : ''}>
         {view === 'scan' && (
           <ScanView
             db={db} pocs={pocs}
-            activeProfileId={activeProfileId}
-            onProfilesChanged={refreshProfiles}
+            activeprofileeId={activeprofileeId}
+            onprofileesChanged={refreshprofilees}
             onLogsChanged={refreshLogs}
           />
         )}
-        {view === 'profiles' && (
+        {view === 'profilees' && (
           <div className="full">
-            <ProfilesView profiles={profiles} onOpen={openProfile} onChanged={refreshProfiles} />
+            <profileesView profilees={profilees} onOpen={openprofilee} onChanged={refreshprofilees} />
           </div>
         )}
         {view === 'db' && (

@@ -3,7 +3,7 @@ import sys, time, struct
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, build_multipart, parse_cookie, chunk_base_from_cookie
 
-URL = sys.argv[1] if len(sys.argv) > 1 else "http://lab.example.com/izin.php"
+URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost/izin.php"
 t = Target(URL, timeout=60, verbose=False)
 SID = b"attacksessionid0001"
 
