@@ -1,7 +1,0 @@
-{
- "meta": {
-  "status": 200,
-  "remaining": "52"
- },
- "data": "b'{\"login\":\"xuehuolll\",\"id\":96810899,\"node_id\":\"U_kgDOBcU3kw\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/96810899?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/xuehuolll\",\"html_url\":\"https://github.com/xuehuolll\",\"followers_url\":\"https://api.github.com/users/xuehuolll/followers\",\"following_url\":\"https://api.github.com/users/xuehuolll/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/xuehuolll/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/xuehuolll/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/xuehuolll/subscriptions\",\"organizations_url\":\"https://api.github.com/users/xuehuolll/orgs\",\"repos_url\":\"https://api.github.com/users/xuehuolll/repos\",\"events_url\":\"https://api.github.com/users/xuehuolll/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/xuehuolll/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false,\"name\":\"xuehuo\",\"company\":null,\"blog\":\"\",\"location\":null,\"email\":null,\"hireable\":null,\"bio\":null,\"twitter_username\":null,\"public_repos\":4,\"public_gists\":0,\"followers\":4,\"following\":2,\"created_at\":\"2021-12-29T05:52:47Z\",\"updated_at\":\"2026-10-22T14:03:11Z\"}'"
-}

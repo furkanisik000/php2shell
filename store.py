@@ -2,7 +2,7 @@
 
 Session / runtime data (profiles, scans, PoC runs, logs) lives in SQLite at
 db/session.db. Static data (CVE DB, PoC definitions) stays in JSON
-(db/vulns.json, db/exploits.json) — per project decision ("poclar suanlik json").
+(db/vulns.json, db/exploits.json) — kept as JSON by design (PoC definitions are static data).
 
 Design goals (professional, per user directive):
   * Relational, queryable, timestamped, thread-safe (per-call connections).

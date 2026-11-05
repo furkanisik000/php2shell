@@ -1,33 +1,34 @@
 #!/usr/bin/env python3
-"""server.py — P2S CVE Scanner v2: core motorunun ustunde ince (thin) HTTP katmani.
+"""server.py — P2S CVE Scanner v2: thin HTTP layer on top of the core engine.
 
-Mimari: bu dosya YALNIZCA yonlendirme (routing) + serilestirme isleri yapar; tarama, risk
-skoru, PoC yurutme gibi tum is mantigi `core.py` icindedir. Boylece HTTP arayuzu
-ve MCP arayuzu (mcp_server.py) ayni beyni paylasir — tek dogruluk kaynagi.
+Architecture: this file only does routing + serialization. All business logic
+(scanning, risk scoring, PoC execution) lives in `core.py`, so the HTTP UI and
+the MCP interface (mcp_server.py) share one brain — a single source of truth.
 
-Calistirma:  python3 server.py [port]        (varsayilan port: 8123)
-Erisim:     http://127.0.0.1:8123            (React UI: web/dist/; yoksa index.html)
+Run:      python3 server.py [port]                 (default port: 8123)
+Access:   http://127.0.0.1:8123                    (React UI: web/dist/; falls back to index.html)
+Bind:     localhost only by default; set P2S_BIND=0.0.0.0 only inside an isolated lab network.
 
-Endpoint'ler (tumu JSON; govdede {..} = POST alanlari)
-  GET    /                        index.html (profesyonel UI — dist fallback'li)
-  GET    /assets/<file>           React build statik varliklari (JS/CSS)
-  GET    /health                  liveness + surum + CVE/PoC/profil sayaclari
-  GET    /db/<file>               db alt agaci dosyalari (vulns.json, ...)
-  GET    /cves?software=&version= CVE listesi (filtreli)
-  GET    /pocs                    calistirilabilir native PoC katalogu
-  POST   /probe                   {url} -> fingerprint + WAF + portlar (kaydetmez)
-  POST   /scan                    {url, name?, save?} -> tam tarama + profil
-  GET    /profiles                kayitli hedef profilleri (ozet liste)
-  GET    /profiles/<id>           tek tam profil (scan + risk + poc_results)
-  GET    /profiles/<id>/scans     tarama gecmisi (zaman damgali, eski->yeni)
-  GET    /profiles/<id>/poc-runs  PoC calisma gecmisi
+Endpoints (all JSON; {..} in the line = POST body fields)
+  GET    /                        index.html (single-file UI — dist first if built)
+  GET    /assets/<file>           static assets of the React build (JS/CSS)
+  GET    /health                  liveness + version + CVE/PoC/profile counters
+  GET    /db/<file>               files under db/ (vulns.json, ...)
+  GET    /cves?software=&version= CVE list (filtered)
+  GET    /pocs                    runnable native PoC catalog
+  POST   /probe                   {url} -> fingerprint + WAF + ports (does not persist)
+  POST   /scan                    {url, name?, save?} -> full scan + profile
+  GET    /profiles                saved target profiles (summary list)
+  GET    /profiles/<id>           one full profile (scan + risk + poc_results)
+  GET    /profiles/<id>/scans     scan history (timestamped, old -> new)
+  GET    /profiles/<id>/poc-runs  PoC run history
   POST   /profiles/<id>/rename    {name}
-  POST   /profiles/<id>/rescan    ayni profile eklenen yeni tarama (gecmis korunur)
+  POST   /profiles/<id>/rescan    new scan appended to the same profile (history kept)
   DELETE /profiles/<id>
-  GET    /profiles/<id>/report?fmt=md|json   rapor indirme (attachment)
-  POST   /profiles/<id>/poc/<cve> {params{}} -> native PoC calistir + profila yaz
-  POST   /poc/<cve>               {params{}} -> ad-hoc native PoC calistir
-  POST   /run                     {command} -> allow-list'li sinirli yerel yurutucu
+  GET    /profiles/<id>/report?fmt=md|json   report download (attachment)
+  POST   /profiles/<id>/poc/<cve> {params{}} -> run native PoC + write into profile
+  POST   /poc/<cve>               {params{}} -> ad-hoc native PoC run
+  POST   /run                     {command} -> allow-listed bounded local executor
   GET    /logs?level=&category=&q=&limit=    SQLite operasyon gunlugu
   POST   /logs/clear              gunluk tablosunu + log dosyasini sifirla
   GET    /mcp                     MCP kurulum belgesi (duz metin)
@@ -119,7 +120,7 @@ class H(BaseHTTPRequestHandler):
         query = {k: v for k, v in urllib.parse.parse_qsl(parts.query)}
 
         if path in ("/", "/index.html"):
-            # React frontend (web/ -> dist/); falls back to legacy index.html if dist missing
+            # React frontend (web/ -> dist/); falls back to single-file index.html if dist is missing
             self._file(os.path.join(DIST, "index.html") if os.path.exists(os.path.join(DIST, "index.html"))
                        else os.path.join(HERE, "index.html"))
         elif path.startswith("/assets/"):
@@ -206,7 +207,7 @@ class H(BaseHTTPRequestHandler):
             )
             self._text(200, doc)
         elif path.startswith("/db/"):
-            # Yol gecisi (path traversal) korumasi: istenen hedef, cozuldukten sonra
+            # Path-traversal protection: the requested target, after resolution,
             # mutlaka db/ alt agacinin ICINDE kalmali ("../" gibi kacislar 404 doner).
             req_path = os.path.realpath(os.path.join(HERE, path.lstrip("/")))
             db_root = os.path.realpath(DB)
@@ -318,7 +319,8 @@ class H(BaseHTTPRequestHandler):
 def main():
     import sys
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8123
-    srv = ThreadingHTTPServer(("0.0.0.0", port), H)
+    bind = os.environ.get("P2S_BIND", "127.0.0.1")  # localhost-only by default (lab tool)
+    srv = ThreadingHTTPServer((bind, port), H)
     print(f"[*] P2S CVE Scanner v{VERSION}  http://127.0.0.1:{port}  (core: {os.path.basename(HERE)})", flush=True)
     srv.serve_forever()
 

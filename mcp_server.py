@@ -14,9 +14,10 @@ Tools exposed (15):
     run_poc, list_profiles, get_profile, delete_profile, export_report,
     risk_score, tls_fingerprint, port_scan, list_logs
 
-Not: `build_poc_command` yalnizca legacy `command_template` panelleri icin komut
-URETIR (calistirmaz); native PoC'ler dogrudan `run_poc` ile socket/HTTP seviyesinde
-kosar. v2.1'de bu arac eksik kayitliydi — tabloya eklenmesi bir duzeltmedir.
+Note: `build_poc_command` only BUILDS (never executes) a command for legacy
+`command_template` panels; native PoCs run directly via `run_poc` at socket/HTTP
+level. In v2.1 this tool was declared in TOOLS but missing from TOOL_IMPLS — the
+registration gap below is fixed here.
 """
 from __future__ import annotations
 
@@ -68,12 +69,11 @@ def t_poc_list(a):
 
 
 def t_build_poc_command(a):
-    """Legacy komut sablonunu parametrelerle doldurur (CALISTIRMAZ).
+    """Fill a legacy command template with parameters (does NOT execute).
 
-    Yalnizca `command_template` tasiyan eski paneller icin anlamlidir; native
-    PoC'larda dogrudan `run_poc` kullanilir. Dogrulama (validation) burada yapilir:
-    sablon yoksa temiz JSON-RPC hatasi doner — duzeltilmeden once bu arac TOOLS
-    listesinde tanitilip TOOL_IMPLS'te eksikti, bu yuzden her cagrida patliyordu.
+    Only meaningful for panels that carry `command_template`; native PoCs use
+    `run_poc` directly. Validation happens here: when no template exists for
+    the CVE, a clean JSON-RPC error is returned instead of an unhandled crash.
     """
     cve = (a.get("cve_id") or "").strip()
     if not cve:
@@ -85,7 +85,7 @@ def t_poc_describe(a):
     cid = (a.get("cve_id") or "").strip()
     specs = core.poc_list()
     if cid not in specs:
-        raise ValueError(f"{cid} icin native PoC yok")
+        raise ValueError(f"no native PoC available for {cid}")
     return specs[cid]
 
 

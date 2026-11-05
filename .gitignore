@@ -1,4 +1,5 @@
+__pycache__/
+*.pyc
 dist/
-build/
-.tmp/
-windows/tmp-p2s/
+db/logs.log
+db/session.db

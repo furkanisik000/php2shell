@@ -114,7 +114,7 @@ def _read_auth_result(sock):
         if payload2 and payload2[0] == 0xFF:
             errno = struct.unpack_from("<H", payload2, 1)[0]
             return False, {"detail": f"ERR {errno}: {payload2[2:].decode('latin1','replace')[:200]}"}
-        return False, {"detail": "auth-switch sonrasi yanit yok"}
+        return False, {"detail": "no response after auth-switch"}
     return False, {"detail": f"beklenmeyen auth yaniti: 0x{first:02x}"}
 
 
@@ -174,7 +174,7 @@ def run_stack_overflow(params):
                 return {"ok": True, "success": False,
                         "evidence": "ERR paket (trigger tetiklenmedi)",
                         "detail": {"host": f"{host}:{port}"}}
-            return {"ok": True, "success": False, "evidence": f"yanit: {c.hex()[:40]}",
+            return {"ok": True, "success": False, "evidence": f"response: {c.hex()[:40]}",
                     "detail": {"host": f"{host}:{port}"}}
         except (ConnectionResetError, OSError):
             return {"ok": True, "success": True,

