@@ -1,36 +1,36 @@
-Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+Comparing files C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
    56:  #include "zend_globals.h"
    57:  #include "zend_operators.h"
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
    56:  #include "zend_globals.h"
    57:  #include "zend_hrtime.h"
    58:  #include "zend_operators.h"
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
    60:  #include "zend_mmap.h"
    61:  #include <signal.h>
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
    61:  #include "zend_mmap.h"
    62:  #include "zend_portability.h"
    63:  #include <signal.h>
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
    70:  # include "win32/winutil.h"
    71:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
    72:  # include "win32/winutil.h"
    73:  # define getpid _getpid
    74:  typedef int pid_t;
    75:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
    81:  #include <errno.h>
    82:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
    85:  #include <errno.h>
    86:  #ifdef __SANITIZE_ADDRESS__
    87:  # include <sanitizer/asan_interface.h>
@@ -38,7 +38,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
    89:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   140:  #endif
   141:  
   142:  #ifndef ZEND_MM_CHECK
@@ -48,17 +48,17 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   146:                  } \
   147:          } while (0)
   148:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   147:  #endif
   148:  #ifndef ZEND_MM_HEAP_PROTECTION
   149:  # define ZEND_MM_HEAP_PROTECTION 1 /* protect heap against corruptions       */
   150:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   149:  
   150:  typedef uint32_t   zend_mm_page_info; /* 4-byte integer */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   151:  
   152:  #if ZEND_MM_HEAP_PROTECTION
   153:  /* Define ZEND_MM_MIN_USEABLE_BIN_SIZE to the size of two pointers */
@@ -87,10 +87,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   176:  typedef uint32_t   zend_mm_page_info; /* 4-byte integer */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   195:  
   196:  typedef struct  _zend_mm_page      zend_mm_page;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   221:  
   222:  #if UINTPTR_MAX == UINT64_MAX
   223:  #  define BSWAPPTR(u) ZEND_BYTES_SWAP64(u)
@@ -101,16 +101,16 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   228:  typedef struct  _zend_mm_page      zend_mm_page;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   246:  #endif
   247:          zend_mm_free_slot *free_slot[ZEND_MM_BINS]; /* free lists for small sizes */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   278:  #endif
   279:          uintptr_t          shadow_key;              /* free slot shadow ptr xor key */
   280:          zend_mm_free_slot *free_slot[ZEND_MM_BINS]; /* free lists for small sizes */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   269:  #if ZEND_MM_CUSTOM
   270:          union {
   271:                  struct {
@@ -124,7 +124,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   279:                          void      *(*_realloc)(void*, size_t  ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
   280:                  } debug;
   281:          } custom_heap;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   302:  #if ZEND_MM_CUSTOM
   303:          struct {
   304:                  void      *(*_malloc)(size_t ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
@@ -135,40 +135,40 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   309:          } custom_heap;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   283:  #endif
   284:  };
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   311:  #endif
   312:          pid_t pid;
   313:          zend_random_bytes_insecure_state rand_state;
   314:  };
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   549:  /* number of trailing set (1) bits */
   550:  static zend_always_inline int zend_mm_bitset_nts(zend_mm_bitset bitset)
   551:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   579:  /* number of trailing set (1) bits */
   580:  ZEND_ATTRIBUTE_CONST static zend_always_inline int zend_mm_bitset_nts(zend_mm_bitset bitset)
   581:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   714:  #elif !defined(VM_FLAGS_SUPERPAGE_SIZE_2MB) && !defined(MAP_ALIGNED_SUPER)
   715:          zend_error_noreturn(E_WARNING, "huge_pages: thp unsupported on this platform");
   716:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   744:  #elif !defined(VM_FLAGS_SUPERPAGE_SIZE_2MB) && !defined(MAP_ALIGNED_SUPER)
   745:          zend_error_noreturn(E_ERROR, "huge_pages: thp unsupported on this platform");
   746:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   728:                  }
   729:                  return ptr;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   758:                  }
   759:  #ifdef __SANITIZE_ADDRESS__
   760:                  ASAN_UNPOISON_MEMORY_REGION(ptr, size);
@@ -176,10 +176,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   762:                  return ptr;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
   767:                  }
   768:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
   800:                  }
   801:  # ifdef __SANITIZE_ADDRESS__
   802:                  ASAN_UNPOISON_MEMORY_REGION(ptr, size);
@@ -187,10 +187,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
   804:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1075:          if (steps > 2 && pages_count < 8) {
  1076:                  /* move chunk into the head of the linked-list */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1111:          if (steps > 2 && pages_count < 8) {
  1112:                  ZEND_MM_CHECK(chunk->next->prev == chunk, "zend_mm_heap corrupted");
  1113:                  ZEND_MM_CHECK(chunk->prev->next == chunk, "zend_mm_heap corrupted");
@@ -198,16 +198,16 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1115:                  /* move chunk into the head of the linked-list */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1113:  
  1114:  #if ZEND_DEBUG
  1115:  static zend_never_inline void *zend_mm_alloc_large(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1152:  
  1153:  static zend_never_inline void *zend_mm_alloc_large(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1118:  }
  1119:  #else
  1120:  static zend_never_inline void *zend_mm_alloc_large(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
@@ -216,15 +216,15 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1123:  }
  1124:  #endif
  1125:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1156:  }
  1157:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1127:  {
  1128:          chunk->next->prev = chunk->prev;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1159:  {
  1160:          ZEND_MM_CHECK(chunk->next->prev == chunk, "zend_mm_heap corrupted");
  1161:          ZEND_MM_CHECK(chunk->prev->next == chunk, "zend_mm_heap corrupted");
@@ -232,7 +232,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1163:          chunk->next->prev = chunk->prev;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1254:  
  1255:  static zend_never_inline void *zend_mm_alloc_small_slow(zend_mm_heap *heap, uint32_t bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_O
  1256:  RIG_DC)
@@ -293,7 +293,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1311:          /* return first element */
  1312:          return bin;
  1313:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1289:  
  1290:  #if ZEND_MM_HEAP_PROTECTION
  1291:  /* We keep track of free slots by organizing them in a linked list, with the
@@ -321,7 +321,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1313:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1314:  
  1315:  static zend_always_inline void *zend_mm_alloc_small(zend_mm_heap *heap, int bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1316:  {
@@ -342,7 +342,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1331:                  return zend_mm_alloc_small_slow(heap, bin_num ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  1332:          }
  1333:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1314:  
  1315:  static zend_always_inline zend_mm_free_slot* zend_mm_decode_free_slot(zend_mm_heap *heap, zend_mm_free_slot *slot)
  1316:  {
@@ -354,7 +354,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1322:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1334:  
  1335:  static zend_always_inline void zend_mm_free_small(zend_mm_heap *heap, void *ptr, int bin_num)
  1336:  {
@@ -376,7 +376,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1352:          p->next_free_slot = heap->free_slot[bin_num];
  1353:          heap->free_slot[bin_num] = p;
  1354:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1323:  
  1324:  static zend_always_inline void zend_mm_set_next_free_slot(zend_mm_heap *heap, uint32_t bin_num, zend_mm_free_slot *slot, zend_m
  1325:  m_free_slot *next)
@@ -388,7 +388,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1331:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1355:  
  1356:  /********/
  1357:  /* Heap */
@@ -399,7 +399,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1362:  {
  1363:          size_t page_offset = ZEND_MM_ALIGNED_OFFSET(ptr, ZEND_MM_CHUNK_SIZE);
  1364:          zend_mm_chunk *chunk;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1332:  
  1333:  static zend_always_inline zend_mm_free_slot *zend_mm_get_next_free_slot(zend_mm_heap *heap, uint32_t bin_num, zend_mm_free_slot
  1334:  * slot)
@@ -427,7 +427,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1356:          zend_mm_chunk *chunk;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1365:          int page_num;
  1366:          zend_mm_page_info info;
  1367:  
@@ -463,7 +463,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1397:                  zend_error_noreturn(E_ERROR, "Possible integer overflow in memory allocation (%zu + %zu)", ZEND_MM_ALIGNED_SIZE
  1398:  (real_size), ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info)));
  1399:                  return NULL;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1357:          int page_num;
  1358:          zend_mm_bin *bin;
  1359:          zend_mm_free_slot *p, *end;
@@ -479,7 +479,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1369:                  return NULL;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1400:          }
  1401:  #endif
  1402:          if (EXPECTED(size <= ZEND_MM_MAX_SMALL_SIZE)) {
@@ -512,7 +512,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1429:                  return zend_mm_alloc_huge(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  1430:          }
  1431:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1370:          }
  1371:  
  1372:          chunk = (zend_mm_chunk*)ZEND_MM_ALIGNED_BASE(bin, ZEND_MM_CHUNK_SIZE);
@@ -557,7 +557,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1411:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1432:  
  1433:  static zend_always_inline void zend_mm_free_heap(zend_mm_heap *heap, void *ptr ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1434:  {
@@ -582,7 +582,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1453:                          zend_mm_free_large(heap, chunk, page_num, pages_count);
  1454:                  }
  1455:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1412:  
  1413:  static zend_always_inline void *zend_mm_alloc_small(zend_mm_heap *heap, int bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1414:  {
@@ -606,7 +606,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1432:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1457:  
  1458:  static size_t zend_mm_size(zend_mm_heap *heap, void *ptr ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1459:  {
@@ -635,7 +635,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1482:  #endif
  1483:          }
  1484:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1434:  
  1435:  static zend_always_inline void zend_mm_free_small(zend_mm_heap *heap, void *ptr, int bin_num)
  1436:  {
@@ -661,7 +661,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1456:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1485:  
  1486:  static zend_never_inline void *zend_mm_realloc_slow(zend_mm_heap *heap, void *ptr, size_t size, size_t copy_size ZEND_FILE_LINE
  1487:  _DC ZEND_FILE_LINE_ORIG_DC)
@@ -690,7 +690,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1510:  #if ZEND_DEBUG
  1511:          size_t real_size;
  1512:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1457:  
  1458:  /********/
  1459:  /* Heap */
@@ -723,7 +723,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1486:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1513:  
  1514:          old_size = zend_mm_get_huge_block_size(heap, ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  1515:  #if ZEND_DEBUG
@@ -732,7 +732,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1518:  #endif
  1519:          if (size > ZEND_MM_MAX_LARGE_SIZE) {
  1520:  #if ZEND_DEBUG
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1487:  
  1488:  static zend_always_inline void *zend_mm_alloc_heap(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1489:  {
@@ -782,7 +782,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1533:  #if ZEND_DEBUG
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1522:  #endif
  1523:  #ifdef ZEND_WIN32
  1524:                  /* On Windows we don't have ability to extend huge blocks in-place.
@@ -857,7 +857,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1593:                                  return ptr;
  1594:                          }
  1595:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1535:  #endif
  1536:                  return zend_mm_alloc_huge(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  1537:          }
@@ -887,25 +887,25 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1561:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1596:          }
  1597:  
  1598:          return zend_mm_realloc_slow(heap, ptr, size, MIN(old_size, copy_size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY
  1599:  _CC);
  1600:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1562:          }
  1563:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1601:  
  1602:  static zend_always_inline void *zend_mm_realloc_heap(zend_mm_heap *heap, void *ptr, size_t size, bool use_copy_size, size_t cop
  1603:  y_size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1604:  {
  1605:          size_t page_offset;
  1606:          size_t old_size;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1564:  
  1565:  static size_t zend_mm_size(zend_mm_heap *heap, void *ptr ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  1566:  {
@@ -960,20 +960,20 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1615:          size_t old_size;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1607:          size_t new_size;
  1608:          void *ret;
  1609:  #if ZEND_DEBUG
  1610:          zend_mm_debug_info *dbg;
  1611:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1616:          size_t new_size;
  1617:  #if ZEND_DEBUG
  1618:          size_t real_size;
  1619:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1612:  
  1613:          page_offset = ZEND_MM_ALIGNED_OFFSET(ptr, ZEND_MM_CHUNK_SIZE);
  1614:          if (UNEXPECTED(page_offset == 0)) {
@@ -992,7 +992,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1627:  
  1628:                  size = ZEND_MM_ALIGNED_SIZE(size) + ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info));
  1629:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1620:  
  1621:          old_size = zend_mm_get_huge_block_size(heap, ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  1622:  #if ZEND_DEBUG
@@ -1094,10 +1094,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1718:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1630:  
  1631:                  ZEND_MM_CHECK(chunk->heap == heap, "zend_mm_heap corrupted");
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  1719:  
  1720:          page_offset = ZEND_MM_ALIGNED_OFFSET(ptr, ZEND_MM_CHUNK_SIZE);
  1721:          if (UNEXPECTED(page_offset == 0)) {
@@ -1125,10 +1125,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  1743:                  ZEND_MM_CHECK(chunk->heap == heap, "zend_mm_heap corrupted");
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1944:  
  1945:  static zend_mm_heap *zend_mm_init(void)
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2056:  
  2057:  static void zend_mm_refresh_key(zend_mm_heap *heap)
  2058:  {
@@ -1144,38 +1144,38 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2068:  static zend_mm_heap *zend_mm_init(void)
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1980:  #endif
  1981:  #if ZEND_MM_LIMIT
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2103:  #endif
  2104:          zend_mm_init_key(heap);
  2105:  #if ZEND_MM_LIMIT
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1991:          heap->huge_list = NULL;
  1992:          return heap;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2115:          heap->huge_list = NULL;
  2116:          heap->pid = getpid();
  2117:          return heap;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  1996:  {
  1997:          zend_mm_free_slot *p, **q;
  1998:          zend_mm_chunk *chunk;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2121:  {
  2122:          zend_mm_free_slot *p, *q;
  2123:          zend_mm_chunk *chunk;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2007:          if (heap->use_custom_heap) {
  2008:                  return 0;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2132:          if (heap->use_custom_heap) {
  2133:                  size_t (*gc)(void) = heap->custom_heap._gc;
  2134:                  if (gc) {
@@ -1184,29 +1184,29 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2137:                  return 0;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2034:                          chunk->map[page_num] = ZEND_MM_SRUN_EX(i, free_counter);
  2035:                          p = p->next_free_slot;
  2036:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2163:                          chunk->map[page_num] = ZEND_MM_SRUN_EX(i, free_counter);
  2164:                          p = zend_mm_get_next_free_slot(heap, i, p);
  2165:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2041:  
  2042:                  q = &heap->free_slot[i];
  2043:                  p = *q;
  2044:                  while (p != NULL) {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2170:  
  2171:                  q = (zend_mm_free_slot*)&heap->free_slot[i];
  2172:                  p = q->next_free_slot;
  2173:                  while (p != NULL) {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2060:                                  /* remove from cache */
  2061:                                  p = p->next_free_slot;
  2062:                                  *q = p;
@@ -1214,7 +1214,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2064:                                  q = &p->next_free_slot;
  2065:                                  p = *q;
  2066:                          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2189:                                  /* remove from cache */
  2190:                                  p = zend_mm_get_next_free_slot(heap, i, p);
  2191:                                  if (q == (zend_mm_free_slot*)&heap->free_slot[i]) {
@@ -1232,35 +1232,35 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2203:                          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2307:  #if ZEND_MM_CUSTOM
  2308:  static void *tracked_malloc(size_t size);
  2309:  static void tracked_free_all(void);
  2310:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2444:  #if ZEND_MM_CUSTOM
  2445:  static void *tracked_malloc(size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
  2446:  static void tracked_free_all(zend_mm_heap *heap);
  2447:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2311:  
  2312:  void zend_mm_shutdown(zend_mm_heap *heap, bool full, bool silent)
  2313:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2448:  
  2449:  ZEND_API void zend_mm_shutdown(zend_mm_heap *heap, bool full, bool silent)
  2450:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2318:          if (heap->use_custom_heap) {
  2319:                  if (heap->custom_heap.std._malloc == tracked_malloc) {
  2320:                          if (silent) {
  2321:                                  tracked_free_all();
  2322:                          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2455:          if (heap->use_custom_heap) {
  2456:                  if (heap->custom_heap._malloc == tracked_malloc) {
  2457:                          if (silent) {
@@ -1268,17 +1268,17 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2459:                          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2327:                                  /* Make sure the heap free below does not use tracked_free(). */
  2328:                                  heap->custom_heap.std._free = free;
  2329:                          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2464:                                  /* Make sure the heap free below does not use tracked_free(). */
  2465:                                  heap->custom_heap._free = __zend_free;
  2466:                          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2335:  
  2336:                  if (full) {
  2337:                          if (ZEND_DEBUG && heap->use_custom_heap == ZEND_MM_CUSTOM_HEAP_DEBUG) {
@@ -1288,7 +1288,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2341:                          }
  2342:                  }
  2343:                  return;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2472:  
  2473:                  void (*shutdown)(bool, bool) = heap->custom_heap._shutdown;
  2474:  
@@ -1303,10 +1303,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2483:                  return;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2430:                  p->map[0] = ZEND_MM_LRUN(ZEND_MM_FIRST_PAGE);
  2431:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2570:                  p->map[0] = ZEND_MM_LRUN(ZEND_MM_FIRST_PAGE);
  2571:  
  2572:                  pid_t pid = getpid();
@@ -1319,27 +1319,27 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2579:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2462:          if (UNEXPECTED(heap->use_custom_heap)) {
  2463:                  if (heap->custom_heap.std._malloc == tracked_malloc) {
  2464:                          zend_ulong h = ((uintptr_t) ptr) >> ZEND_MM_ALIGNMENT_LOG2;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2610:          if (UNEXPECTED(heap->use_custom_heap)) {
  2611:                  if (heap->custom_heap._malloc == tracked_malloc) {
  2612:                          zend_ulong h = ((uintptr_t) ptr) >> ZEND_MM_ALIGNMENT_LOG2;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2505:          if (AG(mm_heap)->use_custom_heap) {
  2506:                  if (AG(mm_heap)->custom_heap.std._malloc == tracked_malloc) {
  2507:                          zend_ulong h = ((uintptr_t) ptr) >> ZEND_MM_ALIGNMENT_LOG2;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2653:          if (AG(mm_heap)->use_custom_heap) {
  2654:                  if (AG(mm_heap)->custom_heap._malloc == tracked_malloc) {
  2655:                          zend_ulong h = ((uintptr_t) ptr) >> ZEND_MM_ALIGNMENT_LOG2;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2540:  
  2541:  #if ZEND_MM_CUSTOM
  2542:  
@@ -1370,7 +1370,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2567:          }
  2568:  }
  2569:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2688:  
  2689:  #if !ZEND_DEBUG && defined(HAVE_BUILTIN_CONSTANT_P)
  2690:  #undef _emalloc
@@ -1393,7 +1393,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2707:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2570:  
  2571:  #if !ZEND_DEBUG && defined(HAVE_BUILTIN_CONSTANT_P)
  2572:  #undef _emalloc
@@ -1417,16 +1417,16 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2590:  
  2591:  # define _ZEND_BIN_ALLOCATOR(_num, _size, _elements, _pages, x, y) \
  2592:          ZEND_API void* ZEND_FASTCALL _emalloc_ ## _size(void) { \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2708:  
  2709:  # define _ZEND_BIN_ALLOCATOR(_num, _size, _elements, _pages, _min_size, y) \
  2710:          ZEND_API void* ZEND_FASTCALL _emalloc_ ## _size(void) { \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2593:                  ZEND_MM_CUSTOM_ALLOCATOR(_size); \
  2594:                  return zend_mm_alloc_small(AG(mm_heap), _num ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC); \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2711:                  ZEND_MM_CUSTOM_ALLOCATOR(_size); \
  2712:                  if (_size < _min_size) { \
  2713:                          return _emalloc_ ## _min_size(); \
@@ -1434,30 +1434,30 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2715:                  return zend_mm_alloc_small(AG(mm_heap), _num ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC); \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2596:  
  2597:  ZEND_MM_BINS_INFO(_ZEND_BIN_ALLOCATOR, x, y)
  2598:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2717:  
  2718:  ZEND_MM_BINS_INFO(_ZEND_BIN_ALLOCATOR, ZEND_MM_MIN_USEABLE_BIN_SIZE, y)
  2719:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2611:  #if ZEND_DEBUG
  2612:  # define _ZEND_BIN_FREE(_num, _size, _elements, _pages, x, y) \
  2613:          ZEND_API void ZEND_FASTCALL _efree_ ## _size(void *ptr) { \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2732:  #if ZEND_DEBUG
  2733:  # define _ZEND_BIN_FREE(_num, _size, _elements, _pages, _min_size, y) \
  2734:          ZEND_API void ZEND_FASTCALL _efree_ ## _size(void *ptr) { \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2614:                  ZEND_MM_CUSTOM_DEALLOCATOR(ptr); \
  2615:                  { \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2735:                  ZEND_MM_CUSTOM_DEALLOCATOR(ptr); \
  2736:                  if (_size < _min_size) { \
  2737:                          _efree_ ## _min_size(ptr); \
@@ -1466,20 +1466,20 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2740:                  { \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2625:  #else
  2626:  # define _ZEND_BIN_FREE(_num, _size, _elements, _pages, x, y) \
  2627:          ZEND_API void ZEND_FASTCALL _efree_ ## _size(void *ptr) { \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2750:  #else
  2751:  # define _ZEND_BIN_FREE(_num, _size, _elements, _pages, _min_size, y) \
  2752:          ZEND_API void ZEND_FASTCALL _efree_ ## _size(void *ptr) { \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2628:                  ZEND_MM_CUSTOM_DEALLOCATOR(ptr); \
  2629:                  { \
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2753:                  ZEND_MM_CUSTOM_DEALLOCATOR(ptr); \
  2754:                  if (_size < _min_size) { \
  2755:                          _efree_ ## _min_size(ptr); \
@@ -1488,115 +1488,115 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  2758:                  { \
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2636:  
  2637:  ZEND_MM_BINS_INFO(_ZEND_BIN_FREE, x, y)
  2638:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2765:  
  2766:  ZEND_MM_BINS_INFO(_ZEND_BIN_FREE, ZEND_MM_MIN_USEABLE_BIN_SIZE, y)
  2767:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2667:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2668:                  return _malloc_custom(size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2669:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2796:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2797:                  return AG(mm_heap)->custom_heap._malloc(size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC); \
  2798:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2677:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2678:                  _efree_custom(ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2679:                  return;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2806:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2807:                  AG(mm_heap)->custom_heap._free(ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2808:                  return;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2688:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2689:                  return _realloc_custom(ptr, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2690:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2817:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2818:                  return AG(mm_heap)->custom_heap._realloc(ptr, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2819:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2698:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2699:                  return _realloc_custom(ptr, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2700:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  2827:          if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
  2828:                  return AG(mm_heap)->custom_heap._realloc(ptr, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  2829:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2897:  
  2898:  static void *tracked_malloc(size_t size)
  2899:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3026:  
  3027:  static void *tracked_malloc(size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  3028:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2915:  
  2916:  static void tracked_free(void *ptr) {
  2917:          if (!ptr) {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3044:  
  3045:  static void tracked_free(void *ptr ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) {
  3046:          if (!ptr) {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2930:  
  2931:  static void *tracked_realloc(void *ptr, size_t new_size) {
  2932:          zend_mm_heap *heap = AG(mm_heap);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3059:  
  3060:  static void *tracked_realloc(void *ptr, size_t new_size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) {
  3061:          zend_mm_heap *heap = AG(mm_heap);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2948:  
  2949:          ptr = __zend_realloc(ptr, new_size);
  2950:          tracked_add(heap, ptr, new_size);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3077:  
  3078:          ptr = __zend_realloc(ptr, new_size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  3079:          tracked_add(heap, ptr, new_size);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2957:  
  2958:  static void tracked_free_all(void) {
  2959:          HashTable *tracked_allocs = AG(mm_heap)->tracked_allocs;
  2960:          zend_ulong h;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3086:  
  3087:  static void tracked_free_all(zend_mm_heap *heap) {
  3088:          HashTable *tracked_allocs = heap->tracked_allocs;
  3089:          zend_ulong h;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2983:                          /* Use system allocator. */
  2984:                          mm_heap->custom_heap.std._malloc = __zend_malloc;
  2985:                          mm_heap->custom_heap.std._free = free;
  2986:                          mm_heap->custom_heap.std._realloc = __zend_realloc;
  2987:                  } else {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3112:                          /* Use system allocator. */
  3113:                          mm_heap->custom_heap._malloc = __zend_malloc;
  3114:                          mm_heap->custom_heap._free = __zend_free;
@@ -1604,13 +1604,13 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3116:                  } else {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  2988:                          /* Use system allocator and track allocations for auto-free. */
  2989:                          mm_heap->custom_heap.std._malloc = tracked_malloc;
  2990:                          mm_heap->custom_heap.std._free = tracked_free;
  2991:                          mm_heap->custom_heap.std._realloc = tracked_realloc;
  2992:                          mm_heap->tracked_allocs = malloc(sizeof(HashTable));
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3117:                          /* Use system allocator and track allocations for auto-free. */
  3118:                          mm_heap->custom_heap._malloc = tracked_malloc;
  3119:                          mm_heap->custom_heap._free = tracked_free;
@@ -1618,7 +1618,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3121:                          mm_heap->tracked_allocs = malloc(sizeof(HashTable));
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3014:  {
  3015:  #ifdef ZTS
  3016:          ts_allocate_fast_id(&alloc_globals_id, &alloc_globals_offset, sizeof(zend_alloc_globals), (ts_allocate_ctor) alloc_glob
@@ -1627,15 +1627,15 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3019:          alloc_globals_ctor(&alloc_globals);
  3020:  #endif
  3021:  #ifndef _WIN32
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3143:  {
  3144:  #ifndef _WIN32
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3027:  #endif
  3028:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3150:  #endif
  3151:  #ifdef ZTS
  3152:          ts_allocate_fast_id(&alloc_globals_id, &alloc_globals_offset, sizeof(zend_alloc_globals), (ts_allocate_ctor) alloc_glob
@@ -1646,13 +1646,13 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3157:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3053:  ZEND_API void zend_mm_set_custom_handlers(zend_mm_heap *heap,
  3054:                                            void* (*_malloc)(size_t),
  3055:                                            void  (*_free)(void*),
  3056:                                            void* (*_realloc)(void*, size_t))
  3057:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3182:  ZEND_API void zend_mm_set_custom_handlers(zend_mm_heap *heap,
  3183:                                            void* (*_malloc)(size_t ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC),
  3184:                                            void  (*_free)(void* ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC),
@@ -1660,7 +1660,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3186:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3058:  #if ZEND_MM_CUSTOM
  3059:          zend_mm_heap *_heap = (zend_mm_heap*)heap;
  3060:  
@@ -1673,20 +1673,20 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3067:                  _heap->custom_heap.std._realloc = _realloc;
  3068:          }
  3069:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3187:  #if ZEND_MM_CUSTOM
  3188:          zend_mm_set_custom_handlers_ex(heap, _malloc, _free, _realloc, NULL, NULL);
  3189:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3071:  
  3072:  ZEND_API void zend_mm_get_custom_handlers(zend_mm_heap *heap,
  3073:                                            void* (**_malloc)(size_t),
  3074:                                            void  (**_free)(void*),
  3075:                                            void* (**_realloc)(void*, size_t))
  3076:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3191:  
  3192:  ZEND_API void zend_mm_set_custom_handlers_ex(zend_mm_heap *heap,
  3193:                                            void* (*_malloc)(size_t ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC),
@@ -1697,7 +1697,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3198:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3079:  
  3080:          if (heap->use_custom_heap) {
  3081:                  *_malloc = _heap->custom_heap.std._malloc;
@@ -1713,7 +1713,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3091:          *_free = NULL;
  3092:          *_realloc = NULL;
  3093:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3201:  
  3202:          if (!_malloc && !_free && !_realloc) {
  3203:                  _heap->use_custom_heap = ZEND_MM_CUSTOM_HEAP_NONE;
@@ -1728,7 +1728,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3212:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3095:  
  3096:  #if ZEND_DEBUG
  3097:  ZEND_API void zend_mm_set_custom_debug_handlers(zend_mm_heap *heap,
@@ -1736,7 +1736,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3099:                                                  void  (*_free)(void* ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC),
  3100:                                                  void* (*_realloc)(void*, size_t ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC))
  3101:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3214:  
  3215:  ZEND_API void zend_mm_get_custom_handlers(zend_mm_heap *heap,
  3216:                                               void* (**_malloc)(size_t ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC),
@@ -1745,7 +1745,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3219:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3102:  #if ZEND_MM_CUSTOM
  3103:          zend_mm_heap *_heap = (zend_mm_heap*)heap;
  3104:  
@@ -1754,13 +1754,13 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3107:          _heap->custom_heap.debug._free = _free;
  3108:          _heap->custom_heap.debug._realloc = _realloc;
  3109:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3220:  #if ZEND_MM_CUSTOM
  3221:          zend_mm_get_custom_handlers_ex(heap, _malloc, _free, _realloc, NULL, NULL);
  3222:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3110:  }
  3111:  #endif
  3112:  
@@ -1771,7 +1771,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3117:  #else
  3118:          return NULL;
  3119:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3223:  }
  3224:  
  3225:  ZEND_API void zend_mm_get_custom_handlers_ex(zend_mm_heap *heap,
@@ -1814,7 +1814,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3262:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3121:  
  3122:  ZEND_API zend_mm_heap *zend_mm_startup(void)
  3123:  {
@@ -1823,16 +1823,16 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3126:  
  3127:  ZEND_API zend_mm_heap *zend_mm_startup_ex(const zend_mm_handlers *handlers, void *data, size_t data_size)
  3128:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3264:  
  3265:  ZEND_API zend_mm_storage *zend_mm_get_storage(zend_mm_heap *heap)
  3266:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3129:  #if ZEND_MM_STORAGE
  3130:          zend_mm_storage tmp_storage, *storage;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3267:  #if ZEND_MM_STORAGE
  3268:          return heap->storage;
  3269:  #else
@@ -1851,68 +1851,68 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c and C:
  3282:          zend_mm_storage tmp_storage, *storage;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3167:  #endif
  3168:  #if ZEND_MM_LIMIT
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3319:  #endif
  3320:          zend_mm_init_key(heap);
  3321:  #if ZEND_MM_LIMIT
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3191:          heap->storage = storage;
  3192:          return heap;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3344:          heap->storage = storage;
  3345:          heap->pid = getpid();
  3346:          return heap;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3197:  
  3198:  ZEND_API void * __zend_malloc(size_t len)
  3199:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3351:  
  3352:  ZEND_API void * __zend_malloc(size_t len ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  3353:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3206:  
  3207:  ZEND_API void * __zend_calloc(size_t nmemb, size_t len)
  3208:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3360:  
  3361:  ZEND_API void * __zend_calloc(size_t nmemb, size_t len ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  3362:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3211:          len = zend_safe_address_guarded(nmemb, len, 0);
  3212:          tmp = __zend_malloc(len);
  3213:          memset(tmp, 0, len);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3365:          len = zend_safe_address_guarded(nmemb, len, 0);
  3366:          tmp = __zend_malloc(len ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
  3367:          memset(tmp, 0, len);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3216:  
  3217:  ZEND_API void * __zend_realloc(void *p, size_t len)
  3218:  {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3370:  
  3371:  ZEND_API void * __zend_realloc(void *p, size_t len ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  3372:  {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\ZEND\zend_alloc.c
  3225:  
  3226:  ZEND_API char * __zend_strdup(const char *s)
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\ZEND\ZEND_ALLOC.C
  3379:  
  3380:  ZEND_API void __zend_free(void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
  3381:  {

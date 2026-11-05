@@ -1,36 +1,36 @@
-Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c and C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+Comparing files C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c and C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
    18:  #ifdef HAVE_CONFIG_H
    19:  #include "config.h"
    20:  #endif
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
    18:  #ifdef HAVE_CONFIG_H
    19:  #include <config.h>
    20:  #endif
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
    34:  #include "php_ini.h"
    35:  #include "SAPI.h"
    36:  #include "rfc1867.h"
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
    34:  #include "php_ini.h"
    35:  #include "rfc1867.h"
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
    48:  #include "ext/random/php_random.h"
    49:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
    47:  #include "ext/random/php_random.h"
    48:  #include "ext/random/php_random_csprng.h"
    49:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   231:  
   232:  static void php_session_track_init(void) /* {{{ */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   231:  
   232:  PHPAPI zval* php_get_session_var_str(const char *name, size_t name_len)
   233:  {
@@ -43,7 +43,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   240:  static void php_session_track_init(void) /* {{{ */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   253:          IF_SESSION_VARS() {
   254:                  if (!PS(serializer)) {
   255:                          php_error_docref(NULL, E_WARNING, "Unknown session.serialize_handler. Failed to encode session object")
@@ -51,88 +51,88 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   257:                          return NULL;
   258:                  }
   259:                  return PS(serializer)->encode();
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   261:          IF_SESSION_VARS() {
   262:          ZEND_ASSERT(PS(serializer));
   263:                  return PS(serializer)->encode();
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   275:  {
   276:          if (!PS(serializer)) {
   277:                  php_error_docref(NULL, E_WARNING, "Unknown session.serialize_handler. Failed to decode session object");
   278:                  return FAILURE;
   279:          }
   280:          zend_result result = SUCCESS;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   279:  {
   280:      ZEND_ASSERT(PS(serializer));
   281:          zend_result result = SUCCESS;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   366:          char c;
   367:          zend_result ret = SUCCESS;
   368:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   367:          char c;
   368:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   369:          for (p = key; (c = *p); p++) {
   370:                  /* valid characters are a..z,A..Z,0..9 */
   371:                  if (!((c >= 'a' && c <= 'z')
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   369:          for (p = key; (c = *p); p++) {
   370:                  /* valid characters are [a-z], [A-Z], [0-9], - (hyphen) and , (comma) */
   371:                  if (!((c >= 'a' && c <= 'z')
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   375:                                  || c == '-')) {
   376:                          ret = FAILURE;
   377:                          break;
   378:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   375:                                  || c == '-')) {
   376:                          return FAILURE;
   377:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   385:          if (len == 0 || len > PS_MAX_SID_LENGTH) {
   386:                  ret = FAILURE;
   387:          }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   384:          if (len == 0 || len > PS_MAX_SID_LENGTH) {
   385:                  return FAILURE;
   386:          }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   388:  
   389:          return ret;
   390:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   387:  
   388:          return SUCCESS;
   389:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   395:  {
   396:          int nrand;
   397:          zend_long num = -1;
   398:  
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   394:  {
   395:          zend_long num = -1;
   396:          bool collect = immediate;
   397:  
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   400:          if ((PS(mod_data) || PS(mod_user_implemented))) {
   401:                  if (immediate) {
   402:                          PS(mod)->s_gc(&PS(mod_data), PS(gc_maxlifetime), &num);
@@ -141,7 +141,7 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   405:                  nrand = (zend_long) ((float) PS(gc_divisor) * php_combined_lcg());
   406:                  if (PS(gc_probability) > 0 && nrand < PS(gc_probability)) {
   407:                          PS(mod)->s_gc(&PS(mod_data), PS(gc_maxlifetime), &num);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   399:          if ((PS(mod_data) || PS(mod_user_implemented))) {
   400:                  if (!collect && PS(gc_probability) > 0) {
   401:                          /* Seed lazily on first GC draw per process. */
@@ -163,28 +163,28 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   417:                          PS(mod)->s_gc(&PS(mod_data), PS(gc_maxlifetime), &num);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   440:                          zend_string_release_ex(PS(id), 0);
   441:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   450:                          zend_string_release_ex(PS(id), 0);
   451:                          PS(id) = NULL;
   452:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   458:                          zend_string_release_ex(PS(id), 0);
   459:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   469:                          zend_string_release_ex(PS(id), 0);
   470:                          PS(id) = NULL;
   471:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   783:          val = ZEND_STRTOL(ZSTR_VAL(new_value), &endptr, 10);
   784:          if (endptr && (*endptr == '\0')
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   795:          val = ZEND_STRTOL(ZSTR_VAL(new_value), &endptr, 10);
   796:          if (val != 32) {
   797:                  php_error_docref("session.configuration", E_DEPRECATED, "session.sid_length INI setting is deprecated");
@@ -192,10 +192,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   799:          if (endptr && (*endptr == '\0')
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   803:          val = ZEND_STRTOL(ZSTR_VAL(new_value), &endptr, 10);
   804:          if (endptr && (*endptr == '\0')
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   818:          val = ZEND_STRTOL(ZSTR_VAL(new_value), &endptr, 10);
   819:          if (val != 4) {
   820:                  php_error_docref("session.configuration", E_DEPRECATED, "session.sid_bits_per_character INI setting is deprecat
@@ -204,10 +204,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   823:          if (endptr && (*endptr == '\0')
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   815:  
   816:  static PHP_INI_MH(OnUpdateRfc1867Freq) /* {{{ */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   834:  
   835:  static PHP_INI_MH(OnUpdateSessionGcProbability) /* {{{ */
   836:  {
@@ -250,10 +250,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   873:  static PHP_INI_MH(OnUpdateRfc1867Freq) /* {{{ */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   834:  
   835:  /* {{{ PHP_INI */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   891:  
   892:  static PHP_INI_MH(OnUpdateUseOnlyCookies)
   893:  {
@@ -295,14 +295,14 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   929:  /* {{{ PHP_INI */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   843:  p_ps_globals,    ps_globals)
   844:          STD_PHP_INI_ENTRY("session.gc_probability",     "1",         PHP_INI_ALL, OnUpdateSessionLong,          gc_probability,
   845:       php_ps_globals,    ps_globals)
   846:          STD_PHP_INI_ENTRY("session.gc_divisor",         "100",       PHP_INI_ALL, OnUpdateSessionLong,          gc_divisor,    
   847:       php_ps_globals,    ps_globals)
   848:          STD_PHP_INI_ENTRY("session.gc_maxlifetime",     "1440",      PHP_INI_ALL, OnUpdateSessionLong,          gc_maxlifetime,
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   937:  p_ps_globals,    ps_globals)
   938:          STD_PHP_INI_ENTRY("session.gc_probability",     "1",         PHP_INI_ALL, OnUpdateSessionGcProbability,    gc_probabili
   939:  ty,     php_ps_globals,    ps_globals)
@@ -311,64 +311,64 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
   942:          STD_PHP_INI_ENTRY("session.gc_maxlifetime",     "1440",      PHP_INI_ALL, OnUpdateSessionLong,          gc_maxlifetime,
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   864:  p_ps_globals,    ps_globals)
   865:          STD_PHP_INI_BOOLEAN("session.use_only_cookies", "1",         PHP_INI_ALL, OnUpdateSessionBool,   use_only_cookies,   ph
   866:  p_ps_globals,    ps_globals)
   867:          STD_PHP_INI_BOOLEAN("session.use_strict_mode",  "0",         PHP_INI_ALL, OnUpdateSessionBool,   use_strict_mode,    ph
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   958:  p_ps_globals,    ps_globals)
   959:          STD_PHP_INI_BOOLEAN("session.use_only_cookies", "1",         PHP_INI_ALL, OnUpdateUseOnlyCookies,   use_only_cookies,  
   960:   php_ps_globals,    ps_globals)
   961:          STD_PHP_INI_BOOLEAN("session.use_strict_mode",  "0",         PHP_INI_ALL, OnUpdateSessionBool,   use_strict_mode,    ph
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   868:  p_ps_globals,    ps_globals)
   869:          STD_PHP_INI_ENTRY("session.referer_check",      "",          PHP_INI_ALL, OnUpdateSessionString, extern_referer_chk, ph
   870:  p_ps_globals,    ps_globals)
   871:          STD_PHP_INI_ENTRY("session.cache_limiter",      "nocache",   PHP_INI_ALL, OnUpdateSessionString, cache_limiter,      ph
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   962:  p_ps_globals,    ps_globals)
   963:          STD_PHP_INI_ENTRY("session.referer_check",      "",          PHP_INI_ALL, OnUpdateRefererCheck, extern_referer_chk, php
   964:  _ps_globals,    ps_globals)
   965:          STD_PHP_INI_ENTRY("session.cache_limiter",      "nocache",   PHP_INI_ALL, OnUpdateSessionString, cache_limiter,      ph
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
   874:  p_ps_globals,    ps_globals)
   875:          STD_PHP_INI_BOOLEAN("session.use_trans_sid",    "0",         PHP_INI_ALL, OnUpdateSessionBool,   use_trans_sid,      ph
   876:  p_ps_globals,    ps_globals)
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
   968:  p_ps_globals,    ps_globals)
   969:          STD_PHP_INI_BOOLEAN("session.use_trans_sid",    "0",         PHP_INI_ALL, OnUpdateUseTransSid,   use_trans_sid,      ph
   970:  p_ps_globals,    ps_globals)
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1027:          php_serialize_data_t var_hash;
  1028:          PS_ENCODE_VARS;
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1121:          php_serialize_data_t var_hash;
  1122:          bool fail = false;
  1123:          PS_ENCODE_VARS;
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1036:                          smart_str_free(&buf);
  1037:                          return NULL;
  1038:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1131:                          smart_str_free(&buf);
  1132:                          fail = true;
  1133:                          break;
  1134:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1042:  
  1043:          smart_str_0(&buf);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1138:  
  1139:          if (fail) {
  1140:                  return NULL;
@@ -377,50 +377,50 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  1143:          smart_str_0(&buf);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1449:                  header, probably sent with setcookie() will be replaced! */
  1450:          sapi_add_header_ex(estrndup(ZSTR_VAL(ncookie.s), ZSTR_LEN(ncookie.s)), ZSTR_LEN(ncookie.s), 0, 0);
  1451:          smart_str_free(&ncookie);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1549:                  header, probably sent with setcookie() will be replaced! */
  1550:          zend_result result = sapi_add_header_ex(estrndup(ZSTR_VAL(ncookie.s), ZSTR_LEN(ncookie.s)), ZSTR_LEN(ncookie.s), 0, 0);
  1551:          smart_str_free(&ncookie);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1452:  
  1453:          return SUCCESS;
  1454:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1552:  
  1553:          return result;
  1554:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1534:                  } else {
  1535:                          REGISTER_STRINGL_CONSTANT("SID", ZSTR_VAL(var.s), ZSTR_LEN(var.s), 0);
  1536:                          smart_str_free(&var);
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1634:                  } else {
  1635:                          REGISTER_STRINGL_CONSTANT("SID", ZSTR_VAL(var.s), ZSTR_LEN(var.s),  CONST_DEPRECATED);
  1636:                          smart_str_free(&var);
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1542:                  } else {
  1543:                          REGISTER_STRINGL_CONSTANT("SID", "", 0, 0);
  1544:                  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1642:                  } else {
  1643:                          REGISTER_STRINGL_CONSTANT("SID", "", 0, CONST_DEPRECATED);
  1644:                  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1708:  
  1709:  static zend_result php_session_abort(void) /* {{{ */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  1808:  
  1809:  PHPAPI php_session_status php_get_session_status(void)
  1810:  {
@@ -430,30 +430,30 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  1814:  static zend_result php_session_abort(void) /* {{{ */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1939:  
  1940:  /* {{{ Return the current session name. If newname is given, the session name is replaced with newname */
  1941:  PHP_FUNCTION(session_name)
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2044:  
  2045:  /* {{{ Return the current session name. If new name is given, the session name is replaced with new name */
  2046:  PHP_FUNCTION(session_name)
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  1945:  
  1946:          if (zend_parse_parameters(ZEND_NUM_ARGS(), "|S!", &name) == FAILURE) {
  1947:                  RETURN_THROWS();
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2050:  
  2051:          if (zend_parse_parameters(ZEND_NUM_ARGS(), "|P!", &name) == FAILURE) {
  2052:                  RETURN_THROWS();
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2182:  
  2183:          /* Procedural version */
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2287:  
  2288:          php_error_docref(NULL, E_DEPRECATED, "Providing individual callbacks instead of an object implementing SessionHandlerIn
  2289:  terface is deprecated");
@@ -464,29 +464,29 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  2294:          /* Procedural version */
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2403:                                  zend_string_release_ex(PS(id), 0);
  2404:                                  PS(id) = PS(mod)->s_create_sid(&PS(mod_data));
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2514:                                  zend_string_release_ex(PS(id), 0);
  2515:                                  PS(id) = NULL;
  2516:                                  PS(id) = PS(mod)->s_create_sid(&PS(mod_data));
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2448:  
  2449:          if (zend_parse_parameters(ZEND_NUM_ARGS(), "|S", &prefix) == FAILURE) {
  2450:                  RETURN_THROWS();
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2560:  
  2561:          if (zend_parse_parameters(ZEND_NUM_ARGS(), "|P", &prefix) == FAILURE) {
  2562:                  RETURN_THROWS();
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2453:          if (prefix && ZSTR_LEN(prefix)) {
  2454:                  if (php_session_valid_key(ZSTR_VAL(prefix)) == FAILURE) {
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2565:          if (prefix && ZSTR_LEN(prefix)) {
  2566:          if (ZSTR_LEN(prefix) > PS_MAX_SID_LENGTH) {
  2567:              zend_argument_value_error(1, "cannot be longer than %d characters", PS_MAX_SID_LENGTH);
@@ -495,10 +495,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  2570:                  if (php_session_valid_key(ZSTR_VAL(prefix)) == FAILURE) {
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2467:                          new_id = PS(mod)->s_create_sid(&PS(mod_data));
  2468:                          if (!PS(mod)->s_validate_sid || (PS(mod_user_implemented) && Z_ISUNDEF(PS(mod_user_names).ps_validate_s
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2583:                          new_id = PS(mod)->s_create_sid(&PS(mod_data));
  2584:                          if (!new_id) {
  2585:                                  break;
@@ -506,10 +506,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  2587:                          if (!PS(mod)->s_validate_sid || (PS(mod_user_implemented) && Z_ISUNDEF(PS(mod_user_names).ps_validate_s
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2489:                  smart_str_free(&id);
  2490:                  php_error_docref(NULL, E_WARNING, "Failed to create new ID");
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  2608:                  smart_str_free(&id);
  2609:                  if (EG(exception)) {
  2610:                          RETURN_THROWS();
@@ -517,10 +517,10 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  2612:                  php_error_docref(NULL, E_WARNING, "Failed to create new ID");
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  2963:          ZVAL_UNDEF(&ps_globals->http_session_vars);
  2964:  }
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  3085:          ZVAL_UNDEF(&ps_globals->http_session_vars);
  3086:  
  3087:          ps_globals->random = (php_random_algo_with_state){
@@ -531,12 +531,12 @@ Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c an
  3092:  }
 *****
 
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\session.c
  3069:  static const zend_module_dep session_deps[] = { /* {{{ */
  3070:          ZEND_MOD_OPTIONAL("hash")
  3071:          ZEND_MOD_REQUIRED("spl")
  3072:          ZEND_MOD_END
-***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
+***** C:\USERS\<USER>\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\SESSION.C
  3197:  static const zend_module_dep session_deps[] = { /* {{{ */
  3198:          ZEND_MOD_OPTIONAL("spl")
  3199:          ZEND_MOD_END
