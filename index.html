@@ -216,7 +216,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
       <div class="sub">native exploit engine · SQLite session</div>
     </div>
   </div>
-  <div class="status"><span class="dot" id="status-dot"></span><span id="status-txt">bağlanıyor…</span></div>
+  <div class="status"><span class="dot" id="status-dot"></span><span id="status-txt">baglaniyor…</span></div>
   <div class="spacer"></div>
   <div class="live-tail" id="live-tail"></div>
   <div class="pill" id="pill-counts">—</div>
@@ -234,11 +234,11 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
   <!-- ============ SIDE (scan controls + fingerprint) ============ -->
   <div class="col-side">
     <div class="panel">
-      <h3>Hedef <span class="tag" id="scan-state">hazır</span></h3>
+      <h3>Hedef <span class="tag" id="scan-state">hazir</span></h3>
       <label class="f">Hedef URL</label>
-      <input id="target-url" class="mono" placeholder="http://192.168.8.123:18111/index.php" spellcheck="false">
-      <label class="f" style="margin-top:12px">Profil adı (opsiyonel)</label>
-      <input id="target-name" placeholder="örn: php-target-18111" spellcheck="false">
+      <input id="target-url" class="mono" placeholder="http://LAB_IP:18111/index.php" spellcheck="false">
+      <label class="f" style="margin-top:12px">Profil adi (opsiyonel)</label>
+      <input id="target-name" placeholder="orn: php-target-18111" spellcheck="false">
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
         <button class="btn primary block" id="btn-scan" onclick="doScan(true)">🎯 Tara + Kaydet</button>
       </div>
@@ -254,7 +254,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
       <div id="waf-body"></div>
     </div>
     <div class="panel" id="ports-panel" style="display:none">
-      <h3>Açık Portlar <span class="tag" id="ports-n"></span></h3>
+      <h3>Acik Portlar <span class="tag" id="ports-n"></span></h3>
       <div id="ports-body"></div>
     </div>
     <div class="panel" id="tls-panel" style="display:none">
@@ -266,7 +266,7 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
       <div id="hdr-body"></div>
     </div>
     <div class="panel" id="paths-panel" style="display:none">
-      <h3>İlginç Path'ler</h3>
+      <h3>Ilginc Path'ler</h3>
       <div id="paths-body"></div>
     </div>
   </div>
@@ -278,12 +278,12 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
     <div class="view active" id="view-scan">
       <div id="scan-empty" class="empty">
         <div class="big">🎯</div>
-        Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header çıkarır,<br>
-        eşleşen kritik CVE'leri listeler, <b>0–100 risk puanı</b> verir, her adımı <b>loglar</b> ve native PoC'leri kendisi atar.
+        Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br>
+        eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, her adimi <b>loglar</b> ve native PoC'leri kendisi atar.
       </div>
       <div id="scan-result" style="display:none">
         <div class="panel">
-          <h3>Risk Değerlendirmesi <span class="tag" id="risk-target"></span></h3>
+          <h3>Risk Degerlendirmesi <span class="tag" id="risk-target"></span></h3>
           <div class="gauge-wrap">
             <div class="gauge">
               <svg width="150" height="150" viewBox="0 0 150 150">
@@ -301,35 +301,35 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
           </div>
         </div>
         <div id="waf-banner-scan"></div>
-        <div class="sec-head">Eşleşen Kritik CVE'ler <span class="n" id="cve-count"></span></div>
+        <div class="sec-head">Eslesen Kritik CVE'ler <span class="n" id="cve-count"></span></div>
         <div id="cve-list"></div>
       </div>
 
       <!-- HISTORY (when viewing a saved profile) -->
       <div id="history-block" style="display:none">
-        <div class="sec-head">Tarama Tarihçesi <span class="n" id="hist-scan-n"></span>
+        <div class="sec-head">Tarama Tarihcesi <span class="n" id="hist-scan-n"></span>
           <button class="btn sm" style="margin-left:auto" onclick="rescanCurrent()">↻ Yeniden Tara (tarihe ekle)</button>
         </div>
         <div class="history-block" id="hist-scans"></div>
-        <div class="sec-head">PoC Çalıştırma Kayıtları <span class="n" id="hist-poc-n"></span></div>
+        <div class="sec-head">PoC Calistirma Kayitlari <span class="n" id="hist-poc-n"></span></div>
         <div class="history-block" id="hist-pocs"></div>
       </div>
     </div>
 
     <!-- PROFILES VIEW -->
     <div class="view" id="view-profiles">
-      <div class="sec-head" style="margin-top:0">Kayıtlı Hedef Profilleri <span class="n" id="prof-count"></span></div>
-      <div id="profiles-body"><div class="empty"><div class="big">📁</div>Henüz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.</div></div>
+      <div class="sec-head" style="margin-top:0">Kayitli Hedef Profilleri <span class="n" id="prof-count"></span></div>
+      <div id="profiles-body"><div class="empty"><div class="big">📁</div>Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.</div></div>
     </div>
 
     <!-- DB VIEW -->
     <div class="view" id="view-db">
       <div class="panel">
-        <h3>CVE Veritabanı <span class="tag" id="db-count"></span></h3>
+        <h3>CVE Veritabani <span class="tag" id="db-count"></span></h3>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
           <select id="db-sw" style="max-width:220px" onchange="onDbSw()"></select>
           <select id="db-ver" style="max-width:180px" onchange="renderDB()"></select>
-          <input id="db-q" style="flex:1;min-width:160px;max-width:340px" placeholder="CVE / açıklama ara…" oninput="renderDB()">
+          <input id="db-q" style="flex:1;min-width:160px;max-width:340px" placeholder="CVE / aciklama ara…" oninput="renderDB()">
         </div>
       </div>
       <div id="db-body"></div>
@@ -341,22 +341,22 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
         <h3>Operasyon Logu <span class="tag" id="log-count">0</span></h3>
         <div class="log-toolbar">
           <select id="log-level" onchange="loadLogs()">
-            <option value="">Tüm seviyeler</option>
+            <option value="">Tum seviyeler</option>
             <option>INFO</option><option>SUCCESS</option><option>WARN</option><option>ERROR</option><option>DEBUG</option>
           </select>
           <select id="log-cat" onchange="loadLogs()">
-            <option value="">Tüm kategoriler</option>
+            <option value="">Tum kategoriler</option>
             <option>scan</option><option>poc</option><option>profile</option><option>store</option><option>system</option>
           </select>
           <input id="log-q" placeholder="log metni ara…" oninput="debounceLogs()">
           <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
-            <input type="checkbox" id="log-live" style="width:auto" onchange="toggleLogLive()"> canlı
+            <input type="checkbox" id="log-live" style="width:auto" onchange="toggleLogLive()"> canli
           </label>
           <button class="btn sm" onclick="loadLogs(true)">⟳ Yenile</button>
           <button class="btn sm danger" onclick="clearLogs()">🗑 Temizle</button>
         </div>
-        <div class="log-console" id="log-console"><span class="dim">yükleniyor…</span></div>
-        <p style="color:var(--text3);font-size:11px;margin-top:8px">Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasına yazılır. Her tarama, PoC çalışması ve hata kaydedilir.</p>
+        <div class="log-console" id="log-console"><span class="dim">yukleniyor…</span></div>
+        <p style="color:var(--text3);font-size:11px;margin-top:8px">Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Her tarama, PoC calismasi ve hata kaydedilir.</p>
       </div>
     </div>
 
@@ -364,16 +364,16 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
     <div class="view" id="view-mcp">
       <div class="panel">
         <h3>MCP Server — Qwen Code entegrasyonu</h3>
-        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Scanner, Model Context Protocol sunucusu olarak Qwen Code'a (ve her MCP client'a) bağlanır. 14 native tool.</p>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Scanner, Model Context Protocol sunucusu olarak Qwen Code'a (ve her MCP client'a) baglanir. 14 native tool.</p>
         <div class="cmd-box" id="mcp-install"></div>
-        <p style="color:var(--text3);font-size:11.5px;margin-top:8px">Not: <code>qwen mcp add</code> sonrası tam Qwen restart gerekir (hot-load yok). Server stdio, bağımlılıksız.</p>
+        <p style="color:var(--text3);font-size:11.5px;margin-top:8px">Not: <code>qwen mcp add</code> sonrasi tam Qwen restart gerekir (hot-load yok). Server stdio, bagimliliksiz.</p>
       </div>
       <div class="panel">
         <h3>Tool'lar <span class="tag" id="mcp-tool-n">14</span></h3>
         <div class="tbl-wrap"><table class="tbl" id="mcp-tools"></table></div>
       </div>
       <div class="panel">
-        <h3>Canlı deneme (HTTP API üzerinden)</h3>
+        <h3>Canli deneme (HTTP API uzerinden)</h3>
         <div class="grid2">
           <div>
             <label class="f">Tool</label>
@@ -389,12 +389,12 @@ footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-t
             <input id="test-arg" class="mono" placeholder='{"software":"PHP"}'>
           </div>
         </div>
-        <button class="btn primary" style="margin-top:12px" onclick="runTest()">▶ Çalıştır</button>
+        <button class="btn primary" style="margin-top:12px" onclick="runTest()">▶ Calistir</button>
         <div class="outbox" id="test-out"></div>
       </div>
     </div>
 
-    <footer>Source: NVD + vendor advisories + Exploit-DB · native exploit engine · SQLite session store · Yetkili güvenlik araştırması · P2S v2.1</footer>
+    <footer>Source: NVD + vendor advisories + Exploit-DB · native exploit engine · SQLite session store · Yetkili guvenlik arastirmasi · P2S v2.1</footer>
   </div>
 </div>
 
@@ -420,7 +420,7 @@ async function init(){
     $('pill-counts').textContent = h.vulns+' CVE · '+h.with_poc+' PoC · '+h.profiles+' profil';
     $('n-cves').textContent = h.vulns;
   }catch(e){
-    $('status-txt').textContent = 'sunucu kapalı (server.py)';
+    $('status-txt').textContent = 'sunucu kapali (server.py)';
   }
   try{ const c = await j('/cves'); DB = c.cves||[]; $('n-cves').textContent = DB.length; }catch(e){}
   try{ const p = await j('/pocs'); POCS = p.pocs||{}; }catch(e){}
@@ -442,7 +442,7 @@ function switchView(v){
 async function doScan(save){
   const url = $('target-url').value.trim();
   if(!url){alert('Hedef URL gir');return;}
-  const btn = $('btn-scan'); btn.disabled=true; $('scan-state').textContent='taranıyor…';
+  const btn = $('btn-scan'); btn.disabled=true; $('scan-state').textContent='taraniyor…';
   try{
     const body = {url, save:!!save};
     if($('target-name').value.trim()) body.name=$('target-name').value.trim();
@@ -452,7 +452,7 @@ async function doScan(save){
     if(save){ loadProfiles(); loadLogs(); }
     $('scan-state').textContent = save ? 'kaydedildi ✓' : 'tara';
   }catch(e){
-    $('scan-state').textContent='hata'; alert('Tarama hatası: '+e.message);
+    $('scan-state').textContent='hata'; alert('Tarama hatasi: '+e.message);
   }
   btn.disabled=false;
 }
@@ -469,7 +469,7 @@ function kvRows(s){
   add('SAPI', s.sapi_guess!=='unknown'?s.sapi_guess:'');
   add('Server hdr', s.server);
   add('X-Powered-By', s.xpoweredby);
-  if(!rows.length) rows.push(['Durum', s.error||'erişilemedi', 'bad']);
+  if(!rows.length) rows.push(['Durum', s.error||'erisilemedi', 'bad']);
   return rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v ${r[2]}">${esc(r[1])}</span></div>`).join('');
 }
 
@@ -492,9 +492,9 @@ function renderScan(s, prof){
   // ports
   const ports = s.ports||[];
   $('ports-n').textContent = ports.length;
-  $('ports-body').innerHTML = ports.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>Port</th><th>Servis</th><th>Sürüm</th></tr>`
+  $('ports-body').innerHTML = ports.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>Port</th><th>Servis</th><th>Surum</th></tr>`
     + ports.map(p=>`<tr><td class="ok">:${esc(p.port)}</td><td>${esc(p.service||'open')}</td><td>${esc(p.version||'—')}</td></tr>`).join('')+'</table></div>'
-    : `<div class="sec-empty">Açık port bulunamadı</div>`;
+    : `<div class="sec-empty">Acik port bulunamadi</div>`;
   $('ports-panel').style.display='block';
 
   // TLS
@@ -503,7 +503,7 @@ function renderScan(s, prof){
     $('tls-body').innerHTML = [
       ['Protocol', tls.protocol], ['Cipher', `${(tls.cipher||{}).name||''} (${(tls.cipher||{}).tls||''})`],
       ['Issuer', (tls.cert||{}).issuer], ['CN', (tls.cert||{}).cn],
-      ['SAN', ((tls.cert||{}).san||[]).join(', ')], ['Expiry', `${(tls.cert||{}).not_after||''} (${(tls.cert||{}).days_to_expire} gün)`]
+      ['SAN', ((tls.cert||{}).san||[]).join(', ')], ['Expiry', `${(tls.cert||{}).not_after||''} (${(tls.cert||{}).days_to_expire} gun)`]
     ].map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${esc(r[1]||'—')}</span></div>`).join('');
     $('tls-panel').style.display='block';
   } else $('tls-panel').style.display='none';
@@ -546,14 +546,14 @@ function renderRisk(risk){
   $('risk-factors').innerHTML = fs.map(f=>{
     const v=f.delta; const cls = v>0?'pos':(v<0?'neg':'zero');
     return `<div class="factor"><span class="fl">${esc(f.label)} ${f.note?`<span style="color:var(--text3)">· ${esc(f.note)}</span>`:''}</span><span class="fv ${cls}">${v>0?'+':''}${v}</span></div>`;
-  }).join('') || '<div class="factor"><span class="fl">Faktör yok</span></div>';
+  }).join('') || '<div class="factor"><span class="fl">Faktor yok</span></div>';
 }
 
 /* ---------- CVE list + native PoC ---------- */
 function renderCVEs(cves, hitMajor){
   $('cve-count').textContent = `${cves.length} · ${cves.filter(c=>POCS[c.id]).length} native PoC`;
   if(!cves.length){
-    $('cve-list').innerHTML = '<div class="sec-empty" style="margin-top:8px">Tespit edilen sürümler için eşleşen kritik CVE bulunamadı ✓</div>';
+    $('cve-list').innerHTML = '<div class="sec-empty" style="margin-top:8px">Tespit edilen surumler icin eslesen kritik CVE bulunamadi ✓</div>';
     return;
   }
   $('cve-list').innerHTML = cves.map(c=>renderCVE(c, hitMajor)).join('');
@@ -568,7 +568,7 @@ function renderCVE(c, hitMajor){
   return `<div class="cve ${isHit?'hit':''}" id="cve-${esc(c.id)}">
     <div class="cve-top">
       <span class="cve-id">${esc(c.id)}</span>
-      ${isHit?'<span class="badge b-hit">HİT</span>':''}
+      ${isHit?'<span class="badge b-hit">HIT</span>':''}
       <span class="badge b-sw">${esc(c.software||'')}</span>
       <span class="badge b-type">${esc((c.exploit||{}).type||'')}</span>
       ${(c.exploit||{}).preauth?'<span class="badge b-pre">PRE-AUTH</span>':''}
@@ -595,7 +595,7 @@ function renderPoC(cveId){
       ${p.preauth?'<span class="badge b-pre">PRE-AUTH</span>':''}</div>
     ${p.note?`<div class="poc-note">⚠ ${esc(p.note)}</div>`:''}
     ${inputs?`<div class="poc-grid">${inputs}</div>`:''}
-    <button class="btn danger" onclick="runPoC('${esc(cveId)}')">▶ Çalıştır (native engine)</button>
+    <button class="btn danger" onclick="runPoC('${esc(cveId)}')">▶ Calistir (native engine)</button>
     <div class="outbox" id="pocout-${esc(cveId)}"></div>
     <div id="pocres-${esc(cveId)}"></div>
   </div>`;
@@ -610,7 +610,7 @@ function pocParams(cveId){
 
 async function runPoC(cveId){
   const out = $('pocout-'+cveId); const res=$('pocres-'+cveId);
-  out.classList.add('show'); out.innerHTML='<span class="dim">native engine çalışıyor… (socket/HTTP scanner\'dan atılıyor)</span>';
+  out.classList.add('show'); out.innerHTML='<span class="dim">native engine calisiyor… (socket/HTTP scanner\'dan atiliyor)</span>';
   res.innerHTML='';
   const params = pocParams(cveId);
   try{
@@ -632,17 +632,17 @@ function renderPoCResult(out,res){
   if(res.evidence){ h+=`<span class="dim">KANIT:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`; }
   const det=res.detail||{};
   if(det.host) h+=`<span class="dim">hedef: ${esc(det.host)}</span>\n`;
-  if(det.stage) h+=`<span class="dim">aşama: ${esc(det.stage)}</span>\n`;
+  if(det.stage) h+=`<span class="dim">asama: ${esc(det.stage)}</span>\n`;
   if(det.chunk_base) h+=`<span class="dim">chunk=${esc(det.chunk_base)} libphp=${esc(det.libphp_base||'')} zif=${esc(det.zif_abs||'')} htdata=${esc(det.htdata_abs||'')}</span>\n`;
   if(det.split) h+=`<span class="dim">split: ${det.split.map(esc).join(' ')}</span>\n`;
   if(res.log && res.log.length) h+=`<span class="dim">── log ──\n</span>${res.log.map(l=>'<span class="dim">'+esc(l)+'</span>').join('\n')}`;
-  if(!h) h='<span class="dim">çıktı yok</span>';
+  if(!h) h='<span class="dim">cikti yok</span>';
   out.innerHTML=h;
   const badge = document.getElementById('pocres-'+out.id.replace('pocout-',''));
   if(badge){
-    if(res.success) badge.innerHTML='<span class="result-badge win">✓ BAŞARILI — kanıt alındı</span>';
-    else if(res.error) badge.innerHTML='<span class="result-badge lose">✗ başarısız</span>';
-    else badge.innerHTML='<span class="result-badge mid">○ çalıştı — hedef savunmalı / trigger tetiklenmedi</span>';
+    if(res.success) badge.innerHTML='<span class="result-badge win">✓ BASARILI — kanit alindi</span>';
+    else if(res.error) badge.innerHTML='<span class="result-badge lose">✗ basarisiz</span>';
+    else badge.innerHTML='<span class="result-badge mid">○ calisti — hedef savunmali / trigger tetiklenmedi</span>';
   }
 }
 
@@ -654,10 +654,10 @@ async function loadHistory(pid){
     $('hist-poc-n').textContent = pc.count;
     $('hist-scans').innerHTML = sc.scans.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr>`
       + sc.scans.map(s=>`<tr><td>${s.id}</td><td>${esc(s.ts)}</td><td>${esc(s.url||'')}</td><td class="${(s.risk&&s.risk.score>=65)?'warn':'ok'}">${s.risk?s.risk.score:'—'}</td><td>${s.cve_count}</td></tr>`).join('')+'</table></div>'
-      : '<div class="sec-empty">tarama kaydı yok</div>';
-    $('hist-pocs').innerHTML = pc.runs.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuç</th><th>Kanıt (kısa)</th></tr>`
-      + pc.runs.map(r=>`<tr><td>${r.id}</td><td>${esc(r.ts)}</td><td>${esc(r.cve_id)}</td><td class="${r.success?'ok':'no'}">${r.success?'✓ BAŞARILI':'✗'}</td><td class="cell-txt">${esc((r.result&&r.result.evidence||'').slice(0,90))}</td></tr>`).join('')+'</table></div>'
-      : '<div class="sec-empty">PoC çalıştırma kaydı yok</div>';
+      : '<div class="sec-empty">tarama kaydi yok</div>';
+    $('hist-pocs').innerHTML = pc.runs.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuc</th><th>Kanit (kisa)</th></tr>`
+      + pc.runs.map(r=>`<tr><td>${r.id}</td><td>${esc(r.ts)}</td><td>${esc(r.cve_id)}</td><td class="${r.success?'ok':'no'}">${r.success?'✓ BASARILI':'✗'}</td><td class="cell-txt">${esc((r.result&&r.result.evidence||'').slice(0,90))}</td></tr>`).join('')+'</table></div>'
+      : '<div class="sec-empty">PoC calistirma kaydi yok</div>';
     $('history-block').style.display='block';
   }catch(e){ $('history-block').style.display='none'; }
 }
@@ -673,7 +673,7 @@ async function loadProfiles(){
 function renderProfiles(){
   $('prof-count').textContent = PROFILES.length;
   if(!PROFILES.length){
-    $('profiles-body').innerHTML='<div class="empty"><div class="big">📁</div>Henüz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite\'a kaydedilir.</div>';
+    $('profiles-body').innerHTML='<div class="empty"><div class="big">📁</div>Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite\'a kaydedilir.</div>';
     return;
   }
   $('profiles-body').innerHTML = `<div class="profiles-grid">`+PROFILES.map(p=>{
@@ -699,7 +699,7 @@ function renderProfiles(){
         <span class="pfact">${p.poc_runs||0} PoC</span>
       </div>
       <div class="pactions">
-        <button class="btn sm primary" onclick="openProfile('${esc(p.id)}')">Aç</button>
+        <button class="btn sm primary" onclick="openProfile('${esc(p.id)}')">Ac</button>
         <button class="btn sm" onclick="rescanProfile('${esc(p.id)}')">↻ Tara</button>
         <button class="btn sm" onclick="report('${esc(p.id)}')">⬇ Rapor</button>
         <button class="btn sm danger" onclick="delProfile('${esc(p.id)}')">Sil</button>
@@ -721,7 +721,7 @@ async function rescanProfile(id){
   currentProfileId = prof.id;
   renderScan(prof.scan||prof, prof);
   loadProfiles(); loadLogs();
-  $('scan-state').textContent='yeniden tarandı ✓';
+  $('scan-state').textContent='yeniden tarandi ✓';
 }
 function rescanCurrent(){ if(currentProfileId) rescanProfile(currentProfileId); }
 async function report(id){
@@ -732,7 +732,7 @@ async function report(id){
   a.download='risk_raporu_'+id+'.md'; a.click();
 }
 async function delProfile(id){
-  if(!confirm('Bu profili ve tüm tarama/PoC kayıtlarını sil?'))return;
+  if(!confirm('Bu profili ve tum tarama/PoC kayitlarini sil?'))return;
   await fetch('/profiles/'+encodeURIComponent(id),{method:'DELETE'});
   if(currentProfileId===id){currentProfileId=null;}
   loadProfiles(); loadLogs();
@@ -741,7 +741,7 @@ async function delProfile(id){
 /* ---------- DB view ---------- */
 function buildDBfilters(){
   const sws=[...new Set(DB.map(c=>c.software))].sort();
-  $('db-sw').innerHTML='<option value="">Tüm yazılımlar</option>'+sws.map(s=>`<option>${esc(s)}</option>`).join('');
+  $('db-sw').innerHTML='<option value="">Tum yazilimlar</option>'+sws.map(s=>`<option>${esc(s)}</option>`).join('');
   onDbSw();
 }
 function onDbSw(){
@@ -749,7 +749,7 @@ function onDbSw(){
   const set=new Set();
   DB.forEach(c=>{ if(!sw||c.software===sw) (c.affected||[]).forEach(v=>set.add(v)); });
   const vs=[...set].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
-  $('db-ver').innerHTML='<option value="">Tüm sürümler</option>'+vs.map(v=>`<option>${esc(v)}</option>`).join('');
+  $('db-ver').innerHTML='<option value="">Tum surumler</option>'+vs.map(v=>`<option>${esc(v)}</option>`).join('');
   renderDB();
 }
 function renderDB(){
@@ -762,7 +762,7 @@ function renderDB(){
   }).sort((a,b)=>b.score-a.score);
   $('db-count').textContent=out.length+' CVE';
   $('db-body').innerHTML = out.slice(0,300).map(c=>renderCVE(c,ver||null)).join('')
-    || '<div class="sec-empty">Sonuç yok</div>';
+    || '<div class="sec-empty">Sonuc yok</div>';
   if(out.length>300) $('db-body').innerHTML+=`<div class="empty">+ ${out.length-300} daha (filtre daralt)</div>`;
 }
 
@@ -780,7 +780,7 @@ async function loadLogs(clear){
       const d = l.data?`\n<span class="data">${esc(JSON.stringify(l.data))}</span>`:'';
       return `<div class="log-line"><span class="ts">${esc((l.ts||'').replace('T',' ').replace('Z',''))}</span><span class="lvl ${l.level}">${esc(l.level)}</span><span class="cat">${esc(l.category||'-')}</span><span class="msg">${esc(l.message||'')}</span>${d}</div>`;
     }).join('') : '<div class="log-line"><span class="msg" style="color:var(--text3)">log yok</span></div>';
-  }catch(e){ $('log-console').innerHTML='<span class="dim">log yüklenemedi: '+esc(e.message)+'</span>'; }
+  }catch(e){ $('log-console').innerHTML='<span class="dim">log yuklenemedi: '+esc(e.message)+'</span>'; }
 }
 function updateLiveTail(logs){
   if(!logs||!logs.length) return;
@@ -788,7 +788,7 @@ function updateLiveTail(logs){
   $('live-tail').innerHTML=`<b>${esc(l.level)}</b> ${esc((l.message||'').slice(0,80))}`;
 }
 function clearLogs(){
-  if(!confirm('Tüm logları temizle?'))return;
+  if(!confirm('Tum loglari temizle?'))return;
   fetch('/logs/clear',{method:'POST'}).then(()=>loadLogs());
 }
 function toggleLogLive(){
@@ -803,34 +803,34 @@ const MCP_TOOLS=[
   ['list_cves','software?, version?','Kritik CVE listesi (filtreli)'],
   ['get_cve','id','Tek CVE (PoC paneliyle)'],
   ['poc_list','—','Native PoC katalogu'],
-  ['poc_describe','cve_id','Native PoC mantığı + parametreler'],
-  ['run_poc','cve_id, params','Native engine ile PoC çalıştır (socket/HTTP scanner\'dan)'],
-  ['list_profiles','—','Kayıtlı hedef profilleri (SQLite)'],
-  ['get_profile','id','Tek profil (tam + tarihçe)'],
+  ['poc_describe','cve_id','Native PoC mantigi + parametreler'],
+  ['run_poc','cve_id, params','Native engine ile PoC calistir (socket/HTTP scanner\'dan)'],
+  ['list_profiles','—','Kayitli hedef profilleri (SQLite)'],
+  ['get_profile','id','Tek profil (tam + tarihce)'],
   ['delete_profile','id','Profili sil'],
   ['export_report','id, fmt','Risk raporu (md/json) + yol'],
-  ['risk_score','id | url','Risk puanı + faktör kırılımı'],
+  ['risk_score','id | url','Risk puani + faktor kirilimi'],
   ['tls_fingerprint','host, port?','TLS/sertifika parmak izi'],
   ['port_scan','host, extra_ports?','TCP port + servis banner'],
-  ['list_logs','level?, category?, limit?','Operasyon logları (SQLite + dosya)'],
+  ['list_logs','level?, category?, limit?','Operasyon loglari (SQLite + dosya)'],
 ];
 function renderMCP(){
   $('mcp-install').textContent =
 `# stdio MCP (Qwen Code)
 qwen mcp add p2s -- /opt/homebrew/bin/python3.12 \\
-  /Users/<USER>/Desktop/php2shell/mcp_server.py
+  <REPO_PATH>/mcp_server.py
 # sonra: tam Qwen restart (qwen mcp add hot-load yapmaz)
 
 # HTTP API
-curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://192.168.8.123:18111/index.php"}'
+curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://LAB_IP:18111/index.php"}'
 curl -sX POST http://127.0.0.1:8123/poc/CVE-2026-109618 -H 'Content-Type: application/json' -d '{"params":{"url":"…","cmd":"id>/out/p1"}}'`;
   $('mcp-tool-n').textContent = MCP_TOOLS.length;
-  $('mcp-tools').innerHTML='<tr><th>Tool</th><th>Args</th><th>Açıklama</th></tr>'+MCP_TOOLS.map(t=>`<tr><td>${t[0]}</td><td>${esc(t[1])}</td><td class="cell-txt">${esc(t[2])}</td></tr>`).join('');
+  $('mcp-tools').innerHTML='<tr><th>Tool</th><th>Args</th><th>Aciklama</th></tr>'+MCP_TOOLS.map(t=>`<tr><td>${t[0]}</td><td>${esc(t[1])}</td><td class="cell-txt">${esc(t[2])}</td></tr>`).join('');
 }
 async function runTest(){
   const tool=$('test-tool').value; let args={};
-  try{ args = $('test-arg').value.trim()?JSON.parse($('test-arg').value):{}; }catch(e){alert('Argument JSON geçersiz: '+e.message);return;}
-  const out=$('test-out'); out.classList.add('show'); out.innerHTML='<span class="dim">çalışıyor…</span>';
+  try{ args = $('test-arg').value.trim()?JSON.parse($('test-arg').value):{}; }catch(e){alert('Argument JSON gecersiz: '+e.message);return;}
+  const out=$('test-out'); out.classList.add('show'); out.innerHTML='<span class="dim">calisiyor…</span>';
   try{
     let res;
     if(tool==='poc_list'){ res=await j('/pocs'); res=Object.keys(res.pocs||{}).length+' PoC'; }

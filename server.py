@@ -1,25 +1,36 @@
 #!/usr/bin/env python3
-"""server.py — P2S CVE Scanner: thin HTTP layer over core.py.
+"""server.py — P2S CVE Scanner v2: core motorunun ustunde ince (thin) HTTP katmani.
 
-Run:  /opt/homebrew/bin/python3.12 server.py 8123
-UI:   http://127.0.0.1:8123
+Mimari: bu dosya YALNIZCA yonlendirme (routing) + serilestirme isleri yapar; tarama, risk
+skoru, PoC yurutme gibi tum is mantigi `core.py` icindedir. Boylece HTTP arayuzu
+ve MCP arayuzu (mcp_server.py) ayni beyni paylasir — tek dogruluk kaynagi.
 
-Endpoints
-  GET  /                 index.html (professional UI)
-  GET  /health           liveness + version + counts
-  GET  /db/<file>        serve db files (vulns.json, exploits.json, ...)
-  GET  /cves?software=&version=    CVE list (filtered)
-  GET  /pocs             runnable PoC catalog
-  POST /probe            {url} -> fingerprint + waf + ports (no save)
-  POST /scan             {url, name?, save?} -> full scan + CVEs + risk (+save profile)
-  GET  /profiles         list saved target profiles (summary)
-  GET  /profiles/<id>    one full profile
-  POST /profiles/<id>/rename      {name}
+Calistirma:  python3 server.py [port]        (varsayilan port: 8123)
+Erisim:     http://127.0.0.1:8123            (React UI: web/dist/; yoksa index.html)
+
+Endpoint'ler (tumu JSON; govdede {..} = POST alanlari)
+  GET    /                        index.html (profesyonel UI — dist fallback'li)
+  GET    /assets/<file>           React build statik varliklari (JS/CSS)
+  GET    /health                  liveness + surum + CVE/PoC/profil sayaclari
+  GET    /db/<file>               db alt agaci dosyalari (vulns.json, ...)
+  GET    /cves?software=&version= CVE listesi (filtreli)
+  GET    /pocs                    calistirilabilir native PoC katalogu
+  POST   /probe                   {url} -> fingerprint + WAF + portlar (kaydetmez)
+  POST   /scan                    {url, name?, save?} -> tam tarama + profil
+  GET    /profiles                kayitli hedef profilleri (ozet liste)
+  GET    /profiles/<id>           tek tam profil (scan + risk + poc_results)
+  GET    /profiles/<id>/scans     tarama gecmisi (zaman damgali, eski->yeni)
+  GET    /profiles/<id>/poc-runs  PoC calisma gecmisi
+  POST   /profiles/<id>/rename    {name}
+  POST   /profiles/<id>/rescan    ayni profile eklenen yeni tarama (gecmis korunur)
   DELETE /profiles/<id>
-  GET  /profiles/<id>/report?fmt=md|json   (downloads report)
-  POST /profiles/<id>/poc/<cve>  {params{}} -> build+run PoC, record on profile
-  POST /run              {command} -> bounded local PoC executor
-  GET  /mcp              MCP server doc + install line
+  GET    /profiles/<id>/report?fmt=md|json   rapor indirme (attachment)
+  POST   /profiles/<id>/poc/<cve> {params{}} -> native PoC calistir + profila yaz
+  POST   /poc/<cve>               {params{}} -> ad-hoc native PoC calistir
+  POST   /run                     {command} -> allow-list'li sinirli yerel yurutucu
+  GET    /logs?level=&category=&q=&limit=    SQLite operasyon gunlugu
+  POST   /logs/clear              gunluk tablosunu + log dosyasini sifirla
+  GET    /mcp                     MCP kurulum belgesi (duz metin)
 """
 from __future__ import annotations
 
@@ -148,8 +159,13 @@ class H(BaseHTTPRequestHandler):
             out = core.store.scan_history(pid, limit=100)
             self._json(200, {"count": len(out), "scans": out})
         elif path == "/logs":
+            # limit degeri kullanicidan gelir: sayisal olmayan/abartili girdi varsayilana duser
+            try:
+                limit = max(1, min(5000, int(query.get("limit", 200))))
+            except (TypeError, ValueError):
+                limit = 200
             out = core.store.list_logs(level=query.get("level"), category=query.get("category"),
-                                       limit=int(query.get("limit", 200)), search=query.get("q"))
+                                       limit=limit, search=query.get("q"))
             self._json(200, {"count": len(out), "logs": out})
         elif path.startswith("/profiles/") and "/report" in path:
             m = re.match(r"^/profiles/([^/]+)/report$", path)
@@ -181,7 +197,7 @@ class H(BaseHTTPRequestHandler):
             doc = (
                 "P2S CVE Scanner — MCP server\n"
                 f"version {VERSION}\n\n"
-                "Install (stdio):  qwen mcp add p2s -- /opt/homebrew/bin/python3.12 "
+                "Install (stdio):  qwen mcp add p2s -- python3 "
                 f"{os.path.join(HERE, 'mcp_server.py')}\n"
                 "(requires a full Qwen restart after 'qwen mcp add')\n\n"
                 "Tools: scan_target, list_cves, get_cve, poc_list, build_poc_command,\n"
@@ -190,7 +206,14 @@ class H(BaseHTTPRequestHandler):
             )
             self._text(200, doc)
         elif path.startswith("/db/"):
-            self._file(os.path.join(HERE, path.lstrip("/")))
+            # Yol gecisi (path traversal) korumasi: istenen hedef, cozuldukten sonra
+            # mutlaka db/ alt agacinin ICINDE kalmali ("../" gibi kacislar 404 doner).
+            req_path = os.path.realpath(os.path.join(HERE, path.lstrip("/")))
+            db_root = os.path.realpath(DB)
+            if not req_path.startswith(db_root + os.sep):
+                self._json(404, {"error": "not found"})
+                return
+            self._file(req_path)
         else:
             self._json(404, {"error": "not found"})
 
@@ -274,7 +297,7 @@ class H(BaseHTTPRequestHandler):
 
         elif path == "/logs/clear":
             n = core.store.clear_logs()
-            core.store.log("INFO", "system", f"logs temizlendi ({n} satır)")
+            core.store.log("INFO", "system", f"logs temizlendi ({n} satir)")
             self._json(200, {"cleared": n})
 
         else:

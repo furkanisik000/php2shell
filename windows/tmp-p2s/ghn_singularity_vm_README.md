@@ -1,6 +1,6 @@
 # Singularity — disposable VM
 
-LKM-Tests gehören in eine **Wegwerf-VM** mit Snapshot, nicht auf dem Host mit produktiven Daten.
+LKM-Tests gehoren in eine **Wegwerf-VM** mit Snapshot, nicht auf dem Host mit produktiven Daten.
 
 ## Empfohlen
 
@@ -22,7 +22,7 @@ qemu-system-x86_64 -m 4096 -smp 2 -enable-kvm \
 sudo apt update && sudo apt install -y linux-headers-$(uname -r) build-essential git
 git clone https://github.com/MatheuZSecurity/Singularity
 cd Singularity
-# Nur mit ausdrücklicher Erlaubnis und Verständnis: Reboot nötig zum Entfernen
+# Nur mit ausdrucklicher Erlaubnis und Verständnis: Reboot notig zum Entfernen
 ```
 
 ## Lab-Netz (optional)

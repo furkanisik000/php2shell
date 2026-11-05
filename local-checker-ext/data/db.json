@@ -1,7 +1,7 @@
 {
   "cve": "CVE-2026-109618/19 (php2shell)",
   "updated": "2026-10-24",
-  "note": "SURUM-TABANLI risk DB'si. Anahtar = branch (major.minor). Sürüm tespiti live fetch ile gelir; bu dosya sadece RISK DATASI. Yeni branch ekle: \"8.6\": { \"status\": \"CONFIRMED_FIXED\", \"note\": \"...\" }",
+  "note": "SURUM-TABANLI risk DB'si. Anahtar = branch (major.minor). Surum tespiti live fetch ile gelir; bu dosya sadece RISK DATASI. Yeni branch ekle: \"8.6\": { \"status\": \"CONFIRMED_FIXED\", \"note\": \"...\" }",
   "rules": {
     "eolBefore": [8, 2],
     "fixedBranch": null,

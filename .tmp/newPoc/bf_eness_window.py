@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""eness tam parametre + concurrent leak read — corruption window'ı yakala.
+"""eness tam parametre + concurrent leak read — corruption window'i yakala.
 
-eness OOM'u 200 döner (soft OOM), sonra crash → corruption window.
+eness OOM'u 200 doner (soft OOM), sonra crash → corruption window.
 Leak read CONCURRENT (thread) ile worker'a isabet etmeli.
 
 Usage:
@@ -54,7 +54,7 @@ def leak_read(t: Target) -> tuple[int, int, int]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     ap.add_argument("--size", type=int, default=12)
     ap.add_argument("--tries", type=int, default=5)

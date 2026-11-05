@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Gemini 'komut konumu' teorisi testi (Senaryo C: Tam İsabet).
+"""Gemini 'komut konumu' teorisi testi (Senaryo C: Tam Isabet).
 
-Teori: filler ile RAM'i ~7.99MB'a doldur, payload'ı TAM 8.00MB sınırına koy.
-PHP tam o noktada OOM olur, hatalı temizlik payload'ın üzerine basar → corrupt worker.
+Teori: filler ile RAM'i ~7.99MB'a doldur, payload'i TAM 8.00MB sinirina koy.
+PHP tam o noktada OOM olur, hatali temizlik payload'in uzerine basar → corrupt worker.
 
-Test: filler size vary (7.0 → 8.1MB), payload filler'ın hemen ardından.
+Test: filler size vary (7.0 → 8.1MB), payload filler'in hemen ardindan.
 Sinyal: OOM status (500) + worker corrupt mi (leak read → heap data).
 
 Usage:
@@ -34,7 +34,7 @@ def leak_probe(t: Target) -> tuple[int, int, int]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     args = ap.parse_args()
 

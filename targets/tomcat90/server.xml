@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Ghostcat lab: Tomcat 9.0.30 (pre-9.0.31), AJP açık, secret yok -->
+<!-- Ghostcat lab: Tomcat 9.0.30 (pre-9.0.31), AJP acik, secret yok -->
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <Service name="Catalina">

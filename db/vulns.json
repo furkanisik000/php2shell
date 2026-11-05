@@ -2249,8 +2249,8 @@
       "inputs": [
         {
           "key": "host",
-          "label": "Hedef (PHP sayfası)",
-          "placeholder": "192.168.8.123:8080/index.php",
+          "label": "Hedef (PHP sayfasi)",
+          "placeholder": "LAB_IP:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -3387,7 +3387,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         },
@@ -3466,7 +3466,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         }
@@ -5974,13 +5974,13 @@
         "8.4",
         "8.5"
       ],
-      "note": "Gerekli: memory_limit=8M, post_max_size>=16M, display_errors=1, glibc 2.36 (Debian 12). Offset'ler libphp.so build'ine göre değişir (nm/readelf ile çıkar).",
+      "note": "Gerekli: memory_limit=8M, post_max_size>=16M, display_errors=1, glibc 2.36 (Debian 12). Offset'ler libphp.so build'ine gore degisir (nm/readelf ile cikar).",
       "command_template": "python3 .tmp/a.py -u {target} -c '{cmd}' --zif-offset 0x{zif} --dtor-offset 0x{dtor} --retries 5",
       "inputs": [
         {
           "key": "target",
           "label": "Hedef URL",
-          "placeholder": "http://192.168.8.123:18130/index.php",
+          "placeholder": "http://LAB_IP:18130/index.php",
           "req": true,
           "default": ""
         },
@@ -6053,13 +6053,13 @@
         "8.4",
         "8.5"
       ],
-      "note": "Gerekli: memory_limit=8M, post_max_size>=16M, display_errors=1, glibc 2.36 (Debian 12). Offset'ler libphp.so build'ine göre değişir (nm/readelf ile çıkar).",
+      "note": "Gerekli: memory_limit=8M, post_max_size>=16M, display_errors=1, glibc 2.36 (Debian 12). Offset'ler libphp.so build'ine gore degisir (nm/readelf ile cikar).",
       "command_template": "python3 .tmp/a.py -u {target} -c '{cmd}' --zif-offset 0x{zif} --dtor-offset 0x{dtor} --retries 5",
       "inputs": [
         {
           "key": "target",
           "label": "Hedef URL",
-          "placeholder": "http://192.168.8.123:18130/index.php",
+          "placeholder": "http://LAB_IP:18130/index.php",
           "req": true,
           "default": ""
         },
@@ -6129,8 +6129,8 @@
       "inputs": [
         {
           "key": "host",
-          "label": "Hedef (PHP sayfası)",
-          "placeholder": "192.168.8.123:8080/index.php",
+          "label": "Hedef (PHP sayfasi)",
+          "placeholder": "LAB_IP:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6183,7 +6183,7 @@
         {
           "key": "host",
           "label": "Hedef (php-fpm cgi)",
-          "placeholder": "192.168.8.123:80",
+          "placeholder": "LAB_IP:80",
           "req": true,
           "default": ""
         },
@@ -6236,7 +6236,7 @@
         {
           "key": "host",
           "label": "Hedef (php-cgi)",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         },
@@ -6283,7 +6283,7 @@
         {
           "key": "host",
           "label": "Hedef (php-cgi)",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         },
@@ -6333,8 +6333,8 @@
       "inputs": [
         {
           "key": "host",
-          "label": "Hedef (PHP sayfası)",
-          "placeholder": "192.168.8.123:8080/index.php",
+          "label": "Hedef (PHP sayfasi)",
+          "placeholder": "LAB_IP:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6373,8 +6373,8 @@
       "inputs": [
         {
           "key": "host",
-          "label": "Hedef (PHP sayfası)",
-          "placeholder": "192.168.8.123:8080/index.php",
+          "label": "Hedef (PHP sayfasi)",
+          "placeholder": "LAB_IP:8080/index.php",
           "req": true,
           "default": ""
         },
@@ -6422,7 +6422,7 @@
         {
           "key": "host",
           "label": "Hedef (h2c)",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         }
@@ -6475,7 +6475,7 @@
         {
           "key": "host",
           "label": "Hedef (proxy)",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         }
@@ -6512,7 +6512,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         },
@@ -6550,7 +6550,7 @@
         {
           "key": "host",
           "label": "Hedef",
-          "placeholder": "192.168.8.123:8080",
+          "placeholder": "LAB_IP:8080",
           "req": true,
           "default": ""
         }
@@ -6592,7 +6592,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "192.168.8.123:3306",
+          "placeholder": "LAB_IP:3306",
           "req": true,
           "default": ""
         }
@@ -6629,7 +6629,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "192.168.8.123:3306",
+          "placeholder": "LAB_IP:3306",
           "req": true,
           "default": ""
         }
@@ -6664,7 +6664,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "192.168.8.123:3306",
+          "placeholder": "LAB_IP:3306",
           "req": true,
           "default": ""
         }
@@ -6704,7 +6704,7 @@
         {
           "key": "host",
           "label": "Hedef (MySQL)",
-          "placeholder": "192.168.8.123:3306",
+          "placeholder": "LAB_IP:3306",
           "req": true,
           "default": ""
         }

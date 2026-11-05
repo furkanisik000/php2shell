@@ -13,7 +13,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import poc
 
-HOST = "192.168.8.123"
+HOST = "LAB_IP"
 VERSIONS = [
     (18101, "5.4.45"), (18102, "5.5.38"), (18103, "5.6.40"),
     (18104, "7.0.33"), (18105, "7.1.33"), (18106, "7.2.34"),

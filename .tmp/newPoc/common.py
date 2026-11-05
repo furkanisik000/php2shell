@@ -15,7 +15,7 @@ import ssl
 import threading
 import urllib.parse
 
-DEFAULT_HOST = "192.168.8.123"
+DEFAULT_HOST = "LAB_IP"
 DEFAULT_PORT = 18113
 DEFAULT_TIMEOUT = 45.0
 
@@ -25,8 +25,8 @@ def parse_url(url: str) -> dict:
 
     Examples:
       https://xxx.com/index.php          -> host=xxx.com port=443 path=/index.php tls=True
-      http://192.168.8.123:18113/index.php -> host=192.168.8.123 port=18113 path=/index.php tls=False
-      192.168.8.123:18113                -> host=192.168.8.123 port=18113 path=/ tls=False
+      http://LAB_IP:18113/index.php -> host=LAB_IP port=18113 path=/index.php tls=False
+      LAB_IP:18113                -> host=LAB_IP port=18113 path=/ tls=False
       18113                              -> host=<default> port=18113 path=/ tls=False
     """
     url = url.strip()

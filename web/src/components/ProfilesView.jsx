@@ -7,10 +7,10 @@ export default function ProfilesView({ profiles, onOpen, onChanged }) {
       await api.rescan(id, {})
       onChanged()
       onOpen(id)
-    } catch (e) { alert('Rescan hatası: ' + e.message) }
+    } catch (e) { alert('Rescan hatasi: ' + e.message) }
   }
   async function del(id) {
-    if (!confirm('Bu profili ve tüm tarama/PoC kayıtlarını sil?')) return
+    if (!confirm('Bu profili ve tum tarama/PoC kayitlarini sil?')) return
     await api.deleteProfile(id)
     onChanged()
   }
@@ -19,14 +19,14 @@ export default function ProfilesView({ profiles, onOpen, onChanged }) {
     return (
       <div className="empty">
         <div className="big">📁</div>
-        Henüz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.
+        Henuz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.
       </div>
     )
   }
 
   return (
     <>
-      <div className="sec-head" style={{ marginTop: 0 }}>Kayıtlı Hedef Profilleri <span className="n">{profiles.length}</span></div>
+      <div className="sec-head" style={{ marginTop: 0 }}>Kayitli Hedef Profilleri <span className="n">{profiles.length}</span></div>
       <div className="profiles-grid">
         {profiles.map(p => {
           const r = p.risk || {}
@@ -57,7 +57,7 @@ export default function ProfilesView({ profiles, onOpen, onChanged }) {
                 <span className="pfact">{p.poc_runs || 0} PoC</span>
               </div>
               <div className="pactions">
-                <button className="btn sm primary" onClick={() => onOpen(p.id)}>Aç</button>
+                <button className="btn sm primary" onClick={() => onOpen(p.id)}>Ac</button>
                 <button className="btn sm" onClick={() => rescan(p.id)}>↻ Tara</button>
                 <a className="btn sm" href={api.reportUrl(p.id, 'md')} download>⬇ Rapor</a>
                 <button className="btn sm danger" onClick={() => del(p.id)}>Sil</button>

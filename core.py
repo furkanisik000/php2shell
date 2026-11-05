@@ -21,6 +21,7 @@ Public API (used by server.py and mcp_server.py):
 """
 from __future__ import annotations
 
+import calendar
 import concurrent.futures
 import hashlib
 import json
@@ -108,11 +109,11 @@ def grade_for(score: float):
     if s >= 85:
         return "Kritik", "F"
     if s >= 65:
-        return "Yüksek", "D"
+        return "Yuksek", "D"
     if s >= 45:
         return "Orta", "C"
     if s >= 25:
-        return "Düşük", "B"
+        return "Dusuk", "B"
     return "Minimal", "A"
 
 
@@ -366,7 +367,7 @@ def detect_waf(p: dict) -> dict:
             if hits:
                 challenge_note += " (" + ", ".join(hits[:3]) + ")"
             if not names:
-                add("WAF (davranış sinyali)", challenge_note)
+                add("WAF (davranis sinyali)", challenge_note)
         elif hits:
             challenge_note = "block keyword: " + ", ".join(hits[:3])
 
@@ -481,6 +482,16 @@ def scan_ports(host: str, extra_ports=None, skip_port=None) -> list:
 # TLS fingerprint
 # ---------------------------------------------------------------------------
 def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
+    """TLS parmak izi: protokol, cipher suite ve sertifika meta verileri.
+
+    Sertifika dogrulamasi BILINCLI olarak kapalidir (CERT_NONE) — taranacak
+    hedefler kendi imzaladigi lab sertifikalari da tasiyabilir; amac guvenlik
+    denetimi degil servis surum/zafiflik tespiti icin veri toplamaktir.
+
+    Returns:
+        {"ok": True, "protocol", "cipher": {...}, "cert": {...}} ya da
+        baglanti/sohbet hatasinda {"ok": False, "error": ...}.
+    """
     out = {"ok": False}
     try:
         s = socket.create_connection((host, port), timeout=timeout)
@@ -519,11 +530,10 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
                 "not_after": cert.get("notAfter", ""),
             },
         }
-        # days to expiry
+        # gun -> saniye cinsinden son kullanma yakinligi (raporlama icin)
         try:
-            from datetime import datetime as _dt
-            ne = _dt.strptime(cert.get("notAfter", ""), "%b %d %H:%M:%S %Y %Z")
-            out["cert"]["days_to_expire"] = (ne - _dt.utcnow()).days
+            exp_ts = calendar.timegm(time.strptime(cert.get("notAfter", ""), "%b %d %H:%M:%S %Y %Z"))
+            out["cert"]["days_to_expire"] = int((exp_ts - time.time()) // 86400)
         except Exception:
             out["cert"]["days_to_expire"] = None
         ss.close()
@@ -536,13 +546,13 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
 # HTTP security-headers audit
 # ---------------------------------------------------------------------------
 _HEADER_RULES = [
-    ("strict-transport-security", "HSTS", "critical", "HTTPS zorlaması yok — MITM/protocol-downgrade riski"),
-    ("content-security-policy", "CSP", "high", "XSS'i sınırlar; yoksa XSS daha tehlikeli"),
-    ("x-frame-options", "X-Frame-Options", "medium", "clickjacking koruması yok"),
-    ("x-content-type-options", "X-Content-Type-Options", "medium", "MIME-sniffing koruması yok"),
-    ("referrer-policy", "Referrer-Policy", "low", "referrer sızdırabilir"),
-    ("permissions-policy", "Permissions-Policy", "low", "kamera/mikrofon/clipboard izinleri açık"),
-    ("x-xss-protection", "X-XSS-Protection", "low", "eski XSS filtresi (önerilmez ama var)"),
+    ("strict-transport-security", "HSTS", "critical", "HTTPS zorlamasi yok — MITM/protocol-downgrade riski"),
+    ("content-security-policy", "CSP", "high", "XSS'i sinirlar; yoksa XSS daha tehlikeli"),
+    ("x-frame-options", "X-Frame-Options", "medium", "clickjacking korumasi yok"),
+    ("x-content-type-options", "X-Content-Type-Options", "medium", "MIME-sniffing korumasi yok"),
+    ("referrer-policy", "Referrer-Policy", "low", "referrer sizdirabilir"),
+    ("permissions-policy", "Permissions-Policy", "low", "kamera/mikrofon/clipboard izinleri acik"),
+    ("x-xss-protection", "X-XSS-Protection", "low", "eski XSS filtresi (onerilmez ama var)"),
 ]
 
 
@@ -560,12 +570,12 @@ def http_headers_audit(p: dict) -> list:
     # bonus: server / x-powered-by disclosure
     leak = []
     if hdrs.get("server"):
-        leak.append({"header": "server", "value": hdrs["server"], "note": "webserver sürümü sızdırıyor"})
+        leak.append({"header": "server", "value": hdrs["server"], "note": "webserver surumu sizdiriyor"})
     if hdrs.get("x-powered-by"):
-        leak.append({"header": "x-powered-by", "value": hdrs["x-powered-by"], "note": "PHP sürümü sızdırıyor"})
+        leak.append({"header": "x-powered-by", "value": hdrs["x-powered-by"], "note": "PHP surumu sizdiriyor"})
     out.append({"header": "info-disclosure", "label": "Header leak", "severity": "info",
                 "present": bool(leak), "value": "; ".join(f"{l['header']}={l['value']}" for l in leak),
-                "note": ("sürüm sızdırma tespit edildi" if leak else "sürüm sızdırma yok")})
+                "note": ("surum sizdirma tespit edildi" if leak else "surum sizdirma yok")})
     return out
 
 
@@ -664,24 +674,24 @@ def score_risk(scan: dict, cves: list) -> dict:
 
     raw = sum(c.get("weight", 0.0) for c in cves)
     base = 100 * (1 - math.exp(-raw / 2.5))
-    factors.append({"label": "Eşleşen kritik CVE (exploitability)",
+    factors.append({"label": "Eslesen kritik CVE (exploitability)",
                     "delta": round(base, 1),
                     "note": f"{len(cves)} CVE, raw={round(raw, 2)}"})
 
     n_poc = sum(1 for c in cves if c.get("exploit"))
     n_pre = sum(1 for c in cves if (c.get("exploit") or {}).get("preauth"))
     if n_pre:
-        factors.append({"label": "Pre-auth yüzeyi", "delta": 0,
+        factors.append({"label": "Pre-auth yuzeyi", "delta": 0,
                         "note": f"{n_pre} pre-auth CVE"})
     if n_poc:
-        factors.append({"label": "Çalışır PoC", "delta": 0,
+        factors.append({"label": "Calisir PoC", "delta": 0,
                         "note": f"{n_poc} CVE'de exploit paneli"})
 
     mult = 1.0
     waf = scan.get("waf") or {}
     if waf.get("present"):
         mult *= 0.80
-        factors.append({"label": "WAF (azaltıcı)", "delta": round((0.20) * base, 1),
+        factors.append({"label": "WAF (azaltici)", "delta": round((0.20) * base, 1),
                         "note": ", ".join(waf.get("names") or []) or "sinyal"})
     if waf.get("challenge_blocked"):
         mult *= 0.90
@@ -690,13 +700,13 @@ def score_risk(scan: dict, cves: list) -> dict:
     ports = scan.get("ports") or []
     exposure = min(10, len(ports))
     if exposure:
-        factors.append({"label": "Açık port yüzeyi", "delta": exposure,
-                        "note": f"{len(ports)} açık port"})
+        factors.append({"label": "Acik port yuzeyi", "delta": exposure,
+                        "note": f"{len(ports)} acik port"})
 
     penalty = base * (1 - mult)
     final = _clamp(base - penalty + exposure, 0, 100)
     if penalty:
-        factors.append({"label": "Toplam azaltım", "delta": -round(penalty, 1),
+        factors.append({"label": "Toplam azaltim", "delta": -round(penalty, 1),
                         "note": "WAF/challenge"})
 
     grade, letter = grade_for(final)
@@ -770,7 +780,7 @@ def build_profile(url: str, name: str = None, save: bool = True,
     (history is kept — professional). Otherwise a new profile is created.
     Every scan is logged to the SQLite logs table + db/logs.log.
     """
-    log("INFO", "scan", f"tarama başladı: {url}", {"url": url})
+    log("INFO", "scan", f"tarama basladi: {url}", {"url": url})
     scan = scan_url(url, do_paths=do_paths)
     host = scan.get("host") or "target"
     port = scan.get("port") or 80
@@ -808,7 +818,7 @@ def get_profile(pid: str) -> dict | None:
 def rename_profile(pid: str, name: str) -> bool:
     ok = store.rename_profile(pid, name)
     if ok:
-        log("INFO", "profile", f"profil yeniden adlandırıldı: {pid} -> {name}")
+        log("INFO", "profile", f"profil yeniden adlandirildi: {pid} -> {name}")
     return ok
 
 
@@ -879,10 +889,10 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
     poc_runs table — with profile_id when run against a saved profile, else as
     an ad-hoc run (profile_id NULL).
     """
-    log("INFO", "poc", f"PoC {cve_id} başladı", {"cve": cve_id, "params": params or {}})
+    log("INFO", "poc", f"PoC {cve_id} basladi", {"cve": cve_id, "params": params or {}})
     if poc is None:
         res = {"ok": False, "success": False, "cve": cve_id,
-               "error": f"native PoC engine yüklenemedi: {_POC_IMPORT_ERROR}"}
+               "error": f"native PoC engine yuklenemedi: {_POC_IMPORT_ERROR}"}
     else:
         try:
             res = poc.run_exploit(cve_id, params or {})
@@ -890,11 +900,11 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
             res = {"ok": False, "success": False, "cve": cve_id, "error": str(e)}
     success = bool(res.get("success"))
     if success:
-        msg = f"PoC {cve_id} -> BAŞARILI (kanıt alındı)"
+        msg = f"PoC {cve_id} -> BASARILI (kanit alindi)"
     elif res.get("error"):
         msg = f"PoC {cve_id} -> hata: {res.get('error')}"
     else:
-        msg = f"PoC {cve_id} -> başarısız / hedef tetiklenmedi"
+        msg = f"PoC {cve_id} -> basarisiz / hedef tetiklenmedi"
     log("SUCCESS" if success else "ERROR", "poc", msg,
         {"cve": cve_id, "success": success, "evidence": (res.get("evidence") or "")[:300]})
     store.record_poc_run(profile_id, cve_id, params or {}, res)
@@ -902,18 +912,65 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
 
 
 def build_command(cve_id: str, params: dict) -> str:
-    poc = poc_list().get(cve_id)
-    if not poc:
-        raise ValueError(f"{cve_id} icin exploit paneli yok")
-    cmd = poc["command_template"]
-    for inp in poc["inputs"]:
+    """Legacy komut-sablonu ureticisi (yalnizca db/exploits.json'daki eski paneller icin).
+
+    v2 native motor (poc/ paketi) komut satiri URETMEZ — exploit'i scanner'in
+    kendisi socket/HTTP seviyesinde dogrudan calistirir (`run_exploit`). Bu fonksiyon
+    yalnizca `command_template` tasiyan legacy CVE panelleri icin geriye donuk
+    uyumluluk amaciyla korunmustur ve sablonu `db/exploits.json` uzerinden cozer.
+
+    Duzeltme (2026-11-05): eski surum `poc_list()` ciktisinda bulunmayan
+    `command_template` alanina eristigi icin her cagrida KeyError ile patliyordu;
+    artik dogru kaynaga (exploit paneli) bakiyor ve PoC'suz CVE icin net hata veriyor.
+
+    Args:
+        cve_id: Komut sablonu cozulecek CVE kimligi (orn. "CVE-2024-56201").
+        params: Sablondaki `{anahtar}` yer tutucularina doldurulacak kullanici
+                parametreleri; eksik anahtarlar input'un `default` degeriyle dolar.
+
+    Returns:
+        Yer tutuculari doldurulmus, `run_command()`-uyumlu tek satirlik komut.
+
+    Raises:
+        ValueError: CVE icin exploit paneli/sablon tanimli degilse.
+    """
+    panel = load_exploits().get(cve_id)
+    if not panel or not panel.get("command_template"):
+        raise ValueError(f"{cve_id} icin command_template iceren bir exploit paneli yok "
+                         f"(native PoC varsa dogrudan run_exploit kullanin)")
+    cmd = panel["command_template"]
+    # Eksik parametreleri panelin varsayilanlariyla doldur — UI formunu bos birakan
+    # alanlarin sablonda `{key}` olarak kalmasini engeller.
+    filled = dict(params or {})
+    for inp in panel.get("inputs") or []:
         k = inp.get("key")
-        val = (params or {}).get(k, inp.get("default", ""))
+        if k and (k not in filled or filled[k] in (None, "")):
+            filled[k] = inp.get("default", "")
+    for k, val in filled.items():
         cmd = cmd.replace("{" + k + "}", str(val))
     return cmd
 
 
 def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
+    """Sinirli (allow-list'li) yerel komut yurutucu — legacy `/run` ucu.
+
+    Guvenlik modeli: ilk gercek token (ENV=val atamalari atlanir) ALLOWED_BIN
+    beyaz listesinde olmalidir; calisma suresi `timeout` ile sinirlidir; cikti
+    20 KB ile sinirlandirilir. Bu genel bir shell DEGILDIR — salt operatorun
+    yetkili oldugu PoC/kesif araclarina kapali bir koprudur.
+
+    Not: v2 native motor bu yolu kullanmaz (`run_exploit` → poc/ paketi); burasi
+    yalnizca `command_template` tabanli legacy PoC'lar ve MCP `build_poc_command`
+    akisi icin tutulur.
+
+    Args:
+        cmd: Yurutulecek komut satiri (beyaz liste kontrolu burada yapilir).
+        timeout: Saniye cinsinden ust sinir (varsayilan MAX_RUN=180).
+
+    Returns:
+        Basarida {"ok": True, "exit", "stdout", "stderr"}; hatada {"ok": False,
+        "error": aciklama}. Asla istisna firlatmaz — HTTP katmani icin guvenli.
+    """
     cmd = (cmd or "").strip()
     if not cmd:
         return {"ok": False, "error": "empty command"}
@@ -921,6 +978,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
         toks = shlex.split(cmd)
     except ValueError as e:
         return {"ok": False, "error": f"parse: {e}"}
+    # ENV=value bicimindeki onek atamalarini atlayarak ilk gercek binary'i bul
     first = None
     for t in toks:
         if re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", t):  # leading ENV=val
@@ -928,7 +986,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
         first = t
         break
     if first is None:
-        return {"ok": False, "error": "binary bulunamadı"}
+        return {"ok": False, "error": "binary bulunamadi"}
     base = os.path.basename(first)
     if base not in ALLOWED_BIN:
         return {"ok": False,
@@ -965,20 +1023,20 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
     L.append(f"# Risk Raporu — {prof.get('name')}")
     L.append("")
     L.append(f"- **Hedef:** `{prof.get('url')}`")
-    L.append(f"- **Oluşturuldu:** {prof.get('created_at')}")
+    L.append(f"- **Olusturuldu:** {prof.get('created_at')}")
     L.append(f"- **Risk:** **{risk.get('score')}/100** — {risk.get('grade')} ({risk.get('letter')})")
-    L.append(f"- **CVE:** {risk.get('n_cve')} eşleşme · {risk.get('n_poc')} PoC · {risk.get('n_preauth')} pre-auth")
+    L.append(f"- **CVE:** {risk.get('n_cve')} eslesme · {risk.get('n_poc')} PoC · {risk.get('n_preauth')} pre-auth")
     L.append("")
     L.append("## Fingerprint")
     L.append("")
-    L.append("| Alan | Değer |")
+    L.append("| Alan | Deger |")
     L.append("|---|---|")
     for k in ("status", "ttfb_ms", "php_version", "webserver", "webserver_version",
               "os_hint", "sapi", "server_header", "x_powered_by"):
         v = fp.get(k)
         L.append(f"| {k} | {v if v not in (None, '', []) else '—'} |")
     L.append(f"| WAF | {', '.join(fp.get('waf') or []) or 'yok'} |")
-    L.append(f"| Açık portlar | {', '.join(str(p) for p in fp.get('open_ports') or []) or '—'} |")
+    L.append(f"| Acik portlar | {', '.join(str(p) for p in fp.get('open_ports') or []) or '—'} |")
     L.append("")
 
     if scan.get("waf", {}).get("present"):
@@ -988,9 +1046,9 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
         L.append("")
 
     if scan.get("ports"):
-        L.append("## Açık Portlar")
+        L.append("## Acik Portlar")
         L.append("")
-        L.append("| Port | Servis | Sürüm |")
+        L.append("| Port | Servis | Surum |")
         L.append("|---|---|---|")
         for p in scan["ports"]:
             L.append(f"| {p['port']} | {p['service']} | {p.get('version') or '—'} |")
@@ -1003,11 +1061,11 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
         L.append(f"- Cipher: {t.get('cipher', {}).get('name')} ({t.get('cipher', {}).get('tls')}, {t.get('cipher', {}).get('bits')}bit)")
         L.append(f"- Issuer: {t.get('cert', {}).get('issuer')}")
         L.append(f"- CN: {t.get('cert', {}).get('cn')}  SAN: {', '.join(t.get('cert', {}).get('san') or [])}")
-        L.append(f"- Expiry: {t.get('cert', {}).get('not_after')} ({t.get('cert', {}).get('days_to_expire')} gün)")
+        L.append(f"- Expiry: {t.get('cert', {}).get('not_after')} ({t.get('cert', {}).get('days_to_expire')} gun)")
         L.append("")
 
     if scan.get("headers_audit"):
-        L.append("## HTTP Güvenlik Header'ları")
+        L.append("## HTTP Guvenlik Header'lari")
         L.append("")
         L.append("| Header | Durum | Not |")
         L.append("|---|---|---|")
@@ -1017,7 +1075,7 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
 
     cves = scan.get("cves") or []
     if cves:
-        L.append(f"## Eşleşen Kritik CVE'ler ({len(cves)})")
+        L.append(f"## Eslesen Kritik CVE'ler ({len(cves)})")
         L.append("")
         L.append("| CVE | SW | CVSS | Tip | Pre-auth | PoC | EDB |")
         L.append("|---|---|---|---|---|---|---|")
@@ -1029,13 +1087,13 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
                 f"| {'; '.join(c.get('edb') or e.get('edb') or []) or '—'} |")
         L.append("")
     else:
-        L.append("## Eşleşen Kritik CVE'ler")
+        L.append("## Eslesen Kritik CVE'ler")
         L.append("")
-        L.append("Tespit edilen sürümler için eşleşen kritik CVE bulunamadı.")
+        L.append("Tespit edilen surumler icin eslesen kritik CVE bulunamadi.")
         L.append("")
 
     if risk.get("factors"):
-        L.append("## Risk Faktörleri")
+        L.append("## Risk Faktorleri")
         L.append("")
         for f in risk["factors"]:
             L.append(f"- {f['label']}: **{f['delta']}** — {f.get('note','')}")
@@ -1043,7 +1101,7 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
 
     pocres = prof.get("poc_results") or {}
     if pocres:
-        L.append("## PoC Sonuçları")
+        L.append("## PoC Sonuclari")
         L.append("")
         for cid, r in pocres.items():
             L.append(f"### {cid}")
@@ -1061,7 +1119,7 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
 
     L.append("")
     L.append("---")
-    L.append("_Yetkili güvenlik araştırması · P2S CVE Scanner · " + now_iso() + "_")
+    L.append("_Yetkili guvenlik arastirmasi · P2S CVE Scanner · " + now_iso() + "_")
     return "\n".join(L), f"{slug}_risk_{stamp}.md"
 
 

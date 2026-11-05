@@ -17,7 +17,7 @@ export default function TopBar({ health, lastLog }) {
       </div>
       <div className="status">
         <span className={'dot' + (online ? ' on' : '')} />
-        <span>{online ? `online · v${health.version}` : 'bağlanıyor… / sunucu kapalı (server.py)'}</span>
+        <span>{online ? `online · v${health.version}` : 'baglaniyor… / sunucu kapali (server.py)'}</span>
       </div>
       <div className="spacer" />
       <div className="live-tail">

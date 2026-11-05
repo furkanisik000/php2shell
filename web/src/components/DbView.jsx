@@ -23,21 +23,21 @@ export default function DbView({ db, pocs }) {
   return (
     <>
       <div className="panel">
-        <h3>CVE Veritabanı <span className="tag">{out.length} CVE</span></h3>
+        <h3>CVE Veritabani <span className="tag">{out.length} CVE</span></h3>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
           <select style={{ maxWidth: 220 }} value={sw} onChange={e => { setSw(e.target.value); setVer('') }}>
-            <option value="">Tüm yazılımlar</option>
+            <option value="">Tum yazilimlar</option>
             {sws.map(s => <option key={s}>{s}</option>)}
           </select>
           <select style={{ maxWidth: 180 }} value={ver} onChange={e => setVer(e.target.value)}>
-            <option value="">Tüm sürümler</option>
+            <option value="">Tum surumler</option>
             {versions.map(v => <option key={v}>{v}</option>)}
           </select>
-          <input style={{ flex: 1, minWidth: 160, maxWidth: 340 }} placeholder="CVE / açıklama ara…"
+          <input style={{ flex: 1, minWidth: 160, maxWidth: 340 }} placeholder="CVE / aciklama ara…"
             value={q} onChange={e => setQ(e.target.value.toLowerCase())} />
         </div>
       </div>
-      {out.length === 0 ? <div className="sec-empty">Sonuç yok</div> : (
+      {out.length === 0 ? <div className="sec-empty">Sonuc yok</div> : (
         <>
           {out.slice(0, 300).map(c => <CveCard key={c.id} cve={c} pocs={pocs} hitMajor={ver || null} />)}
           {out.length > 300 && <div className="empty">+ {out.length - 300} daha (filtre daralt)</div>}

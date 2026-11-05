@@ -1,38 +1,38 @@
-# P2S — Diğer PoC'ler için Docker Hedefleri (Kurulum Dokümanı)
+# P2S — Diger PoC'ler icin Docker Hedefleri (Kurulum Dokumani)
 
-> **Amaç:** php2shell (18120, kullanıcıda) DIŞINDAKİ native PoC'ler için
-> **gerçek kanıt** alınacak Docker hedeflerini tek dokümanda toplama.
-> Hedef ortam: **Windows kutusu 192.168.8.123** (Docker Desktop, WSL2, **native amd64**).
-> Port aralığı: **18201–18220** (18101–18114 PHP + 18120 OOM ile çakışmaz).
-> Sunucudaki agent bu dokümanı takip edip her container'ı ayağa kaldırıp LAN'a açacak.
+> **Amac:** php2shell (18120, kullanicida) DISINDAKI native PoC'ler icin
+> **gercek kanit** alinacak Docker hedeflerini tek dokumanda toplama.
+> Hedef ortam: **Windows kutusu LAB_IP** (Docker Desktop, WSL2, **native amd64**).
+> Port araligi: **18201–18220** (18101–18114 PHP + 18120 OOM ile cakismaz).
+> Sunucudaki agent bu dokumani takip edip her container'i ayaga kaldirip LAN'a acacak.
 
-## Neden Windows kutusu (Colima değil)?
+## Neden Windows kutusu (Colima degil)?
 
-Colima (macOS/aarch64 VM) **AJP ve h2c gibi binary HTTP/2 transportlarında 0-byte/timeout**
-veriyor (Ghostcat'te doğrulandı). Windows Docker Desktop = **native amd64 + sağlam port mapping**
-→ aynı 18101–18114 PHP hedeflerinin çalıştığı gibi güvenilir.
+Colima (macOS/aarch64 VM) **AJP ve h2c gibi binary HTTP/2 transportlarinda 0-byte/timeout**
+veriyor (Ghostcat'te dogrulandi). Windows Docker Desktop = **native amd64 + saglam port mapping**
+→ ayni 18101–18114 PHP hedeflerinin calistigi gibi guvenilir.
 
-## Hedef Özeti (PoC → Image → Port → Kanıt)
+## Hedef Ozeti (PoC → Image → Port → Kanit)
 
-| # | Hedef | CVE (poc modülü) | Docker image | Port(s) | Gerçek kanıt |
+| # | Hedef | CVE (poc modulu) | Docker image | Port(s) | Gercek kanit |
 |---|-------|------------------|--------------|---------|--------------|
-| 1 | **Ghostcat / Tomcat AJP** | CVE-2020-1938 (java_web) | `tomcat:9.0.30` | HTTP **18201**, AJP **18202** | `/WEB-INF/web.xml` + `/etc/passwd` byte'ları |
+| 1 | **Ghostcat / Tomcat AJP** | CVE-2020-1938 (java_web) | `tomcat:9.0.30` | HTTP **18201**, AJP **18202** | `/WEB-INF/web.xml` + `/etc/passwd` byte'lari |
 | 2 | **nginx h2c (Rapid Reset)** | CVE-2024-7347 (h2c) | `nginx:1.22` | **18203** | RST_STREAM / GOAWAY |
 | 3 | **Apache mod_http2** | CVE-2021-44790, CVE-2017-5638, CVE-2024-38477 (h2c) | `httpd:2.4` + mod_http2 | **18205** | RST / GOAWAY / crash |
 | 4 | **MySQL 5.7** | CVE-2019-14853, CVE-2015-4824 (mysql_proto) | `mysql:5.7` | **18210** | OK paket (auth bypass) / crash-RST |
 | 5 | **MySQL 8.0** | CVE-2023-24714, CVE-2019-14367 (mysql_proto) | `mysql:8.0` | **18211** | OK paket (auth bypass) / crash-RST |
 | 6 | **PHP CGI/FPM (RCE)** | CVE-2017-13300, CVE-2014-8142, CVE-2019-8648 (php_http) | `nginx:1.20` + `php:7.4-fpm` | **18215** | `uid=` (id) |
-| 7 | *(lokal — Docker gerekmez)* | CVE-2016-1238, CVE-2020-10543, CVE-2021-29923, CVE-2022-36319, CVE-2013-1667 (perl_local) | `perl:5.30` *(ops.)* | — | scanner'ın native mekanizma simülasyonu |
+| 7 | *(lokal — Docker gerekmez)* | CVE-2016-1238, CVE-2020-10543, CVE-2021-29923, CVE-2022-36319, CVE-2013-1667 (perl_local) | `perl:5.30` *(ops.)* | — | scanner'in native mekanizma simulasyonu |
 
-> **Öncelik:** #1 Ghostcat + #6 PHP CGI (gerçek dosya/`uid=` kanıtı, en güvenilir) →
-> sonra #4/#5 MySQL, #2/#3 h2c (DoS/UAF = anormal yanıt kanıtı). #7 perl lokal.
+> **Oncelik:** #1 Ghostcat + #6 PHP CGI (gercek dosya/`uid=` kaniti, en guvenilir) →
+> sonra #4/#5 MySQL, #2/#3 h2c (DoS/UAF = anormal yanit kaniti). #7 perl lokal.
 
 ---
 
-## 1) Ghostcat — Tomcat 9.0.30 (CVE-2020-1938)  ⭐ ÖNCELİK
+## 1) Ghostcat — Tomcat 9.0.30 (CVE-2020-1938)  ⭐ ONCELIK
 
-Tomcat 9.0.30 = patch **öncesi** son sürüm (9.0.31 secretRequired default yaptı).
-AJP connector'ı 8009'da açık + secret yok → `javax.servlet.include.*` ile keyfi dosya okunur.
+Tomcat 9.0.30 = patch **oncesi** son surum (9.0.31 secretRequired default yapti).
+AJP connector'i 8009'da acik + secret yok → `javax.servlet.include.*` ile keyfi dosya okunur.
 
 ```powershell
 docker pull --platform linux/amd64 tomcat:9.0.30
@@ -42,27 +42,27 @@ docker run -d --name p2s-ghostcat --restart unless-stopped `
   tomcat:9.0.30
 ```
 
-**AJP connector ekle** (secretRequired=false / pre-patch davranış):
+**AJP connector ekle** (secretRequired=false / pre-patch davranis):
 ```powershell
 $ajp = '<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" secretRequired="false"/>'
 docker exec p2s-ghostcat sh -c "grep -q 'port=\"8009\"' /usr/local/tomcat/conf/server.xml || sed -i '/<\/Server>/i\\  $ajp' /usr/local/tomcat/conf/server.xml"
 docker restart p2s-ghostcat
 ```
 
-**Doğrula:**
+**Dogrula:**
 ```powershell
 curl -s --max-time 5 http://127.0.0.1:18201/ | Select-String "Tomcat"      # HTTP 200
-# AJP portu açık mı:
+# AJP portu acik mi:
 Test-NetConnection 127.0.0.1 -Port 18202 -InformationLevel Quiet            # True
 ```
-**Kanıt (scanner):** `CVE-2020-1938` → host `192.168.8.123:18202`, file `/WEB-INF/web.xml`
-ve `../../../../../etc/passwd` → gerçek byte'lar.
+**Kanit (scanner):** `CVE-2020-1938` → host `LAB_IP:18202`, file `/WEB-INF/web.xml`
+ve `../../../../../etc/passwd` → gercek byte'lar.
 
 ---
 
 ## 2) nginx h2c — Rapid Reset (CVE-2024-7347)
 
-nginx `http2` (cleartext h2c) açık → HEADERS + RST_STREAM flood → RST/GOAWAY.
+nginx `http2` (cleartext h2c) acik → HEADERS + RST_STREAM flood → RST/GOAWAY.
 
 ```powershell
 docker pull --platform linux/amd64 nginx:1.22
@@ -83,38 +83,38 @@ Set-Content -Encoding UTF8 "$env:TEMP\p2s_h2c.conf" -Value $conf
 docker cp "$env:TEMP\p2s_h2c.conf" p2s-h2c:/etc/nginx/conf.d/default.conf
 docker exec p2s-h2c nginx -s reload
 ```
-**Doğrula:**
+**Dogrula:**
 ```powershell
 curl -s --http2-prior-knowledge -o /dev/null -w "h2c -> HTTP %{http_code} (http_version=%{http_version})\n" http://127.0.0.1:18203/
 ```
-**Kanıt (scanner):** `CVE-2024-7347` → host `192.168.8.123:18203`, streams 500 → RST/GOAWAY.
+**Kanit (scanner):** `CVE-2024-7347` → host `LAB_IP:18203`, streams 500 → RST/GOAWAY.
 
 ---
 
 ## 3) Apache mod_http2 (CVE-2021-44790 / 2017-5638 / 2024-38477)
 
-`httpd:2.4` + **mod_http2** (custom modül) + mod_proxy. mod_http2 default image'da yok →
-kurulum gerekli. (En çok uğraş isteyen hedef; #1/#2/#4/#5 kanıtı gelene kadar bekletilebilir.)
+`httpd:2.4` + **mod_http2** (custom modul) + mod_proxy. mod_http2 default image'da yok →
+kurulum gerekli. (En cok ugras isteyen hedef; #1/#2/#4/#5 kaniti gelene kadar bekletilebilir.)
 
 ```powershell
 docker pull --platform linux/amd64 httpd:2.4
 docker rm -f p2s-apacheh2 2>$null | Out-Null
 docker run -d --name p2s-apacheh2 --restart unless-stopped -p 18205:80 httpd:2.4
-# mod_http2 + mod_proxy kur (Debian tabanlı image):
+# mod_http2 + mod_proxy kur (Debian tabanli image):
 docker exec p2s-apacheh2 sh -c "apt-get update && apt-get install -y libapache2-mod-http2 || a2enmod http2"
 docker exec p2s-apacheh2 sh -c "a2enmod http2 proxy"
 # http2 (h2c) dinle:
 docker exec p2s-apacheh2 sh -c "echo 'Protocols h2 http/1.1' >> /etc/apache2/conf-enabled/other-vhosts-incl.conf 2>/dev/null || echo 'Protocols h2 http/1.1' > /etc/apache2/conf-available/h2c.conf && a2enconf h2c"
 docker restart p2s-apacheh2
 ```
-**Doğrula:** `curl -s --http2-prior-knowledge -o /dev/null -w "%{http_version}\n" http://127.0.0.1:18205/`
-**Kanıt (scanner):** `CVE-2021-44790` / `CVE-2017-5638` / `CVE-2024-38477` → host `192.168.8.123:18205`.
+**Dogrula:** `curl -s --http2-prior-knowledge -o /dev/null -w "%{http_version}\n" http://127.0.0.1:18205/`
+**Kanit (scanner):** `CVE-2021-44790` / `CVE-2017-5638` / `CVE-2024-38477` → host `LAB_IP:18205`.
 
 ---
 
 ## 4) + 5) MySQL 5.7 & 8.0 (mysql_proto)
 
-Native MySQL protokol (scanner socket açar, mysql client yok).
+Native MySQL protokol (scanner socket acar, mysql client yok).
 - **5.7** → CVE-2019-14853 (stack overflow), CVE-2015-4824 (auth bypass)
 - **8.0** → CVE-2023-24714, CVE-2019-14367 (auth bypass)
 
@@ -132,30 +132,30 @@ docker run -d --name p2s-mysql80 --restart unless-stopped `
   -e MYSQL_ROOT_PASSWORD=p2s_test_123 -e MYSQL_DATABASE=p2s `
   -p 18211:3306 mysql:8.0
 ```
-**Doğrula (TCP handshake — scanner'ın gördüğü):**
+**Dogrula (TCP handshake — scanner'in gordugu):**
 ```powershell
 Test-NetConnection 127.0.0.1 -Port 18210 -InformationLevel Quiet   # 5.7
 Test-NetConnection 127.0.0.1 -Port 18211 -InformationLevel Quiet   # 8.0
 ```
-**Kanıt (scanner):**
-- `CVE-2015-4824` → host `192.168.8.123:18210`, user `` (boş) → OK paket.
-- `CVE-2023-24714` → host `192.168.8.123:18211`, user `` (boş) → OK paket.
-- `CVE-2019-14853` → host `192.168.8.123:18210`, size_kb 512 → crash/RST sinyali.
+**Kanit (scanner):**
+- `CVE-2015-4824` → host `LAB_IP:18210`, user `` (bos) → OK paket.
+- `CVE-2023-24714` → host `LAB_IP:18211`, user `` (bos) → OK paket.
+- `CVE-2019-14853` → host `LAB_IP:18210`, size_kb 512 → crash/RST sinyali.
 
 ---
 
-## 6) PHP CGI / FPM RCE (php_http)  ⭐ ÖNCELİK
+## 6) PHP CGI / FPM RCE (php_http)  ⭐ ONCELIK
 
 nginx + php-fpm, **vulnerable `fastcgi_split_path_info`** config →
 CVE-2017-13300 (`/index.php/{cmd}`), CVE-2014-8142 (`? -c ;{cmd}`),
-CVE-2019-8648 (`/cgi-bin/php? -c ;{cmd}`). Kanıt = gerçek `uid=`.
+CVE-2019-8648 (`/cgi-bin/php? -c ;{cmd}`). Kanit = gercek `uid=`.
 
 ```powershell
 docker pull --platform linux/amd64 nginx:1.20
 docker pull --platform linux/amd64 php:7.4-fpm
 docker network create p2s-phpnet 2>$null
 
-# php-fpm (aynı network'te "php" hostnames)
+# php-fpm (ayni network'te "php" hostnames)
 docker rm -f p2s-phpfpm 2>$null | Out-Null
 docker run -d --name p2s-phpfpm --restart unless-stopped `
   --network p2s-phpnet --network-alias php php:7.4-fpm
@@ -165,7 +165,7 @@ docker rm -f p2s-phpcgi 2>$null | Out-Null
 docker run -d --name p2s-phpcgi --restart unless-stopped `
   --network p2s-phpnet -p 18215:80 nginx:1.20
 ```
-**Vulnerable nginx config** (fastcgi_split_path_info + SCRIPT_FILENAME manipülasyonu):
+**Vulnerable nginx config** (fastcgi_split_path_info + SCRIPT_FILENAME manipulasyonu):
 ```powershell
 $conf = @'
 server {
@@ -197,42 +197,42 @@ docker cp "$env:TEMP\p2s_index.php" p2s-phpcgi:/usr/share/nginx/html/index.php
 docker exec p2s-phpcgi nginx -t
 docker exec p2s-phpcgi nginx -s reload
 ```
-**Doğrula:**
+**Dogrula:**
 ```powershell
 curl -s --max-time 5 http://127.0.0.1:18215/index.php          # "P2S-PHP-OK"
 ```
-**Kanıt (scanner):**
-- `CVE-2017-13300` → host `192.168.8.123:18215`, base `/index.php`, cmd `id` → `uid=`.
-- `CVE-2014-8142` → host `192.168.8.123:18215`, base `/index.php`, cmd `id` → `uid=`.
-- `CVE-2019-8648` → host `192.168.8.123:18215`, base `/cgi-bin/php`, cmd `id` → `uid=`.
+**Kanit (scanner):**
+- `CVE-2017-13300` → host `LAB_IP:18215`, base `/index.php`, cmd `id` → `uid=`.
+- `CVE-2014-8142` → host `LAB_IP:18215`, base `/index.php`, cmd `id` → `uid=`.
+- `CVE-2019-8648` → host `LAB_IP:18215`, base `/cgi-bin/php`, cmd `id` → `uid=`.
 
 ---
 
 ## 7) Perl (perl_local) — Docker GEREKMEZ
 
 CVE-2016-1238 / CVE-2020-10543 / CVE-2021-29923 / CVE-2022-36319 / CVE-2013-1667 =
-**lokal perl-runtime** mekanizmaları (uzak socket vektörü yok). Scanner bunları native olarak
-(Python, dış perl binary'si yok) simüle edip raporluyor. İsteğe bağlı gerçek perl:
+**lokal perl-runtime** mekanizmalari (uzak socket vektoru yok). Scanner bunlari native olarak
+(Python, dis perl binary'si yok) simule edip raporluyor. Istege bagli gercek perl:
 ```powershell
 docker run --rm --platform linux/amd64 perl:5.30 perl -v
 ```
 
 ---
 
-## Tek Bat Dosyası — Hepsini Kur (kopyala-yap)
+## Tek Bat Dosyasi — Hepsini Kur (kopyala-yap)
 
-Aşağı `p2s_other_setup.bat` dosyası olarak kaydedip Windows'ta çalıştır:
-`p2s_other_setup.bat` (ayrı dosya olarak bu projede hazır).
+Asagi `p2s_other_setup.bat` dosyasi olarak kaydedip Windows'ta calistir:
+`p2s_other_setup.bat` (ayri dosya olarak bu projede hazir).
 
-## Doğrulama Checklist (kurulumdan sonra)
+## Dogrulama Checklist (kurulumdan sonra)
 
 - [ ] `docker ps --filter "name=p2s"` → 7 container (ghostcat, h2c, apacheh2, mysql57, mysql80, phpfpm, phpcgi)
-- [ ] `Test-NetConnection 192.168.8.123 -Port 18202` (AJP) → True
-- [ ] `curl http://192.168.8.123:18201/` → Tomcat 200
-- [ ] `curl --http2-prior-knowledge http://192.168.8.123:18203/` → http_version=2
-- [ ] `Test-NetConnection 192.168.8.123 -Port 18210/18211` (MySQL) → True
-- [ ] `curl http://192.168.8.123:18215/index.php` → "P2S-PHP-OK"
-- [ ] Windows Firewall 18201–18220 LAN'a açık:
+- [ ] `Test-NetConnection LAB_IP -Port 18202` (AJP) → True
+- [ ] `curl http://LAB_IP:18201/` → Tomcat 200
+- [ ] `curl --http2-prior-knowledge http://LAB_IP:18203/` → http_version=2
+- [ ] `Test-NetConnection LAB_IP -Port 18210/18211` (MySQL) → True
+- [ ] `curl http://LAB_IP:18215/index.php` → "P2S-PHP-OK"
+- [ ] Windows Firewall 18201–18220 LAN'a acik:
       `New-NetFirewallRule -DisplayName "p2s-other" -Direction Inbound -Port 18201-18220 -Protocol TCP -Action Allow`
 
 ## Temizlik
