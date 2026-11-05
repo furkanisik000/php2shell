@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHP2Shell Local Checker</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo" aria-hidden="true">&lt;/&gt;</span>
+      <div>
+        <h1>PHP2Shell <span>Local</span></h1>
+        <p class="sub">Aktif sekmeyi canlı kontrol eder · sürüm DB'sinden risk · API yok</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <label class="lbl" for="target">Hedef (varsayılan: aktif sekme)</label>
+      <div class="row">
+        <input id="target" type="text" placeholder="192.168.8.123:18101" autocomplete="off" spellcheck="false">
+        <button id="checkBtn" class="btn btn-primary" type="button">Kontrol</button>
+      </div>
+      <p class="hint">IP/port değişse bile sorun değil — her seferinde canlı sorar. Varsayılan <code>http://</code>.</p>
+    </section>
+
+    <section class="card" id="resultCard" hidden></section>
+
+    <section class="card" id="manualCard" hidden>
+      <label class="lbl" for="manualVer">Manuel PHP sürümü (gizliyse)</label>
+      <div class="row">
+        <input id="manualVer" type="text" placeholder="8.4.26" autocomplete="off" spellcheck="false">
+        <button id="manualBtn" class="btn" type="button">Değerlendir</button>
+      </div>
+    </section>
+
+    <section class="card" id="dbCard" hidden>
+      <div class="row-between"><h2>Sürüm risk DB'si (data/db.json)</h2></div>
+      <ul id="dbList" class="hist"></ul>
+    </section>
+
+    <section class="card" id="historyCard" hidden>
+      <div class="row-between"><h2>Son kontroller</h2><button id="clearHist" class="link" type="button">Temizle</button></div>
+      <ul id="history" class="hist"></ul>
+    </section>
+  </main>
+
+  <footer><span id="ruleNote" class="muted"></span></footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

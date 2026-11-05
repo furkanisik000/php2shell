@@ -1,0 +1,1705 @@
+{
+  "updated_at": "2026-10-23T15:37:38Z",
+  "profiles": [
+    {
+      "id": "p_ce40542344",
+      "name": "xx",
+      "url": "https://fra.org.in:443/",
+      "created_at": "2026-10-23T15:37:38Z",
+      "updated_at": "2026-10-23T15:37:38Z",
+      "scan": {
+        "url": "https://fra.org.in:443/",
+        "host": "fra.org.in",
+        "port": 443,
+        "path": "/",
+        "status": 200,
+        "error": "",
+        "server": "Apache",
+        "xpoweredby": "",
+        "date": "Fri, 23 Oct 2026 15:37:33 GMT",
+        "ttfb_ms": 1398.4,
+        "body_bytes": 7133,
+        "headers": {
+          "date": "Fri, 23 Oct 2026 15:37:33 GMT",
+          "server": "Apache",
+          "content-type": "text/html; charset=utf-8",
+          "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+          "cf-edge-cache": "no-cache",
+          "content-length": "7133",
+          "connection": "close"
+        },
+        "php_version": "",
+        "php_major": "",
+        "webserver": "apache",
+        "webserver_version": "",
+        "webserver_major": "",
+        "detections": [],
+        "os_hint": "",
+        "sapi_guess": "unknown",
+        "waf": {
+          "present": false,
+          "names": [],
+          "evidence": [],
+          "challenge_blocked": false,
+          "challenge_note": ""
+        },
+        "ports": [
+          {
+            "port": 80,
+            "service": "http",
+            "version": "Apache"
+          }
+        ],
+        "tls": {
+          "ok": true,
+          "protocol": "TLSv1.2",
+          "cipher": {
+            "name": "ECDHE-RSA-AES256-GCM-SHA384",
+            "tls": "TLSv1.2",
+            "bits": 256
+          },
+          "cert": {
+            "subject": "",
+            "issuer": "",
+            "cn": "",
+            "san": [],
+            "serial": "",
+            "not_before": "",
+            "not_after": "",
+            "days_to_expire": null
+          }
+        },
+        "paths": [
+          {
+            "path": "/",
+            "status": 200,
+            "length": 7116,
+            "interesting": true
+          },
+          {
+            "path": "/actuator",
+            "status": 200,
+            "length": 7127,
+            "interesting": true
+          },
+          {
+            "path": "/admin",
+            "status": 200,
+            "length": 7124,
+            "interesting": true
+          },
+          {
+            "path": "/admin/",
+            "status": 200,
+            "length": 7127,
+            "interesting": true
+          },
+          {
+            "path": "/api",
+            "status": 200,
+            "length": 7122,
+            "interesting": true
+          },
+          {
+            "path": "/cgi-bin/.cgi",
+            "status": 200,
+            "length": 7133,
+            "interesting": true
+          },
+          {
+            "path": "/cgi-bin/php",
+            "status": 200,
+            "length": 7132,
+            "interesting": true
+          },
+          {
+            "path": "/debug",
+            "status": 200,
+            "length": 7124,
+            "interesting": true
+          },
+          {
+            "path": "/index.php",
+            "status": 200,
+            "length": 7128,
+            "interesting": true
+          },
+          {
+            "path": "/info.php",
+            "status": 200,
+            "length": 7127,
+            "interesting": true
+          },
+          {
+            "path": "/izin.php",
+            "status": 200,
+            "length": 7127,
+            "interesting": true
+          },
+          {
+            "path": "/phpinfo.php",
+            "status": 200,
+            "length": 7130,
+            "interesting": true
+          },
+          {
+            "path": "/phpmyadmin",
+            "status": 200,
+            "length": 7129,
+            "interesting": true
+          },
+          {
+            "path": "/pma",
+            "status": 200,
+            "length": 7122,
+            "interesting": true
+          },
+          {
+            "path": "/server-info",
+            "status": 200,
+            "length": 7130,
+            "interesting": true
+          },
+          {
+            "path": "/server-status",
+            "status": 200,
+            "length": 7132,
+            "interesting": true
+          },
+          {
+            "path": "/test.php",
+            "status": 200,
+            "length": 7127,
+            "interesting": true
+          },
+          {
+            "path": "/wp-admin/",
+            "status": 200,
+            "length": 7130,
+            "interesting": true
+          },
+          {
+            "path": "/wp-login.php",
+            "status": 200,
+            "length": 7131,
+            "interesting": true
+          },
+          {
+            "path": "/.env",
+            "status": 403,
+            "length": 0,
+            "interesting": false
+          },
+          {
+            "path": "/.git/config",
+            "status": 403,
+            "length": 0,
+            "interesting": false
+          }
+        ],
+        "headers_audit": [
+          {
+            "header": "strict-transport-security",
+            "label": "HSTS",
+            "severity": "critical",
+            "present": false,
+            "value": "",
+            "note": "HTTPS zorlamas\u0131 yok \u2014 MITM/protocol-downgrade riski"
+          },
+          {
+            "header": "content-security-policy",
+            "label": "CSP",
+            "severity": "high",
+            "present": false,
+            "value": "",
+            "note": "XSS'i s\u0131n\u0131rlar; yoksa XSS daha tehlikeli"
+          },
+          {
+            "header": "x-frame-options",
+            "label": "X-Frame-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "clickjacking korumas\u0131 yok"
+          },
+          {
+            "header": "x-content-type-options",
+            "label": "X-Content-Type-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "MIME-sniffing korumas\u0131 yok"
+          },
+          {
+            "header": "referrer-policy",
+            "label": "Referrer-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "referrer s\u0131zd\u0131rabilir"
+          },
+          {
+            "header": "permissions-policy",
+            "label": "Permissions-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "kamera/mikrofon/clipboard izinleri a\u00e7\u0131k"
+          },
+          {
+            "header": "x-xss-protection",
+            "label": "X-XSS-Protection",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "eski XSS filtresi (\u00f6nerilmez ama var)"
+          },
+          {
+            "header": "info-disclosure",
+            "label": "Header leak",
+            "severity": "info",
+            "present": true,
+            "value": "server=Apache",
+            "note": "s\u00fcr\u00fcm s\u0131zd\u0131rma tespit edildi"
+          }
+        ],
+        "fingerprint": {
+          "url": "https://fra.org.in:443/",
+          "host": "fra.org.in",
+          "port": 443,
+          "status": 200,
+          "ttfb_ms": 1398.4,
+          "php_version": "",
+          "php_major": "",
+          "webserver": "apache",
+          "webserver_version": "",
+          "os_hint": "",
+          "sapi": "unknown",
+          "waf": [],
+          "open_ports": [
+            80
+          ],
+          "server_header": "Apache",
+          "x_powered_by": ""
+        },
+        "cves": [],
+        "risk": {
+          "score": 1.0,
+          "grade": "Minimal",
+          "letter": "A",
+          "n_cve": 0,
+          "n_poc": 0,
+          "n_preauth": 0,
+          "factors": [
+            {
+              "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+              "delta": 0.0,
+              "note": "0 CVE, raw=0"
+            },
+            {
+              "label": "A\u00e7\u0131k port y\u00fczeyi",
+              "delta": 1,
+              "note": "1 a\u00e7\u0131k port"
+            }
+          ],
+          "computed_at": "2026-10-23T15:37:38Z"
+        },
+        "scanned_at": "2026-10-23T15:37:38Z"
+      },
+      "risk": {
+        "score": 1.0,
+        "grade": "Minimal",
+        "letter": "A",
+        "n_cve": 0,
+        "n_poc": 0,
+        "n_preauth": 0,
+        "factors": [
+          {
+            "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+            "delta": 0.0,
+            "note": "0 CVE, raw=0"
+          },
+          {
+            "label": "A\u00e7\u0131k port y\u00fczeyi",
+            "delta": 1,
+            "note": "1 a\u00e7\u0131k port"
+          }
+        ],
+        "computed_at": "2026-10-23T15:37:38Z"
+      },
+      "poc_results": {}
+    },
+    {
+      "id": "p_31196c821d",
+      "name": "127.0.0.1:8123",
+      "url": "http://127.0.0.1:8123/",
+      "created_at": "2026-10-23T15:35:24Z",
+      "updated_at": "2026-10-23T15:35:24Z",
+      "scan": {
+        "url": "http://127.0.0.1:8123/",
+        "host": "127.0.0.1",
+        "port": 8123,
+        "path": "/",
+        "status": 200,
+        "error": "",
+        "server": "BaseHTTP/0.6 Python/3.12.6",
+        "xpoweredby": "",
+        "date": "Fri, 23 Oct 2026 15:35:22 GMT",
+        "ttfb_ms": 2.2,
+        "body_bytes": 39186,
+        "headers": {
+          "server": "BaseHTTP/0.6 Python/3.12.6",
+          "date": "Fri, 23 Oct 2026 15:35:22 GMT",
+          "content-type": "text/html; charset=utf-8",
+          "access-control-allow-origin": "*",
+          "content-length": "39186"
+        },
+        "php_version": "",
+        "php_major": "",
+        "webserver": "unknown",
+        "webserver_version": "",
+        "webserver_major": "",
+        "detections": [],
+        "os_hint": "",
+        "sapi_guess": "unknown",
+        "waf": {
+          "present": false,
+          "names": [],
+          "evidence": [],
+          "challenge_blocked": false,
+          "challenge_note": ""
+        },
+        "ports": [
+          {
+            "port": 53,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 3306,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 5432,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 6379,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 8080,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 18110,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          },
+          {
+            "port": 18120,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          }
+        ],
+        "paths": [
+          {
+            "path": "/",
+            "status": 200,
+            "length": 39186,
+            "interesting": true
+          },
+          {
+            "path": "/.env",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/.git/config",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/actuator",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/api",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/.cgi",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/debug",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/index.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/info.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/izin.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpinfo.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpmyadmin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/pma",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-info",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-status",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/test.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-login.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          }
+        ],
+        "headers_audit": [
+          {
+            "header": "strict-transport-security",
+            "label": "HSTS",
+            "severity": "critical",
+            "present": false,
+            "value": "",
+            "note": "HTTPS zorlamas\u0131 yok \u2014 MITM/protocol-downgrade riski"
+          },
+          {
+            "header": "content-security-policy",
+            "label": "CSP",
+            "severity": "high",
+            "present": false,
+            "value": "",
+            "note": "XSS'i s\u0131n\u0131rlar; yoksa XSS daha tehlikeli"
+          },
+          {
+            "header": "x-frame-options",
+            "label": "X-Frame-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "clickjacking korumas\u0131 yok"
+          },
+          {
+            "header": "x-content-type-options",
+            "label": "X-Content-Type-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "MIME-sniffing korumas\u0131 yok"
+          },
+          {
+            "header": "referrer-policy",
+            "label": "Referrer-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "referrer s\u0131zd\u0131rabilir"
+          },
+          {
+            "header": "permissions-policy",
+            "label": "Permissions-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "kamera/mikrofon/clipboard izinleri a\u00e7\u0131k"
+          },
+          {
+            "header": "x-xss-protection",
+            "label": "X-XSS-Protection",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "eski XSS filtresi (\u00f6nerilmez ama var)"
+          },
+          {
+            "header": "info-disclosure",
+            "label": "Header leak",
+            "severity": "info",
+            "present": true,
+            "value": "server=BaseHTTP/0.6 Python/3.12.6",
+            "note": "s\u00fcr\u00fcm s\u0131zd\u0131rma tespit edildi"
+          }
+        ],
+        "fingerprint": {
+          "url": "http://127.0.0.1:8123/",
+          "host": "127.0.0.1",
+          "port": 8123,
+          "status": 200,
+          "ttfb_ms": 2.2,
+          "php_version": "",
+          "php_major": "",
+          "webserver": "unknown",
+          "webserver_version": "",
+          "os_hint": "",
+          "sapi": "unknown",
+          "waf": [],
+          "open_ports": [
+            53,
+            3306,
+            5432,
+            6379,
+            8080,
+            18110,
+            18120
+          ],
+          "server_header": "BaseHTTP/0.6 Python/3.12.6",
+          "x_powered_by": ""
+        },
+        "cves": [],
+        "risk": {
+          "score": 7.0,
+          "grade": "Minimal",
+          "letter": "A",
+          "n_cve": 0,
+          "n_poc": 0,
+          "n_preauth": 0,
+          "factors": [
+            {
+              "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+              "delta": 0.0,
+              "note": "0 CVE, raw=0"
+            },
+            {
+              "label": "A\u00e7\u0131k port y\u00fczeyi",
+              "delta": 7,
+              "note": "7 a\u00e7\u0131k port"
+            }
+          ],
+          "computed_at": "2026-10-23T15:35:24Z"
+        },
+        "scanned_at": "2026-10-23T15:35:24Z"
+      },
+      "risk": {
+        "score": 7.0,
+        "grade": "Minimal",
+        "letter": "A",
+        "n_cve": 0,
+        "n_poc": 0,
+        "n_preauth": 0,
+        "factors": [
+          {
+            "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+            "delta": 0.0,
+            "note": "0 CVE, raw=0"
+          },
+          {
+            "label": "A\u00e7\u0131k port y\u00fczeyi",
+            "delta": 7,
+            "note": "7 a\u00e7\u0131k port"
+          }
+        ],
+        "computed_at": "2026-10-23T15:35:24Z"
+      },
+      "poc_results": {}
+    },
+    {
+      "id": "p_4b489f00ae",
+      "name": "127.0.0.1:8123",
+      "url": "http://127.0.0.1:8123/",
+      "created_at": "2026-10-23T15:34:45Z",
+      "updated_at": "2026-10-23T15:34:45Z",
+      "scan": {
+        "url": "http://127.0.0.1:8123/",
+        "host": "127.0.0.1",
+        "port": 8123,
+        "path": "/",
+        "status": 200,
+        "error": "",
+        "server": "BaseHTTP/0.6 Python/3.12.6",
+        "xpoweredby": "",
+        "date": "Fri, 23 Oct 2026 15:34:43 GMT",
+        "ttfb_ms": 1.8,
+        "body_bytes": 39186,
+        "headers": {
+          "server": "BaseHTTP/0.6 Python/3.12.6",
+          "date": "Fri, 23 Oct 2026 15:34:43 GMT",
+          "content-type": "text/html; charset=utf-8",
+          "access-control-allow-origin": "*",
+          "content-length": "39186"
+        },
+        "php_version": "",
+        "php_major": "",
+        "webserver": "unknown",
+        "webserver_version": "",
+        "webserver_major": "",
+        "detections": [],
+        "os_hint": "",
+        "sapi_guess": "unknown",
+        "waf": {
+          "present": false,
+          "names": [],
+          "evidence": [],
+          "challenge_blocked": false,
+          "challenge_note": ""
+        },
+        "ports": [
+          {
+            "port": 53,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 3306,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 5432,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 6379,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 8080,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 18110,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          },
+          {
+            "port": 18120,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          }
+        ],
+        "paths": [
+          {
+            "path": "/",
+            "status": 200,
+            "length": 39186,
+            "interesting": true
+          },
+          {
+            "path": "/.env",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/.git/config",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/actuator",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/api",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/.cgi",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/debug",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/index.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/info.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/izin.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpinfo.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpmyadmin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/pma",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-info",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-status",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/test.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-login.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          }
+        ],
+        "headers_audit": [
+          {
+            "header": "strict-transport-security",
+            "label": "HSTS",
+            "severity": "critical",
+            "present": false,
+            "value": "",
+            "note": "HTTPS zorlamas\u0131 yok \u2014 MITM/protocol-downgrade riski"
+          },
+          {
+            "header": "content-security-policy",
+            "label": "CSP",
+            "severity": "high",
+            "present": false,
+            "value": "",
+            "note": "XSS'i s\u0131n\u0131rlar; yoksa XSS daha tehlikeli"
+          },
+          {
+            "header": "x-frame-options",
+            "label": "X-Frame-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "clickjacking korumas\u0131 yok"
+          },
+          {
+            "header": "x-content-type-options",
+            "label": "X-Content-Type-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "MIME-sniffing korumas\u0131 yok"
+          },
+          {
+            "header": "referrer-policy",
+            "label": "Referrer-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "referrer s\u0131zd\u0131rabilir"
+          },
+          {
+            "header": "permissions-policy",
+            "label": "Permissions-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "kamera/mikrofon/clipboard izinleri a\u00e7\u0131k"
+          },
+          {
+            "header": "x-xss-protection",
+            "label": "X-XSS-Protection",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "eski XSS filtresi (\u00f6nerilmez ama var)"
+          },
+          {
+            "header": "info-disclosure",
+            "label": "Header leak",
+            "severity": "info",
+            "present": true,
+            "value": "server=BaseHTTP/0.6 Python/3.12.6",
+            "note": "s\u00fcr\u00fcm s\u0131zd\u0131rma tespit edildi"
+          }
+        ],
+        "fingerprint": {
+          "url": "http://127.0.0.1:8123/",
+          "host": "127.0.0.1",
+          "port": 8123,
+          "status": 200,
+          "ttfb_ms": 1.8,
+          "php_version": "",
+          "php_major": "",
+          "webserver": "unknown",
+          "webserver_version": "",
+          "os_hint": "",
+          "sapi": "unknown",
+          "waf": [],
+          "open_ports": [
+            53,
+            3306,
+            5432,
+            6379,
+            8080,
+            18110,
+            18120
+          ],
+          "server_header": "BaseHTTP/0.6 Python/3.12.6",
+          "x_powered_by": ""
+        },
+        "cves": [],
+        "risk": {
+          "score": 7.0,
+          "grade": "Minimal",
+          "letter": "A",
+          "n_cve": 0,
+          "n_poc": 0,
+          "n_preauth": 0,
+          "factors": [
+            {
+              "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+              "delta": 0.0,
+              "note": "0 CVE, raw=0"
+            },
+            {
+              "label": "A\u00e7\u0131k port y\u00fczeyi",
+              "delta": 7,
+              "note": "7 a\u00e7\u0131k port"
+            }
+          ],
+          "computed_at": "2026-10-23T15:34:45Z"
+        },
+        "scanned_at": "2026-10-23T15:34:45Z"
+      },
+      "risk": {
+        "score": 7.0,
+        "grade": "Minimal",
+        "letter": "A",
+        "n_cve": 0,
+        "n_poc": 0,
+        "n_preauth": 0,
+        "factors": [
+          {
+            "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+            "delta": 0.0,
+            "note": "0 CVE, raw=0"
+          },
+          {
+            "label": "A\u00e7\u0131k port y\u00fczeyi",
+            "delta": 7,
+            "note": "7 a\u00e7\u0131k port"
+          }
+        ],
+        "computed_at": "2026-10-23T15:34:45Z"
+      },
+      "poc_results": {}
+    },
+    {
+      "id": "p_7c8ad58c5b",
+      "name": "127.0.0.1:8123",
+      "url": "http://127.0.0.1:8123/",
+      "created_at": "2026-10-23T15:33:45Z",
+      "updated_at": "2026-10-23T15:33:45Z",
+      "scan": {
+        "url": "http://127.0.0.1:8123/",
+        "host": "127.0.0.1",
+        "port": 8123,
+        "path": "/",
+        "status": 200,
+        "error": "",
+        "server": "BaseHTTP/0.6 Python/3.12.6",
+        "xpoweredby": "",
+        "date": "Fri, 23 Oct 2026 15:33:43 GMT",
+        "ttfb_ms": 1.5,
+        "body_bytes": 39186,
+        "headers": {
+          "server": "BaseHTTP/0.6 Python/3.12.6",
+          "date": "Fri, 23 Oct 2026 15:33:43 GMT",
+          "content-type": "text/html; charset=utf-8",
+          "access-control-allow-origin": "*",
+          "content-length": "39186"
+        },
+        "php_version": "",
+        "php_major": "",
+        "webserver": "unknown",
+        "webserver_version": "",
+        "webserver_major": "",
+        "detections": [],
+        "os_hint": "",
+        "sapi_guess": "unknown",
+        "waf": {
+          "present": false,
+          "names": [],
+          "evidence": [],
+          "challenge_blocked": false,
+          "challenge_note": ""
+        },
+        "ports": [
+          {
+            "port": 53,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 3306,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 5432,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 6379,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 8080,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 18110,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          },
+          {
+            "port": 18120,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          }
+        ],
+        "paths": [
+          {
+            "path": "/",
+            "status": 200,
+            "length": 39186,
+            "interesting": true
+          },
+          {
+            "path": "/.env",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/.git/config",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/actuator",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/api",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/.cgi",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/debug",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/index.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/info.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/izin.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpinfo.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpmyadmin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/pma",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-info",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-status",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/test.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-login.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          }
+        ],
+        "headers_audit": [
+          {
+            "header": "strict-transport-security",
+            "label": "HSTS",
+            "severity": "critical",
+            "present": false,
+            "value": "",
+            "note": "HTTPS zorlamas\u0131 yok \u2014 MITM/protocol-downgrade riski"
+          },
+          {
+            "header": "content-security-policy",
+            "label": "CSP",
+            "severity": "high",
+            "present": false,
+            "value": "",
+            "note": "XSS'i s\u0131n\u0131rlar; yoksa XSS daha tehlikeli"
+          },
+          {
+            "header": "x-frame-options",
+            "label": "X-Frame-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "clickjacking korumas\u0131 yok"
+          },
+          {
+            "header": "x-content-type-options",
+            "label": "X-Content-Type-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "MIME-sniffing korumas\u0131 yok"
+          },
+          {
+            "header": "referrer-policy",
+            "label": "Referrer-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "referrer s\u0131zd\u0131rabilir"
+          },
+          {
+            "header": "permissions-policy",
+            "label": "Permissions-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "kamera/mikrofon/clipboard izinleri a\u00e7\u0131k"
+          },
+          {
+            "header": "x-xss-protection",
+            "label": "X-XSS-Protection",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "eski XSS filtresi (\u00f6nerilmez ama var)"
+          },
+          {
+            "header": "info-disclosure",
+            "label": "Header leak",
+            "severity": "info",
+            "present": true,
+            "value": "server=BaseHTTP/0.6 Python/3.12.6",
+            "note": "s\u00fcr\u00fcm s\u0131zd\u0131rma tespit edildi"
+          }
+        ],
+        "fingerprint": {
+          "url": "http://127.0.0.1:8123/",
+          "host": "127.0.0.1",
+          "port": 8123,
+          "status": 200,
+          "ttfb_ms": 1.5,
+          "php_version": "",
+          "php_major": "",
+          "webserver": "unknown",
+          "webserver_version": "",
+          "os_hint": "",
+          "sapi": "unknown",
+          "waf": [],
+          "open_ports": [
+            53,
+            3306,
+            5432,
+            6379,
+            8080,
+            18110,
+            18120
+          ],
+          "server_header": "BaseHTTP/0.6 Python/3.12.6",
+          "x_powered_by": ""
+        },
+        "cves": [],
+        "risk": {
+          "score": 7.0,
+          "grade": "Minimal",
+          "letter": "A",
+          "n_cve": 0,
+          "n_poc": 0,
+          "n_preauth": 0,
+          "factors": [
+            {
+              "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+              "delta": 0.0,
+              "note": "0 CVE, raw=0"
+            },
+            {
+              "label": "A\u00e7\u0131k port y\u00fczeyi",
+              "delta": 7,
+              "note": "7 a\u00e7\u0131k port"
+            }
+          ],
+          "computed_at": "2026-10-23T15:33:45Z"
+        },
+        "scanned_at": "2026-10-23T15:33:45Z"
+      },
+      "risk": {
+        "score": 7.0,
+        "grade": "Minimal",
+        "letter": "A",
+        "n_cve": 0,
+        "n_poc": 0,
+        "n_preauth": 0,
+        "factors": [
+          {
+            "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+            "delta": 0.0,
+            "note": "0 CVE, raw=0"
+          },
+          {
+            "label": "A\u00e7\u0131k port y\u00fczeyi",
+            "delta": 7,
+            "note": "7 a\u00e7\u0131k port"
+          }
+        ],
+        "computed_at": "2026-10-23T15:33:45Z"
+      },
+      "poc_results": {}
+    },
+    {
+      "id": "p_ed18c6b65e",
+      "name": "selftest",
+      "url": "http://127.0.0.1:8123/",
+      "created_at": "2026-10-23T15:33:09Z",
+      "updated_at": "2026-10-23T15:33:09Z",
+      "scan": {
+        "url": "http://127.0.0.1:8123/",
+        "host": "127.0.0.1",
+        "port": 8123,
+        "path": "/",
+        "status": 200,
+        "error": "",
+        "server": "BaseHTTP/0.6 Python/3.12.6",
+        "xpoweredby": "",
+        "date": "Fri, 23 Oct 2026 15:33:07 GMT",
+        "ttfb_ms": 0.4,
+        "body_bytes": 39186,
+        "headers": {
+          "server": "BaseHTTP/0.6 Python/3.12.6",
+          "date": "Fri, 23 Oct 2026 15:33:07 GMT",
+          "content-type": "text/html; charset=utf-8",
+          "access-control-allow-origin": "*",
+          "content-length": "39186"
+        },
+        "php_version": "",
+        "php_major": "",
+        "webserver": "unknown",
+        "webserver_version": "",
+        "webserver_major": "",
+        "detections": [],
+        "os_hint": "",
+        "sapi_guess": "unknown",
+        "waf": {
+          "present": false,
+          "names": [],
+          "evidence": [],
+          "challenge_blocked": false,
+          "challenge_note": ""
+        },
+        "ports": [
+          {
+            "port": 53,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 3306,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 5432,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 6379,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 8080,
+            "service": "open",
+            "version": ""
+          },
+          {
+            "port": 18110,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          },
+          {
+            "port": 18120,
+            "service": "http",
+            "version": "Apache/2.4.69 (Debian) / PHP/8.4.26"
+          }
+        ],
+        "paths": [
+          {
+            "path": "/",
+            "status": 200,
+            "length": 39186,
+            "interesting": true
+          },
+          {
+            "path": "/.env",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/.git/config",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/actuator",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/api",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/.cgi",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/cgi-bin/php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/debug",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/index.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/info.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/izin.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpinfo.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/phpmyadmin",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/pma",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-info",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/server-status",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/test.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-admin/",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          },
+          {
+            "path": "/wp-login.php",
+            "status": 404,
+            "length": 22,
+            "interesting": false
+          }
+        ],
+        "headers_audit": [
+          {
+            "header": "strict-transport-security",
+            "label": "HSTS",
+            "severity": "critical",
+            "present": false,
+            "value": "",
+            "note": "HTTPS zorlamas\u0131 yok \u2014 MITM/protocol-downgrade riski"
+          },
+          {
+            "header": "content-security-policy",
+            "label": "CSP",
+            "severity": "high",
+            "present": false,
+            "value": "",
+            "note": "XSS'i s\u0131n\u0131rlar; yoksa XSS daha tehlikeli"
+          },
+          {
+            "header": "x-frame-options",
+            "label": "X-Frame-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "clickjacking korumas\u0131 yok"
+          },
+          {
+            "header": "x-content-type-options",
+            "label": "X-Content-Type-Options",
+            "severity": "medium",
+            "present": false,
+            "value": "",
+            "note": "MIME-sniffing korumas\u0131 yok"
+          },
+          {
+            "header": "referrer-policy",
+            "label": "Referrer-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "referrer s\u0131zd\u0131rabilir"
+          },
+          {
+            "header": "permissions-policy",
+            "label": "Permissions-Policy",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "kamera/mikrofon/clipboard izinleri a\u00e7\u0131k"
+          },
+          {
+            "header": "x-xss-protection",
+            "label": "X-XSS-Protection",
+            "severity": "low",
+            "present": false,
+            "value": "",
+            "note": "eski XSS filtresi (\u00f6nerilmez ama var)"
+          },
+          {
+            "header": "info-disclosure",
+            "label": "Header leak",
+            "severity": "info",
+            "present": true,
+            "value": "server=BaseHTTP/0.6 Python/3.12.6",
+            "note": "s\u00fcr\u00fcm s\u0131zd\u0131rma tespit edildi"
+          }
+        ],
+        "fingerprint": {
+          "url": "http://127.0.0.1:8123/",
+          "host": "127.0.0.1",
+          "port": 8123,
+          "status": 200,
+          "ttfb_ms": 0.4,
+          "php_version": "",
+          "php_major": "",
+          "webserver": "unknown",
+          "webserver_version": "",
+          "os_hint": "",
+          "sapi": "unknown",
+          "waf": [],
+          "open_ports": [
+            53,
+            3306,
+            5432,
+            6379,
+            8080,
+            18110,
+            18120
+          ],
+          "server_header": "BaseHTTP/0.6 Python/3.12.6",
+          "x_powered_by": ""
+        },
+        "cves": [],
+        "risk": {
+          "score": 7.0,
+          "grade": "Minimal",
+          "letter": "A",
+          "n_cve": 0,
+          "n_poc": 0,
+          "n_preauth": 0,
+          "factors": [
+            {
+              "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+              "delta": 0.0,
+              "note": "0 CVE, raw=0"
+            },
+            {
+              "label": "A\u00e7\u0131k port y\u00fczeyi",
+              "delta": 7,
+              "note": "7 a\u00e7\u0131k port"
+            }
+          ],
+          "computed_at": "2026-10-23T15:33:09Z"
+        },
+        "scanned_at": "2026-10-23T15:33:09Z"
+      },
+      "risk": {
+        "score": 7.0,
+        "grade": "Minimal",
+        "letter": "A",
+        "n_cve": 0,
+        "n_poc": 0,
+        "n_preauth": 0,
+        "factors": [
+          {
+            "label": "E\u015fle\u015fen kritik CVE (exploitability)",
+            "delta": 0.0,
+            "note": "0 CVE, raw=0"
+          },
+          {
+            "label": "A\u00e7\u0131k port y\u00fczeyi",
+            "delta": 7,
+            "note": "7 a\u00e7\u0131k port"
+          }
+        ],
+        "computed_at": "2026-10-23T15:33:09Z"
+      },
+      "poc_results": {}
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "cve": "CVE-2026-109618/19 (php2shell)",
+  "updated": "2026-10-24",
+  "note": "SURUM-TABANLI risk DB'si. Anahtar = branch (major.minor). Sürüm tespiti live fetch ile gelir; bu dosya sadece RISK DATASI. Yeni branch ekle: \"8.6\": { \"status\": \"CONFIRMED_FIXED\", \"note\": \"...\" }",
+  "rules": {
+    "eolBefore": [8, 2],
+    "fixedBranch": null,
+    "note": "versions map'inde olmayan branch'ler icin fallback. eolBefore: altinda EOL. fixedBranch: null=dogrulanmadi (at-risk)."
+  },
+  "versions": {
+    "5.4":  { "status": "EOL_NO_PATCH",   "note": "EOL — vendor patch yok" },
+    "5.5":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "5.6":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "7.0":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "7.1":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "7.2":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "7.3":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "7.4":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "8.0":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "8.1":  { "status": "EOL_NO_PATCH",   "note": "EOL" },
+    "8.2":  { "status": "POTENTIAL_RISK", "note": "Etkilenen aralikta (varsayilan)" },
+    "8.3":  { "status": "POTENTIAL_RISK", "note": "Etkilenen aralikta" },
+    "8.4":  { "status": "POTENTIAL_RISK", "note": "Etkilenen aralikta (baseline 8.4.26)" },
+    "8.5":  { "status": "POTENTIAL_RISK", "note": "Etkilenen aralikta" }
+  }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- P2S Ghostcat lab target: standard Tomcat 9 server.xml with the AJP
+     connector ENABLED on 8009 (CVE-2020-1938 / Ghostcat). -->
+<Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+
+  <Service name="Catalina">
+    <!-- HTTP -->
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+    <!-- AJP (Ghostcat surface) — DELIBERATELY enabled for the lab target.
+         secretRequired="false" reproduces the classic pre-secret Ghostcat config. -->
+    <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" secretRequired="false" />
+
+    <Engine name="Catalina" defaultHost="localhost">
+      <Valve className="org.apache.catalina.valves.AccessLogValve"
+             directory="logs" prefix="catalina.access_log" suffix=".log"
+             pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+      <Host name="localhost" appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+        <Valve className="org.apache.catalina.valves.ErrorReportValve" />
+      </Host>
+    </Engine>
+  </Service>
+</Server>

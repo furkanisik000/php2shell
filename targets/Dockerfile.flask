@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+WORKDIR /app
+COPY flask_ssti.py .
+RUN pip install --no-cache-dir flask==2.3.3
+EXPOSE 5000
+CMD ["python", "flask_ssti.py"]

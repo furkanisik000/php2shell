@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+WORKDIR /app
+COPY dotnet_mock.py .
+RUN pip install flask --quiet
+EXPOSE 8080
+CMD ["python", "dotnet_mock.py"]

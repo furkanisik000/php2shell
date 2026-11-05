@@ -1,0 +1,13 @@
+{
+  "name": "PHP2Shell Local Checker",
+  "version": "1.2.0",
+  "description": "Aktif sekmeyi otomatik alir, hedefi canli sorar (IP/port degisikliginden bagimsiz), PHP surumunu surum-tabanli yerel DB'de sorgular. Uzak API yok, auth yok, PostHog yok.",
+  "manifest_version": 3,
+  "minimum_chrome_version": "116",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PHP2Shell Local Checker"
+  },
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["http://*/*", "https://*/*"]
+}

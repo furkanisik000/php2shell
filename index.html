@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P2S — CVE Scanner · native exploit engine</title>
+<style>
+:root{
+  --bg:#0a0e14; --bg2:#0e131b; --bg3:#141b26; --bg4:#1b2534;
+  --border:#222d3d; --border2:#2d3a4f;
+  --text:#e8eef7; --text2:#8a99b0; --text3:#5b6b84;
+  --blue:#4d9fff; --cyan:#39c5e0; --green:#31c46a; --amber:#e0a030; --orange:#e07a30; --red:#f0544f;
+  --purple:#a98bff;
+  --radius:12px; --radius-sm:8px;
+  --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Helvetica,Arial,sans-serif;line-height:1.5;font-size:14px;-webkit-font-smoothing:antialiased;min-width:0}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:rgba(77,159,255,.3)}
+button{font-family:inherit}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:6px}
+::-webkit-scrollbar-track{background:transparent}
+.mono{font-family:var(--mono)}
+code{font-family:var(--mono);background:var(--bg4);padding:1px 5px;border-radius:4px;font-size:.92em}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  min-height:56px;display:flex;align-items:center;gap:16px;padding:8px 20px;flex-wrap:wrap;
+  background:linear-gradient(180deg,#111826,#0d131d);border-bottom:1px solid var(--border2);
+  position:sticky;top:0;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand .mark{width:32px;height:32px;flex:none;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#1c3a5e,#0e1a2b);border:1px solid var(--border2);border-radius:9px}
+.brand .name{font-size:15.5px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand .name b{color:var(--blue)}
+.brand .sub{font-size:10.5px;color:var(--text3);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2);min-width:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(240,84,79,.15);flex:none}
+.dot.on{background:var(--green);box-shadow:0 0 0 3px rgba(49,196,106,.18)}
+.spacer{flex:1;min-width:0}
+.pill{font-size:11px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);padding:4px 10px;border-radius:999px;font-family:var(--mono);white-space:nowrap}
+.live-tail{font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw;min-width:0}
+.live-tail b{color:var(--text2);font-weight:600}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:2px;padding:0 16px;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:11px 16px;font-size:13.5px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;user-select:none;transition:color .12s;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--blue);font-weight:600}
+.tab .n{font-size:11px;color:var(--text3);margin-left:6px;font-family:var(--mono)}
+
+/* ===== LAYOUT ===== */
+.wrap{display:grid;grid-template-columns:minmax(320px,380px) minmax(0,1fr);min-height:calc(100vh - 100px)}
+.col-side{border-right:1px solid var(--border);background:var(--bg2);padding:20px;overflow-y:auto;max-height:calc(100vh - 100px);min-width:0}
+.col-main{padding:24px 28px;overflow-y:auto;max-height:calc(100vh - 100px);min-width:0}
+.full{padding:24px 28px;max-width:1200px;margin:0 auto;min-width:0}
+.panel{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;min-width:0}
+.panel h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text2);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.panel h3 .tag{margin-left:auto;font-size:10px;text-transform:none;letter-spacing:0;color:var(--text3);font-family:var(--mono)}
+
+/* ===== INPUTS / BUTTONS ===== */
+label.f{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);display:block;margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:9px 11px;border-radius:var(--radius-sm);font-size:13px;outline:none;font-family:inherit;min-width:0}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+input.mono{font-family:var(--mono);font-size:12.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--bg4);color:var(--text);border:1px solid var(--border2);padding:9px 15px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .12s;white-space:nowrap}
+.btn:hover{background:var(--bg3);border-color:var(--blue)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#04121f}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.danger{background:transparent;border-color:rgba(240,84,79,.4);color:var(--red)}
+.btn.danger:hover{background:rgba(240,84,79,.12);border-color:var(--red)}
+.btn.green{background:transparent;border-color:rgba(49,196,106,.4);color:var(--green)}
+.btn.green:hover{background:rgba(49,196,106,.12)}
+.btn.sm{padding:6px 11px;font-size:12px}
+.btn.block{width:100%}
+
+/* ===== FINGERPRINT / KEY-VALUE ===== */
+.kv{display:flex;flex-direction:column;gap:1px}
+.kv .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border);gap:12px}
+.kv .row:last-child{border-bottom:0}
+.kv .k{color:var(--text2);font-size:12.5px;flex:none}
+.kv .v{font-family:var(--mono);font-size:12px;text-align:right;overflow-wrap:anywhere;word-break:break-word;max-width:70%;min-width:0}
+.kv .v.ok{color:var(--green)} .kv .v.bad{color:var(--red)} .kv .v.warn{color:var(--amber)}
+
+/* ===== RISK GAUGE ===== */
+.gauge-wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.gauge{position:relative;width:150px;height:150px;flex:none}
+.gauge .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .num{font-size:40px;font-weight:800;line-height:1;font-family:var(--mono)}
+.gauge .lbl{font-size:11px;color:var(--text2);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+.gauge .grade{font-size:19px;font-weight:800;margin-top:3px}
+.factors{flex:1;min-width:220px;min-height:0}
+.factor{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;gap:10px}
+.factor:last-child{border-bottom:0}
+.factor .fl{color:var(--text2);min-width:0;overflow-wrap:anywhere}
+.factor .fv{font-family:var(--mono);font-weight:700;flex:none}
+.factor .fv.pos{color:var(--red)} .factor .fv.neg{color:var(--green)} .factor .fv.zero{color:var(--text3)}
+
+/* ===== CVE CARDS ===== */
+.cve{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;transition:border-color .12s;min-width:0}
+.cve.hit{border-color:rgba(240,84,79,.45);box-shadow:0 0 0 1px rgba(240,84,79,.12)}
+.cve-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.cve-id{font-weight:700;font-size:15px;font-family:var(--mono);letter-spacing:.3px}
+.badge{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.3px;white-space:nowrap}
+.b-sw{background:rgba(77,159,255,.14);color:var(--blue)}
+.b-type{background:rgba(138,153,176,.14);color:var(--text2)}
+.b-pre{background:rgba(49,196,106,.12);color:var(--green)}
+.b-hit{background:rgba(240,84,79,.16);color:var(--red)}
+.b-nat{background:rgba(57,197,224,.14);color:var(--cyan)}
+.b-local{background:rgba(169,139,255,.14);color:var(--purple)}
+.score{font-size:12.5px;font-weight:800;padding:4px 11px;border-radius:7px;margin-left:auto;font-family:var(--mono);flex:none}
+.score.crit{background:rgba(240,84,79,.2);color:var(--red)}
+.score.high{background:rgba(224,160,48,.2);color:var(--amber)}
+.cve-desc{color:var(--text2);font-size:13px;margin-top:9px;line-height:1.55;overflow-wrap:anywhere}
+.cve-meta{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--text2);flex-wrap:wrap;align-items:center}
+.cve-meta .cwe{font-family:var(--mono)}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:10.5px;padding:2px 9px;border-radius:6px;background:var(--bg4);color:var(--text2);font-family:var(--mono)}
+.chip.hit{background:rgba(240,84,79,.16);color:var(--red);font-weight:700}
+
+/* ===== PoC PANEL (native) ===== */
+.poc{margin-top:14px;padding:15px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;min-width:0}
+.poc-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+.poc-head .pname{font-size:13.5px;font-weight:700}
+.poc-note{font-size:11.5px;color:var(--amber);margin-bottom:12px;line-height:1.5;overflow-wrap:anywhere}
+.poc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:12px}
+.poc-grid>div{min-width:0}
+.outbox{display:none;margin-top:12px;padding:12px;background:#05080d;border:1px solid var(--border);border-radius:8px;font-family:var(--mono);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-height:340px;overflow:auto;max-width:100%;min-width:0}
+.outbox.show{display:block}
+.outbox .ok{color:var(--green)} .outbox .err{color:var(--red)} .outbox .dim{color:var(--text3)} .outbox .ev{color:var(--text)}
+.result-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;margin-top:12px}
+.result-badge.win{background:rgba(49,196,106,.16);color:var(--green)}
+.result-badge.lose{background:rgba(240,84,79,.14);color:var(--red)}
+.result-badge.mid{background:rgba(224,160,48,.16);color:var(--amber)}
+
+/* ===== TABLES (overflow-safe) ===== */
+.tbl-wrap{overflow-x:auto;max-width:100%;min-width:0}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:0}
+.tbl th{text-align:left;color:var(--text2);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:1px solid var(--border2);font-weight:600;white-space:nowrap}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .ok{color:var(--green)} .tbl .no{color:var(--red)} .tbl .warn{color:var(--amber)}
+.tbl .cell-txt{font-family:inherit}
+
+/* ===== PROFILES ===== */
+.profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.profile-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.profile-card .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.profile-card .pname{font-size:15px;font-weight:700;font-family:var(--mono);overflow-wrap:anywhere;word-break:break-word;min-width:0}
+.profile-card .purl{font-size:11.5px;color:var(--text2);overflow-wrap:anywhere;word-break:break-word;margin-top:2px;min-width:0}
+.mini-gauge{width:64px;height:64px;flex:none;position:relative}
+.mini-gauge .mn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;font-family:var(--mono)}
+.pfacts{display:flex;flex-wrap:wrap;gap:6px}
+.pfact{font-size:11px;background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:3px 9px;color:var(--text2);font-family:var(--mono)}
+.pactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.empty{text-align:center;color:var(--text2);padding:60px 20px;font-size:14px}
+.empty .big{font-size:44px;margin-bottom:14px;opacity:.5}
+
+/* ===== LOG CONSOLE ===== */
+.log-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.log-toolbar select,.log-toolbar input{width:auto;max-width:190px}
+.log-toolbar input{flex:1;min-width:140px}
+.log-console{background:#05080d;border:1px solid var(--border);border-radius:10px;padding:6px 4px;font-family:var(--mono);font-size:12px;max-height:64vh;overflow:auto;min-width:0}
+.log-line{display:flex;gap:10px;padding:5px 10px;border-bottom:1px solid rgba(35,45,61,.5);align-items:flex-start;flex-wrap:wrap}
+.log-line:last-child{border-bottom:0}
+.log-line .ts{color:var(--text3);flex:none}
+.log-line .lvl{flex:none;font-weight:700;width:66px;text-align:center;border-radius:5px;padding:1px 0}
+.lvl.DEBUG{background:rgba(138,153,176,.14);color:var(--text2)}
+.lvl.INFO{background:rgba(77,159,255,.14);color:var(--blue)}
+.lvl.WARN{background:rgba(224,160,48,.16);color:var(--amber)}
+.lvl.ERROR{background:rgba(240,84,79,.16);color:var(--red)}
+.lvl.SUCCESS{background:rgba(49,196,106,.16);color:var(--green)}
+.log-line .cat{flex:none;color:var(--text3);font-size:11px;border:1px solid var(--border);border-radius:4px;padding:0 6px}
+.log-line .msg{color:var(--text);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.log-line .data{width:100%;color:var(--text3);white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;padding-left:2px}
+
+/* ===== MISC ===== */
+.cmd-box{background:#05080d;border:1px solid var(--border);border-radius:8px;padding:12px;font-family:var(--mono);font-size:12px;color:var(--green);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all;margin-top:8px;max-width:100%;overflow:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sec-head{font-size:14px;font-weight:700;margin:20px 0 10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sec-head .n{font-size:12px;color:var(--text2);font-weight:400;font-family:var(--mono)}
+.sec-empty{color:var(--green);font-size:12.5px;padding:11px 14px;margin-bottom:10px;background:rgba(49,196,106,.08);border:1px solid rgba(49,196,106,.25);border-radius:8px;overflow-wrap:anywhere}
+.waf-banner{padding:10px 14px;margin-bottom:12px;font-size:12.5px;background:rgba(224,160,48,.1);border:1px solid rgba(224,160,48,.4);border-radius:8px;color:var(--amber);overflow-wrap:anywhere}
+.view{display:none}
+.view.active{display:block}
+footer{text-align:center;color:var(--text3);font-size:11px;padding:18px;border-top:1px solid var(--border);margin-top:20px}
+.history-block{margin-bottom:14px}
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr}
+  .col-side{border-right:0;border-bottom:1px solid var(--border);max-height:none}
+  .col-main{max-height:none}
+  .grid2{grid-template-columns:1fr}
+  .live-tail{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="mark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3z" stroke="#4d9fff" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="12" cy="11" r="4" stroke="#39c5e0" stroke-width="1.5"/>
+        <path d="M12 7v4l2.5 1.5" stroke="#31c46a" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div style="min-width:0">
+      <div class="name">P2S · <b>CVE Scanner</b></div>
+      <div class="sub">native exploit engine · SQLite session</div>
+    </div>
+  </div>
+  <div class="status"><span class="dot" id="status-dot"></span><span id="status-txt">bağlanıyor…</span></div>
+  <div class="spacer"></div>
+  <div class="live-tail" id="live-tail"></div>
+  <div class="pill" id="pill-counts">—</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-view="scan" onclick="switchView('scan')">Tarama</div>
+  <div class="tab" data-view="profiles" onclick="switchView('profiles')">Profiller <span class="n" id="n-profiles">0</span></div>
+  <div class="tab" data-view="db" onclick="switchView('db')">CVE DB <span class="n" id="n-cves">0</span></div>
+  <div class="tab" data-view="log" onclick="switchView('log')">Log <span class="n" id="n-logs">0</span></div>
+  <div class="tab" data-view="mcp" onclick="switchView('mcp')">MCP / API</div>
+</div>
+
+<div class="wrap">
+  <!-- ============ SIDE (scan controls + fingerprint) ============ -->
+  <div class="col-side">
+    <div class="panel">
+      <h3>Hedef <span class="tag" id="scan-state">hazır</span></h3>
+      <label class="f">Hedef URL</label>
+      <input id="target-url" class="mono" placeholder="http://192.168.8.123:18111/index.php" spellcheck="false">
+      <label class="f" style="margin-top:12px">Profil adı (opsiyonel)</label>
+      <input id="target-name" placeholder="örn: php-target-18111" spellcheck="false">
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="btn primary block" id="btn-scan" onclick="doScan(true)">🎯 Tara + Kaydet</button>
+      </div>
+      <button class="btn sm block" style="margin-top:8px" onclick="doScan(false)">Tek tara (kaydetme)</button>
+    </div>
+
+    <div class="panel" id="fp-panel" style="display:none">
+      <h3>Fingerprint</h3>
+      <div class="kv" id="fp"></div>
+    </div>
+    <div class="panel" id="waf-panel" style="display:none">
+      <h3>WAF / Mitigasyon</h3>
+      <div id="waf-body"></div>
+    </div>
+    <div class="panel" id="ports-panel" style="display:none">
+      <h3>Açık Portlar <span class="tag" id="ports-n"></span></h3>
+      <div id="ports-body"></div>
+    </div>
+    <div class="panel" id="tls-panel" style="display:none">
+      <h3>TLS / Sertifika</h3>
+      <div class="kv" id="tls-body"></div>
+    </div>
+    <div class="panel" id="hdr-panel" style="display:none">
+      <h3>HTTP Header Audit</h3>
+      <div id="hdr-body"></div>
+    </div>
+    <div class="panel" id="paths-panel" style="display:none">
+      <h3>İlginç Path'ler</h3>
+      <div id="paths-body"></div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN ============ -->
+  <div class="col-main">
+
+    <!-- SCAN VIEW -->
+    <div class="view active" id="view-scan">
+      <div id="scan-empty" class="empty">
+        <div class="big">🎯</div>
+        Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header çıkarır,<br>
+        eşleşen kritik CVE'leri listeler, <b>0–100 risk puanı</b> verir, her adımı <b>loglar</b> ve native PoC'leri kendisi atar.
+      </div>
+      <div id="scan-result" style="display:none">
+        <div class="panel">
+          <h3>Risk Değerlendirmesi <span class="tag" id="risk-target"></span></h3>
+          <div class="gauge-wrap">
+            <div class="gauge">
+              <svg width="150" height="150" viewBox="0 0 150 150">
+                <circle cx="75" cy="75" r="64" fill="none" stroke="var(--bg4)" stroke-width="14"/>
+                <circle id="gauge-arc" cx="75" cy="75" r="64" fill="none" stroke="var(--red)" stroke-width="14"
+                        stroke-linecap="round" transform="rotate(-90 75 75)" stroke-dasharray="402" stroke-dashoffset="402"/>
+              </svg>
+              <div class="center">
+                <div class="num" id="gauge-num">0</div>
+                <div class="lbl">risk / 100</div>
+                <div class="grade" id="gauge-grade">—</div>
+              </div>
+            </div>
+            <div class="factors" id="risk-factors"></div>
+          </div>
+        </div>
+        <div id="waf-banner-scan"></div>
+        <div class="sec-head">Eşleşen Kritik CVE'ler <span class="n" id="cve-count"></span></div>
+        <div id="cve-list"></div>
+      </div>
+
+      <!-- HISTORY (when viewing a saved profile) -->
+      <div id="history-block" style="display:none">
+        <div class="sec-head">Tarama Tarihçesi <span class="n" id="hist-scan-n"></span>
+          <button class="btn sm" style="margin-left:auto" onclick="rescanCurrent()">↻ Yeniden Tara (tarihe ekle)</button>
+        </div>
+        <div class="history-block" id="hist-scans"></div>
+        <div class="sec-head">PoC Çalıştırma Kayıtları <span class="n" id="hist-poc-n"></span></div>
+        <div class="history-block" id="hist-pocs"></div>
+      </div>
+    </div>
+
+    <!-- PROFILES VIEW -->
+    <div class="view" id="view-profiles">
+      <div class="sec-head" style="margin-top:0">Kayıtlı Hedef Profilleri <span class="n" id="prof-count"></span></div>
+      <div id="profiles-body"><div class="empty"><div class="big">📁</div>Henüz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite'a kaydedilir.</div></div>
+    </div>
+
+    <!-- DB VIEW -->
+    <div class="view" id="view-db">
+      <div class="panel">
+        <h3>CVE Veritabanı <span class="tag" id="db-count"></span></h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <select id="db-sw" style="max-width:220px" onchange="onDbSw()"></select>
+          <select id="db-ver" style="max-width:180px" onchange="renderDB()"></select>
+          <input id="db-q" style="flex:1;min-width:160px;max-width:340px" placeholder="CVE / açıklama ara…" oninput="renderDB()">
+        </div>
+      </div>
+      <div id="db-body"></div>
+    </div>
+
+    <!-- LOG VIEW -->
+    <div class="view" id="view-log">
+      <div class="panel">
+        <h3>Operasyon Logu <span class="tag" id="log-count">0</span></h3>
+        <div class="log-toolbar">
+          <select id="log-level" onchange="loadLogs()">
+            <option value="">Tüm seviyeler</option>
+            <option>INFO</option><option>SUCCESS</option><option>WARN</option><option>ERROR</option><option>DEBUG</option>
+          </select>
+          <select id="log-cat" onchange="loadLogs()">
+            <option value="">Tüm kategoriler</option>
+            <option>scan</option><option>poc</option><option>profile</option><option>store</option><option>system</option>
+          </select>
+          <input id="log-q" placeholder="log metni ara…" oninput="debounceLogs()">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
+            <input type="checkbox" id="log-live" style="width:auto" onchange="toggleLogLive()"> canlı
+          </label>
+          <button class="btn sm" onclick="loadLogs(true)">⟳ Yenile</button>
+          <button class="btn sm danger" onclick="clearLogs()">🗑 Temizle</button>
+        </div>
+        <div class="log-console" id="log-console"><span class="dim">yükleniyor…</span></div>
+        <p style="color:var(--text3);font-size:11px;margin-top:8px">Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasına yazılır. Her tarama, PoC çalışması ve hata kaydedilir.</p>
+      </div>
+    </div>
+
+    <!-- MCP VIEW -->
+    <div class="view" id="view-mcp">
+      <div class="panel">
+        <h3>MCP Server — Qwen Code entegrasyonu</h3>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Scanner, Model Context Protocol sunucusu olarak Qwen Code'a (ve her MCP client'a) bağlanır. 14 native tool.</p>
+        <div class="cmd-box" id="mcp-install"></div>
+        <p style="color:var(--text3);font-size:11.5px;margin-top:8px">Not: <code>qwen mcp add</code> sonrası tam Qwen restart gerekir (hot-load yok). Server stdio, bağımlılıksız.</p>
+      </div>
+      <div class="panel">
+        <h3>Tool'lar <span class="tag" id="mcp-tool-n">14</span></h3>
+        <div class="tbl-wrap"><table class="tbl" id="mcp-tools"></table></div>
+      </div>
+      <div class="panel">
+        <h3>Canlı deneme (HTTP API üzerinden)</h3>
+        <div class="grid2">
+          <div>
+            <label class="f">Tool</label>
+            <select id="test-tool">
+              <option value="poc_list">poc_list</option>
+              <option value="list_cves">list_cves</option>
+              <option value="risk_score">risk_score (url)</option>
+              <option value="list_logs">list_logs</option>
+            </select>
+          </div>
+          <div>
+            <label class="f">Argument (JSON / opsiyonel)</label>
+            <input id="test-arg" class="mono" placeholder='{"software":"PHP"}'>
+          </div>
+        </div>
+        <button class="btn primary" style="margin-top:12px" onclick="runTest()">▶ Çalıştır</button>
+        <div class="outbox" id="test-out"></div>
+      </div>
+    </div>
+
+    <footer>Source: NVD + vendor advisories + Exploit-DB · native exploit engine · SQLite session store · Yetkili güvenlik araştırması · P2S v2.1</footer>
+  </div>
+</div>
+
+<script>
+let DB = [];
+let POCS = {};
+let PROFILES = [];
+let currentProfileId = null;
+
+const $ = id => document.getElementById(id);
+function esc(s){const d=document.createElement('div');d.textContent=(s==null)?'':String(s);return d.innerHTML;}
+async function j(u,opt){const r=await fetch(u,opt);if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||('HTTP '+r.status);return r.json();}
+function jraw(u,opt){const r=await fetch(u,opt);if(!r.ok) throw new Error('HTTP '+r.status);return r;}
+function debounceLogs(){clearTimeout(window._ldb);window._ldb=setTimeout(()=>loadLogs(),300);}
+function gradeColor(score){return score>=85?'var(--red)':score>=65?'var(--orange)':score>=45?'var(--amber)':score>=25?'var(--green)':'var(--text3)';}
+
+/* ---------- init ---------- */
+async function init(){
+  try{
+    const h = await j('/health');
+    $('status-dot').classList.add('on');
+    $('status-txt').textContent = 'online · v'+h.version;
+    $('pill-counts').textContent = h.vulns+' CVE · '+h.with_poc+' PoC · '+h.profiles+' profil';
+    $('n-cves').textContent = h.vulns;
+  }catch(e){
+    $('status-txt').textContent = 'sunucu kapalı (server.py)';
+  }
+  try{ const c = await j('/cves'); DB = c.cves||[]; $('n-cves').textContent = DB.length; }catch(e){}
+  try{ const p = await j('/pocs'); POCS = p.pocs||{}; }catch(e){}
+  await loadProfiles();
+  buildDBfilters(); renderDB(); renderMCP();
+  loadLogs();
+}
+
+/* ---------- views ---------- */
+function switchView(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  const el = $('view-'+v); if(el) el.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
+  if(v==='profiles') loadProfiles();
+  if(v==='log') loadLogs();
+}
+
+/* ---------- scan ---------- */
+async function doScan(save){
+  const url = $('target-url').value.trim();
+  if(!url){alert('Hedef URL gir');return;}
+  const btn = $('btn-scan'); btn.disabled=true; $('scan-state').textContent='taranıyor…';
+  try{
+    const body = {url, save:!!save};
+    if($('target-name').value.trim()) body.name=$('target-name').value.trim();
+    const prof = await j('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(prof.id) currentProfileId = prof.id; else currentProfileId=null;
+    renderScan(prof.scan || prof, prof);
+    if(save){ loadProfiles(); loadLogs(); }
+    $('scan-state').textContent = save ? 'kaydedildi ✓' : 'tara';
+  }catch(e){
+    $('scan-state').textContent='hata'; alert('Tarama hatası: '+e.message);
+  }
+  btn.disabled=false;
+}
+
+function kvRows(s){
+  const fp = s.fingerprint || {};
+  const rows = [];
+  const add=(k,v,cls)=>{ if(v!==''&&v!=null&&v!=='unknown'&&v!=='-') rows.push([k,v,cls||'']); };
+  add('Durum', s.status?('HTTP '+s.status):(s.error||'—'), (s.status>=200&&s.status<500)?'ok':'bad');
+  if(s.ttfb_ms!=null) add('TTFB', s.ttfb_ms+' ms');
+  add('PHP', s.php_version, s.php_version?'ok':'');
+  add('Web', (s.webserver!=='unknown'?s.webserver:'')+(s.webserver_version?' '+s.webserver_version:''), s.webserver!=='unknown'?'ok':'');
+  add('OS', s.os_hint);
+  add('SAPI', s.sapi_guess!=='unknown'?s.sapi_guess:'');
+  add('Server hdr', s.server);
+  add('X-Powered-By', s.xpoweredby);
+  if(!rows.length) rows.push(['Durum', s.error||'erişilemedi', 'bad']);
+  return rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v ${r[2]}">${esc(r[1])}</span></div>`).join('');
+}
+
+function renderScan(s, prof){
+  $('scan-empty').style.display='none';
+  $('scan-result').style.display='block';
+  $('risk-target').textContent = (prof && prof.name) || (s.url||'');
+  $('fp').innerHTML = kvRows(s);
+  $('fp-panel').style.display='block';
+
+  // WAF
+  const waf = s.waf||{};
+  if(waf.names && waf.names.length){
+    $('waf-body').innerHTML = `<div class="pfacts">${waf.names.map(n=>`<span class="pfact" style="color:var(--amber)">${esc(n)}</span>`).join('')}</div>`
+      + (waf.challenge_note?`<p style="color:var(--text2);font-size:11.5px;margin-top:8px">${esc(waf.challenge_note)}</p>`:'');
+    $('waf-panel').style.display='block';
+    $('waf-banner-scan').innerHTML = `<div class="waf-banner">🛡 WAF sinyali: ${waf.names.map(esc).join(', ')} — exploit denemeleri engellenebilir.</div>`;
+  } else { $('waf-panel').style.display='none'; $('waf-banner-scan').innerHTML=''; }
+
+  // ports
+  const ports = s.ports||[];
+  $('ports-n').textContent = ports.length;
+  $('ports-body').innerHTML = ports.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>Port</th><th>Servis</th><th>Sürüm</th></tr>`
+    + ports.map(p=>`<tr><td class="ok">:${esc(p.port)}</td><td>${esc(p.service||'open')}</td><td>${esc(p.version||'—')}</td></tr>`).join('')+'</table></div>'
+    : `<div class="sec-empty">Açık port bulunamadı</div>`;
+  $('ports-panel').style.display='block';
+
+  // TLS
+  const tls = s.tls||{};
+  if(tls.ok){
+    $('tls-body').innerHTML = [
+      ['Protocol', tls.protocol], ['Cipher', `${(tls.cipher||{}).name||''} (${(tls.cipher||{}).tls||''})`],
+      ['Issuer', (tls.cert||{}).issuer], ['CN', (tls.cert||{}).cn],
+      ['SAN', ((tls.cert||{}).san||[]).join(', ')], ['Expiry', `${(tls.cert||{}).not_after||''} (${(tls.cert||{}).days_to_expire} gün)`]
+    ].map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${esc(r[1]||'—')}</span></div>`).join('');
+    $('tls-panel').style.display='block';
+  } else $('tls-panel').style.display='none';
+
+  // headers
+  const hdr = s.headers_audit||[];
+  if(hdr.length){
+    $('hdr-body').innerHTML = `<div class="tbl-wrap"><table class="tbl"><tr><th>Header</th><th>Durum</th></tr>`
+      + hdr.map(h=>`<tr><td>${esc(h.label)}</td><td class="${h.present?'ok':'no'}">${h.present?'✅':'❌'} <span class="cell-txt">${esc(h.note||'')}</span></td></tr>`).join('')+'</table></div>';
+    $('hdr-panel').style.display='block';
+  } else $('hdr-panel').style.display='none';
+
+  // paths
+  const paths = (s.paths||[]).filter(p=>p.interesting);
+  if(paths.length){
+    $('paths-body').innerHTML = `<div class="tbl-wrap"><table class="tbl"><tr><th>Path</th><th>HTTP</th></tr>`
+      + paths.map(p=>`<tr><td>${esc(p.path)}</td><td class="${p.status<400?'ok':'warn'}">${p.status}</td></tr>`).join('')+'</table></div>';
+    $('paths-panel').style.display='block';
+  } else $('paths-panel').style.display='none';
+
+  renderRisk(s.risk||{});
+  renderCVEs(s.cves||[], s.php_major||null);
+  if(prof && prof.id && (prof.scans||[]).length>0) loadHistory(prof.id);
+  else $('history-block').style.display='none';
+}
+
+function renderRisk(risk){
+  const score = risk.score||0;
+  const C = 2*Math.PI*64;
+  const arc=$('gauge-arc');
+  arc.setAttribute('stroke-dasharray', C);
+  arc.setAttribute('stroke-dashoffset', C - (score/100)*C);
+  const col = gradeColor(score);
+  arc.setAttribute('stroke', col);
+  $('gauge-num').textContent = Math.round(score);
+  $('gauge-num').style.color = col;
+  $('gauge-grade').textContent = risk.letter||'—';
+  $('gauge-grade').style.color = col;
+  const fs = risk.factors||[];
+  $('risk-factors').innerHTML = fs.map(f=>{
+    const v=f.delta; const cls = v>0?'pos':(v<0?'neg':'zero');
+    return `<div class="factor"><span class="fl">${esc(f.label)} ${f.note?`<span style="color:var(--text3)">· ${esc(f.note)}</span>`:''}</span><span class="fv ${cls}">${v>0?'+':''}${v}</span></div>`;
+  }).join('') || '<div class="factor"><span class="fl">Faktör yok</span></div>';
+}
+
+/* ---------- CVE list + native PoC ---------- */
+function renderCVEs(cves, hitMajor){
+  $('cve-count').textContent = `${cves.length} · ${cves.filter(c=>POCS[c.id]).length} native PoC`;
+  if(!cves.length){
+    $('cve-list').innerHTML = '<div class="sec-empty" style="margin-top:8px">Tespit edilen sürümler için eşleşen kritik CVE bulunamadı ✓</div>';
+    return;
+  }
+  $('cve-list').innerHTML = cves.map(c=>renderCVE(c, hitMajor)).join('');
+}
+
+function renderCVE(c, hitMajor){
+  const isHit = hitMajor && (c.affected||[]).includes(hitMajor);
+  const scoreCls = c.score>=9.5?'crit':'high';
+  const chips = (c.affected&&c.affected.length) ? `<div class="chips">`+c.affected.map(v=>`<span class="chip ${isHit&&v===hitMajor?'hit':''}">${esc(v)}${isHit&&v===hitMajor?' ◄':''}</span>`).join('')+`</div>`:'';
+  const nvd = `<a href="https://nvd.nist.gov/vuln/detail/${esc(c.id)}" target="_blank" rel="noopener">NVD</a>`;
+  const edb = (c.edb||[]).slice(0,1).map(r=>`<a href="${esc(r)}" target="_blank" rel="noopener">EDB</a>`).join(' ');
+  return `<div class="cve ${isHit?'hit':''}" id="cve-${esc(c.id)}">
+    <div class="cve-top">
+      <span class="cve-id">${esc(c.id)}</span>
+      ${isHit?'<span class="badge b-hit">HİT</span>':''}
+      <span class="badge b-sw">${esc(c.software||'')}</span>
+      <span class="badge b-type">${esc((c.exploit||{}).type||'')}</span>
+      ${(c.exploit||{}).preauth?'<span class="badge b-pre">PRE-AUTH</span>':''}
+      ${POCS[c.id]?'<span class="badge b-nat">native</span>':''}
+      <span class="score ${scoreCls}">${(c.score||0).toFixed(1)}</span>
+    </div>
+    <div class="cve-desc">${esc(c.desc||'')}</div>
+    ${chips}
+    <div class="cve-meta"><span class="cwe">${esc(c.cwe||'')}</span><span>📅 ${esc(c.published||'')}</span><span>${nvd} ${edb}</span></div>
+    ${POCS[c.id]?renderPoC(c.id):''}
+  </div>`;
+}
+
+function renderPoC(cveId){
+  const p = POCS[cveId];
+  const inputs = (p.inputs||[]).map(inp=>`
+    <div>
+      <label class="f">${esc(inp.label)}${inp.req?' *':''}</label>
+      <input class="mono" data-key="${esc(inp.key)}" placeholder="${esc(inp.placeholder||'')}" value="${esc(inp.default||'')}" spellcheck="false">
+    </div>`).join('');
+  return `<div class="poc" id="poc-${esc(cveId)}">
+    <div class="poc-head"><span style="font-size:16px">⚔</span><span class="pname">${esc(p.name||'')}</span>
+      <span class="badge b-type">${esc(p.type||'')}</span>
+      ${p.preauth?'<span class="badge b-pre">PRE-AUTH</span>':''}</div>
+    ${p.note?`<div class="poc-note">⚠ ${esc(p.note)}</div>`:''}
+    ${inputs?`<div class="poc-grid">${inputs}</div>`:''}
+    <button class="btn danger" onclick="runPoC('${esc(cveId)}')">▶ Çalıştır (native engine)</button>
+    <div class="outbox" id="pocout-${esc(cveId)}"></div>
+    <div id="pocres-${esc(cveId)}"></div>
+  </div>`;
+}
+
+function pocParams(cveId){
+  const card = document.getElementById('poc-'+cveId);
+  const vals={};
+  if(card) card.querySelectorAll('input[data-key]').forEach(inp=>{ vals[inp.dataset.key]=inp.value.trim(); });
+  return vals;
+}
+
+async function runPoC(cveId){
+  const out = $('pocout-'+cveId); const res=$('pocres-'+cveId);
+  out.classList.add('show'); out.innerHTML='<span class="dim">native engine çalışıyor… (socket/HTTP scanner\'dan atılıyor)</span>';
+  res.innerHTML='';
+  const params = pocParams(cveId);
+  try{
+    // profile-linked when viewing a saved profile (recorded to poc_runs), else ad-hoc
+    const url = currentProfileId ? `/profiles/${encodeURIComponent(currentProfileId)}/poc/${encodeURIComponent(cveId)}` : `/poc/${encodeURIComponent(cveId)}`;
+    const r = await j(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({params})});
+    renderPoCResult(out,res,r.result||r);
+    loadLogs();
+    if(currentProfileId) loadProfiles();
+  }catch(e){
+    out.innerHTML=`<span class="err">✗ ${esc(e.message)}</span>`;
+  }
+}
+
+function renderPoCResult(out,res){
+  let h='';
+  if(res.error) h+=`<span class="err">✗ ${esc(res.error)}</span>\n`;
+  if(res.status!=null) h+=`<span class="dim">HTTP ${res.status}</span>\n`;
+  if(res.evidence){ h+=`<span class="dim">KANIT:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`; }
+  const det=res.detail||{};
+  if(det.host) h+=`<span class="dim">hedef: ${esc(det.host)}</span>\n`;
+  if(det.stage) h+=`<span class="dim">aşama: ${esc(det.stage)}</span>\n`;
+  if(det.chunk_base) h+=`<span class="dim">chunk=${esc(det.chunk_base)} libphp=${esc(det.libphp_base||'')} zif=${esc(det.zif_abs||'')} htdata=${esc(det.htdata_abs||'')}</span>\n`;
+  if(det.split) h+=`<span class="dim">split: ${det.split.map(esc).join(' ')}</span>\n`;
+  if(res.log && res.log.length) h+=`<span class="dim">── log ──\n</span>${res.log.map(l=>'<span class="dim">'+esc(l)+'</span>').join('\n')}`;
+  if(!h) h='<span class="dim">çıktı yok</span>';
+  out.innerHTML=h;
+  const badge = document.getElementById('pocres-'+out.id.replace('pocout-',''));
+  if(badge){
+    if(res.success) badge.innerHTML='<span class="result-badge win">✓ BAŞARILI — kanıt alındı</span>';
+    else if(res.error) badge.innerHTML='<span class="result-badge lose">✗ başarısız</span>';
+    else badge.innerHTML='<span class="result-badge mid">○ çalıştı — hedef savunmalı / trigger tetiklenmedi</span>';
+  }
+}
+
+/* ---------- history (scans + poc runs) ---------- */
+async function loadHistory(pid){
+  try{
+    const [sc,pc] = await Promise.all([j(`/profiles/${encodeURIComponent(pid)}/scans`), j(`/profiles/${encodeURIComponent(pid)}/poc-runs`)]);
+    $('hist-scan-n').textContent = sc.count;
+    $('hist-poc-n').textContent = pc.count;
+    $('hist-scans').innerHTML = sc.scans.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman (UTC)</th><th>URL</th><th>Risk</th><th>CVE</th></tr>`
+      + sc.scans.map(s=>`<tr><td>${s.id}</td><td>${esc(s.ts)}</td><td>${esc(s.url||'')}</td><td class="${(s.risk&&s.risk.score>=65)?'warn':'ok'}">${s.risk?s.risk.score:'—'}</td><td>${s.cve_count}</td></tr>`).join('')+'</table></div>'
+      : '<div class="sec-empty">tarama kaydı yok</div>';
+    $('hist-pocs').innerHTML = pc.runs.length ? `<div class="tbl-wrap"><table class="tbl"><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuç</th><th>Kanıt (kısa)</th></tr>`
+      + pc.runs.map(r=>`<tr><td>${r.id}</td><td>${esc(r.ts)}</td><td>${esc(r.cve_id)}</td><td class="${r.success?'ok':'no'}">${r.success?'✓ BAŞARILI':'✗'}</td><td class="cell-txt">${esc((r.result&&r.result.evidence||'').slice(0,90))}</td></tr>`).join('')+'</table></div>'
+      : '<div class="sec-empty">PoC çalıştırma kaydı yok</div>';
+    $('history-block').style.display='block';
+  }catch(e){ $('history-block').style.display='none'; }
+}
+
+/* ---------- profiles ---------- */
+async function loadProfiles(){
+  try{
+    const r = await j('/profiles'); PROFILES = r.profiles||[];
+    $('n-profiles').textContent = PROFILES.length;
+    renderProfiles();
+  }catch(e){}
+}
+function renderProfiles(){
+  $('prof-count').textContent = PROFILES.length;
+  if(!PROFILES.length){
+    $('profiles-body').innerHTML='<div class="empty"><div class="big">📁</div>Henüz profil yok. "Tarama" sekmesinden hedef tara → profil SQLite\'a kaydedilir.</div>';
+    return;
+  }
+  $('profiles-body').innerHTML = `<div class="profiles-grid">`+PROFILES.map(p=>{
+    const r=p.risk||{}; const score=r.score||0; const C=2*Math.PI*26;
+    const col = gradeColor(score);
+    return `<div class="profile-card">
+      <div class="ph">
+        <div style="min-width:0"><div class="pname">${esc(p.name)}</div><div class="purl">${esc(p.url)}</div></div>
+        <div class="mini-gauge">
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="var(--bg4)" stroke-width="7"/>
+            <circle cx="32" cy="32" r="26" fill="none" stroke="${col}" stroke-width="7" stroke-linecap="round"
+              transform="rotate(-90 32 32)" stroke-dasharray="${C}" stroke-dashoffset="${C-(score/100)*C}"/>
+          </svg>
+          <div class="mn" style="color:${col}">${Math.round(score)}</div>
+        </div>
+      </div>
+      <div class="pfacts">
+        <span class="pfact">${r.letter||'—'} ${esc(r.grade||'')}</span>
+        <span class="pfact">${p.n_cve||0} CVE</span>
+        <span class="pfact">${(p.open_ports||[]).length} port</span>
+        <span class="pfact">${p.scans||0} tarama</span>
+        <span class="pfact">${p.poc_runs||0} PoC</span>
+      </div>
+      <div class="pactions">
+        <button class="btn sm primary" onclick="openProfile('${esc(p.id)}')">Aç</button>
+        <button class="btn sm" onclick="rescanProfile('${esc(p.id)}')">↻ Tara</button>
+        <button class="btn sm" onclick="report('${esc(p.id)}')">⬇ Rapor</button>
+        <button class="btn sm danger" onclick="delProfile('${esc(p.id)}')">Sil</button>
+      </div>
+    </div>`;
+  }).join('')+'</div>';
+}
+async function openProfile(id){
+  const p = await j('/profiles/'+encodeURIComponent(id));
+  currentProfileId = p.id;
+  $('target-url').value = p.url||''; $('target-name').value = p.name||'';
+  switchView('scan');
+  renderScan(p.scan||{}, p);
+}
+async function rescanProfile(id){
+  $('target-url').value = (PROFILES.find(x=>x.id===id)||{}).url||'';
+  switchView('scan');
+  const prof = await j(`/profiles/${encodeURIComponent(id)}/rescan`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+  currentProfileId = prof.id;
+  renderScan(prof.scan||prof, prof);
+  loadProfiles(); loadLogs();
+  $('scan-state').textContent='yeniden tarandı ✓';
+}
+function rescanCurrent(){ if(currentProfileId) rescanProfile(currentProfileId); }
+async function report(id){
+  const r = await jraw('/profiles/'+encodeURIComponent(id)+'/report?fmt=md');
+  const text = await r.text();
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([text],{type:'text/markdown'}));
+  a.download='risk_raporu_'+id+'.md'; a.click();
+}
+async function delProfile(id){
+  if(!confirm('Bu profili ve tüm tarama/PoC kayıtlarını sil?'))return;
+  await fetch('/profiles/'+encodeURIComponent(id),{method:'DELETE'});
+  if(currentProfileId===id){currentProfileId=null;}
+  loadProfiles(); loadLogs();
+}
+
+/* ---------- DB view ---------- */
+function buildDBfilters(){
+  const sws=[...new Set(DB.map(c=>c.software))].sort();
+  $('db-sw').innerHTML='<option value="">Tüm yazılımlar</option>'+sws.map(s=>`<option>${esc(s)}</option>`).join('');
+  onDbSw();
+}
+function onDbSw(){
+  const sw=$('db-sw').value;
+  const set=new Set();
+  DB.forEach(c=>{ if(!sw||c.software===sw) (c.affected||[]).forEach(v=>set.add(v)); });
+  const vs=[...set].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+  $('db-ver').innerHTML='<option value="">Tüm sürümler</option>'+vs.map(v=>`<option>${esc(v)}</option>`).join('');
+  renderDB();
+}
+function renderDB(){
+  const sw=$('db-sw').value, ver=$('db-ver').value, q=($('db-q').value||'').toLowerCase();
+  let out=DB.filter(c=>{
+    if(sw&&c.software!==sw)return false;
+    if(ver&&!(c.affected||[]).includes(ver))return false;
+    if(q&&!( (c.id||'').toLowerCase().includes(q) || (c.desc||'').toLowerCase().includes(q) ))return false;
+    return true;
+  }).sort((a,b)=>b.score-a.score);
+  $('db-count').textContent=out.length+' CVE';
+  $('db-body').innerHTML = out.slice(0,300).map(c=>renderCVE(c,ver||null)).join('')
+    || '<div class="sec-empty">Sonuç yok</div>';
+  if(out.length>300) $('db-body').innerHTML+=`<div class="empty">+ ${out.length-300} daha (filtre daralt)</div>`;
+}
+
+/* ---------- LOG view ---------- */
+let logLiveTimer=null;
+async function loadLogs(clear){
+  try{
+    const q=$('log-q').value.trim(), lvl=$('log-level').value, cat=$('log-cat').value;
+    const params=new URLSearchParams({limit:'300'});
+    if(q)params.set('q',q); if(lvl)params.set('level',lvl); if(cat)params.set('category',cat);
+    const r = await j('/logs?'+params.toString());
+    $('n-logs').textContent = r.count; $('log-count').textContent = r.count;
+    updateLiveTail(r.logs);
+    $('log-console').innerHTML = r.logs.length ? r.logs.map(l=>{
+      const d = l.data?`\n<span class="data">${esc(JSON.stringify(l.data))}</span>`:'';
+      return `<div class="log-line"><span class="ts">${esc((l.ts||'').replace('T',' ').replace('Z',''))}</span><span class="lvl ${l.level}">${esc(l.level)}</span><span class="cat">${esc(l.category||'-')}</span><span class="msg">${esc(l.message||'')}</span>${d}</div>`;
+    }).join('') : '<div class="log-line"><span class="msg" style="color:var(--text3)">log yok</span></div>';
+  }catch(e){ $('log-console').innerHTML='<span class="dim">log yüklenemedi: '+esc(e.message)+'</span>'; }
+}
+function updateLiveTail(logs){
+  if(!logs||!logs.length) return;
+  const l=logs[0];
+  $('live-tail').innerHTML=`<b>${esc(l.level)}</b> ${esc((l.message||'').slice(0,80))}`;
+}
+function clearLogs(){
+  if(!confirm('Tüm logları temizle?'))return;
+  fetch('/logs/clear',{method:'POST'}).then(()=>loadLogs());
+}
+function toggleLogLive(){
+  const on=$('log-live').checked;
+  if(on){ logLiveTimer=setInterval(loadLogs,3000); }
+  else if(logLiveTimer){ clearInterval(logLiveTimer); logLiveTimer=null; }
+}
+
+/* ---------- MCP view ---------- */
+const MCP_TOOLS=[
+  ['scan_target','url, name?, save?','Fingerprint + WAF + port + TLS + CVE + risk; profil SQLite\'a kaydeder'],
+  ['list_cves','software?, version?','Kritik CVE listesi (filtreli)'],
+  ['get_cve','id','Tek CVE (PoC paneliyle)'],
+  ['poc_list','—','Native PoC katalogu'],
+  ['poc_describe','cve_id','Native PoC mantığı + parametreler'],
+  ['run_poc','cve_id, params','Native engine ile PoC çalıştır (socket/HTTP scanner\'dan)'],
+  ['list_profiles','—','Kayıtlı hedef profilleri (SQLite)'],
+  ['get_profile','id','Tek profil (tam + tarihçe)'],
+  ['delete_profile','id','Profili sil'],
+  ['export_report','id, fmt','Risk raporu (md/json) + yol'],
+  ['risk_score','id | url','Risk puanı + faktör kırılımı'],
+  ['tls_fingerprint','host, port?','TLS/sertifika parmak izi'],
+  ['port_scan','host, extra_ports?','TCP port + servis banner'],
+  ['list_logs','level?, category?, limit?','Operasyon logları (SQLite + dosya)'],
+];
+function renderMCP(){
+  $('mcp-install').textContent =
+`# stdio MCP (Qwen Code)
+qwen mcp add p2s -- /opt/homebrew/bin/python3.12 \\
+  /Users/emredagdelen/Desktop/php2shell/mcp_server.py
+# sonra: tam Qwen restart (qwen mcp add hot-load yapmaz)
+
+# HTTP API
+curl -sX POST http://127.0.0.1:8123/scan -H 'Content-Type: application/json' -d '{"url":"http://192.168.8.123:18111/index.php"}'
+curl -sX POST http://127.0.0.1:8123/poc/CVE-2026-109618 -H 'Content-Type: application/json' -d '{"params":{"url":"…","cmd":"id>/out/p1"}}'`;
+  $('mcp-tool-n').textContent = MCP_TOOLS.length;
+  $('mcp-tools').innerHTML='<tr><th>Tool</th><th>Args</th><th>Açıklama</th></tr>'+MCP_TOOLS.map(t=>`<tr><td>${t[0]}</td><td>${esc(t[1])}</td><td class="cell-txt">${esc(t[2])}</td></tr>`).join('');
+}
+async function runTest(){
+  const tool=$('test-tool').value; let args={};
+  try{ args = $('test-arg').value.trim()?JSON.parse($('test-arg').value):{}; }catch(e){alert('Argument JSON geçersiz: '+e.message);return;}
+  const out=$('test-out'); out.classList.add('show'); out.innerHTML='<span class="dim">çalışıyor…</span>';
+  try{
+    let res;
+    if(tool==='poc_list'){ res=await j('/pocs'); res=Object.keys(res.pocs||{}).length+' PoC'; }
+    else if(tool==='list_cves'){ res=await j('/cves?'+(args.software?'software='+encodeURIComponent(args.software):'')); res={count:res.count, first:res.cves.slice(0,3)}; }
+    else if(tool==='risk_score'){ const b={url:args.url,save:false}; res=await j('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}); res=(res.scan||{}).risk||res.risk; }
+    else if(tool==='list_logs'){ res=await j('/logs?limit=10'); res={count:res.count, latest:res.logs.slice(0,5)}; }
+    out.innerHTML='<span class="ev">'+esc(JSON.stringify(res,null,2))+'</span>';
+  }catch(e){ out.innerHTML=`<span class="err">✗ ${esc(e.message)}</span>`; }
+}
+
+init();
+</script>
+</body>
+</html>

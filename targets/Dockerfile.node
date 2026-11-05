@@ -1,0 +1,7 @@
+FROM node:20-slim
+WORKDIR /app
+COPY node_lfi.js .
+ENV PORT=3000
+EXPOSE 3000
+# Non-root by default in node:slim; the lab target just needs fs read.
+CMD ["node", "node_lfi.js"]
