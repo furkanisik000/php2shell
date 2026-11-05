@@ -1,0 +1,37 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "libphp": "0x7f015d200000",
+      "slots": [
+        "0x55b17533b3c0"
+      ],
+      "system": "0x7f0161d1a090",
+      "worker_after": 3367078,
+      "worker_before": 3367078,
+      "worker_survived": true
+    },
+    {
+      "attempt": 2,
+      "libphp": "0x7f015d200000",
+      "slots": [
+        "0x55b17533b3c0"
+      ],
+      "system": "0x7f0161d1a090",
+      "worker_after": 3367699,
+      "worker_before": 3367699,
+      "worker_survived": true
+    }
+  ],
+  "libphp_base": "0x7f015d200000",
+  "observed_slots": [
+    "0x55b17533b3c0"
+  ],
+  "selected_slots": [
+    "0x55b17533b370",
+    "0x55b17533b3c0",
+    "0x55b17533b410"
+  ],
+  "slot_basis": "repeated_slot_plus_adjacent_guards",
+  "system_address": "0x7f0161d1a090"
+}

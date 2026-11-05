@@ -1,0 +1,276 @@
+{
+  "sampling": "Three random distinct image digests from each label, plus the legacy distro-backport edge case if not already drawn.",
+  "seed": "628b02bc2eb7f54db257f42d",
+  "priorRun": "https://github.com/YoungOnef/php2shell-observatory-data/actions/runs/39863099729",
+  "samples": [
+    {
+      "image": "privatebin/nginx-fpm-alpine:latest",
+      "project": "privatebin",
+      "name": "PrivateBin",
+      "checkedAt": "2026-10-22T21:59:46.651Z",
+      "status": "fixed",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:f37dffd71cf0322e4bb2c083b13d3c839c2f2c6e6c50076fbd5d56f967b3fb97",
+      "immutable": "docker.io/privatebin/nginx-fpm-alpine@sha256:f37dffd71cf0322e4bb2c083b13d3c839c2f2c6e6c50076fbd5d56f967b3fb97",
+      "publishedAt": "2026-10-22T02:32:28.875478979Z",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.5.12",
+          "status": "patched",
+          "minimum": "8.5.12",
+          "reason": "Meets the upstream fixed version for this PHP branch. CLI evidence does not attest the web SAPI."
+        },
+        {
+          "sapi": "FPM",
+          "version": "8.5.12",
+          "status": "patched",
+          "minimum": "8.5.12",
+          "reason": "Meets the upstream fixed version for this PHP branch. CLI evidence does not attest the web SAPI."
+        }
+      ],
+      "reason": "All queried PHP runtime binaries meet the upstream fix versions for both CVEs.",
+      "tagCheckedAt": "2026-10-22T22:11:45.821Z"
+    },
+    {
+      "image": "joomla:latest",
+      "project": "joomla!",
+      "name": "Joomla!",
+      "checkedAt": "2026-10-22T22:00:06.085Z",
+      "status": "fixed",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:ccb1a6a3ceb84c51d3a21a9122b2bcaf239a5d297bd4d3a3e0a0d65c7048ff84",
+      "immutable": "docker.io/library/joomla@sha256:ccb1a6a3ceb84c51d3a21a9122b2bcaf239a5d297bd4d3a3e0a0d65c7048ff84",
+      "publishedAt": "2026-10-21T16:36:38.396697936Z",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.4.27",
+          "status": "patched",
+          "minimum": "8.4.27",
+          "reason": "Meets the upstream fixed version for this PHP branch. CLI evidence does not attest the web SAPI."
+        }
+      ],
+      "reason": "All queried PHP runtime binaries meet the upstream fix versions for both CVEs.",
+      "tagCheckedAt": "2026-10-22T22:11:48.618Z"
+    },
+    {
+      "image": "wordpress:latest",
+      "project": "wordpress",
+      "name": "WordPress",
+      "checkedAt": "2026-10-22T21:58:12.941Z",
+      "status": "fixed",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:806680ba62232c4c300fb9dcc9f89d08e9e8c2bfc59837a1f58716f8648306d5",
+      "immutable": "docker.io/library/wordpress@sha256:806680ba62232c4c300fb9dcc9f89d08e9e8c2bfc59837a1f58716f8648306d5",
+      "publishedAt": "2026-10-21T16:29:48.270758445Z",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.3.36",
+          "status": "patched",
+          "minimum": "8.3.36",
+          "reason": "Meets the upstream fixed version for this PHP branch. CLI evidence does not attest the web SAPI."
+        }
+      ],
+      "reason": "All queried PHP runtime binaries meet the upstream fix versions for both CVEs.",
+      "tagCheckedAt": "2026-10-22T22:11:41.881Z"
+    },
+    {
+      "image": "phpmyadmin:5.2.1",
+      "project": "plainpad",
+      "name": "Plainpad",
+      "checkedAt": "2026-10-22T22:04:54.699Z",
+      "status": "affected",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:02ca8a185af8a72811316b7789565970a7b3b74e83366076dcdd7618f62a8cf5",
+      "immutable": "docker.io/library/phpmyadmin@sha256:02ca8a185af8a72811316b7789565970a7b3b74e83366076dcdd7618f62a8cf5",
+      "publishedAt": "2025-01-14T13:39:35Z",
+      "executionRef": "docker.io/library/phpmyadmin@sha256:02ca8a185af8a72811316b7789565970a7b3b74e83366076dcdd7618f62a8cf5",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.2.27",
+          "status": "below-fixed",
+          "minimum": "8.2.35",
+          "reason": "Below upstream fix threshold; vendor backports require separate evidence."
+        }
+      ],
+      "reason": "A queried runtime is below the upstream PHP fix. No vendor backport has been automatically confirmed.",
+      "tagCheckedAt": "2026-10-22T22:11:49.772Z"
+    },
+    {
+      "image": "phpmyadmin/phpmyadmin:5.0.1",
+      "project": "lingarr",
+      "name": "Lingarr",
+      "checkedAt": "2026-10-22T22:06:18.736Z",
+      "status": "affected",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:d2191935bda8c825bcf51d1c659efcd4d80a4f5da907ea72c8517c8144136de4",
+      "immutable": "docker.io/phpmyadmin/phpmyadmin@sha256:d2191935bda8c825bcf51d1c659efcd4d80a4f5da907ea72c8517c8144136de4",
+      "publishedAt": "2020-01-14T01:10:53.656516983Z",
+      "executionRef": "docker.io/phpmyadmin/phpmyadmin@sha256:d2191935bda8c825bcf51d1c659efcd4d80a4f5da907ea72c8517c8144136de4",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "7.4.1",
+          "status": "below-fixed",
+          "reason": "Legacy PHP branch has no supported upstream fixed release. No vendor backport has been automatically confirmed."
+        }
+      ],
+      "reason": "A queried runtime is below the upstream PHP fix. No vendor backport has been automatically confirmed.",
+      "tagCheckedAt": "2026-10-22T22:11:53.210Z"
+    },
+    {
+      "image": "alcohol/php:8.3-xdebug",
+      "project": "zenphoto",
+      "name": "Zenphoto",
+      "checkedAt": "2026-10-22T22:06:29.724Z",
+      "status": "affected",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:932993341f21cf4ff7707ba89e551af3f17399ee2a43792955b9832900f26d0d",
+      "immutable": "docker.io/alcohol/php@sha256:932993341f21cf4ff7707ba89e551af3f17399ee2a43792955b9832900f26d0d",
+      "publishedAt": "2026-10-19T15:15:17.499251987Z",
+      "executionRef": "docker.io/alcohol/php@sha256:932993341f21cf4ff7707ba89e551af3f17399ee2a43792955b9832900f26d0d",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.3.35",
+          "status": "below-fixed",
+          "minimum": "8.3.36",
+          "reason": "Below upstream fix threshold; vendor backports require separate evidence."
+        },
+        {
+          "sapi": "CGI",
+          "version": "8.3.35",
+          "status": "below-fixed",
+          "minimum": "8.3.36",
+          "reason": "Below upstream fix threshold; vendor backports require separate evidence."
+        }
+      ],
+      "reason": "A queried runtime is below the upstream PHP fix. No vendor backport has been automatically confirmed.",
+      "tagCheckedAt": "2026-10-22T22:11:53.791Z"
+    },
+    {
+      "image": "wallabag/wallabag:latest",
+      "project": "wallabag",
+      "name": "Wallabag",
+      "checkedAt": "2026-10-22T22:03:06.079Z",
+      "status": "affected",
+      "platform": "linux/amd64",
+      "scope": "Published image runtime binaries on linux/amd64; not the userâ€™s running deployment.",
+      "digest": "sha256:82ade66b403d67c05732f9f08003034509f6499e9f487b858c0b77524b28545d",
+      "immutable": "docker.io/wallabag/wallabag@sha256:82ade66b403d67c05732f9f08003034509f6499e9f487b858c0b77524b28545d",
+      "publishedAt": "2025-10-07T08:18:01.960915532Z",
+      "executionRef": "docker.io/wallabag/wallabag@sha256:82ade66b403d67c05732f9f08003034509f6499e9f487b858c0b77524b28545d",
+      "runtimes": [
+        {
+          "sapi": "CLI",
+          "version": "8.1.32",
+          "status": "below-fixed",
+          "reason": "Legacy PHP branch has no supported upstream fixed release. No vendor backport has been automatically confirmed."
+        },
+        {
+          "sapi": "FPM",
+          "version": "8.1.32",
+          "status": "below-fixed",
+          "reason": "Legacy PHP branch has no supported upstream fixed release. No vendor backport has been automatically confirmed."
+        }
+      ],
+      "reason": "A queried runtime is below the upstream PHP fix. No vendor backport has been automatically confirmed.",
+      "tagCheckedAt": "2026-10-22T22:11:43.220Z"
+    },
+    {
+      "image": "shlinkio/shlink:latest",
+      "digest": "sha256:9083dc4ba2b682c43e1a477b69ef451738253fc8ad680db072663ea68530a973",
+      "indexDigest": "sha256:68a722f7677008a50ccf3a9e570966bc37d7627fe6a870b86be28c5dcf9085ee",
+      "platform": "linux/amd64",
+      "immutable": "docker.io/shlinkio/shlink@sha256:9083dc4ba2b682c43e1a477b69ef451738253fc8ad680db072663ea68530a973",
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "PHPIZE_DEPS=autoconf \t\tdpkg-dev dpkg \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkgconf \t\tre2c",
+        "PHP_INI_DIR=/usr/local/etc/php",
+        "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+        "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+        "PHP_LDFLAGS=-Wl,-O1 -pie",
+        "GPG_KEYS=1198C0117593497A5EC5C199286AF1F9897469DC 49D9AF6BC72A80D6691719C8AA23F5BE9C7097D4 D95C03BC702BE9515344AE3374E44BC9067701A5",
+        "PHP_VERSION=8.5.12",
+        "PHP_URL=https://www.php.net/distributions/php-8.5.12.tar.xz",
+        "PHP_ASC_URL=https://www.php.net/distributions/php-8.5.12.tar.xz.asc",
+        "PHP_SHA256=08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+        "SHLINK_VERSION=5.1.8",
+        "SHLINK_RUNTIME=rr",
+        "USER_ID=1001",
+        "PDO_SQLSRV_VERSION=5.13.0",
+        "MS_ODBC_DOWNLOAD=fae28b9a-d880-42fd-9b98-d779f0fdd77f",
+        "MS_ODBC_SQL_VERSION=18_18.5.1.1",
+        "LC_ALL=C"
+      ],
+      "labels": {
+        "maintainer": "Alejandro Celaya <alejandro@alejandrocelaya.com>",
+        "org.opencontainers.image.created": "2026-10-22T09:54:48.053Z",
+        "org.opencontainers.image.description": "The definitive self-hosted URL shortener",
+        "org.opencontainers.image.licenses": "MIT",
+        "org.opencontainers.image.revision": "4a642689caf19e9dace0f709b08334db25519f16",
+        "org.opencontainers.image.source": "https://github.com/shlinkio/shlink",
+        "org.opencontainers.image.title": "shlink",
+        "org.opencontainers.image.url": "https://github.com/shlinkio/shlink",
+        "org.opencontainers.image.version": "5.1.8"
+      },
+      "publishedAt": "2026-10-22T09:57:16.40383623Z",
+      "size": 116846673,
+      "name": "Shlink",
+      "status": "fixed",
+      "runtimes": []
+    },
+    {
+      "image": "shlinkio/shlink:5.1.7",
+      "digest": "sha256:a0bbe22e39d817ababfba71fe0d0b883a9c1609ac02a3e0ddf3c981a16a9cb52",
+      "indexDigest": "sha256:844e1f2b6455331c5b49207bad3a2455ccd65e62bb9daa09a6c57afff26bd9c8",
+      "platform": "linux/amd64",
+      "immutable": "docker.io/shlinkio/shlink@sha256:a0bbe22e39d817ababfba71fe0d0b883a9c1609ac02a3e0ddf3c981a16a9cb52",
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "PHPIZE_DEPS=autoconf \t\tdpkg-dev dpkg \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkgconf \t\tre2c",
+        "PHP_INI_DIR=/usr/local/etc/php",
+        "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+        "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+        "PHP_LDFLAGS=-Wl,-O1 -pie",
+        "GPG_KEYS=1198C0117593497A5EC5C199286AF1F9897469DC 49D9AF6BC72A80D6691719C8AA23F5BE9C7097D4 D95C03BC702BE9515344AE3374E44BC9067701A5",
+        "PHP_VERSION=8.5.7",
+        "PHP_URL=https://www.php.net/distributions/php-8.5.7.tar.xz",
+        "PHP_ASC_URL=https://www.php.net/distributions/php-8.5.7.tar.xz.asc",
+        "PHP_SHA256=01ba2ed1c2658dacf91bebc8be6a4885f69b811c7993831fc48e26107ab29985",
+        "SHLINK_VERSION=5.1.7",
+        "SHLINK_RUNTIME=rr",
+        "USER_ID=1001",
+        "PDO_SQLSRV_VERSION=5.13.0",
+        "MS_ODBC_DOWNLOAD=fae28b9a-d880-42fd-9b98-d779f0fdd77f",
+        "MS_ODBC_SQL_VERSION=18_18.5.1.1",
+        "LC_ALL=C"
+      ],
+      "labels": {
+        "maintainer": "Alejandro Celaya <alejandro@alejandrocelaya.com>",
+        "org.opencontainers.image.created": "2026-09-21T15:57:09.190Z",
+        "org.opencontainers.image.description": "The definitive self-hosted URL shortener",
+        "org.opencontainers.image.licenses": "MIT",
+        "org.opencontainers.image.revision": "3f17ecf9334ea3d53beba0539e6f23a42454f5a3",
+        "org.opencontainers.image.source": "https://github.com/shlinkio/shlink",
+        "org.opencontainers.image.title": "shlink",
+        "org.opencontainers.image.url": "https://github.com/shlinkio/shlink",
+        "org.opencontainers.image.version": "5.1.7"
+      },
+      "publishedAt": "2026-09-21T16:00:09.301325801Z",
+      "size": 112998350,
+      "name": "Shlink",
+      "status": "control",
+      "runtimes": []
+    }
+  ]
+}

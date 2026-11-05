@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Sun, 25 Oct 2026 14:26:41 GMT
+Server: Apache/2.4.62 (Debian)
+X-Powered-By: PHP/8.2.23
+Set-Cookie: PHPSESSID=8eedab9bca7ce2f3968205e95f7070bf; path=/
+Vary: Accept-Encoding
+Content-Length: 731
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+<br />
+<b>Warning</b>:  PHP Request Startup: open(/var/lib/php/sessions/sess_8eedab9bca7ce2f3968205e95f7070bf, O_RDWR) failed: No such file or directory (2) in <b>Unknown</b> on line <b>0</b><br />
+<br />
+<b>Warning</b>:  PHP Request Startup: Failed to read session data: files (path: /var/lib/php/sessions) in <b>Unknown</b> on line <b>0</b><br />
+<br />
+<b>Warning</b>:  PHP Request Startup: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php/sessions) in <b>Unknown</b> on line <b>0</b><br />
+<br />
+<b>Warning</b>:  session_start(): Session cannot be started after headers have already been sent in <b>/var/www/html/index.php</b> on line <b>2</b><br />
+OK

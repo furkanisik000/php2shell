@@ -1,0 +1,89 @@
+
+### query='php2shell' count=989
+  LyesH4ck/php2shell-lab                        upd=2026-10-25 stars=0
+      PHP2Shell lab — heap-leak-to-RCE chain, multi-build & multi-worker
+  JoshRob297/php2shell-research                 upd=2026-10-25 stars=0
+      In-depth technical verification, ASLR boundary analysis, and memory defaults impact for CV
+  imMamdouhaboammar/bug-killer                  upd=2026-10-25 stars=8
+      Autonomous Vulnerability Discovery & Self-Healing Engine for Deep and Ghosty Bugs
+  kipmyk/PHP2Shell                              upd=2026-10-25 stars=0
+      A local Docker-based research lab for investigating PHP2Shell (CVE-2026-109618 and CVE-202
+  Moladi19/php2shell-twinteach                  upd=2026-10-25 stars=0
+      tarea de moc sobre los errores de php
+  pbkwee/dephp2shell                            upd=2026-10-25 stars=0
+      Fix php2shell packages
+  Opathedane/php2shell                          upd=2026-10-25 stars=1
+      Read-only PHP discovery and patch-review scanner for Windows, Linux, and macOS. Produces H
+  Leviticus-Triage/php2shell-unchained          upd=2026-10-25 stars=0
+  CypherSecurity/php2shell-detection            upd=2026-10-25 stars=0
+      Detection and response package for php2shell (CVE-2026-109618 / CVE-2026-109619): Suricata
+  atombarel/php2shell-cli-1mb-lab               upd=2026-10-25 stars=0
+      Sub-1 MiB PHP CLI server PHP2Shell differential crash lab (8.4.26 vs 8.4.27)
+  eosrce/php2shell-research                     upd=2026-10-25 stars=0
+  windshock/php2shell                           upd=2026-10-25 stars=0
+      PHP security analysis lab with Linux FPM, ASAN builds, PHPT, and evidence collection
+  NabhanKashif/php2shell-exploits               upd=2026-10-25 stars=0
+  smile178998/php2shell-toolkit                 upd=2026-10-25 stars=1
+      CVE-2026-109618 PHP session.upload_progress detection & authorized testing toolkit
+  testerxma/php2shellX                          upd=2026-10-25 stars=1
+      Next-generation exploit orchestrator for CVE-2026-109618/619 — adds Cloudflare WAF bypass,
+
+### query='php2shell 8.2 OR 8.3 OR leak' count=989
+  LyesH4ck/php2shell-lab                        upd=2026-10-25 stars=0
+      PHP2Shell lab — heap-leak-to-RCE chain, multi-build & multi-worker
+  JoshRob297/php2shell-research                 upd=2026-10-25 stars=0
+      In-depth technical verification, ASLR boundary analysis, and memory defaults impact for CV
+  imMamdouhaboammar/bug-killer                  upd=2026-10-25 stars=8
+      Autonomous Vulnerability Discovery & Self-Healing Engine for Deep and Ghosty Bugs
+  kipmyk/PHP2Shell                              upd=2026-10-25 stars=0
+      A local Docker-based research lab for investigating PHP2Shell (CVE-2026-109618 and CVE-202
+  Moladi19/php2shell-twinteach                  upd=2026-10-25 stars=0
+      tarea de moc sobre los errores de php
+  pbkwee/dephp2shell                            upd=2026-10-25 stars=0
+      Fix php2shell packages
+  Opathedane/php2shell                          upd=2026-10-25 stars=1
+      Read-only PHP discovery and patch-review scanner for Windows, Linux, and macOS. Produces H
+  Leviticus-Triage/php2shell-unchained          upd=2026-10-25 stars=0
+  CypherSecurity/php2shell-detection            upd=2026-10-25 stars=0
+      Detection and response package for php2shell (CVE-2026-109618 / CVE-2026-109619): Suricata
+  atombarel/php2shell-cli-1mb-lab               upd=2026-10-25 stars=0
+      Sub-1 MiB PHP CLI server PHP2Shell differential crash lab (8.4.26 vs 8.4.27)
+  eosrce/php2shell-research                     upd=2026-10-25 stars=0
+  windshock/php2shell                           upd=2026-10-25 stars=0
+      PHP security analysis lab with Linux FPM, ASAN builds, PHPT, and evidence collection
+  NabhanKashif/php2shell-exploits               upd=2026-10-25 stars=0
+  smile178998/php2shell-toolkit                 upd=2026-10-25 stars=1
+      CVE-2026-109618 PHP session.upload_progress detection & authorized testing toolkit
+  testerxma/php2shellX                          upd=2026-10-25 stars=1
+      Next-generation exploit orchestrator for CVE-2026-109618/619 — adds Cloudflare WAF bypass,
+
+### query='CVE-2026-109618' count=683
+  JoshRob297/php2shell-research                 upd=2026-10-25 stars=0
+      In-depth technical verification, ASLR boundary analysis, and memory defaults impact for CV
+  kipmyk/PHP2Shell                              upd=2026-10-25 stars=0
+      A local Docker-based research lab for investigating PHP2Shell (CVE-2026-109618 and CVE-202
+  Opathedane/php2shell                          upd=2026-10-25 stars=1
+      Read-only PHP discovery and patch-review scanner for Windows, Linux, and macOS. Produces H
+  jeffschafer/Bigfix-PHP-Vulnerability-Scanner-Content-CVE-2026-109618-CVE-2026-109619 upd=2026-10-25 stars=0
+      Bigfix PHP Vulnerability Scanner Content (CVE-2026-109618, CVE-2026-109619) for Windows, L
+  CypherSecurity/php2shell-detection            upd=2026-10-25 stars=0
+      Detection and response package for php2shell (CVE-2026-109618 / CVE-2026-109619): Suricata
+  0x1c1101/CVE-2026-109618-PoC                  upd=2026-10-25 stars=0
+  smile178998/php2shell-toolkit                 upd=2026-10-25 stars=1
+      CVE-2026-109618 PHP session.upload_progress detection & authorized testing toolkit
+  testerxma/php2shellX                          upd=2026-10-25 stars=1
+      Next-generation exploit orchestrator for CVE-2026-109618/619 — adds Cloudflare WAF bypass,
+  fbuff-tools/php2shell-checker                 upd=2026-10-25 stars=0
+      Check PHP for PHP2Shell (CVE-2026-109618, CVE-2026-109619): fixed PHP and Ubuntu/Debian/Al
+  KyleClouthier/php2shell-action                upd=2026-10-25 stars=2
+      GitHub Action: fail the build if your project runs or pins a PHP version without the PHP2S
+  KyleClouthier/php2shell-check                 upd=2026-10-25 stars=2
+      Find out in one minute if a site is on a PHP version that gets the PHP2Shell fix. Self-del
+  egctl/php2shell                               upd=2026-10-25 stars=3
+      CVE-2026-109618 PoC tool — OOM ghost bucket trigger in PHP POST parsing (CVSS 9.2)
+  nokitakaze/CVE-2026-109618-109619-checker     upd=2026-10-25 stars=0
+      CVE-2026-109618 / 109619 checker
+  ctkqiang/PHP2ShellPOC2026                     upd=2026-10-25 stars=1
+      A passive exposure analyzer for the PHP2Shell bug class (CVE-2026-109618 and CVE-2026-1096
+  PHPatch/phpscan                               upd=2026-10-25 stars=2
+      Free open-source scanner: is your PHP version vulnerable to php2shell (CVE-2026-109618 / C

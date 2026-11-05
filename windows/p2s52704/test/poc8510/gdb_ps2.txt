@@ -1,0 +1,13 @@
+attach 45
+set pagination off
+set confirm off
+break *0x76a4d3f467c0
+commands 1
+silent
+printf "=== HIT ps_session_start, dumping ps_globals @ 0x76a4d5170a40 ===\n"
+x/120gx 0x76a4d5170a40
+printf "=== END ===\n"
+detach
+quit
+end
+continue

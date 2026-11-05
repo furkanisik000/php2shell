@@ -1,0 +1,5 @@
+{
+  "exclusions": [
+    {"repo":"pi-hole/pi-hole","reason":"Pi-hole v6 replaced PHP/lighttpd with the FTL embedded web server. Legacy v5 installations need separate assessment.","source":"https://pi-hole.net/blog/2025/02/18/introducing-pi-hole-v6/","checkedAt":"2026-10-22"}
+  ]
+}

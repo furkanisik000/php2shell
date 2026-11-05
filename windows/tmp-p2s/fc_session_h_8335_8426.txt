@@ -1,0 +1,178 @@
+Comparing files C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h and C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+   20:  #include "ext/standard/php_var.h"
+   21:  #include "ext/hash/php_hash.h"
+   22:  
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+   20:  #include "ext/standard/php_var.h"
+   21:  #include "ext/random/php_random.h"
+   22:  
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  134:          zval      data;                 /* the array exported to session data */
+  135:          zval     *post_bytes_processed; /* data["bytes_processed"] */
+  136:          zval      files;                /* data["files"] array */
+  137:          zval      current_file;         /* array of currently uploading file */
+  138:          zval     *current_file_bytes_processed;
+  139:  } php_session_rfc1867_progress;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  134:          zval      data;                 /* the array exported to session data */
+  135:          zval      files;                /* data["files"] array */
+  136:          zval     *post_bytes_processed; /* data["bytes_processed"] */
+  137:          zval     *current_file_bytes_processed;
+  138:          zval      current_file;         /* array of currently uploading file */
+  139:  } php_session_rfc1867_progress;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  149:          char *cookie_domain;
+  150:          bool  cookie_secure;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  149:          char *cookie_domain;
+  150:          char *cookie_samesite;
+  151:          bool  cookie_secure;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  151:          bool  cookie_httponly;
+  152:          char *cookie_samesite;
+  153:          const ps_module *mod;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  152:          bool  cookie_httponly;
+  153:          const ps_module *mod;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  158:          uint32_t session_started_lineno;
+  159:          zend_long gc_probability;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  158:          uint32_t session_started_lineno;
+  159:          int module_number;
+  160:          php_random_status_state_pcgoneseq128xslrr64 random_state;
+  161:          php_random_algo_with_state random;
+  162:          zend_long gc_probability;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  161:          zend_long gc_maxlifetime;
+  162:          int module_number;
+  163:          zend_long cache_expire;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  164:          zend_long gc_maxlifetime;
+  165:          zend_long cache_expire;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  174:          } mod_user_names;
+  175:          bool mod_user_implemented;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  176:          } mod_user_names;
+  177:          zend_string *mod_user_class_name;
+  178:          bool mod_user_implemented;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  176:          bool mod_user_is_open;
+  177:          zend_string *mod_user_class_name;
+  178:          const struct ps_serializer_struct *serializer;
+  179:          zval http_session_vars;
+  180:          bool auto_start;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  179:          bool mod_user_is_open;
+  180:          bool auto_start;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  183:          bool use_trans_sid; /* contains the INI value of whether to use trans-sid */
+  184:  
+  185:          zend_long sid_length;
+  186:          zend_long sid_bits_per_character;
+  187:          bool send_cookie;
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  183:          bool use_trans_sid; /* contains the INI value of whether to use trans-sid */
+  184:          bool send_cookie;
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  189:  
+  190:          php_session_rfc1867_progress *rfc1867_progress;
+  191:          bool rfc1867_enabled; /* session.upload_progress.enabled */
+  192:          bool rfc1867_cleanup; /* session.upload_progress.cleanup */
+  193:          char *rfc1867_prefix;  /* session.upload_progress.prefix */
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  186:  
+  187:          const struct ps_serializer_struct *serializer;
+  188:          zval http_session_vars;
+  189:  
+  190:          zend_long sid_length;
+  191:          zend_long sid_bits_per_character;
+  192:  
+  193:          php_session_rfc1867_progress *rfc1867_progress;
+  194:          char *rfc1867_prefix;  /* session.upload_progress.prefix */
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  196:          double rfc1867_min_freq;   /* session.upload_progress.min_freq */
+  197:  
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  197:          double rfc1867_min_freq;   /* session.upload_progress.min_freq */
+  198:          bool rfc1867_enabled; /* session.upload_progress.enabled */
+  199:          bool rfc1867_cleanup; /* session.upload_progress.cleanup */
+  200:  
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  201:          bool set_handler;     /* state if session module i setting handler or not */
+  202:          zend_string *session_vars; /* serialized original session data */
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  204:          bool set_handler;     /* state if session module i setting handler or not */
+  205:          bool random_seeded;
+  206:          zend_string *session_vars; /* serialized original session data */
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  254:  PHPAPI zval *php_get_session_var(zend_string *name);
+  255:  
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  258:  PHPAPI zval *php_get_session_var(zend_string *name);
+  259:  PHPAPI zval* php_get_session_var_str(const char *name, size_t name_len);
+  260:  
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  263:  PHPAPI zend_result php_session_flush(int write);
+  264:  
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  268:  PHPAPI zend_result php_session_flush(int write);
+  269:  PHPAPI php_session_status php_get_session_status(void);
+  270:  
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  290:  
+  291:  #define PS_ENCODE_LOOP(code) do {                                                                       \
+  292:          HashTable *_ht = Z_ARRVAL_P(Z_REFVAL(PS(http_session_vars)));   \
+  293:          ZEND_HASH_FOREACH_KEY(_ht, num_key, key) {                                              \
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  296:  
+  297:  /* Do not use a return statement in `code` because that may leak memory.
+  298:   * Break out of the loop instead. */
+  299:  #define PS_ENCODE_LOOP(code) do {                                                                       \
+  300:          zval _zv;                                                                                                              
+  301:  \
+  302:          /* protect against user interference */                                                 \
+  303:          ZVAL_COPY(&_zv, Z_REFVAL(PS(http_session_vars)));                               \
+  304:          HashTable *_ht = Z_ARRVAL(_zv);                                                                 \
+  305:          ZEND_HASH_FOREACH_KEY(_ht, num_key, key) {                                              \
+*****
+
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.3.35\EXT\SESSION\php_session.h
+  306:          } ZEND_HASH_FOREACH_END();                                                                              \
+  307:  } while(0)
+***** C:\USERS\LIKAT\.QWEN\TMP\P2S\PHP-8.4.26\EXT\SESSION\PHP_SESSION.H
+  318:          } ZEND_HASH_FOREACH_END();                                                                              \
+  319:          zval_ptr_dtor(&_zv);                                                                                    \
+  320:  } while(0)
+*****
+

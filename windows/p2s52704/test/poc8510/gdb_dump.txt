@@ -1,0 +1,14 @@
+attach 45
+set pagination off
+set confirm off
+break *0x76a4d414fe50
+commands 1
+silent
+printf "=== BREAKPOINT HIT at zend_execute ===\n"
+printf "ps_globals base = 0x76a4d5170a40\n"
+x/160gx 0x76a4d5170a40
+printf "=== END DUMP ===\n"
+detach
+quit
+end
+continue

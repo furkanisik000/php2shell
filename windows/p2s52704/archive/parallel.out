@@ -1,0 +1,36 @@
+launched p2s5445 (port 18101)
+launched p2s5538 (port 18102)
+launched p2s5640 (port 18103)
+launched p2s7033 (port 18104)
+launched p2s7133 (port 18105)
+launched p2s7234 (port 18106)
+launched p2s7333 (port 18107)
+launched p2s7433 (port 18108)
+launched p2s8030 (port 18109)
+launched p2s8132 (port 18110)
+launched p2s8234 (port 18111)
+launched p2s8335 (port 18112)
+launched p2s8426 (port 18113)
+launched p2s8511 (port 18114)
+
+14 exploits launched in parallel; waiting...
+
+============================================================
+SUMMARY (RCE = uid=33 in output):
+  p2s5445    port=18101  no RCE  rc=1
+  p2s5538    port=18102  no RCE  rc=1
+  p2s5640    port=18103  no RCE  rc=1
+  p2s7033    port=18104  no RCE  rc=1
+  p2s7133    port=18105  no RCE  rc=1
+  p2s7234    port=18106  no RCE  rc=1
+  p2s7333    port=18107  no RCE  rc=1
+  p2s7433    port=18108  no RCE  rc=1
+  p2s8030    port=18109  no RCE  rc=1
+  p2s8132    port=18110  no RCE  rc=1
+  p2s8234    port=18111  no RCE  rc=1
+  p2s8335    port=18112  no RCE  rc=1
+  p2s8426    port=18113  no RCE  rc=1
+  p2s8511    port=18114  no RCE  rc=1
+
+RCE proven (0): 
+No RCE (14): p2s5445, p2s5538, p2s5640, p2s7033, p2s7133, p2s7234, p2s7333, p2s7433, p2s8030, p2s8132, p2s8234, p2s8335, p2s8426, p2s8511

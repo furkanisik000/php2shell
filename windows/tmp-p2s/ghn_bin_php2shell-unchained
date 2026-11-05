@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Menü-Launcher. Funktioniert auch als PATH-Symlink.
+set -euo pipefail
+SOURCE="${BASH_SOURCE[0]}"
+while [[ -L "$SOURCE" ]]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+LAB="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
+exec "$LAB/bin/vtbw-php2shell-lab" menu "$@"

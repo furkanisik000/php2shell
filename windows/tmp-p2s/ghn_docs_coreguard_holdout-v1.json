@@ -1,0 +1,30 @@
+{
+  "version": "v1",
+  "frozen_at": "2026-10-23",
+  "rule": "evaluation-only cases: reproduced on 8.4.27 (the official fix does not block them) in #4 H2, one per failure pattern, same-family siblings split between hold-out and tuning; never used for CoreGuard development or tuning",
+  "holdout": [
+    {"record": "R23", "source": "GH-10026 / PR #10283 test gh10026.phpt (127.0.0.1 variant)",
+     "pattern": "bailout_gc", "invariant": "recovery after a caught bailout restores the cycle-collector protection state",
+     "h2_evidence": "evidence/corpus-h2-20261023T132556-asanext R23 (8.4.4 and 8.4.27 reproduced: GC runs stop after the SOAP fault)",
+     "needs": ["soap"]},
+    {"record": "R46", "source": "PR #22710 test hash_clean_bailout.phpt",
+     "pattern": "failure_atomicity_bailout", "invariant": "a bailout inside a container clean leaves no slot that teardown destroys a second time",
+     "h2_evidence": "evidence/corpus-h2-20261023T132556-asanext R46 (8.4.4 and 8.4.27 reproduced: ASAN SEGV php_var_serialize_intern <- ps_srlzr_encode_php)",
+     "needs": ["session"]},
+    {"record": "R51", "source": "GH-24455 reproducer block00",
+     "pattern": "reentrancy", "invariant": "an object destroyed or reset by a destructor during an operation is not used afterwards",
+     "h2_evidence": "evidence/corpus-h2-20261023T132556-asanext R51 (8.4.4 and 8.4.27 reproduced: zend_mm_panic <- zend_mm_get_next_free_slot)",
+     "needs": []}
+  ],
+  "tuning": [
+    {"record": "R49", "reason": "same family as R23 (GC protection left set after a caught bailout) - kept out of the hold-out"},
+    {"record": "R55", "reason": "8.4.27 regression (SimpleXML GC double free)"}
+  ],
+  "regression_controls_not_success": [
+    "P15", "P16", "P17", "BugS", "PathB_flock_deadlock", "R41", "R42"
+  ],
+  "declared_gaps": [
+    "no OOM/partial-initialization case reproduces on 8.4.27 (R26 GH-12073 does not reproduce on these post-fix builds; R18 has no reproducer)",
+    "no request-lifetime case reproduces on 8.4.27 besides the officially fixed CVE paths: CoreGuard Phase 1 (request ownership guard) has NO hold-out to claim success against until one is found (e.g. by #2 exploration or a constructed case), and may only be reported as detect-only/regression-checked until then"
+  ]
+}

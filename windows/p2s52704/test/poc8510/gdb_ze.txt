@@ -1,0 +1,13 @@
+attach 45
+set pagination off
+set confirm off
+break *0x76a4d414fe50
+commands 1
+silent
+printf "=== HIT zend_execute, ps_globals @ 0x76a4d5170a40 ===\n"
+x/60gx 0x76a4d5170a40
+printf "=== END ===\n"
+detach
+quit
+end
+continue

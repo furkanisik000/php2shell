@@ -1,0 +1,300 @@
+﻿	ZEND_MOD_END
+};
+/* }}} */
+
+/* ************************
+   * Upload hook handling *
+   ************************ */
+
+static bool early_find_sid_in(zval *dest, int where, php_session_rfc1867_progress *progress) /* {{{ */
+{
+	zval *ppid;
+
+	if (Z_ISUNDEF(PG(http_globals)[where])) {
+		return 0;
+	}
+
+	if ((ppid = zend_hash_str_find(Z_ARRVAL(PG(http_globals)[where]), PS(session_name), progress->sname_len))
+			&& Z_TYPE_P(ppid) == IS_STRING) {
+		zval_ptr_dtor(dest);
+		ZVAL_COPY_DEREF(dest, ppid);
+		return 1;
+	}
+
+	return 0;
+} /* }}} */
+
+static void php_session_rfc1867_early_find_sid(php_session_rfc1867_progress *progress) /* {{{ */
+{
+
+	if (PS(use_cookies)) {
+		sapi_module.treat_data(PARSE_COOKIE, NULL, NULL);
+		if (early_find_sid_in(&progress->sid, TRACK_VARS_COOKIE, progress)) {
+			progress->apply_trans_sid = 0;
+			return;
+		}
+	}
+	if (PS(use_only_cookies)) {
+		return;
+	}
+	sapi_module.treat_data(PARSE_GET, NULL, NULL);
+	early_find_sid_in(&progress->sid, TRACK_VARS_GET, progress);
+} /* }}} */
+
+static bool php_check_cancel_upload(php_session_rfc1867_progress *progress) /* {{{ */
+{
+	zval *progress_ary, *cancel_upload;
+
+	if ((progress_ary = zend_symtable_find(Z_ARRVAL_P(Z_REFVAL(PS(http_session_vars))), progress->key.s)) == NULL) {
+		return 0;
+	}
+	if (Z_TYPE_P(progress_ary) != IS_ARRAY) {
+		return 0;
+	}
+	if ((cancel_upload = zend_hash_str_find(Z_ARRVAL_P(progress_ary), "cancel_upload", sizeof("cancel_upload") - 1)) == NULL) {
+		return 0;
+	}
+	return Z_TYPE_P(cancel_upload) == IS_TRUE;
+} /* }}} */
+
+static void php_session_rfc1867_update(php_session_rfc1867_progress *progress, int force_update) /* {{{ */
+{
+	if (!force_update) {
+		if (Z_LVAL_P(progress->post_bytes_processed) < progress->next_update) {
+			return;
+		}
+#ifdef HAVE_GETTIMEOFDAY
+		if (PS(rfc1867_min_freq) > 0.0) {
+			struct timeval tv = {0};
+			double dtv;
+			gettimeofday(&tv, NULL);
+			dtv = (double) tv.tv_sec + tv.tv_usec / 1000000.0;
+			if (dtv < progress->next_update_time) {
+				return;
+			}
+			progress->next_update_time = dtv + PS(rfc1867_min_freq);
+		}
+#endif
+		progress->next_update = Z_LVAL_P(progress->post_bytes_processed) + progress->update_step;
+	}
+
+	php_session_initialize();
+	PS(session_status) = php_session_active;
+	IF_SESSION_VARS() {
+		zval *sess_var = Z_REFVAL(PS(http_session_vars));
+		SEPARATE_ARRAY(sess_var);
+
+		progress->cancel_upload |= php_check_cancel_upload(progress);
+		Z_TRY_ADDREF(progress->data);
+		zend_hash_update(Z_ARRVAL_P(sess_var), progress->key.s, &progress->data);
+	}
+	php_session_flush(1);
+} /* }}} */
+
+static void php_session_rfc1867_cleanup(php_session_rfc1867_progress *progress) /* {{{ */
+{
+	php_session_initialize();
+	PS(session_status) = php_session_active;
+	IF_SESSION_VARS() {
+		zval *sess_var = Z_REFVAL(PS(http_session_vars));
+		SEPARATE_ARRAY(sess_var);
+		zend_hash_del(Z_ARRVAL_P(sess_var), progress->key.s);
+	}
+	php_session_flush(1);
+} /* }}} */
+
+static zend_result php_session_rfc1867_callback(unsigned int event, void *event_data, void **extra) /* {{{ */
+{
+	php_session_rfc1867_progress *progress;
+	zend_result retval = SUCCESS;
+
+	if (php_session_rfc1867_orig_callback) {
+		retval = php_session_rfc1867_orig_callback(event, event_data, extra);
+	}
+	if (!PS(rfc1867_enabled)) {
+		return retval;
+	}
+
+	progress = PS(rfc1867_progress);
+
+	switch(event) {
+		case MULTIPART_EVENT_START: {
+			multipart_event_start *data = (multipart_event_start *) event_data;
+			progress = ecalloc(1, sizeof(php_session_rfc1867_progress));
+			progress->content_length = data->content_length;
+			progress->sname_len  = strlen(PS(session_name));
+			PS(rfc1867_progress) = progress;
+		}
+		break;
+		case MULTIPART_EVENT_FORMDATA: {
+			multipart_event_formdata *data = (multipart_event_formdata *) event_data;
+			size_t value_len;
+
+			if (Z_TYPE(progress->sid) && progress->key.s) {
+				break;
+			}
+
+			/* orig callback may have modified *data->newlength */
+			if (data->newlength) {
+				value_len = *data->newlength;
+			} else {
+				value_len = data->length;
+			}
+
+			if (data->name && data->value && value_len) {
+				size_t name_len = strlen(data->name);
+
+				if (name_len == progress->sname_len && memcmp(data->name, PS(session_name), name_len) == 0) {
+					zval_ptr_dtor(&progress->sid);
+					ZVAL_STRINGL(&progress->sid, (*data->value), value_len);
+				} else if (name_len == strlen(PS(rfc1867_name)) && memcmp(data->name, PS(rfc1867_name), name_len + 1) == 0) {
+					smart_str_free(&progress->key);
+					smart_str_appends(&progress->key, PS(rfc1867_prefix));
+					smart_str_appendl(&progress->key, *data->value, value_len);
+					smart_str_0(&progress->key);
+
+					progress->apply_trans_sid = APPLY_TRANS_SID;
+					php_session_rfc1867_early_find_sid(progress);
+				}
+			}
+		}
+		break;
+		case MULTIPART_EVENT_FILE_START: {
+			multipart_event_file_start *data = (multipart_event_file_start *) event_data;
+
+			/* Do nothing when $_POST["PHP_SESSION_UPLOAD_PROGRESS"] is not set
+			 * or when we have no session id */
+			if (!Z_TYPE(progress->sid) || !progress->key.s) {
+				break;
+			}
+
+			/* First FILE_START event, initializing data */
+			if (Z_ISUNDEF(progress->data)) {
+
+				if (PS(rfc1867_freq) >= 0) {
+					progress->update_step = PS(rfc1867_freq);
+				} else if (PS(rfc1867_freq) < 0) { /* % of total size */
+					progress->update_step = progress->content_length * -PS(rfc1867_freq) / 100;
+				}
+				progress->next_update = 0;
+				progress->next_update_time = 0.0;
+
+				array_init(&progress->data);
+				array_init(&progress->files);
+
+				add_assoc_long_ex(&progress->data, "start_time", sizeof("start_time") - 1, (zend_long)sapi_get_request_time());
+				add_assoc_long_ex(&progress->data, "content_length",  sizeof("content_length") - 1, progress->content_length);
+				add_assoc_long_ex(&progress->data, "bytes_processed", sizeof("bytes_processed") - 1, data->post_bytes_processed);
+				add_assoc_bool_ex(&progress->data, "done", sizeof("done") - 1, 0);
+				add_assoc_zval_ex(&progress->data, "files", sizeof("files") - 1, &progress->files);
+
+				progress->post_bytes_processed = zend_hash_str_find(Z_ARRVAL(progress->data), "bytes_processed", sizeof("bytes_processed") - 1);
+
+				php_rinit_session(0);
+				PS(id) = zend_string_init(Z_STRVAL(progress->sid), Z_STRLEN(progress->sid), 0);
+				if (progress->apply_trans_sid) {
+					/* Enable trans sid by modifying flags */
+					PS(use_trans_sid) = 1;
+					PS(use_only_cookies) = 0;
+				}
+				PS(send_cookie) = 0;
+			}
+
+			array_init(&progress->current_file);
+
+			/* Each uploaded file has its own array. Trying to make it close to $_FILES entries. */
+			add_assoc_string_ex(&progress->current_file, "field_name", sizeof("field_name") - 1, data->name);
+			add_assoc_string_ex(&progress->current_file, "name", sizeof("name") - 1, *data->filename);
+			add_assoc_null_ex(&progress->current_file, "tmp_name", sizeof("tmp_name") - 1);
+			add_assoc_long_ex(&progress->current_file, "error", sizeof("error") - 1, 0);
+
+			add_assoc_bool_ex(&progress->current_file, "done", sizeof("done") - 1, 0);
+			add_assoc_long_ex(&progress->current_file, "start_time", sizeof("start_time") - 1, (zend_long)time(NULL));
+			add_assoc_long_ex(&progress->current_file, "bytes_processed", sizeof("bytes_processed") - 1, 0);
+
+			add_next_index_zval(&progress->files, &progress->current_file);
+
+			progress->current_file_bytes_processed = zend_hash_str_find(Z_ARRVAL(progress->current_file), "bytes_processed", sizeof("bytes_processed") - 1);
+
+			Z_LVAL_P(progress->current_file_bytes_processed) =  data->post_bytes_processed;
+			php_session_rfc1867_update(progress, 0);
+		}
+		break;
+		case MULTIPART_EVENT_FILE_DATA: {
+			multipart_event_file_data *data = (multipart_event_file_data *) event_data;
+
+			if (!Z_TYPE(progress->sid) || !progress->key.s) {
+				break;
+			}
+
+			Z_LVAL_P(progress->current_file_bytes_processed) = data->offset + data->length;
+			Z_LVAL_P(progress->post_bytes_processed) = data->post_bytes_processed;
+
+			php_session_rfc1867_update(progress, 0);
+		}
+		break;
+		case MULTIPART_EVENT_FILE_END: {
+			multipart_event_file_end *data = (multipart_event_file_end *) event_data;
+
+			if (!Z_TYPE(progress->sid) || !progress->key.s) {
+				break;
+			}
+
+			if (data->temp_filename) {
+				add_assoc_string_ex(&progress->current_file, "tmp_name",  sizeof("tmp_name") - 1, data->temp_filename);
+			}
+
+			add_assoc_long_ex(&progress->current_file, "error", sizeof("error") - 1, data->cancel_upload);
+			add_assoc_bool_ex(&progress->current_file, "done", sizeof("done") - 1,  1);
+
+			Z_LVAL_P(progress->post_bytes_processed) = data->post_bytes_processed;
+
+			php_session_rfc1867_update(progress, 0);
+		}
+		break;
+		case MULTIPART_EVENT_END: {
+			multipart_event_end *data = (multipart_event_end *) event_data;
+
+			if (Z_TYPE(progress->sid) && progress->key.s) {
+				if (PS(rfc1867_cleanup)) {
+					php_session_rfc1867_cleanup(progress);
+				} else {
+					if (!Z_ISUNDEF(progress->data)) {
+						SEPARATE_ARRAY(&progress->data);
+						add_assoc_bool_ex(&progress->data, "done", sizeof("done") - 1, 1);
+						Z_LVAL_P(progress->post_bytes_processed) = data->post_bytes_processed;
+						php_session_rfc1867_update(progress, 1);
+					}
+				}
+				php_rshutdown_session_globals();
+			}
+
+			if (!Z_ISUNDEF(progress->data)) {
+				zval_ptr_dtor(&progress->data);
+			}
+			zval_ptr_dtor(&progress->sid);
+			smart_str_free(&progress->key);
+			efree(progress);
+			progress = NULL;
+			PS(rfc1867_progress) = NULL;
+		}
+		break;
+	}
+
+	if (progress && progress->cancel_upload) {
+		return FAILURE;
+	}
+	return retval;
+
+} /* }}} */
+
+zend_module_entry session_module_entry = {
+	STANDARD_MODULE_HEADER_EX,
+	NULL,
+	session_deps,
+	"session",
+	ext_functions,
+	PHP_MINIT(session), PHP_MSHUTDOWN(session),
+	PHP_RINIT(session), PHP_RSHUTDOWN(session),
+	PHP_MINFO(session),
+	PHP_SESSION_VERSION,

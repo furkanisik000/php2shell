@@ -1,0 +1,61 @@
+{
+  "schema": "soc-detection-v1",
+  "detections": [
+    {
+      "id": "php-upload-progress-producer",
+      "owner": "dimasma0305",
+      "status": "experimental",
+      "claim": "attempted_trigger",
+      "artifact_type": "sensor_rule",
+      "sensor": {
+        "location": "ingress",
+        "source": "Suricata 8.0.7 EVE on Apache container eth0",
+        "required_fields": [
+          "event_id",
+          "flow_id",
+          "http_method",
+          "url",
+          "service_port"
+        ]
+      },
+      "analytic": "defense/detections/php-upload-progress-producer.yaml",
+      "rule": "defense/rules/suricata/php-upload-progress-producer.rules",
+      "playbook": "defense/playbooks/php-upload-progress-producer.md",
+      "accepted_false_positives": [
+        "php-benign-fixed-boundary-20261025"
+      ],
+      "cases": [
+        {
+          "id": "php-affected-positive-20261024",
+          "role": "affected_positive",
+          "expected_alert": true,
+          "evidence": "defense/test/php-upload-progress-producer/evidence/affected-positive.json"
+        },
+        {
+          "id": "php-patched-control-20261024",
+          "role": "patched_control",
+          "expected_alert": true,
+          "evidence": "defense/test/php-upload-progress-producer/evidence/patched-control.json"
+        },
+        {
+          "id": "php-benign-20261024",
+          "role": "benign",
+          "expected_alert": false,
+          "evidence": "defense/test/php-upload-progress-producer/evidence/benign.json"
+        },
+        {
+          "id": "php-near-miss-20261024",
+          "role": "near_miss",
+          "expected_alert": false,
+          "evidence": "defense/test/php-upload-progress-producer/evidence/near-miss.json"
+        },
+        {
+          "id": "php-benign-fixed-boundary-20261025",
+          "role": "benign",
+          "expected_alert": false,
+          "evidence": "defense/test/php-upload-progress-producer/evidence/benign-fixed-boundary.json"
+        }
+      ]
+    }
+  ]
+}

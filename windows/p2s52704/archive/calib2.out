@@ -1,0 +1,8 @@
+total=983 t=406 v=16: 262B ptrs=5 libphp=0 DTOR=-
+total=983 t=300 v=16: 262B ptrs=11 libphp=0 DTOR=-
+total=983 t=500 v=16: 262B ptrs=5 libphp=0 DTOR=-
+total=983 t=700 v=16: 262B ptrs=5 libphp=0 DTOR=-
+total=983 t=406 v=8: 262B ptrs=5 libphp=0 DTOR=-
+total=983 t=406 v=32: NO COOKIE
+total=1100 t=406 v=16: NO COOKIE
+total=850 t=406 v=16: 262B ptrs=5 libphp=0 DTOR=-

@@ -1,0 +1,26 @@
+[
+  {"repo":"shlinkio/shlink","image":"shlinkio/shlink:latest","publisher":"Shlink official image","source":"https://shlink.io/documentation/install-docker/","role":"primary"},
+  {"repo":"nextcloud/server","image":"nextcloud:latest","publisher":"Docker Official Image","source":"https://github.com/nextcloud/docker"},
+  {"repo":"nextcloud/all-in-one","image":"ghcr.io/nextcloud-releases/aio-nextcloud:latest","publisher":"Nextcloud AIO","source":"https://github.com/nextcloud/all-in-one"},
+  {"repo":"WordPress/WordPress","image":"wordpress:latest","publisher":"Docker Official Image","source":"https://github.com/docker-library/wordpress"},
+  {"repo":"FreshRSS/FreshRSS","image":"freshrss/freshrss:latest","publisher":"FreshRSS","source":"https://github.com/FreshRSS/FreshRSS/tree/edge/Docker"},
+  {"repo":"firefly-iii/firefly-iii","image":"fireflyiii/core:latest","publisher":"Firefly III","source":"https://docs.firefly-iii.org/how-to/firefly-iii/installation/docker/"},
+  {"repo":"BookStackApp/BookStack","image":"lscr.io/linuxserver/bookstack:latest","publisher":"LinuxServer.io (community)","source":"https://docs.linuxserver.io/images/docker-bookstack/","name":"BookStack"},
+  {"repo":"snipe/snipe-it","image":"snipe/snipe-it:latest","publisher":"Snipe-IT","source":"https://snipe-it.readme.io/docs/docker","name":"Snipe-IT"},
+  {"repo":"matomo-org/matomo","image":"matomo:latest","publisher":"Docker Official Image","source":"https://github.com/matomo-org/docker"},
+  {"repo":"wallabag/wallabag","image":"wallabag/wallabag:latest","publisher":"Wallabag","source":"https://github.com/wallabag/docker"},
+  {"repo":"monicahq/monica","image":"monica:latest","publisher":"Docker Official Image","source":"https://github.com/monicahq/docker"},
+  {"repo":"ellite/Wallos","image":"bellamy/wallos:latest","publisher":"Wallos","source":"https://github.com/ellite/Wallos"},
+  {"repo":"Leantime/leantime","image":"leantime/leantime:latest","publisher":"Leantime","source":"https://github.com/Leantime/docker-leantime"},
+  {"repo":"koel/koel","image":"phanan/koel:latest","publisher":"Koel","source":"https://docs.koel.dev/guide/getting-started.html"},
+  {"repo":"kanboard/kanboard","image":"kanboard/kanboard:latest","publisher":"Kanboard","source":"https://docs.kanboard.org/v1/admin/docker/"},
+  {"repo":"drupal/drupal","image":"drupal:latest","publisher":"Docker Official Image","source":"https://github.com/docker-library/drupal"},
+  {"repo":"joomla/joomla-cms","image":"joomla:latest","publisher":"Docker Official Image","source":"https://github.com/joomla-docker/docker-joomla"},
+  {"repo":"fossar/selfoss","image":"rsprta/selfoss:latest","publisher":"Community","source":"https://github.com/RSprta/docker-selfoss"},
+  {"repo":"kimai/kimai","image":"kimai/kimai2:apache","publisher":"Kimai","source":"https://www.kimai.org/documentation/docker.html"},
+  {"repo":"PrivateBin/PrivateBin","image":"privatebin/nginx-fpm-alpine:latest","publisher":"PrivateBin","source":"https://github.com/PrivateBin/docker-nginx-fpm-alpine"},
+  {"repo":"phpmyadmin/phpmyadmin","image":"phpmyadmin:latest","publisher":"Docker Official Image","source":"https://github.com/phpmyadmin/docker"},
+  {"repo":"roundcube/roundcubemail","image":"roundcube/roundcubemail:latest","publisher":"Roundcube","source":"https://github.com/roundcube/roundcubemail-docker"},
+  {"repo":"LinkStackOrg/LinkStack","image":"linkstackorg/linkstack:latest","publisher":"LinkStack","source":"https://github.com/LinkStackOrg/linkstack-docker"}
+]
+

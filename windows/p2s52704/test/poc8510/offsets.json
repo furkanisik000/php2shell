@@ -1,0 +1,34 @@
+{
+  "8.5.9": {
+    "zif_system": 5865824,
+    "zval_ptr_dtor": 8071584
+  },
+  "8.4.24": {
+    "zif_system": 4605232,
+    "zval_ptr_dtor": 6672864
+  },
+  "8.4.25": {
+    "zif_system": 4607088,
+    "zval_ptr_dtor": 6675552
+  },
+  "8.3.33": {
+    "zif_system": 3850112,
+    "zval_ptr_dtor": 4843088
+  },
+  "8.3.35": {
+    "zif_system": 3850368,
+    "zval_ptr_dtor": 4844624
+  },
+  "8.4.26": {
+    "zif_system": 4608880,
+    "zval_ptr_dtor": 6679392
+  },
+  "8.5.10": {
+    "zif_system": 5868896,
+    "zval_ptr_dtor": 8075360
+  },
+  "8.5.11": {
+    "zif_system": 5871328,
+    "zval_ptr_dtor": 8079264
+  }
+}

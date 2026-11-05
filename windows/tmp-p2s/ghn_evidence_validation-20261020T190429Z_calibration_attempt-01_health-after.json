@@ -1,0 +1,1 @@
+{"marker":"PHP_RFC1867_RCE_LAB_V1","pid":353,"version":"8.5.11","sapi":"apache2handler","memory_limit":"16M","post_max_size":"32M","upload_progress":"1","use_zend_alloc":"0","use_tracked_alloc":"1"}
