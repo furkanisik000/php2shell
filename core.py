@@ -485,8 +485,8 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
     """TLS parmak izi: protokol, cipher suite ve sertifika meta verileri.
 
     Sertifika dogrulamasi BILINCLI olarak kapalidir (CERT_NONE) — taranacak
-    hedefler kendi imzaladigi lab sertifikalari da tasiyabilir; amac guvenlik
-    denetimi degil servis surum/zafiflik tespiti icin veri toplamaktir.
+    targets may also carry self-signed lab certificates; the goal is to gather
+    data for service/version and vulnerability detection, not certificate audit.
 
     Returns:
         {"ok": True, "protocol", "cipher": {...}, "cert": {...}} ya da
@@ -530,7 +530,7 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
                 "not_after": cert.get("notAfter", ""),
             },
         }
-        # gun -> saniye cinsinden son kullanma yakinligi (raporlama icin)
+        # days -> seconds until expiry (for reporting)
         try:
             exp_ts = calendar.timegm(time.strptime(cert.get("notAfter", ""), "%b %d %H:%M:%S %Y %Z"))
             out["cert"]["days_to_expire"] = int((exp_ts - time.time()) // 86400)
@@ -546,12 +546,12 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
 # HTTP security-headers audit
 # ---------------------------------------------------------------------------
 _HEADER_RULES = [
-    ("strict-transport-security", "HSTS", "critical", "HTTPS zorlamasi yok — MITM/protocol-downgrade riski"),
-    ("content-security-policy", "CSP", "high", "XSS'i sinirlar; yoksa XSS daha tehlikeli"),
-    ("x-frame-options", "X-Frame-Options", "medium", "clickjacking korumasi yok"),
-    ("x-content-type-options", "X-Content-Type-Options", "medium", "MIME-sniffing korumasi yok"),
+    ("strict-transport-security", "HSTS", "critical", "no HTTPS enforcement — MITM / protocol-downgrade risk"),
+    ("content-security-policy", "CSP", "high", "limits XSS; without it XSS is more dangerous"),
+    ("x-frame-options", "X-Frame-Options", "medium", "missing clickjacking protection"),
+    ("x-content-type-options", "X-Content-Type-Options", "medium", "missing MIME-sniffing protection"),
     ("referrer-policy", "Referrer-Policy", "low", "referrer sizdirabilir"),
-    ("permissions-policy", "Permissions-Policy", "low", "kamera/mikrofon/clipboard izinleri acik"),
+    ("permissions-policy", "Permissions-Policy", "low", "camera/microphone/clipboard permissions unrestricted"),
     ("x-xss-protection", "X-XSS-Protection", "low", "eski XSS filtresi (onerilmez ama var)"),
 ]
 
@@ -570,12 +570,12 @@ def http_headers_audit(p: dict) -> list:
     # bonus: server / x-powered-by disclosure
     leak = []
     if hdrs.get("server"):
-        leak.append({"header": "server", "value": hdrs["server"], "note": "webserver surumu sizdiriyor"})
+        leak.append({"header": "server", "value": hdrs["server"], "note": "web server version disclosure"})
     if hdrs.get("x-powered-by"):
-        leak.append({"header": "x-powered-by", "value": hdrs["x-powered-by"], "note": "PHP surumu sizdiriyor"})
+        leak.append({"header": "x-powered-by", "value": hdrs["x-powered-by"], "note": "PHP version disclosure"})
     out.append({"header": "info-disclosure", "label": "Header leak", "severity": "info",
                 "present": bool(leak), "value": "; ".join(f"{l['header']}={l['value']}" for l in leak),
-                "note": ("surum sizdirma tespit edildi" if leak else "surum sizdirma yok")})
+                "note": ("version disclosure detected" if leak else "no version disclosure")})
     return out
 
 
@@ -701,7 +701,7 @@ def score_risk(scan: dict, cves: list) -> dict:
     exposure = min(10, len(ports))
     if exposure:
         factors.append({"label": "Acik port yuzeyi", "delta": exposure,
-                        "note": f"{len(ports)} acik port"})
+                        "note": f"{len(ports)} open port(s)"})
 
     penalty = base * (1 - mult)
     final = _clamp(base - penalty + exposure, 0, 100)
@@ -780,14 +780,14 @@ def build_profile(url: str, name: str = None, save: bool = True,
     (history is kept — professional). Otherwise a new profile is created.
     Every scan is logged to the SQLite logs table + db/logs.log.
     """
-    log("INFO", "scan", f"tarama basladi: {url}", {"url": url})
+    log("INFO", "scan", f"scan started: {url}", {"url": url})
     scan = scan_url(url, do_paths=do_paths)
     host = scan.get("host") or "target"
     port = scan.get("port") or 80
     n_cve = len(scan.get("cves") or [])
     risk = scan.get("risk") or {}
     log("INFO", "scan",
-        f"tarama bitti: {host} — {n_cve} CVE, risk={risk.get('score')} ({risk.get('grade') or risk.get('letter') or '-'})",
+        f"scan finished: {host} — {n_cve} CVE, risk={risk.get('score')} ({risk.get('grade') or risk.get('letter') or '-'})",
         {"url": scan.get("url", url), "host": host, "cves": n_cve,
          "risk": risk.get("score"), "grade": risk.get("grade")})
 
@@ -818,13 +818,13 @@ def get_profile(pid: str) -> dict | None:
 def rename_profile(pid: str, name: str) -> bool:
     ok = store.rename_profile(pid, name)
     if ok:
-        log("INFO", "profile", f"profil yeniden adlandirildi: {pid} -> {name}")
+        log("INFO", "profile", f"profile renamed: {pid} -> {name}")
     return ok
 
 
 def delete_profile(pid: str) -> bool:
     ok = store.delete_profile(pid)
-    log("INFO", "profile", f"profil silindi: {pid}")
+    log("INFO", "profile", "profile deleted: {pid}")
     return ok
 
 
@@ -900,11 +900,11 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
             res = {"ok": False, "success": False, "cve": cve_id, "error": str(e)}
     success = bool(res.get("success"))
     if success:
-        msg = f"PoC {cve_id} -> BASARILI (kanit alindi)"
+        msg = f"PoC {cve_id} -> SUCCESS (evidence captured)"
     elif res.get("error"):
         msg = f"PoC {cve_id} -> hata: {res.get('error')}"
     else:
-        msg = f"PoC {cve_id} -> basarisiz / hedef tetiklenmedi"
+        msg = f"PoC {cve_id} -> failed / target not triggered"
     log("SUCCESS" if success else "ERROR", "poc", msg,
         {"cve": cve_id, "success": success, "evidence": (res.get("evidence") or "")[:300]})
     store.record_poc_run(profile_id, cve_id, params or {}, res)
@@ -912,16 +912,17 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
 
 
 def build_command(cve_id: str, params: dict) -> str:
-    """Legacy komut-sablonu ureticisi (yalnizca db/exploits.json'daki eski paneller icin).
+    """Legacy command-template builder (only for old panels in db/exploits.json).
 
     v2 native motor (poc/ paketi) komut satiri URETMEZ — exploit'i scanner'in
     kendisi socket/HTTP seviyesinde dogrudan calistirir (`run_exploit`). Bu fonksiyon
-    yalnizca `command_template` tasiyan legacy CVE panelleri icin geriye donuk
+    backward-compatible path only for legacy CVE panels carrying `command_template`.
     uyumluluk amaciyla korunmustur ve sablonu `db/exploits.json` uzerinden cozer.
 
-    Duzeltme (2026-11-05): eski surum `poc_list()` ciktisinda bulunmayan
-    `command_template` alanina eristigi icin her cagrida KeyError ile patliyordu;
-    artik dogru kaynaga (exploit paneli) bakiyor ve PoC'suz CVE icin net hata veriyor.
+    Fix (2026-11-05): the previous revision read `command_template` from a dict
+    that never contained it, raising KeyError on every call; it now reads the
+    correct source (the exploit panel) and fails with a clear error for CVEs
+    without a template.
 
     Args:
         cve_id: Komut sablonu cozulecek CVE kimligi (orn. "CVE-2024-56201").
@@ -932,15 +933,15 @@ def build_command(cve_id: str, params: dict) -> str:
         Yer tutuculari doldurulmus, `run_command()`-uyumlu tek satirlik komut.
 
     Raises:
-        ValueError: CVE icin exploit paneli/sablon tanimli degilse.
+        ValueError: when no exploit panel/template is defined for the CVE.
     """
     panel = load_exploits().get(cve_id)
     if not panel or not panel.get("command_template"):
-        raise ValueError(f"{cve_id} icin command_template iceren bir exploit paneli yok "
+        raise ValueError(f"no exploit panel with a command_template for {cve_id} "
                          f"(native PoC varsa dogrudan run_exploit kullanin)")
     cmd = panel["command_template"]
     # Eksik parametreleri panelin varsayilanlariyla doldur — UI formunu bos birakan
-    # alanlarin sablonda `{key}` olarak kalmasini engeller.
+    # prevents unreplaced `{key}` placeholders from leaking into the template.
     filled = dict(params or {})
     for inp in panel.get("inputs") or []:
         k = inp.get("key")
@@ -961,7 +962,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
 
     Not: v2 native motor bu yolu kullanmaz (`run_exploit` → poc/ paketi); burasi
     yalnizca `command_template` tabanli legacy PoC'lar ve MCP `build_poc_command`
-    akisi icin tutulur.
+    flow.
 
     Args:
         cmd: Yurutulecek komut satiri (beyaz liste kontrolu burada yapilir).
@@ -969,7 +970,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
 
     Returns:
         Basarida {"ok": True, "exit", "stdout", "stderr"}; hatada {"ok": False,
-        "error": aciklama}. Asla istisna firlatmaz — HTTP katmani icin guvenli.
+        "error": description}. Never raises — safe for the HTTP layer.
     """
     cmd = (cmd or "").strip()
     if not cmd:
@@ -990,7 +991,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
     base = os.path.basename(first)
     if base not in ALLOWED_BIN:
         return {"ok": False,
-                "error": f"'{base}' izinli listede degil (izinli: {', '.join(sorted(ALLOWED_BIN))})"}
+                "error": f"'{base}' is not in the allow-list (allowed: {', '.join(sorted(ALLOWED_BIN))})"}
     try:
         r = subprocess.run(cmd, shell=True, cwd=HERE, capture_output=True, timeout=timeout)
         return {
@@ -1035,7 +1036,7 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
               "os_hint", "sapi", "server_header", "x_powered_by"):
         v = fp.get(k)
         L.append(f"| {k} | {v if v not in (None, '', []) else '—'} |")
-    L.append(f"| WAF | {', '.join(fp.get('waf') or []) or 'yok'} |")
+    L.append(f"| WAF | {', '.join(fp.get('waf') or []) or 'none'} |")
     L.append(f"| Acik portlar | {', '.join(str(p) for p in fp.get('open_ports') or []) or '—'} |")
     L.append("")
 
@@ -1089,7 +1090,7 @@ def build_report(prof: dict, fmt: str = "md") -> tuple:
     else:
         L.append("## Eslesen Kritik CVE'ler")
         L.append("")
-        L.append("Tespit edilen surumler icin eslesen kritik CVE bulunamadi.")
+        L.append("No matching critical CVEs found for the detected versions.")
         L.append("")
 
     if risk.get("factors"):

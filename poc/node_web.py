@@ -32,7 +32,7 @@ def _send(params, query_value, timeout=15):
     """GET (or POST) the endpoint with `param=<query_value>`. Returns (status, body)."""
     url = (params.get("url") or params.get("host") or "").strip()
     if not url:
-        raise ValueError("hedef url gerekli (orn. http://127.0.0.1:3000/read)")
+        raise ValueError("target url required (e.g. http://127.0.0.1:3000/read)")
     t = _resolve(url)
     method = (params.get("method") or "GET").upper()
     param = params.get("param") or "file"

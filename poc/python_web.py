@@ -52,7 +52,7 @@ _WORKERS = 16
 def _parse(params):
     url = (params.get("url") or params.get("host") or "").strip()
     if not url:
-        raise ValueError("hedef url gerekli (orn. http://127.0.0.1:5000/greet)")
+        raise ValueError("target url required (e.g. http://127.0.0.1:5000/greet)")
     t = _net.parse_target(url if "://" in url else "http://" + url, default_port=80)
     method = (params.get("method") or "GET").upper()
     param = params.get("param") or "name"
@@ -144,7 +144,7 @@ def ssti_rce(params) -> dict:
     if not ssti:
         return {**out, "status": status,
                 "evidence": body.strip()[:2000],
-                "error": "SSTI dogrulanamadi ({{7*7}} -> 49 yok). Hedef sablon enjeksiyonuna kapali olabilir."}
+                "error": "SSTI not confirmed ({{7*7}} -> 49 missing). Target may block template injection."}
 
     # 2) discover an os-bearing subclass index
     idx = _discover(params)

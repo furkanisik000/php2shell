@@ -71,30 +71,30 @@ EXPLOITS = {
     "CVE-2016-1238": {
         "name": "perl -MIO socket bind RCE", "type": "RCE", "preauth": False,
         "affected": ["5.8", "5.10", "5.12", "5.14", "5.16", "5.18", "5.20", "5.22"],
-        "note": "Yerel perl-runtime; uzak socket vektoru yok. Mekanizma: `--` arg-exec siniri.",
+        "note": "Local perl runtime; no remote socket vector. Mechanism: `--` arg-exec boundary.",
         "inputs": [_in("Komut", "cmd", True, "id")], "run": mio_socket},
     "CVE-2020-10543": {
         "name": "perl -MIO socket bind RCE", "type": "RCE", "preauth": False,
         "affected": ["5.24", "5.26", "5.28", "5.30", "5.32"],
-        "note": "Yerel perl-runtime; uzak socket vektoru yok. Mekanizma: `--` arg-exec siniri.",
+        "note": "Local perl runtime; no remote socket vector. Mechanism: `--` arg-exec boundary.",
         "inputs": [_in("Komut", "cmd", True, "id")], "run": mio_socket},
     "CVE-2021-29923": {
         "name": "LWP::UserAgent env RCE (HTTP_PROXY)", "type": "RCE", "preauth": False,
         "affected": ["5.8", "5.10", "5.12", "5.14", "5.16", "5.18", "5.20", "5.22",
                      "5.24", "5.26", "5.28", "5.30", "5.32", "5.34"],
-        "note": "Yerel perl-runtime; uzak socket vektoru yok. Mekanizma: env `;` shell-split.",
+        "note": "Local perl runtime; no remote socket vector. Mechanism: env `;` shell-split.",
         "inputs": [_in("HTTP_PROXY", "proxy", False, "127.0.0.1:8080"),
                    _in("Komut", "cmd", True, "id")], "run": lwp_env},
     "CVE-2022-36319": {
         "name": "LWP::UserAgent env RCE", "type": "RCE", "preauth": False,
         "affected": ["5.30", "5.32", "5.34", "5.36"],
-        "note": "Yerel perl-runtime; uzak socket vektoru yok. Mekanizma: env `;` shell-split.",
+        "note": "Local perl runtime; no remote socket vector. Mechanism: env `;` shell-split.",
         "inputs": [_in("HTTP_PROXY", "proxy", False, "127.0.0.1:8080"),
                    _in("Komut", "cmd", True, "id")], "run": lwp_env},
     "CVE-2013-1667": {
         "name": "Compress::Zlib heap overflow", "type": "HeapOverflow", "preauth": False,
         "affected": ["5.8", "5.10", "5.12", "5.14"],
-        "note": "Yerel perl-runtime; uzak socket vektoru yok. Mekanizma: oversized deflate input.",
+        "note": "Local perl runtime; no remote socket vector. Mechanism: oversized deflate input.",
         "inputs": [_in("Girdi (KB)", "size_kb", False, "1024"),
                    _in("Tampon (KB)", "buf_kb", False, "64")], "run": zlib_overflow},
 }

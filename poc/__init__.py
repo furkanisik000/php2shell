@@ -37,7 +37,7 @@ def has_exploit(cve_id: str) -> bool:
 def run_exploit(cve_id: str, params: dict = None) -> dict:
     spec = REGISTRY.get(cve_id)
     if not spec:
-        raise ValueError(f"{cve_id} icin native PoC yok (katalog: {', '.join(sorted(REGISTRY))})")
+        raise ValueError(f"no native PoC for {cve_id} (catalog: {', '.join(sorted(REGISTRY))})")
     params = params or {}
     # defaults: fill missing inputs with their defaults
     filled = dict(params)
