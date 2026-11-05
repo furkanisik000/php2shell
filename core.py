@@ -21,6 +21,7 @@ Public API (used by server.py and mcp_server.py):
 """
 from __future__ import annotations
 
+import calendar
 import concurrent.futures
 import hashlib
 import json
@@ -481,6 +482,16 @@ def scan_ports(host: str, extra_ports=None, skip_port=None) -> list:
 # TLS fingerprint
 # ---------------------------------------------------------------------------
 def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
+    """TLS parmak izi: protokol, cipher suite ve sertifika meta verileri.
+
+    Sertifika doğrulaması BİLİNÇLİ olarak kapalıdır (CERT_NONE) — taranacak
+    hedefler kendi imzaladığı lab sertifikaları da taşıyabilir; amaç güvenlik
+    denetimi değil servis sürüm/zafiflik tespiti için veri toplamaktır.
+
+    Returns:
+        {"ok": True, "protocol", "cipher": {...}, "cert": {...}} ya da
+        bağlantı/sohbet hatasında {"ok": False, "error": ...}.
+    """
     out = {"ok": False}
     try:
         s = socket.create_connection((host, port), timeout=timeout)
@@ -519,11 +530,10 @@ def tls_fingerprint(host: str, port: int = 443, timeout: float = 4.0) -> dict:
                 "not_after": cert.get("notAfter", ""),
             },
         }
-        # days to expiry
+        # gün -> saniye cinsinden son kullanma yakınlığı (raporlama için)
         try:
-            from datetime import datetime as _dt
-            ne = _dt.strptime(cert.get("notAfter", ""), "%b %d %H:%M:%S %Y %Z")
-            out["cert"]["days_to_expire"] = (ne - _dt.utcnow()).days
+            exp_ts = calendar.timegm(time.strptime(cert.get("notAfter", ""), "%b %d %H:%M:%S %Y %Z"))
+            out["cert"]["days_to_expire"] = int((exp_ts - time.time()) // 86400)
         except Exception:
             out["cert"]["days_to_expire"] = None
         ss.close()
@@ -902,18 +912,65 @@ def run_exploit(cve_id: str, params: dict = None, profile_id: str = None) -> dic
 
 
 def build_command(cve_id: str, params: dict) -> str:
-    poc = poc_list().get(cve_id)
-    if not poc:
-        raise ValueError(f"{cve_id} icin exploit paneli yok")
-    cmd = poc["command_template"]
-    for inp in poc["inputs"]:
+    """Legacy komut-şablonu üreticisi (yalnızca db/exploits.json'daki eski paneller için).
+
+    v2 native motor (poc/ paketi) komut satırı ÜRETMEZ — exploit'i scanner'ın
+    kendisi socket/HTTP seviyesinde doğrudan çalıştırır (`run_exploit`). Bu fonksiyon
+    yalnızca `command_template` taşıyan legacy CVE panelleri için geriye dönük
+    uyumluluk amacıyla korunmuştur ve şablonu `db/exploits.json` üzerinden çözer.
+
+    Düzeltme (2026-11-05): eski sürüm `poc_list()` çıktısında bulunmayan
+    `command_template` alanına eriştiği için her çağrıda KeyError ile patlıyordu;
+    artık doğru kaynağa (exploit paneli) bakıyor ve PoC'suz CVE için net hata veriyor.
+
+    Args:
+        cve_id: Komut şablonu çözülecek CVE kimliği (örn. "CVE-2024-56201").
+        params: Şablondaki `{anahtar}` yer tutucularına doldurulacak kullanıcı
+                parametreleri; eksik anahtarlar input'un `default` değeriyle dolar.
+
+    Returns:
+        Yer tutucuları doldurulmuş, `run_command()`-uyumlu tek satırlık komut.
+
+    Raises:
+        ValueError: CVE için exploit paneli/şablon tanımlı değilse.
+    """
+    panel = load_exploits().get(cve_id)
+    if not panel or not panel.get("command_template"):
+        raise ValueError(f"{cve_id} için command_template içeren bir exploit paneli yok "
+                         f"(native PoC varsa doğrudan run_exploit kullanın)")
+    cmd = panel["command_template"]
+    # Eksik parametreleri panelin varsayılanlarıyla doldur — UI formunu boş bırakan
+    # alanların şablonda `{key}` olarak kalmasını engeller.
+    filled = dict(params or {})
+    for inp in panel.get("inputs") or []:
         k = inp.get("key")
-        val = (params or {}).get(k, inp.get("default", ""))
+        if k and (k not in filled or filled[k] in (None, "")):
+            filled[k] = inp.get("default", "")
+    for k, val in filled.items():
         cmd = cmd.replace("{" + k + "}", str(val))
     return cmd
 
 
 def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
+    """Sınırlı (allow-list'li) yerel komut yürütücü — legacy `/run` ucu.
+
+    Güvenlik modeli: ilk gerçek token (ENV=val atamaları atlanır) ALLOWED_BIN
+    beyaz listesinde olmalıdır; çalışma süresi `timeout` ile sınırlıdır; çıktı
+    20 KB ile sınırlandırılır. Bu genel bir shell DEĞİLDİR — salt operatörün
+    yetkili olduğu PoC/keşif araçlarına kapalı bir köprüdür.
+
+    Not: v2 native motor bu yolu kullanmaz (`run_exploit` → poc/ paketi); burası
+    yalnızca `command_template` tabanlı legacy PoC'lar ve MCP `build_poc_command`
+    akışı için tutulur.
+
+    Args:
+        cmd: Yürütülecek komut satırı (beyaz liste kontrolü burada yapılır).
+        timeout: Saniye cinsinden üst sınır (varsayılan MAX_RUN=180).
+
+    Returns:
+        Başarıda {"ok": True, "exit", "stdout", "stderr"}; hatada {"ok": False,
+        "error": açıklama}. Asla istisna fırlatmaz — HTTP katmanı için güvenli.
+    """
     cmd = (cmd or "").strip()
     if not cmd:
         return {"ok": False, "error": "empty command"}
@@ -921,6 +978,7 @@ def run_command(cmd: str, timeout: int = MAX_RUN) -> dict:
         toks = shlex.split(cmd)
     except ValueError as e:
         return {"ok": False, "error": f"parse: {e}"}
+    # ENV=value biçimindeki önek atamalarını atlayarak ilk gerçek binary'i bul
     first = None
     for t in toks:
         if re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", t):  # leading ENV=val

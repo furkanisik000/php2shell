@@ -6,13 +6,17 @@ Wires the scanner core (core.py) up as MCP tools so Qwen Code / any MCP client
 can drive the scanner.
 
 Install (stdio):
-    qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/<USER>/Desktop/php2shell/mcp_server.py
+    qwen mcp add p2s -- python3 <REPO>/mcp_server.py   # <REPO> = bu dosyanın klasörü
     # then a FULL Qwen restart is required (qwen mcp add never hot-loads).
 
-Tools exposed:
-    scan_target, list_cves, get_cve, poc_list, build_poc_command, run_poc,
-    list_profiles, get_profile, delete_profile, export_report, risk_score,
-    tls_fingerprint, port_scan
+Tools exposed (15):
+    scan_target, list_cves, get_cve, poc_list, poc_describe, build_poc_command,
+    run_poc, list_profiles, get_profile, delete_profile, export_report,
+    risk_score, tls_fingerprint, port_scan, list_logs
+
+Not: `build_poc_command` yalnızca legacy `command_template` panelleri için komut
+ÜRETİR (çalıştırmaz); native PoC'ler doğrudan `run_poc` ile socket/HTTP seviyesinde
+koşar. v2.1'de bu araç eksik kayıtlıydı — tabloya eklenmesi bir düzeltmedir.
 """
 from __future__ import annotations
 
@@ -23,7 +27,7 @@ import core
 
 PROTOCOL_VERSION = "2025-06-18"
 SERVER_NAME = "p2s-cve-scanner"
-SERVER_VERSION = "2.0.0"
+SERVER_VERSION = "2.1.0"  # server.py VERSION ile senkron tutulur
 
 
 def _s(obj) -> str:
@@ -61,6 +65,20 @@ def t_get_cve(a):
 
 def t_poc_list(a):
     return core.poc_list()
+
+
+def t_build_poc_command(a):
+    """Legacy komut şablonunu parametrelerle doldurur (ÇALIŞTIRMAZ).
+
+    Yalnızca `command_template` taşıyan eski paneller için anlamlıdır; native
+    PoC'larda doğrudan `run_poc` kullanılır. Doğrulama (validation) burada yapılır:
+    şablon yoksa temiz JSON-RPC hatası döner — düzeltilmeden önce bu araç TOOLS
+    listesinde tanıtılıp TOOL_IMPLS'te eksikti, bu yüzden her çağrıda patlıyordu.
+    """
+    cve = (a.get("cve_id") or "").strip()
+    if not cve:
+        raise ValueError("cve_id is required")
+    return {"cve": cve, "command": core.build_command(cve, a.get("params", {}))}
 
 
 def t_poc_describe(a):
@@ -149,6 +167,7 @@ TOOL_IMPLS = {
     "get_cve": t_get_cve,
     "poc_list": t_poc_list,
     "poc_describe": t_poc_describe,
+    "build_poc_command": t_build_poc_command,
     "run_poc": t_run_poc,
     "list_profiles": t_list_profiles,
     "get_profile": t_get_profile,
@@ -183,6 +202,10 @@ TOOLS = [
     {"name": "poc_list",
      "description": "List the runnable PoC catalog (CVEs with a command template + inputs).",
      "inputSchema": _schema({})},
+    {"name": "build_poc_command",
+     "description": "Fill a legacy command_template PoC panel with params and RETURN the "
+                    "command string (does NOT execute it). Native PoCs use run_poc instead.",
+     "inputSchema": _schema({"cve_id": {"type": "string"}, "params": {"type": "object"}}, ["cve_id"])},
     {"name": "poc_describe",
      "description": "Describe the NATIVE PoC for a CVE (name, type, preauth, inputs+defaults, note) — "
                     "what the scanner will do, not an external command.",
