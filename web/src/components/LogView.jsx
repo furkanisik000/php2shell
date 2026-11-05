@@ -28,26 +28,26 @@ export default function LogView() {
   }, [live, level, cat, qLive])
 
   function clear() {
-    if (!confirm('Tüm logları temizle?')) return
+    if (!confirm('Tum loglari temizle?')) return
     api.clearLogs().then(() => load(true))
   }
 
   return (
     <div className="panel">
-      <h3>Operasyon Logu <span className="tag">{loading ? 'yükleniyor…' : count}</span></h3>
+      <h3>Operasyon Logu <span className="tag">{loading ? 'yukleniyor…' : count}</span></h3>
       <div className="log-toolbar">
         <select value={level} onChange={e => setLevel(e.target.value)}>
-          <option value="">Tüm seviyeler</option>
+          <option value="">Tum seviyeler</option>
           <option>INFO</option><option>SUCCESS</option><option>WARN</option><option>ERROR</option><option>DEBUG</option>
         </select>
         <select value={cat} onChange={e => setCat(e.target.value)}>
-          <option value="">Tüm kategoriler</option>
+          <option value="">Tum kategoriler</option>
           <option>scan</option><option>poc</option><option>profile</option><option>store</option><option>system</option>
         </select>
         <input placeholder="log metni ara…" value={q}
           onChange={e => { setQ(e.target.value); const t = e.target.value; clearTimeout(load._d); load._d = setTimeout(() => setQLive(t), 300) }} />
         <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--text2)', cursor: 'pointer' }}>
-          <input type="checkbox" style={{ width: 'auto' }} checked={live} onChange={e => setLive(e.target.checked)} /> canlı
+          <input type="checkbox" style={{ width: 'auto' }} checked={live} onChange={e => setLive(e.target.checked)} /> canli
         </label>
         <button className="btn sm" onClick={() => load()}>⟳ Yenile</button>
         <button className="btn sm danger" onClick={clear}>🗑 Temizle</button>
@@ -65,7 +65,7 @@ export default function LogView() {
           ))}
       </div>
       <p style={{ color: 'var(--text3)', fontSize: 11, marginTop: 8 }}>
-        Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasına yazılır. Her tarama, PoC çalışması ve hata kaydedilir.
+        Loglar SQLite <code>logs</code> tablosuna + <code>db/logs.log</code> dosyasina yazilir. Her tarama, PoC calismasi ve hata kaydedilir.
       </p>
     </div>
   )

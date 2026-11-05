@@ -11,7 +11,7 @@ export default function CveCard({ cve, pocs, hitMajor, profileId, onRun }) {
     <div className={'cve' + (isHit ? ' hit' : '')}>
       <div className="cve-top">
         <span className="cve-id">{cve.id}</span>
-        {isHit && <span className="badge b-hit">HİT</span>}
+        {isHit && <span className="badge b-hit">HIT</span>}
         <span className="badge b-sw">{cve.software || ''}</span>
         {(cve.exploit || {}).type && <span className="badge b-type">{cve.exploit.type}</span>}
         {(cve.exploit || {}).preauth && <span className="badge b-pre">PRE-AUTH</span>}
@@ -45,7 +45,7 @@ function PocPanel({ cve, spec, profileId, onRun }) {
     const vals = {}
     ;(spec.inputs || []).forEach(i => { vals[i.key] = (params[i.key] || '').trim() })
     setRunning(true); setShow(true); setResult(null)
-    setOut('native engine çalışıyor… (socket/HTTP scanner\'dan atılıyor)')
+    setOut('native engine calisiyor… (socket/HTTP scanner\'dan atiliyor)')
     try {
       const r = profileId
         ? await api.runPocProfile(profileId, cve.id, vals)
@@ -65,20 +65,20 @@ function PocPanel({ cve, spec, profileId, onRun }) {
     if (res.evidence) h += `<span class="dim">KANIT:</span>\n<span class="ev">${esc(res.evidence)}</span>\n`
     const det = res.detail || {}
     if (det.host) h += `<span class="dim">hedef: ${esc(det.host)}</span>\n`
-    if (det.stage) h += `<span class="dim">aşama: ${esc(det.stage)}</span>\n`
+    if (det.stage) h += `<span class="dim">asama: ${esc(det.stage)}</span>\n`
     if (det.chunk_base) h += `<span class="dim">chunk=${esc(det.chunk_base)} libphp=${esc(det.libphp_base || '')} zif=${esc(det.zif_abs || '')} htdata=${esc(det.htdata_abs || '')}</span>\n`
     if (res.log && res.log.length) h += `<span class="dim">── log ──</span>\n${res.log.map(l => '<span class="dim">' + esc(l) + '</span>').join('\n')}`
-    if (!h) h = '<span class="dim">çıktı yok</span>'
+    if (!h) h = '<span class="dim">cikti yok</span>'
     setOut(h)
     setResult(res)
   }
 
   const badge = result ? (
     result.success
-      ? <span className="result-badge win">✓ BAŞARILI — kanıt alındı</span>
+      ? <span className="result-badge win">✓ BASARILI — kanit alindi</span>
       : (result.error
-        ? <span className="result-badge lose">✗ başarısız</span>
-        : <span className="result-badge mid">○ çalıştı — hedef savunmalı / trigger tetiklenmedi</span>)
+        ? <span className="result-badge lose">✗ basarisiz</span>
+        : <span className="result-badge mid">○ calisti — hedef savunmali / trigger tetiklenmedi</span>)
   ) : null
 
   return (
@@ -107,7 +107,7 @@ function PocPanel({ cve, spec, profileId, onRun }) {
         </div>
       )}
       <button className="btn danger" disabled={running} onClick={run}>
-        {running ? <span className="spin" /> : '▶'} Çalıştır (native engine)
+        {running ? <span className="spin" /> : '▶'} Calistir (native engine)
       </button>
       {show && <div className="outbox show" dangerouslySetInnerHTML={{ __html: out }} />}
       {badge}

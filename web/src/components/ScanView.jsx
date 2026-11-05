@@ -7,7 +7,7 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
   const [url, setUrl] = useState('')
   const [name, setName] = useState('')
   const [scanning, setScanning] = useState(false)
-  const [state, setState] = useState('hazır')
+  const [state, setState] = useState('hazir')
   const [scan, setScan] = useState(null)
   const [profileId, setProfileId] = useState(null)
   const [profileName, setProfileName] = useState('')
@@ -33,7 +33,7 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
 
   async function doScan(save) {
     if (!url.trim()) { alert('Hedef URL gir'); return }
-    setScanning(true); setState('taranıyor…')
+    setScanning(true); setState('taraniyor…')
     try {
       const body = { url, save }
       if (name.trim()) body.name = name.trim()
@@ -47,21 +47,21 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
       if (save) onLogsChanged()
       setState(save ? 'kaydedildi ✓' : 'tara')
     } catch (e) {
-      setState('hata'); alert('Tarama hatası: ' + e.message)
+      setState('hata'); alert('Tarama hatasi: ' + e.message)
     }
     setScanning(false)
   }
 
   async function rescan() {
     if (!profileId) return
-    setState('yeniden taranıyor…')
+    setState('yeniden taraniyor…')
     try {
       const p = await api.rescan(profileId, {})
       setScan(p.scan || p)
       onProfilesChanged(); onLogsChanged()
       loadHistory(profileId)
-      setState('yeniden tarandı ✓')
-    } catch (e) { setState('hata'); alert('Rescan hatası: ' + e.message) }
+      setState('yeniden tarandi ✓')
+    } catch (e) { setState('hata'); alert('Rescan hatasi: ' + e.message) }
   }
 
   const s = scan || {}
@@ -73,9 +73,9 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
           <h3>Hedef <span className="tag">{state}</span></h3>
           <label className="f">Hedef URL</label>
           <input className="mono" value={url} onChange={e => setUrl(e.target.value)}
-            placeholder="http://192.168.8.123:18111/index.php" spellCheck="false" />
-          <label className="f" style={{ marginTop: 12 }}>Profil adı (opsiyonel)</label>
-          <input value={name} onChange={e => setName(e.target.value)} placeholder="örn: php-target-18111" spellCheck="false" />
+            placeholder="http://LAB_IP:18111/index.php" spellCheck="false" />
+          <label className="f" style={{ marginTop: 12 }}>Profil adi (opsiyonel)</label>
+          <input value={name} onChange={e => setName(e.target.value)} placeholder="orn: php-target-18111" spellCheck="false" />
           <div style={{ display: 'flex', gap: 8, marginTop: 14, flexWrap: 'wrap' }}>
             <button className="btn primary block" disabled={scanning} onClick={() => doScan(true)}>
               {scanning ? <span className="spin" /> : '🎯'} Tara + Kaydet
@@ -96,8 +96,8 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
         {!s && (
           <div className="empty">
             <div className="big">🎯</div>
-            Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header çıkarır,<br />
-            eşleşen kritik CVE'leri listeler, <b>0–100 risk puanı</b> verir, her adımı <b>loglar</b> ve native PoC'leri kendisi atar.
+            Soldan hedef URL gir → <b>Tara</b>. Scanner fingerprint + WAF + port + TLS + header cikarir,<br />
+            eslesen kritik CVE'leri listeler, <b>0–100 risk puani</b> verir, her adimi <b>loglar</b> ve native PoC'leri kendisi atar.
           </div>
         )}
         {s && (
@@ -106,9 +106,9 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
             {s.waf && s.waf.names && s.waf.names.length > 0 && (
               <div className="waf-banner">🛡 WAF sinyali: {s.waf.names.join(', ')} — exploit denemeleri engellenebilir.</div>
             )}
-            <div className="sec-head">Eşleşen Kritik CVE'ler <span className="n">{(s.cves || []).length} · {(s.cves || []).filter(c => pocs[c.id]).length} native PoC</span></div>
+            <div className="sec-head">Eslesen Kritik CVE'ler <span className="n">{(s.cves || []).length} · {(s.cves || []).filter(c => pocs[c.id]).length} native PoC</span></div>
             {(s.cves || []).length === 0 ? (
-              <div className="sec-empty" style={{ marginTop: 8 }}>Tespit edilen sürümler için eşleşen kritik CVE bulunamadı ✓</div>
+              <div className="sec-empty" style={{ marginTop: 8 }}>Tespit edilen surumler icin eslesen kritik CVE bulunamadi ✓</div>
             ) : (
               (s.cves || []).map(c => <CveCard key={c.id} cve={c} pocs={pocs} hitMajor={s.php_major}
                 profileId={profileId} onRun={() => { onProfilesChanged(); onLogsChanged(); }} />)
@@ -116,7 +116,7 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
 
             {profileId && history && (
               <>
-                <div className="sec-head">Tarama Tarihçesi <span className="n">{history.scans.length}</span>
+                <div className="sec-head">Tarama Tarihcesi <span className="n">{history.scans.length}</span>
                   <button className="btn sm" style={{ marginLeft: 'auto' }} onClick={rescan}>↻ Yeniden Tara (tarihe ekle)</button>
                 </div>
                 <div className="history-block">
@@ -130,15 +130,15 @@ export default function ScanView({ pocs, activeProfileId, onProfilesChanged, onL
                     </tbody>
                   </table></div>
                 </div>
-                <div className="sec-head">PoC Çalıştırma Kayıtları <span className="n">{history.pocs.length}</span></div>
+                <div className="sec-head">PoC Calistirma Kayitlari <span className="n">{history.pocs.length}</span></div>
                 <div className="history-block">
-                  {history.pocs.length === 0 ? <div className="sec-empty">PoC çalıştırma kaydı yok</div> : (
+                  {history.pocs.length === 0 ? <div className="sec-empty">PoC calistirma kaydi yok</div> : (
                     <div className="tbl-wrap"><table className="tbl">
-                      <thead><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuç</th><th>Kanıt (kısa)</th></tr></thead>
+                      <thead><tr><th>#</th><th>Zaman</th><th>CVE</th><th>Sonuc</th><th>Kanit (kisa)</th></tr></thead>
                       <tbody>
                         {history.pocs.map(r => (
                           <tr key={r.id}><td>{r.id}</td><td>{r.ts}</td><td>{r.cve_id}</td>
-                            <td className={r.success ? 'ok' : 'no'}>{r.success ? '✓ BAŞARILI' : '✗'}</td>
+                            <td className={r.success ? 'ok' : 'no'}>{r.success ? '✓ BASARILI' : '✗'}</td>
                             <td className="cell-txt">{(r.result && r.result.evidence || '').slice(0, 90)}</td></tr>
                         ))}
                       </tbody>
@@ -166,7 +166,7 @@ function kvRows(s) {
   add('SAPI', s.sapi_guess !== 'unknown' ? s.sapi_guess : '')
   add('Server hdr', s.server)
   add('X-Powered-By', s.xpoweredby)
-  if (!rows.length) rows.push(['Durum', s.error || 'erişilemedi', 'bad'])
+  if (!rows.length) rows.push(['Durum', s.error || 'erisilemedi', 'bad'])
   return rows
 }
 
@@ -193,10 +193,10 @@ function PortsPanel({ s }) {
   const ports = s.ports || []
   return (
     <div className="panel">
-      <h3>Açık Portlar <span className="tag">{ports.length}</span></h3>
-      {ports.length === 0 ? <div className="sec-empty">Açık port bulunamadı</div> : (
+      <h3>Acik Portlar <span className="tag">{ports.length}</span></h3>
+      {ports.length === 0 ? <div className="sec-empty">Acik port bulunamadi</div> : (
         <div className="tbl-wrap"><table className="tbl">
-          <thead><tr><th>Port</th><th>Servis</th><th>Sürüm</th></tr></thead>
+          <thead><tr><th>Port</th><th>Servis</th><th>Surum</th></tr></thead>
           <tbody>{ports.map(p => <tr key={p.port}><td className="ok">:{p.port}</td><td>{p.service || 'open'}</td><td>{p.version || '—'}</td></tr>)}</tbody>
         </table></div>
       )}
@@ -208,7 +208,7 @@ function TlsPanel({ s }) {
   const rows = [
     ['Protocol', t.protocol], ['Cipher', `${(t.cipher || {}).name || ''} (${(t.cipher || {}).tls || ''})`],
     ['Issuer', (t.cert || {}).issuer], ['CN', (t.cert || {}).cn],
-    ['SAN', ((t.cert || {}).san || []).join(', ')], ['Expiry', `${(t.cert || {}).not_after || ''} (${(t.cert || {}).days_to_expire} gün)`],
+    ['SAN', ((t.cert || {}).san || []).join(', ')], ['Expiry', `${(t.cert || {}).not_after || ''} (${(t.cert || {}).days_to_expire} gun)`],
   ]
   return (
     <div className="panel">
@@ -233,7 +233,7 @@ function PathsPanel({ s }) {
   if (!paths.length) return null
   return (
     <div className="panel">
-      <h3>İlginç Path'ler</h3>
+      <h3>Ilginc Path'ler</h3>
       <div className="tbl-wrap"><table className="tbl">
         <thead><tr><th>Path</th><th>HTTP</th></tr></thead>
         <tbody>{paths.map(p => <tr key={p.path}><td>{p.path}</td><td className={p.status < 400 ? 'ok' : 'warn'}>{p.status}</td></tr>)}</tbody>

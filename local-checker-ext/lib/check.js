@@ -5,7 +5,7 @@ import { extractVersion } from './version.js';
 const TIMEOUT_MS = 8000;
 const PROBE_PATHS = ['/', '/index.php', '/phpinfo.php'];
 
-/** "192.168.8.123:18101" / "http://..." -> URL | null. Bare host -> http://. */
+/** "LAB_IP:18101" / "http://..." -> URL | null. Bare host -> http://. */
 export function toUrl(input) {
   let s = String(input || '').trim();
   if (!s) return null;
@@ -57,7 +57,7 @@ async function probe(url) {
  */
 export async function checkTarget(input) {
   const url = toUrl(input);
-  if (!url) return { ok: false, error: 'INVALID_URL', message: 'Gecerli host/URL gir — or. 192.168.8.123:18101' };
+  if (!url) return { ok: false, error: 'INVALID_URL', message: 'Gecerli host/URL gir — or. LAB_IP:18101' };
   const host = url.hostname;
   let lastResponse = null;
   let lastError = null;

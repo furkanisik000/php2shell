@@ -51,11 +51,11 @@ REM --- 4) dogrula ---
 echo [4/4] dogrula (local + LAN)...
 echo   - local : 
 for /f %%a in ('curl -s --max-time 6 http://127.0.0.1:18120/index.php 2^>nul') do echo      %%a
-echo   - LAN   : http://192.168.8.123:18120/index.php
+echo   - LAN   : http://LAB_IP:18120/index.php
 echo.
 echo ============================================
 echo  HAZIR: PHP 8.4.26 target (native amd64)
-echo  URL   : http://192.168.8.123:18120/index.php
+echo  URL   : http://LAB_IP:18120/index.php
 echo  Offset: zif_system=0x465370  zval_ptr_dtor=0x65EB60
 echo  Asistan (Mac) simdi exploit'i calistiracaktir.
 echo ============================================

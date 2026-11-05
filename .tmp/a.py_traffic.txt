@@ -2,7 +2,7 @@
 ======================================================================  #1  ======================================================================
 --- REQUEST POST /index.php ---
 POST /index.php HTTP/1.1
-Host: 192.168.8.123:18120
+Host: LAB_IP:18120
 Content-Type: multipart/form-data; boundary=SSSSSSSSSSSSSSSSS
 Content-Length: 12655437
 Connection: close
@@ -26,7 +26,7 @@ Content-Type: text/html; charset=UTF-8
 ======================================================================  #2  ======================================================================
 --- REQUEST POST /index.php ---
 POST /index.php HTTP/1.1
-Host: 192.168.8.123:18120
+Host: LAB_IP:18120
 Content-Type: multipart/form-data; boundary=BBBBBBBBBB
 Content-Length: 93685
 Connection: close
@@ -51,7 +51,7 @@ OK
 ======================================================================  #3  ======================================================================
 --- REQUEST POST /index.php ---
 POST /index.php HTTP/1.1
-Host: 192.168.8.123:18120
+Host: LAB_IP:18120
 Content-Type: multipart/form-data; boundary=SSSSSSSSSSSSSSSSS
 Content-Length: 15657436
 Connection: close
@@ -75,7 +75,7 @@ Content-Type: text/html; charset=UTF-8
 ======================================================================  #4  ======================================================================
 --- REQUEST POST /index.php ---
 POST /index.php HTTP/1.1
-Host: 192.168.8.123:18120
+Host: LAB_IP:18120
 Content-Type: multipart/form-data; boundary=BNDRY12345
 Content-Length: 192
 Connection: close

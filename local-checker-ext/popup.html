@@ -12,33 +12,33 @@
       <span class="logo" aria-hidden="true">&lt;/&gt;</span>
       <div>
         <h1>PHP2Shell <span>Local</span></h1>
-        <p class="sub">Aktif sekmeyi canlı kontrol eder · sürüm DB'sinden risk · API yok</p>
+        <p class="sub">Aktif sekmeyi canli kontrol eder · surum DB'sinden risk · API yok</p>
       </div>
     </div>
   </header>
 
   <main>
     <section class="card">
-      <label class="lbl" for="target">Hedef (varsayılan: aktif sekme)</label>
+      <label class="lbl" for="target">Hedef (varsayilan: aktif sekme)</label>
       <div class="row">
-        <input id="target" type="text" placeholder="192.168.8.123:18101" autocomplete="off" spellcheck="false">
+        <input id="target" type="text" placeholder="LAB_IP:18101" autocomplete="off" spellcheck="false">
         <button id="checkBtn" class="btn btn-primary" type="button">Kontrol</button>
       </div>
-      <p class="hint">IP/port değişse bile sorun değil — her seferinde canlı sorar. Varsayılan <code>http://</code>.</p>
+      <p class="hint">IP/port degisse bile sorun degil — her seferinde canli sorar. Varsayilan <code>http://</code>.</p>
     </section>
 
     <section class="card" id="resultCard" hidden></section>
 
     <section class="card" id="manualCard" hidden>
-      <label class="lbl" for="manualVer">Manuel PHP sürümü (gizliyse)</label>
+      <label class="lbl" for="manualVer">Manuel PHP surumu (gizliyse)</label>
       <div class="row">
         <input id="manualVer" type="text" placeholder="8.4.26" autocomplete="off" spellcheck="false">
-        <button id="manualBtn" class="btn" type="button">Değerlendir</button>
+        <button id="manualBtn" class="btn" type="button">Degerlendir</button>
       </div>
     </section>
 
     <section class="card" id="dbCard" hidden>
-      <div class="row-between"><h2>Sürüm risk DB'si (data/db.json)</h2></div>
+      <div class="row-between"><h2>Surum risk DB'si (data/db.json)</h2></div>
       <ul id="dbList" class="hist"></ul>
     </section>
 

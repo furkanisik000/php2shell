@@ -59,7 +59,7 @@ function renderResult(res, vinfo) {
         <span class="pill">Hata</span>
         <span class="host">${esc(res.host || '')}</span>
       </div>
-      <p class="reason danger">${esc(res.message || 'Kontrol başarısız.')}</p>
+      <p class="reason danger">${esc(res.message || 'Kontrol basarisiz.')}</p>
       ${res.url ? `<p class="muted small">Denenen: ${esc(res.url)}</p>` : ''}
     `;
     $('#manualCard').hidden = true;
@@ -73,12 +73,12 @@ function renderResult(res, vinfo) {
   if (res.httpStatus) rows.push(['HTTP', String(res.httpStatus)]);
   if (res.server) rows.push(['Server', res.server]);
   if (res.xPoweredBy) rows.push(['X-Powered-By', res.xPoweredBy]);
-  if (v) rows.push(['PHP sürümü', `${v}${res.versionSource ? ` (${res.versionSource})` : ''}`]);
+  if (v) rows.push(['PHP surumu', `${v}${res.versionSource ? ` (${res.versionSource})` : ''}`]);
   if (info) rows.push(['Risk', `${info.label} · [${info.source}]`]);
 
   card.innerHTML = `
     <div class="result-head t-${tone}">
-      <span class="pill">${esc(info ? info.label : v ? '—' : 'Sürüm gizli')}</span>
+      <span class="pill">${esc(info ? info.label : v ? '—' : 'Surum gizli')}</span>
       <span class="host">${esc(res.host)}</span>
     </div>
     <dl class="kv">
@@ -87,7 +87,7 @@ function renderResult(res, vinfo) {
     </dl>
     ${info && info.note ? `<p class="reason">${esc(info.note)}</p>` : ''}
     ${res.note ? `<p class="reason warn">${esc(res.note)}</p>` : ''}
-    ${!v ? '<p class="reason">PHP sürümü gizli — biliyorsan alttan manuel gir.</p>' : ''}
+    ${!v ? '<p class="reason">PHP surumu gizli — biliyorsan alttan manuel gir.</p>' : ''}
   `;
   $('#manualCard').hidden = Boolean(v);
 }
@@ -104,7 +104,7 @@ async function doCheck(inputOverride) {
       if (u) input = u;
     }
     if (!input) {
-      renderResult({ ok: false, message: 'Hedef yok — URL yaz ya da hedef sekmesindeyken aç.' });
+      renderResult({ ok: false, message: 'Hedef yok — URL yaz ya da hedef sekmesindeyken ac.' });
       return;
     }
     $('#target').value = input;
@@ -127,7 +127,7 @@ function doManual() {
   if (!v) return;
   lookupVersion(v).then((info) => {
     renderResult(
-      { ok: true, host: 'manual', url: 'manuel giriş', httpStatus: null, server: null, xPoweredBy: null, version: v, versionSource: 'manual' },
+      { ok: true, host: 'manual', url: 'manuel giris', httpStatus: null, server: null, xPoweredBy: null, version: v, versionSource: 'manual' },
       info,
     );
     void pushHistory({ host: 'manual', version: v, status: info.status });
@@ -169,7 +169,7 @@ $('#clearHist').addEventListener('click', async () => {
 // init: meta + history + db list + AKTIF SEKME otomatik kontrolu
 (async () => {
   getMeta().then((m) => {
-    if (m.cve) $('#ruleNote').textContent = `${m.cve} · db güncel ${m.updated}`;
+    if (m.cve) $('#ruleNote').textContent = `${m.cve} · db guncel ${m.updated}`;
   }).catch(() => {});
   renderHistory();
   renderDbList();

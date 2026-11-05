@@ -9,10 +9,10 @@
  *     -L/opt/homebrew/opt/openssl@3/lib -lssl -lcrypto
  *
  * Run:
- *   ./p2s_sweep http://192.168.8.123:18113/index.php
- *   ./p2s_sweep --sizes 8,16,32 --tries 5 http://192.168.8.123:18113/index.php https://xxx.com/index.php
+ *   ./p2s_sweep http://LAB_IP:18113/index.php
+ *   ./p2s_sweep --sizes 8,16,32 --tries 5 http://LAB_IP:18113/index.php https://xxx.com/index.php
  *   ./p2s_sweep --file hosts.txt
- *   ./p2s_sweep --probe http://192.168.8.123:18113/index.php  (sadece probe, exploit yok)
+ *   ./p2s_sweep --probe http://LAB_IP:18113/index.php  (sadece probe, exploit yok)
  *
  * Signal:
  *   LEAK!  = heap pointer'lar Set-Cookie'de → worker corrupted → exploit calisiyor
@@ -36,7 +36,7 @@
 #include <openssl/err.h>
 
 /* ============ config ============ */
-#define OFFSETS_DIR "/Users/<USER>/Desktop/php2shell/labs/versions"
+#define OFFSETS_DIR "<REPO_PATH>/labs/versions"
 #define MAX_URLS 64
 #define RESP_CAP (1 << 20)
 #define OOM_BND "S17"

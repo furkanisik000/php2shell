@@ -1,36 +1,36 @@
 #!/usr/bin/env python3
-"""server.py — P2S CVE Scanner v2: core motorunun üstünde ince (thin) HTTP katmanı.
+"""server.py — P2S CVE Scanner v2: core motorunun ustunde ince (thin) HTTP katmani.
 
-Mimari: bu dosya YALNIZCA yönlendirme (routing) + serileştirme işleri yapar; tarama, risk
-skoru, PoC yürütme gibi tüm iş mantığı `core.py` içindedir. Böylece HTTP arayüzü
-ve MCP arayüzü (mcp_server.py) aynı beyni paylaşır — tek doğruluk kaynağı.
+Mimari: bu dosya YALNIZCA yonlendirme (routing) + serilestirme isleri yapar; tarama, risk
+skoru, PoC yurutme gibi tum is mantigi `core.py` icindedir. Boylece HTTP arayuzu
+ve MCP arayuzu (mcp_server.py) ayni beyni paylasir — tek dogruluk kaynagi.
 
-Çalıştırma:  python3 server.py [port]        (varsayılan port: 8123)
-Erişim:     http://127.0.0.1:8123            (React UI: web/dist/; yoksa index.html)
+Calistirma:  python3 server.py [port]        (varsayilan port: 8123)
+Erisim:     http://127.0.0.1:8123            (React UI: web/dist/; yoksa index.html)
 
-Endpoint'ler (tümü JSON; gövdede {..} = POST alanları)
+Endpoint'ler (tumu JSON; govdede {..} = POST alanlari)
   GET    /                        index.html (profesyonel UI — dist fallback'li)
-  GET    /assets/<file>           React build statik varlıkları (JS/CSS)
-  GET    /health                  liveness + sürüm + CVE/PoC/profil sayaçları
-  GET    /db/<file>               db alt ağacı dosyaları (vulns.json, ...)
+  GET    /assets/<file>           React build statik varliklari (JS/CSS)
+  GET    /health                  liveness + surum + CVE/PoC/profil sayaclari
+  GET    /db/<file>               db alt agaci dosyalari (vulns.json, ...)
   GET    /cves?software=&version= CVE listesi (filtreli)
-  GET    /pocs                    çalıştırılabilir native PoC kataloğu
+  GET    /pocs                    calistirilabilir native PoC katalogu
   POST   /probe                   {url} -> fingerprint + WAF + portlar (kaydetmez)
   POST   /scan                    {url, name?, save?} -> tam tarama + profil
-  GET    /profiles                kayıtlı hedef profilleri (özet liste)
+  GET    /profiles                kayitli hedef profilleri (ozet liste)
   GET    /profiles/<id>           tek tam profil (scan + risk + poc_results)
-  GET    /profiles/<id>/scans     tarama geçmişi (zaman damgalı, eski->yeni)
-  GET    /profiles/<id>/poc-runs  PoC çalışma geçmişi
+  GET    /profiles/<id>/scans     tarama gecmisi (zaman damgali, eski->yeni)
+  GET    /profiles/<id>/poc-runs  PoC calisma gecmisi
   POST   /profiles/<id>/rename    {name}
-  POST   /profiles/<id>/rescan    aynı profile eklenen yeni tarama (geçmiş korunur)
+  POST   /profiles/<id>/rescan    ayni profile eklenen yeni tarama (gecmis korunur)
   DELETE /profiles/<id>
   GET    /profiles/<id>/report?fmt=md|json   rapor indirme (attachment)
-  POST   /profiles/<id>/poc/<cve> {params{}} -> native PoC çalıştır + profila yaz
-  POST   /poc/<cve>               {params{}} -> ad-hoc native PoC çalıştır
-  POST   /run                     {command} -> allow-list'li sınırlı yerel yürütücü
-  GET    /logs?level=&category=&q=&limit=    SQLite operasyon günlüğü
-  POST   /logs/clear              günlük tablosunu + log dosyasını sıfırla
-  GET    /mcp                     MCP kurulum belgesi (düz metin)
+  POST   /profiles/<id>/poc/<cve> {params{}} -> native PoC calistir + profila yaz
+  POST   /poc/<cve>               {params{}} -> ad-hoc native PoC calistir
+  POST   /run                     {command} -> allow-list'li sinirli yerel yurutucu
+  GET    /logs?level=&category=&q=&limit=    SQLite operasyon gunlugu
+  POST   /logs/clear              gunluk tablosunu + log dosyasini sifirla
+  GET    /mcp                     MCP kurulum belgesi (duz metin)
 """
 from __future__ import annotations
 
@@ -159,7 +159,7 @@ class H(BaseHTTPRequestHandler):
             out = core.store.scan_history(pid, limit=100)
             self._json(200, {"count": len(out), "scans": out})
         elif path == "/logs":
-            # limit değeri kullanıcıdan gelir: sayısal olmayan/abartılı girdi varsayılana düşer
+            # limit degeri kullanicidan gelir: sayisal olmayan/abartili girdi varsayilana duser
             try:
                 limit = max(1, min(5000, int(query.get("limit", 200))))
             except (TypeError, ValueError):
@@ -206,8 +206,8 @@ class H(BaseHTTPRequestHandler):
             )
             self._text(200, doc)
         elif path.startswith("/db/"):
-            # Yol geçişi (path traversal) koruması: istenen hedef, çözüldükten sonra
-            # mutlaka db/ alt ağacının İÇİNDE kalmalı ("../" gibi kaçışlar 404 döner).
+            # Yol gecisi (path traversal) korumasi: istenen hedef, cozuldukten sonra
+            # mutlaka db/ alt agacinin ICINDE kalmali ("../" gibi kacislar 404 doner).
             req_path = os.path.realpath(os.path.join(HERE, path.lstrip("/")))
             db_root = os.path.realpath(DB)
             if not req_path.startswith(db_root + os.sep):
@@ -297,7 +297,7 @@ class H(BaseHTTPRequestHandler):
 
         elif path == "/logs/clear":
             n = core.store.clear_logs()
-            core.store.log("INFO", "system", f"logs temizlendi ({n} satır)")
+            core.store.log("INFO", "system", f"logs temizlendi ({n} satir)")
             self._json(200, {"cleared": n})
 
         else:

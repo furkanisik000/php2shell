@@ -6,7 +6,7 @@ Wires the scanner core (core.py) up as MCP tools so Qwen Code / any MCP client
 can drive the scanner.
 
 Install (stdio):
-    qwen mcp add p2s -- python3 <REPO>/mcp_server.py   # <REPO> = bu dosyanın klasörü
+    qwen mcp add p2s -- python3 <REPO>/mcp_server.py   # <REPO> = bu dosyanin klasoru
     # then a FULL Qwen restart is required (qwen mcp add never hot-loads).
 
 Tools exposed (15):
@@ -14,9 +14,9 @@ Tools exposed (15):
     run_poc, list_profiles, get_profile, delete_profile, export_report,
     risk_score, tls_fingerprint, port_scan, list_logs
 
-Not: `build_poc_command` yalnızca legacy `command_template` panelleri için komut
-ÜRETİR (çalıştırmaz); native PoC'ler doğrudan `run_poc` ile socket/HTTP seviyesinde
-koşar. v2.1'de bu araç eksik kayıtlıydı — tabloya eklenmesi bir düzeltmedir.
+Not: `build_poc_command` yalnizca legacy `command_template` panelleri icin komut
+URETIR (calistirmaz); native PoC'ler dogrudan `run_poc` ile socket/HTTP seviyesinde
+kosar. v2.1'de bu arac eksik kayitliydi — tabloya eklenmesi bir duzeltmedir.
 """
 from __future__ import annotations
 
@@ -68,12 +68,12 @@ def t_poc_list(a):
 
 
 def t_build_poc_command(a):
-    """Legacy komut şablonunu parametrelerle doldurur (ÇALIŞTIRMAZ).
+    """Legacy komut sablonunu parametrelerle doldurur (CALISTIRMAZ).
 
-    Yalnızca `command_template` taşıyan eski paneller için anlamlıdır; native
-    PoC'larda doğrudan `run_poc` kullanılır. Doğrulama (validation) burada yapılır:
-    şablon yoksa temiz JSON-RPC hatası döner — düzeltilmeden önce bu araç TOOLS
-    listesinde tanıtılıp TOOL_IMPLS'te eksikti, bu yüzden her çağrıda patlıyordu.
+    Yalnizca `command_template` tasiyan eski paneller icin anlamlidir; native
+    PoC'larda dogrudan `run_poc` kullanilir. Dogrulama (validation) burada yapilir:
+    sablon yoksa temiz JSON-RPC hatasi doner — duzeltilmeden once bu arac TOOLS
+    listesinde tanitilip TOOL_IMPLS'te eksikti, bu yuzden her cagrida patliyordu.
     """
     cve = (a.get("cve_id") or "").strip()
     if not cve:

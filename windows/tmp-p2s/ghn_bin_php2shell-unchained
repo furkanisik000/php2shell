@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Menü-Launcher. Funktioniert auch als PATH-Symlink.
+# Menu-Launcher. Funktioniert auch als PATH-Symlink.
 set -euo pipefail
 SOURCE="${BASH_SOURCE[0]}"
 while [[ -L "$SOURCE" ]]; do

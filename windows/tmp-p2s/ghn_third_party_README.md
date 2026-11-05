@@ -13,7 +13,7 @@ Hier legst du **selbst** heruntergeladene Forschungs-Bundles ab (nur autorisiert
 ```
 
 - Framework: `third_party/php-up-2026/bin/php_up_framework.py` (Mirror-Layout wie Jackalsyn-Bundle)
-- Repro-ZIP: `third_party/jackalsyn-reup/` von [jackalsyn.com](https://jackalsyn.com/posts/php-up-2026.html) (`php2shell-reup.zip`, SHA256 geprüft)
+- Repro-ZIP: `third_party/jackalsyn-reup/` von [jackalsyn.com](https://jackalsyn.com/posts/php-up-2026.html) (`php2shell-reup.zip`, SHA256 gepruft)
 
 `php_up_framework.py` wird im Attacker-Container unter `/opt/third_party/` gemountet.
 
@@ -58,7 +58,7 @@ Payload landet in `zer061-php2shell/out/r` (gemeinsames `/out` am Apache-Target)
 ~/Schreibtisch/cursor-projects/vtbw-php2shell-lab sliver implant
 ```
 
-Externe Sicht: `tunnel up web` (Web-Target) oder `sliver http-listener` + `tunnel up sliver-http` (C2 über Cloudflare Quick Tunnel). Ops-Logs: `out/sliver/ops.log`, `out/tunnel/ops.log`. Menü **[6]**.
+Externe Sicht: `tunnel up web` (Web-Target) oder `sliver http-listener` + `tunnel up sliver-http` (C2 uber Cloudflare Quick Tunnel). Ops-Logs: `out/sliver/ops.log`, `out/tunnel/ops.log`. Menu **[6]**.
 
 ## Singularity (Post-Exploit LKM)
 
@@ -68,9 +68,9 @@ Externe Sicht: `tunnel up web` (Web-Target) oder `sliver http-listener` + `tunne
 ~/Schreibtisch/cursor-projects/vtbw-php2shell-lab singularity runtime
 ```
 
-Nur VM / Host / Compose-Profil `singularity` — **nicht** in FPM/Apache-PHP-Containern. Doku: `docs/SINGULARITY-LAB.md`, Menü **[7]**.
+Nur VM / Host / Compose-Profil `singularity` — **nicht** in FPM/Apache-PHP-Containern. Doku: `docs/SINGULARITY-LAB.md`, Menu **[7]**.
 
-## Menü
+## Menu
 
 ```bash
 ~/Schreibtisch/cursor-projects/php2shell-unchained

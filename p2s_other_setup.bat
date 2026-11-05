@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions
 REM ============================================================
-REM  P2S — Diğer PoC hedefleri (Windows Docker Desktop, native amd64)
+REM  P2S — Diger PoC hedefleri (Windows Docker Desktop, native amd64)
 REM  Kur: Ghostcat + h2c + Apache mod_http2 + MySQL 5.7/8.0 + PHP CGI/FPM
 REM  Detay: P2S_OTHER_TARGETS.md
 REM ============================================================

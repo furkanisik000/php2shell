@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Concurrent OOM + leak read — corruption window'ı yakala.
+"""Concurrent OOM + leak read — corruption window'i yakala.
 
 Kritik bulgu: `zend_mm_heap corrupted` + `Abort (6)` — korupsiyon OLUYOR,
-worker crash ediyor (clean recover değil). ~2s corruption window var.
+worker crash ediyor (clean recover degil). ~2s corruption window var.
 
 Strateji:
-  1. Connection 1: OOM (12MB) — worker'ı corrupt et
+  1. Connection 1: OOM (12MB) — worker'i corrupt et
   2. Connection 2 (CONCURRENT): leak read (forged zend_string) —
-     corruption window'ında worker'a isabet et
+     corruption window'inda worker'a isabet et
 
-Delay vary (0, 0.3, 0.6, 1.0, 1.5s) — window'ı yakala.
+Delay vary (0, 0.3, 0.6, 1.0, 1.5s) — window'i yakala.
 
 Usage:
   python3 bf_window.py --port 18113 --delays 0,0.3,0.6,1.0,1.5
@@ -55,7 +55,7 @@ def fire_leak(t: Target, boundary: bytes) -> tuple[int, int, int]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host", default="192.168.8.123")
+    ap.add_argument("--host", default="LAB_IP")
     ap.add_argument("--port", type=int, default=18113)
     ap.add_argument("--delays", default="0,0.3,0.6,1.0,1.5",
                     help="comma-separated delays in seconds")

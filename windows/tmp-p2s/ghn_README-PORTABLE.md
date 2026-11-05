@@ -10,16 +10,16 @@ cd ~/Schreibtisch/php2shell-lab-vtbw-portable-*
 chmod +x vtbw-php2shell-lab php2shell-unchained vtbw-php2shell-doctor
 ```
 
-## 2. Menü starten
+## 2. Menu starten
 
 ```bash
 ./php2shell-unchained
 ```
 
-Vollständige Schritt-für-Schritt-Anleitung:  
+Vollständige Schritt-fur-Schritt-Anleitung:  
 `php2shell-lab-vtbw/docs/HOWTO-DE.md`
 
-## 3. Bundles (Internet nötig, einmalig)
+## 3. Bundles (Internet notig, einmalig)
 
 ```bash
 ./vtbw-php2shell-lab fetch-zer061
@@ -41,7 +41,7 @@ cd php2shell-lab-vtbw && docker compose --profile tools build attacker
 
 ```
 php2shell-lab-vtbw-portable-<datum>/
-├── php2shell-unchained      # Menü
+├── php2shell-unchained      # Menu
 ├── vtbw-php2shell-lab       # alle CLI-Befehle (siehe: help)
 ├── vtbw-php2shell-doctor
 ├── README-PORTABLE.md       # diese Datei

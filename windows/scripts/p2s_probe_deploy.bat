@@ -50,7 +50,7 @@ foreach ($v in ($map.Keys | Sort-Object)) {
 echo.
 echo ============================================
 echo  Bitti. Simdi Mac'ten de oku:
-echo  curl http://192.168.8.123:18113/p2s_probe.php
+echo  curl http://LAB_IP:18113/p2s_probe.php
 echo ============================================
 endlocal
 pause
