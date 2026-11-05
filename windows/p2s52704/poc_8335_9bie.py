@@ -3,6 +3,7 @@
 
 A1 (mk_a1.py) -> B1 (mk_leak_b.py) -> A2 (cheap_oom_a.py) -> B2 (fake_ref_b.py)
 """
+import os
 import subprocess, sys, os, time, struct, socket, re, urllib.parse
 from collections import Counter
 
@@ -15,7 +16,7 @@ FETCH = "/p1"
 S_OFFSET = 0xF8398       # from 8.4.26 calibration; may differ on 8.3.35
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 
 def log(m): print(m, flush=True)
 

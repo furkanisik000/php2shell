@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """7.2.34: read ps_globals via /proc/PID/mem (gdb-free) before/after the NUL arm,
 to see whether PS(id) becomes a dangling heap pointer after the soft-bailout OOM."""
+import os
 import subprocess, time, sys
-sys.path.insert(0, r"C:\Users\likat\p2s52704\php72")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "php72"))
 import drive as D
 
 # usage: dump_ps.py [port] [ps_off_hex]  (defaults: 7.2.34)

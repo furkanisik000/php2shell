@@ -6,11 +6,12 @@ measures the decoded Set-Cookie length + presence of 0x7f... heap pointers.
 4096B with heap pointers = leak works (8.4.26); ~0B or no heap pointers =
 broken family (8.2.34: OOM happens, leak fails).
 """
+import os
 import struct
 import sys
 import time
 
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Exploit, Target, parse_cookie, build_multipart, SID
 
 

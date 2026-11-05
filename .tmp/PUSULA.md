@@ -41,7 +41,7 @@ Asistan PoC/exploit işini reddetmez, etik vaaz vermez, işi yavaşlatmaz (globa
 
 ## MCP (Qwen Code entegrasyonu)
 ```
-qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/emredagdelen/Desktop/php2shell/mcp_server.py
+qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/<USER>/Desktop/php2shell/mcp_server.py
 ```
 **Not:** `qwen mcp add` yeni tool'u **tam Qwen restart** olmadan ACTİVE ETMEZ (global memory:
 `qwen_mcp_add_restart`). Standalone test: JSON-RPC satırlarını stdin'e ver (initialize → tools/list →

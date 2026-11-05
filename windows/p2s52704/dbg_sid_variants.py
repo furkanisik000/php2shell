@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Try different SID formats on the stage-1 B request for a given port, to
 see which produces a Set-Cookie (and whether it leaks heap)."""
+import os
 import sys, os, time, struct
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = int(sys.argv[1])

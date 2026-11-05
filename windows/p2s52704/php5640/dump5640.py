@@ -20,8 +20,9 @@
   0x180 rfc1867_freq 0x188 rfc1867_min_freq
   0x190 use_strict   0x194 session_data_hash[16]
 """
+import os
 import subprocess, time, sys
-sys.path.insert(0, r"C:\Users\likat\p2s52704\php72")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "php72"))
 import drive as D
 
 CONT = "p2s5640"

@@ -1,5 +1,6 @@
+import os
 import subprocess, sys, time
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 def sh(cmd):
     return subprocess.run(cmd, shell=True, capture_output=True, text=True)

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Fine sweep: find the narrow leak window on 8.2.34 (OOM inside php_url_encode)."""
+import os
 import sys, time
-sys.path.insert(0, r"C:\Users\likat\p2s52704\php72")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "php72"))
 import drive as D
 
 PORT = 18111

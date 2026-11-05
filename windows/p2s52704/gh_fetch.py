@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Fetch the file tree + key files from a GitHub repo."""
+import os
 import json, sys, urllib.request, os
 
-OUT = r"C:\Users\likat\.qwen\tmp\p2s"
+OUT = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 os.makedirs(OUT, exist_ok=True)
 
 def api(url):

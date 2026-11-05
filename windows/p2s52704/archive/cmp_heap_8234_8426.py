@@ -1,6 +1,7 @@
+import os
 import subprocess, time, struct, os, importlib.util
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location("exploit", os.path.join(BASE, "exploit.py"))
 em = importlib.util.module_from_spec(spec); spec.loader.exec_module(em)
 Target, build_multipart, SID, MAX_CMD = em.Target, em.build_multipart, em.SID, em.MAX_CMD

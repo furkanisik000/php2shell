@@ -1,1 +1,1 @@
-error: Could not access 'C:\Users\likat\.qwen\tmp\p2s\php-8.2.34\ext\standard\variables.c'
+error: Could not access 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.2.34\ext\standard\variables.c'

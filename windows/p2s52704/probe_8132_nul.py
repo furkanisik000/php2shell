@@ -5,8 +5,9 @@ send_cookie=1. On 8.1.32 the cookie channel is already OPEN (32B clean for any
 sid), so this is the best sub-8.3 target. Test NUL sid + several OOM shapes to
 see if ANY produces a heap-spill (>32B) cookie.
 """
+import os
 import struct, sys, time, collections
-sys.path.insert(0, r"C:\Users\likat\p2s52704\test\poc8335")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8335"))
 import exploit as E
 
 HOST = "127.0.0.1"; PORT = 18110

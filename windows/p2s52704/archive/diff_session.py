@@ -1,5 +1,6 @@
+import os
 import re, sys, os
-BASE = r"C:\Users\likat\.qwen\tmp\p2s"
+BASE = r"C:\Users\<USER>\.qwen\tmp\p2s"
 
 def extract(fn, funcs):
     src = open(fn, encoding='utf-8', errors='replace').read()

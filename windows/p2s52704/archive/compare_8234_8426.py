@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Compare 8.2.34 vs 8.4.26 session state after OOM (reqA) + reqB with forge."""
+import os
 import sys, time, struct, re, base64
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart
 
 def run(port, label):

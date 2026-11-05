@@ -1,5 +1,6 @@
+import os
 import json, io, os
-D = r"C:\Users\likat\.qwen\tmp\p2s\scan"
+D = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s", "scan")
 p = os.path.join(D, "trees_summary.json")
 print("exists:", os.path.exists(p), "size:", os.path.getsize(p) if os.path.exists(p) else "-")
 s = json.load(io.open(p, encoding="utf-8"))

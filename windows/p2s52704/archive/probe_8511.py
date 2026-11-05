@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Probe 8.5.11 stage-1 responses: dump headers + cookie for a couple of stage1_n values."""
+import os
 import sys
 import time
 import struct
 
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart, parse_cookie, SID
 
 URL = "http://127.0.0.1:18114/index.php"

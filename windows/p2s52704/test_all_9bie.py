@@ -8,10 +8,11 @@ before any stage-3 RCE is possible.
 
 Offsets (zif/dtor) from the per-version offsets memory.
 """
+import os
 import sys, os, time, subprocess, struct, urllib.parse
 from collections import Counter
 
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 LEAK_SPEC = ",".join(["G:511:0x137"] * 14 + ["G:400:0x137", "G:511:0x137", "X:900"])
 MAIN_BUCKET_COUNT = 87
 

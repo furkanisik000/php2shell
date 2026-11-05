@@ -1,7 +1,8 @@
+import os
 import urllib.request, os, sys
 
 RAW = "https://raw.githubusercontent.com/"
-OUT = r"C:\Users\likat\.qwen\tmp\p2s\scan\raw"
+OUT = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s", "scan", "raw")
 os.makedirs(OUT, exist_ok=True)
 
 FILES = [

@@ -9,9 +9,10 @@ The carrier must overwrite R. This script:
   6. Reads the 24 bytes at R AFTER request B.
   7. Reports if R was overwritten (carrier landed) and by what.
 """
+import os
 import subprocess, sys, time, os, struct, importlib.util
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0   # ps_globals offset in libphp.so (8.3.35)

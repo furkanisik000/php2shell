@@ -3,9 +3,10 @@ Read R = PS(http_session_vars).value, then search for the carrier bytes
 (rc=1, typ=0x1A, + low-7-bytes of htdata) in R±0x200000.
 Also dump the 256B around R and around the expected carrier location (R+0xfd8).
 """
+import os
 import subprocess, time, struct, os, importlib.util
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0

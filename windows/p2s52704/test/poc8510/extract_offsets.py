@@ -2,6 +2,7 @@
 """Pull the NEW affected versions, run containers, extract zif/dtor offsets via nm.
 New: 8.5.9 (18121), 8.4.24 (18122), 8.4.25 (18123), 8.3.33 (18124).
 Also re-extract the 4 known ones for a complete table."""
+import os
 import subprocess, time, json
 
 NEW = [
@@ -83,5 +84,5 @@ print("\n=== OFFSET TABLE ===")
 for ver in sorted(results, key=lambda v: [int(x) for x in v.split(".")], reverse=True):
     o = results[ver]
     print("  %-8s zif=0x%-8x dtor=0x%-8x" % (ver, o.get("zif_system",0), o.get("zval_ptr_dtor",0)))
-json.dump(results, open(r"C:\Users\likat\p2s52704\test\poc8510\offsets.json","w"), indent=2)
+json.dump(results, open(r"C:\Users\<USER>\p2s52704\test\poc8510\offsets.json","w"), indent=2)
 print("\nsaved -> offsets.json")

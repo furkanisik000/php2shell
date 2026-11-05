@@ -20,7 +20,7 @@ const MCP_TOOLS = [
 
 const INSTALL = `# stdio MCP (Qwen Code)
 qwen mcp add p2s -- /opt/homebrew/bin/python3.12 \\
-  /Users/emredagdelen/Desktop/php2shell/mcp_server.py
+  /Users/<USER>/Desktop/php2shell/mcp_server.py
 # sonra: tam Qwen restart (qwen mcp add hot-load yapmaz)
 
 # HTTP API

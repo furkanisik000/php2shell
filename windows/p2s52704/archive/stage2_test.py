@@ -1,5 +1,6 @@
+import os
 import sys, time
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, build_multipart, parse_cookie, libphp_base_from_cookie, chunk_base_from_cookie
 
 URL = "http://127.0.0.1:18113/index.php"

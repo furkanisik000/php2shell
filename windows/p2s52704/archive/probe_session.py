@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Investigate 8.5.11 session-cookie behavior: which requests set a Set-Cookie, and does any leak heap?"""
+import os
 import sys, re
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, build_multipart
 
 t = Target("http://127.0.0.1:18114/index.php", timeout=60.0, verbose=False)

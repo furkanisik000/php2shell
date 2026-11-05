@@ -1,6 +1,7 @@
+import os
 import difflib, io, os
 
-BASE = r'C:\Users\likat\.qwen\tmp\p2s'
+BASE = r'C:\Users\<USER>\.qwen\tmp\p2s'
 PAIRS = [
     ('php-8.4.26', 'php-8.4.27', '8.4'),
     ('php-8.5.11', 'php-8.5.12', '8.5'),

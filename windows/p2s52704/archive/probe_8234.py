@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """8.2.34: does the OOM+heap-leak trigger fire at all? (compare to 8.4.26 where it works)"""
+import os
 import sys, time, struct, re, urllib.parse
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, Exploit, build_multipart
 
 t = Target("http://127.0.0.1:18111/index.php", timeout=90.0, verbose=False)

@@ -1,9 +1,9 @@
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.2.34\Zend\zend_execute_API.c', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.4.26\Zend\zend_execute_API.c', LF will be replaced by CRLF the next time Git touches it
-diff --git "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_execute_API.c" "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_execute_API.c"
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.2.34\Zend\zend_execute_API.c', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.4.26\Zend\zend_execute_API.c', LF will be replaced by CRLF the next time Git touches it
+diff --git "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_execute_API.c" "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_execute_API.c"
 index fa126f9..6e42be5 100644
---- "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_execute_API.c"
-+++ "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_execute_API.c"
+--- "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_execute_API.c"
++++ "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_execute_API.c"
 @@ -34,12 +34,14 @@
  #include "zend_vm.h"
  #include "zend_float.h"

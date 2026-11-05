@@ -2,9 +2,10 @@
 """Dump the raw stage-1 Set-Cookie leak on a given port and analyze the
 2MB-aligned heap-pointer buckets. Compare a failing version (8.2.34) vs a
 working one (8.3.35) to see why the chunk-base leak misses."""
+import os
 import sys, os, time, struct, re, urllib.parse
 from collections import Counter
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = int(sys.argv[1])

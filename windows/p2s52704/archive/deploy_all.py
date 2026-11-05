@@ -1,3 +1,4 @@
+import os
 import subprocess, sys
 
 CONTAINERS = [
@@ -7,7 +8,7 @@ CONTAINERS = [
     ("p2s8132", "18110"), ("p2s8234", "18111"), ("p2s8335", "18112"),
     ("p2s8426", "18113"), ("p2s8511", "18114"),
 ]
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 def run(cmd, **kw):
     return subprocess.run(cmd, shell=True, capture_output=True, text=True, **kw)

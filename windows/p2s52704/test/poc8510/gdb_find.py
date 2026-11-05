@@ -22,13 +22,13 @@ import os
 procs = []
 for i, pid in enumerate(pids):
     script = "/tmp/gdb_w%d.txt" % i
-    with open(r"C:\Users\likat\p2s52704\test\poc8510\gdb_w%d.txt" % i, "w") as f:
+    with open(r"C:\Users\<USER>\p2s52704\test\poc8510\gdb_w%d.txt" % i, "w") as f:
         f.write("attach %d\nset pagination off\nset confirm off\n"
                 "break *0x%x\ncommands 1\nsilent\n"
                 "printf 'HIT worker %d\\n' % 0x%x\nx/160gx 0x%x\n"
                 "printf 'END\\n'\ndetach\nquit\nend\ncontinue\n"
                 % (int(pid), ZEXEC, int(pid), ZEXEC, PS_BASE))
-    sh("docker cp C:/Users/likat/p2s52704/test/poc8510/gdb_w%d.txt p2s8510:%s" % (i, script))
+    sh("docker cp C:/Users/<USER>/p2s52704/test/poc8510/gdb_w%d.txt p2s8510:%s" % (i, script))
     # start gdb in background inside the container
     p = subprocess.Popen(["docker", "exec", "-d", "p2s8510",
                           "sh", "-c", "gdb -batch -x %s > /tmp/gdb_out%d.txt 2>&1" % (script, i)])

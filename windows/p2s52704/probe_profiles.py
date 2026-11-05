@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Probe likely paths for dimasa0305 profiles.json via raw.githubusercontent (works)."""
+import os
 import urllib.request, os
 
 REPO = "dismasa0305/php2shell"
-OUT = r"C:\Users\likat\.qwen\tmp\p2s"
+OUT = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 cands = ["profiles.json", "registry/profiles.json", "profiles/registry.json",
          "data/profiles.json", "config/profiles.json", "profile.json",
          "registry.json", "profiles/official.json", "profiles/debian.json",

@@ -1,6 +1,7 @@
+import os
 import subprocess, sys, time, os
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 c, port = "p2s8335", "18112"
 zif, dtor = "0x3ac080", "0x49ec50"
 

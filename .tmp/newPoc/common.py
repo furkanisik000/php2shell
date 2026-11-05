@@ -7,6 +7,7 @@ Design goals (see README.md):
   * Chunked or Content-Length selectable (post_max_size bypass vs not).
 """
 from __future__ import annotations
+from pathlib import Path
 import http.client
 import re
 import socket
@@ -196,7 +197,7 @@ def php_version_from_xpb(xpb: str) -> str:
     return m.group(1) if m else ""
 
 
-_OFFSETS_DIR = "/Users/emredagdelen/Desktop/php2shell/labs/versions"
+_OFFSETS_DIR = str(Path(__file__).resolve().parents[2] / "labs" / "versions")
 
 
 def load_offsets(version: str) -> dict:

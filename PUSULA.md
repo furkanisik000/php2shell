@@ -55,7 +55,7 @@ php2shell/
 ### php2shell gerçek kanıt — native amd64 ortam
 - **Windows kutusu 192.168.8.123** (x86_64, Docker Desktop): 14 PHP hedef 18101–18114 (native amd64, AÇIK) + **18120 OOM test hedefi** (düşük).
 - **18101–18114** `index.php="OK"` → `session_start()` yok, default memory_limit → exploit koşulu yok (PHPSESSID oluşmuyor).
-- **18120** = exploit'in ihtiyacı olan kurulum (`memory_limit=8M`, `post_max_size=16M`, `session_start`); RDP `likat/124578` ile `p2s_probe_deploy.bat` çalıştırınca ayağa kalkacak.
+- **18120** = exploit'in ihtiyacı olan kurulum (`memory_limit=8M`, `post_max_size=16M`, `session_start`); RDP (kimlik: hafıza `windows_box_192_168_8_123`) ile `p2s_probe_deploy.bat` çalıştırınca ayağa kalkacak.
 - **Düzeltilen bug:** `_hex("465370")` ondalık (0x719DA) yorumlanıyordu → hex'e (0x465370) zorlandı. Stage2/3 pointer'ları artık doğru.
 
 ## Kullanım
@@ -77,7 +77,7 @@ GET  /api/logs              # Loglar
 ## MCP Tool
 
 ```bash
-qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/emredagdelen/Desktop/php2shell/mcp_server.py
+qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/<USER>/Desktop/php2shell/mcp_server.py
 # Qwen restart gerekli
 ```
 

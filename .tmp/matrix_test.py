@@ -1,3 +1,4 @@
+from pathlib import Path
 """Per-version php2shell proof matrix — runs the REAL exploit against 18101-18114.
 
 For each version: run CVE-2026-109618 with retries=1, capture stage reached,
@@ -9,7 +10,7 @@ import json
 import time
 import sys
 
-sys.path.insert(0, "/Users/emredagdelen/Desktop/php2shell")
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import poc
 
 HOST = "192.168.8.123"
@@ -51,7 +52,7 @@ for port, ver in VERSIONS:
           f"chunk={row.get('chunk_base')} libphp={row.get('libphp_base')} "
           f"ev={row.get('evidence')!r} {row.get('secs')}s", flush=True)
 
-with open("/Users/emredagdelen/Desktop/php2shell/.tmp/matrix_results.json", "w") as f:
+with open(str(Path(__file__).resolve().parent / "matrix_results.json"), "w") as f:
     json.dump(results, f, indent=2, ensure_ascii=False)
 
 ok = [r for r in results if r.get("success")]

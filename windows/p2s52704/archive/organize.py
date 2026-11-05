@@ -1,7 +1,7 @@
 """Organize p2s52704: move old scripts to archive/, keep exploit.py + STATUS.md."""
 import os, shutil
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.join(BASE, "archive")
 os.makedirs(ARCHIVE, exist_ok=True)
 

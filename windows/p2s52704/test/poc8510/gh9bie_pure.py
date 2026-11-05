@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Fetch 9bie pure/ stage-3 scripts (fake_ref_b, cheap_oom_a, mk_ht)."""
+import os
 import urllib.request
 
 BASE = "https://raw.githubusercontent.com/9bie/php2shell-bypass-aslr-exp/main/"
-OUT = r"C:\Users\likat\p2s52704\test\poc8510"
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8510")
 for name in ["pure/fake_ref_b.py", "pure/cheap_oom_a.py", "pure/mk_ht.py",
              "pure/pwn_pure.py", "pure/mk_b_min.py"]:
     fn = name.split("/")[-1]

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+import os
 import sys, os, struct, hashlib
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 from p2s8335_lib import build_multipart as lib_mp, SID, BIG_MB
 

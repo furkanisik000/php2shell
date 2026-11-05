@@ -1,9 +1,9 @@
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.2.34\main\main.c', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.4.26\main\main.c', LF will be replaced by CRLF the next time Git touches it
-diff --git "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\main\\main.c" "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\main\\main.c"
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.2.34\main\main.c', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.4.26\main\main.c', LF will be replaced by CRLF the next time Git touches it
+diff --git "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\main\\main.c" "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\main\\main.c"
 index b38ef8d..4870349 100644
---- "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\main\\main.c"
-+++ "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\main\\main.c"
+--- "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\main\\main.c"
++++ "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\main\\main.c"
 @@ -29,12 +29,12 @@
  #include "win32/php_win32_globals.h"
  #include "win32/winutil.h"

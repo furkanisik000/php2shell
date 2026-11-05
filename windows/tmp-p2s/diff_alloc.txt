@@ -1,9 +1,9 @@
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.2.34\Zend\zend_alloc.c', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'C:\Users\likat\.qwen\tmp\p2s\php-8.4.26\Zend\zend_alloc.c', LF will be replaced by CRLF the next time Git touches it
-diff --git "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_alloc.c" "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_alloc.c"
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.2.34\Zend\zend_alloc.c', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Users\<USER>\.qwen\tmp\p2s\php-8.4.26\Zend\zend_alloc.c', LF will be replaced by CRLF the next time Git touches it
+diff --git "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_alloc.c" "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_alloc.c"
 index 06e9d61..f057f4a 100644
---- "a/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_alloc.c"
-+++ "b/C:\\Users\\likat\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_alloc.c"
+--- "a/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.2.34\\Zend\\zend_alloc.c"
++++ "b/C:\\Users\\<USER>\\.qwen\\tmp\\p2s\\php-8.4.26\\Zend\\zend_alloc.c"
 @@ -53,12 +53,14 @@
  
  #include "zend.h"

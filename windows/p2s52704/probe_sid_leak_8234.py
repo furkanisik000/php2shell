@@ -8,8 +8,9 @@ dinosn's sub-8.3 insight: the leak channel opens only with the RIGHT sid (NUL /
 32-char). We OOM once, then try the leak-read (forged 79B zend_string, len=0x1000
 -> oversized Set-Cookie) with several SIDs and report which one spills heap.
 """
+import os
 import struct, sys, time, collections
-sys.path.insert(0, r"C:\Users\likat\p2s52704\test\poc8335")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8335"))
 import exploit as E
 
 HOST, PORT = "127.0.0.1", 18111

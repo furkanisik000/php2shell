@@ -1,6 +1,7 @@
+import os
 import subprocess, sys, time, os, struct
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 c = "p2s8335"
 
 def sh(cmd):

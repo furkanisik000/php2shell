@@ -2,8 +2,9 @@
 """Test egctl's ghost-bucket OOM (oversized key) on 8.2.34, then the stage-1
 leak. If the ghost-bucket OOM sets up a heap state where the leak works, 8.2.34
 becomes reachable."""
+import os
 import sys, os, time, struct, socket, re
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = 18111

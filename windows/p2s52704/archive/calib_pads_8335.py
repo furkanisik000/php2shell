@@ -12,10 +12,11 @@ Metric: after request B, read R (PS(http_session_vars).value) and check:
 We sweep the number of (31,31) pads in request A, and also try varying the
 carrier position (f00/f01 count) in request B.
 """
+import os
 import subprocess, sys, time, os, struct, importlib.util
 from collections import Counter
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0

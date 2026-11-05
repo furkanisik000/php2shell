@@ -1,5 +1,6 @@
+import os
 import subprocess, sys, time
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 c, port, zif, dtor = "p2s8335", "18112", "0x3ac080", "0x49ec50"
 
 def sh(cmd):

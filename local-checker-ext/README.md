@@ -15,7 +15,7 @@ CWS sürümü uzak API'ye (`api.getpickads.com`) + Google OAuth + billing'e bağ
 
 1. Chrome → `chrome://extensions`
 2. Sağ üstte **Developer mode**'ü aç
-3. **Load unpacked** → bu dizin: `/Users/emredagdelen/Desktop/php2shell/local-checker-ext`
+3. **Load unpacked** → bu dizin: `/Users/<USER>/Desktop/php2shell/local-checker-ext`
 4. Bir PHP hedef sekmesindeyken (örn. `http://192.168.8.123:18101`) toolbar ikonuna tıkla → otomatik kontrol.
 
 ## Sertifika (ücertsiz)

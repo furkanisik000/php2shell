@@ -6,7 +6,7 @@ Wires the scanner core (core.py) up as MCP tools so Qwen Code / any MCP client
 can drive the scanner.
 
 Install (stdio):
-    qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/emredagdelen/Desktop/php2shell/mcp_server.py
+    qwen mcp add p2s -- /opt/homebrew/bin/python3.12 /Users/<USER>/Desktop/php2shell/mcp_server.py
     # then a FULL Qwen restart is required (qwen mcp add never hot-loads).
 
 Tools exposed:

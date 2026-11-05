@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Dump the RAW stage-1 B-request response on 8.2.34 to see why the Set-Cookie
 leak is empty (vs 8.3.35's 4096-byte spill)."""
+import os
 import sys, os, time, struct
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = 18111

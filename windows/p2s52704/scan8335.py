@@ -5,8 +5,9 @@ Runs stage1+2 (leaks), then scans stage-3 shapes (A2 pads x B2 pre-padding)
 within one ASLR window. Uses exploit.py's Exploit for stage1/2 and a custom
 stage3 for the scan.
 """
+import os
 import sys, os, time, struct
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import exploit
 
 PORT = 18112

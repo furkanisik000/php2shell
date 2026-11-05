@@ -8,10 +8,11 @@ Try:
 3. Different field orders (carrier before/after ht fields)
 4. Different pad sizes
 """
+import os
 import subprocess, sys, time, os, struct, importlib.util
 from collections import Counter
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0

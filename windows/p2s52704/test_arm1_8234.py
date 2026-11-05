@@ -2,8 +2,9 @@
 """Test the dinosn 7.2 leak arm on 8.2.34.
 arm1: PHPSESSID=\x00 + N header lines (a:\n) in a file part -> OOM in php_url_encode -> send_cookie=1 -> cookie emitted.
 """
+import os
 import sys, time
-sys.path.insert(0, r"C:\Users\likat\p2s52704\php72")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "php72"))
 import drive as D
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 18111

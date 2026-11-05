@@ -1,6 +1,7 @@
+import os
 import json, io, os
 
-D = r"C:\Users\likat\.qwen\tmp\p2s\scan"
+D = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s", "scan")
 trees = ["xuehuolll_tree.json", "aarsaputra_tree.json", "ikow_tree.json", "barinov_tree.json",
          "dinosn_php_cve_2026_10961x_lab_poc_tree.json", "eness_php2shell_CVE_2026_109618_CVE_2026_109619_PoC_tree.json",
          "3em0_php2shell_tree.json", "mpyw_php_eol_CVE_2026_109618_109619_tree.json",

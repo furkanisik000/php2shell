@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Histogram of 2MB-aligned 8-byte values in the leaked cookie, wide window."""
+import os
 import struct, sys
 from collections import Counter
 
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import (Target, Exploit, build_multipart, SID)
 
 t = Target("http://127.0.0.1:18113/index.php", timeout=120.0)

@@ -1,3 +1,4 @@
+import os
 import json, time, urllib.request, urllib.parse, sys
 
 BASE = "https://api.github.com"
@@ -6,7 +7,7 @@ HDRS = {
     "Accept": "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
 }
-OUT = "C:/Users/likat/.qwen/tmp/p2s/scan"
+OUT = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s", "scan")
 
 def get(url, raw=False):
     req = urllib.request.Request(url, headers=HDRS)

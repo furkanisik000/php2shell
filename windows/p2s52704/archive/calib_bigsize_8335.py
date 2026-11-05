@@ -3,10 +3,11 @@ The carrier lands at R+0xfd8 with the default 12MB big field.
 Try 8/10/11/12/13/14/16/20/24 MB and check if the carrier lands at R.
 Signal: ref@R has rc=1 typ=0x1A val_lo7=htdata_lo7 (CARRIER ON).
 """
+import os
 import subprocess, sys, time, struct, os, importlib.util
 from collections import Counter
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0

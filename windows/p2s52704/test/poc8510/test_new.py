@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Test the 4 NEW versions (8.5.9, 8.4.24, 8.4.25, 8.3.33) with the default htdata/s_off."""
+import os
 import subprocess, time, sys
 
 NEW = [
@@ -8,7 +9,7 @@ NEW = [
     ("8.4.25", 18123),
     ("8.3.33", 18124),
 ]
-POC = r"C:\Users\likat\p2s52704\test\poc8335\php2shell.py"
+POC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8335", "php2shell.py")
 
 for ver, port in NEW:
     t0 = time.time()

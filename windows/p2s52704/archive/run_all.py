@@ -1,5 +1,6 @@
+import os
 import subprocess, sys
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 # (container, port, zif_offset, dtor_offset)
 VERS = [
     ("p2s5445", "18101", "0x2f2e20", "0x3cd750"),

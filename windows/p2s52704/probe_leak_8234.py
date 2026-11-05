@@ -10,7 +10,7 @@ that carries 0x7f... heap pointers?), not the full fire chain.
 Reuses php72/drive.py (arm_body, Conn).
 """
 import os, re, struct, sys, collections
-sys.path.insert(0, r"C:\Users\likat\p2s52704\php72")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "php72"))
 import drive as D
 
 HOST, PORT = "127.0.0.1", 18111

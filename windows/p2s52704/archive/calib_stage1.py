@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Calibrate stage1_n for a target: scan a range and report which values produce the heap leak."""
+import os
 import sys
 import time
 
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import (Target, Exploit, build_multipart, parse_cookie,
                      chunk_base_from_cookie, SID)
 

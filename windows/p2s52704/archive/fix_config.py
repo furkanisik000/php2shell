@@ -1,5 +1,6 @@
+import os
 import subprocess, sys, time
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 CONTAINERS = ["p2s5445","p2s5538","p2s5640","p2s7033","p2s7133","p2s7234","p2s7333","p2s7433",
               "p2s8030","p2s8132","p2s8234","p2s8335","p2s8426","p2s8511"]
 

@@ -1,5 +1,6 @@
+import os
 import sys, time
-sys.path.insert(0, r"C:\Users\likat\p2s52704")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exploit import Target, build_multipart
 
 port = sys.argv[1] if len(sys.argv) > 1 else "18101"

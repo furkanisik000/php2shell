@@ -6,10 +6,11 @@ Try:
 - carrier 32B (24 + 8 extra), carrier AFTER ht fields
 - carrier 15B, carrier AFTER ht fields (ht fields first, carrier last)
 """
+import os
 import subprocess, sys, time, os, struct, importlib.util
 from collections import Counter
 
-BASE = r"C:\Users\likat\p2s52704"
+BASE = os.path.dirname(os.path.abspath(__file__))
 C = "p2s8335"
 PORT = 18112
 PSG_OFF = 0x10432a0

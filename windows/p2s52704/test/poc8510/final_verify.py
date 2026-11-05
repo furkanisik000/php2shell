@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Final smoke test: the 4 RCE-verified versions with the current deliverable."""
+import os
 import subprocess, sys
-POC = r"C:\Users\likat\p2s52704\test\poc8335\php2shell.py"
+POC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test", "poc8335", "php2shell.py")
 WORKING = [("8.3.33", 18124), ("8.3.35", 18112), ("8.4.26", 18113), ("8.5.11", 18114)]
 
 for ver, port in WORKING:

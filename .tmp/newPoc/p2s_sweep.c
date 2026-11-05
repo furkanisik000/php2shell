@@ -36,7 +36,7 @@
 #include <openssl/err.h>
 
 /* ============ config ============ */
-#define OFFSETS_DIR "/Users/emredagdelen/Desktop/php2shell/labs/versions"
+#define OFFSETS_DIR "/Users/<USER>/Desktop/php2shell/labs/versions"
 #define MAX_URLS 64
 #define RESP_CAP (1 << 20)
 #define OOM_BND "S17"

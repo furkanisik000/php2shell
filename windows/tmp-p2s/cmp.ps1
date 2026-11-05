@@ -1,5 +1,5 @@
-param([string]$A = "C:\Users\likat\.qwen\tmp\p2s\php-8.4.26\ext\session",
-      [string]$B = "C:\Users\likat\.qwen\tmp\p2s\php-8.5.11\ext\session",
+param([string]$A = "C:\Users\<USER>\.qwen\tmp\p2s\php-8.4.26\ext\session",
+      [string]$B = "C:\Users\<USER>\.qwen\tmp\p2s\php-8.5.11\ext\session",
       [string]$File)
 
 $fa = Join-Path $A $File
